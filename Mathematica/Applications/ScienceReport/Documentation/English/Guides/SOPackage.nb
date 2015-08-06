@@ -1,0 +1,873 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     28607,        864]
+NotebookOptionsPosition[     24979,        749]
+NotebookOutlinePosition[     25790,        775]
+CellTagsIndexPosition[     25747,        772]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["SOPACKAGE PACKAGE GUIDE", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"BinarySubsets\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/BinarySubsets"], "\<\"Bridges\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Bridges"], "\<\"ChromaticPolynomial\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/ChromaticPolynomial"], \
+"\<\"Compositions\"\>":>Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Compositions"], \
+"\<\"ConnectedComponents\"\>":>Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/ConnectedComponents"], "\<\"CycleIndex\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/CycleIndex"], "\<\"DegreeSequence\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/DegreeSequence"], "\<\"DepthFirstTraversal\"\
+\>":>Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/DepthFirstTraversal"], "\<\"Dijkstra\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Dijkstra"], "\<\"EdgeColoring\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/EdgeColoring"], "\<\"EdgeConnectivity\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/EdgeConnectivity"], "\<\"Edges\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Edges"], "\<\"EdgeStyle\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/EdgeStyle"], "\<\"Equivalences\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Equivalences"], "\<\"FerrersDiagram\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/FerrersDiagram"], "\<\"FromOrderedPairs\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/FromOrderedPairs"], "\<\"Girth\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Girth"], "\<\"Graph\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Graph"], "\<\"GraphJoin\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/GraphJoin"], "\<\"GraphOptions\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/GraphOptions"], "\<\"HamiltonianCycle\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/HamiltonianCycle"], "\<\"Highlight\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Highlight"], "\<\"IncidenceMatrix\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/IncidenceMatrix"], "\<\"InversePermutation\"\
+\>":>Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/InversePermutation"], "\<\"Isomorphism\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Isomorphism"], "\<\"KSetPartitions\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/KSetPartitions"], "\<\"KSubsets\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/KSubsets"], "\<\"MakeGraph\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/MakeGraph"], "\<\"MinimumSpanningTree\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/MinimumSpanningTree"], \
+"\<\"NecklacePolynomial\"\>":>Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/NecklacePolynomial"], "\<\"NetworkFlow\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/NetworkFlow"], "\<\"OrientGraph\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/OrientGraph"], "\<\"Partitions\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Partitions"], "\<\"Permutations\"\>":>
+       Documentation`HelpLookup[
+       "paclet:ref/Permutations"], "\<\"RadialEmbedding\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/RadialEmbedding"], "\<\"RandomPartition\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/RandomPartition"], "\<\"RandomSubset\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/RandomSubset"], "\<\"ShortestPath\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/ShortestPath"], "\<\"ShowGraph\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/ShowGraph"], "\<\"StableMarriage\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/StableMarriage"], "\<\"TableauClasses\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/TableauClasses"], "\<\"Tableaux\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/Tableaux"], "\<\"ToCycles\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/ToCycles"], "\<\"TransitiveClosure\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/TransitiveClosure"], "\<\"VertexStyle\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/ref/VertexStyle"], "\<\"Vertices\"\>":>
+       Documentation`HelpLookup["paclet:Combinatorica/ref/Vertices"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Computational Geometry\"\>":>
+       Documentation`HelpLookup[
+       "paclet:guide/ComputationalGeometry"], "\<\"Discrete Mathematics\"\>":>
+       Documentation`HelpLookup["paclet:guide/DiscreteMathematics"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Combinatorica\"\>":>
+       Documentation`HelpLookup[
+       "paclet:Combinatorica/tutorial/Combinatorica"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Combinatorica/guide/CombinatoricaPackage\"\>":>
+       None, "\<\"Copy Mathematica URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["Combinatorica/guide/CombinatoricaPackage"]}, Visible -> 
+            False]]; SelectionMove[
+         DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/Combinatorica/guide/\
+CombinatoricaPackage.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "Combinatorica/guide/CombinatoricaPackage", ".html"]], None}]}]},
+       
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellChangeTimes->{{3.518782452160328*^9, 3.5187824804379177`*^9}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["SOPackage",
+  FontSlant->"Italic"],
+ " Package"
+}], "GuideTitle",
+ CellChangeTimes->{{3.5187824404309053`*^9, 3.518782442236787*^9}},
+ CellID->942062912],
+
+Cell[TextData[{
+ "I copied the contents of ",
+ StyleBox["Combinatorica",
+  FontSlant->"Italic"],
+ " here."
+}], "Text",
+ CellChangeTimes->{{3.518785457218378*^9, 3.51878548950493*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["Subsets and Permutations \[RightGuillemet]",
+ BaseStyle->{"Link", "GuideFunctionsSubsection"},
+ ButtonData->
+  "paclet:Combinatorica/guide/SubsetsAndPermutations"]], \
+"GuideFunctionsSubsection",
+ CellID->291519260],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Permutations",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Permutations"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "get a list of permutations"
+}], "GuideText",
+ CellID->203374175],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["BinarySubsets",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/BinarySubsets"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "enumerate subsets using binary representation "
+}], "GuideText",
+ CellID->1463276848],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["InversePermutation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/InversePermutation"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["KSubsets",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/KSubsets"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["RandomSubset",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/RandomSubset"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ToCycles",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/ToCycles"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["CycleIndex",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/CycleIndex"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/guide/SubsetsAndPermutations"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->223432585]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["Partitions and Compositions \[RightGuillemet]",
+ BaseStyle->{"Link", "GuideFunctionsSubsection"},
+ ButtonData->
+  "paclet:Combinatorica/guide/PartitionsAndCompositions"]], \
+"GuideFunctionsSubsection",
+ CellID->789053025],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Partitions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Partitions"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "list partitions of a positive integer"
+}], "GuideText",
+ CellID->179146833],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Compositions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Compositions"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " list all compositions of integer ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " into ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]], "InlineMath"],
+ " parts"
+}], "GuideText",
+ CellID->537382875],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Tableaux",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Tableaux"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "construct Young tableaux from integer partition"
+}], "GuideText",
+ CellID->902031408],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["RandomPartition",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/RandomPartition"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["FerrersDiagram",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/FerrersDiagram"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["KSetPartitions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/KSetPartitions"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["TableauClasses",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/TableauClasses"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/guide/PartitionsAndCompositions"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->3895184]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ ButtonBox["Graph Construction and Representations",
+  BaseStyle->{"Link", "GuideFunctionsSubsection"},
+  ButtonData->
+   "paclet:Combinatorica/guide/GraphConstructionAndRepresentations"],
+ ButtonBox[" \[RightGuillemet]",
+  BaseStyle->{"Link", "GuideFunctionsSubsection"},
+  ButtonData->"paclet:Combinatorica/guide/GraphConstructionAndRepresentations"]
+}], "GuideFunctionsSubsection",
+ CellID->74479324],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Graph",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Graph"]], "InlineFunctionSans"],
+ ", ",
+ Cell[TextData[ButtonBox["Edges",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Edges"]], "InlineFunctionSans"],
+ ", ",
+ Cell[TextData[ButtonBox["Vertices",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Vertices"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "basic graph elements"
+}], "GuideText",
+ CellID->39359584],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ShowGraph",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/ShowGraph"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "display a graph"
+}], "GuideText",
+ CellID->575371407],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["MakeGraph",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/MakeGraph"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "construct a graph"
+}], "GuideText",
+ CellID->278421529],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["GraphJoin",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/GraphJoin"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "join two graphs"
+}], "GuideText",
+ CellID->541595220],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["FromOrderedPairs",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/FromOrderedPairs"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["IncidenceMatrix",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/IncidenceMatrix"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["GraphOptions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/GraphOptions"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["RadialEmbedding",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/RadialEmbedding"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->384380006],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["EdgeStyle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/EdgeStyle"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["VertexStyle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/VertexStyle"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["Highlight",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Highlight"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:Combinatorica/guide/GraphConstructionAndRepresentations"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->88600997]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["Graph Properties \[RightGuillemet]",
+ BaseStyle->{"Link", "GuideFunctionsSubsection"},
+ ButtonData->
+  "paclet:Combinatorica/guide/GraphProperties"]], "GuideFunctionsSubsection",
+ CellID->137069814],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["DegreeSequence",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/DegreeSequence"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "list number of edges for each vertex"
+}], "GuideText",
+ CellID->146852818],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["OrientGraph",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/OrientGraph"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "find strongly connected orientation of a graph"
+}], "GuideText",
+ CellID->765960676],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ChromaticPolynomial",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/ChromaticPolynomial"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "compute chromatic polynomial for a graph"
+}], "GuideText",
+ CellID->268516296],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["NecklacePolynomial",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/NecklacePolynomial"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["HamiltonianCycle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/HamiltonianCycle"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ConnectedComponents",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/ConnectedComponents"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["EdgeColoring",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/EdgeColoring"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->483332925],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["EdgeConnectivity",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/EdgeConnectivity"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["Girth",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Girth"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["Bridges",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Bridges"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/guide/GraphProperties"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->198367767]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["Graph Algorithms \[RightGuillemet]",
+ BaseStyle->{"Link", "GuideFunctionsSubsection"},
+ ButtonData->
+  "paclet:Combinatorica/guide/GraphAlgorithms"]], "GuideFunctionsSubsection",
+ CellID->181899765],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Dijkstra",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Dijkstra"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "find single-source shortest path"
+}], "GuideText",
+ CellID->266349823],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["MinimumSpanningTree",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/MinimumSpanningTree"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "find a minimum spanning tree of a graph"
+}], "GuideText",
+ CellID->183029240],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["NetworkFlow",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/NetworkFlow"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "maximum flow through a graph"
+}], "GuideText",
+ CellID->947340222],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Isomorphism",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Isomorphism"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["Equivalences",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/Equivalences"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ShortestPath",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/ShortestPath"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->235460859],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["StableMarriage",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/StableMarriage"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["DepthFirstTraversal",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/DepthFirstTraversal"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["TransitiveClosure",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/ref/TransitiveClosure"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Combinatorica/guide/GraphAlgorithms"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->68744025]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["TUTORIALS", "GuideTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellID->415694126],
+
+Cell[TextData[StyleBox[ButtonBox["Combinatorica",
+ BaseStyle->"Link",
+ ButtonData->"paclet:Combinatorica/tutorial/Combinatorica"],
+ FontSlant->"Italic"]], "GuideTutorial",
+ CellID->14586202]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["TUTORIAL COLLECTION", "GuideTutorialCollectionSection"],
+
+Cell[TextData[ButtonBox["Graph Drawing",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolfram.com/learningcenter/tutorialcollection/GraphDrawing/\
+"], None}]], "GuideTutorialCollection"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "GuideMoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->23220180],
+
+Cell[TextData[ButtonBox["Computational Geometry",
+ BaseStyle->"Link",
+ ButtonData->"paclet:guide/ComputationalGeometry"]], "GuideMoreAbout",
+ CellID->311584766],
+
+Cell[TextData[ButtonBox["Discrete Mathematics",
+ BaseStyle->"Link",
+ ButtonData->"paclet:guide/DiscreteMathematics"]], "GuideMoreAbout",
+ CellID->1240030776]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+WindowSize->{740, 652},
+WindowMargins->{{Automatic, 143}, {Automatic, 49}},
+TaggingRules->{
+ "DocuToolsSettings" -> {
+   "$ApplicationName" -> "WireFrame", "$LinkBase" -> "WireFrame", 
+    "$DocumentationDirectory" -> 
+    "/Applications/Mathematica.app/Documentation/English/", 
+    "$ApplicationDirectory" -> 
+    "/Users/jmlopez/Documents/Code/mathematica/WorkBench/WireFrame/WireFrame"}\
+, "LinkTrails" -> "", "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 8051, 166, 47, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[8633, 190, 180, 6, 65, "GuideTitle",
+ CellID->942062912],
+Cell[8816, 198, 183, 6, 31, "Text"],
+Cell[CellGroupData[{
+Cell[9024, 208, 240, 5, 28, "GuideFunctionsSubsection",
+ CellID->291519260],
+Cell[9267, 215, 263, 9, 21, "GuideText",
+ CellID->203374175],
+Cell[9533, 226, 303, 10, 21, "GuideText",
+ CellID->1463276848],
+Cell[9839, 238, 1516, 42, 19, "InlineGuideFunctionListing",
+ CellID->223432585]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11392, 285, 246, 5, 29, "GuideFunctionsSubsection",
+ CellID->789053025],
+Cell[11641, 292, 284, 9, 21, "GuideText",
+ CellID->179146833],
+Cell[11928, 303, 429, 14, 21, "GuideText",
+ CellID->537382875],
+Cell[12360, 319, 290, 9, 21, "GuideText",
+ CellID->902031408],
+Cell[12653, 330, 1291, 38, 19, "InlineGuideFunctionListing",
+ CellID->3895184]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13981, 373, 419, 9, 29, "GuideFunctionsSubsection",
+ CellID->74479324],
+Cell[14403, 384, 532, 17, 21, "GuideText",
+ CellID->39359584],
+Cell[14938, 403, 260, 9, 21, "GuideText",
+ CellID->575371407],
+Cell[15201, 414, 262, 9, 21, "GuideText",
+ CellID->278421529],
+Cell[15466, 425, 260, 9, 21, "GuideText",
+ CellID->541595220],
+Cell[15729, 436, 1022, 29, 19, "InlineGuideFunctionListing",
+ CellID->384380006],
+Cell[16754, 467, 1004, 29, 19, "InlineGuideFunctionListing",
+ CellID->88600997]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17795, 501, 223, 4, 29, "GuideFunctionsSubsection",
+ CellID->137069814],
+Cell[18021, 507, 294, 10, 21, "GuideText",
+ CellID->146852818],
+Cell[18318, 519, 298, 10, 21, "GuideText",
+ CellID->765960676],
+Cell[18619, 531, 308, 10, 21, "GuideText",
+ CellID->268516296],
+Cell[18930, 543, 1039, 30, 19, "InlineGuideFunctionListing",
+ CellID->483332925],
+Cell[19972, 575, 979, 28, 19, "InlineGuideFunctionListing",
+ CellID->198367767]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20988, 608, 223, 4, 29, "GuideFunctionsSubsection",
+ CellID->181899765],
+Cell[21214, 614, 275, 9, 20, "GuideText",
+ CellID->266349823],
+Cell[21492, 625, 307, 10, 20, "GuideText",
+ CellID->183029240],
+Cell[21802, 637, 280, 10, 20, "GuideText",
+ CellID->947340222],
+Cell[22085, 649, 736, 21, 20, "InlineGuideFunctionListing",
+ CellID->235460859],
+Cell[22824, 672, 1028, 30, 20, "InlineGuideFunctionListing",
+ CellID->68744025]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23901, 708, 91, 2, 20, "GuideTutorialsSection",
+ CellID->415694126],
+Cell[23995, 712, 190, 4, 20, "GuideTutorial",
+ CellID->14586202]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24222, 721, 61, 0, 20, "GuideTutorialCollectionSection"],
+Cell[24286, 723, 200, 4, 20, "GuideTutorialCollection"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24523, 732, 91, 2, 20, "GuideMoreAboutSection",
+ CellID->23220180],
+Cell[24617, 736, 160, 3, 20, "GuideMoreAbout",
+ CellID->311584766],
+Cell[24780, 741, 157, 3, 20, "GuideMoreAbout",
+ CellID->1240030776]
+}, Open  ]],
+Cell[24952, 747, 23, 0, 20, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
