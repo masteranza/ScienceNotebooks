@@ -36,7 +36,7 @@ Download it and unpack it in "XXX", you'll not be able to run ./runanki straight
 
 If anki runs correctly then open your profile and import MathematicaCloze.apkg to make a correct Cloze note type. You should get a temporary _SANDBOX deck - you're free to remove it, but double check if the new default note type is *MathematicaCloze* by trying to add a new card. You should see something like this: 
 
-![https://www.dropbox.com/s/q0dz6pawcbr8sbh/Screenshot%202015-08-06%2018.28.07.png?dl=0](https://photos-4.dropbox.com/t/2/AABcrhtQwOYi6B7Fm0aJAGAOIAuMyFxYuqe5x0tCBXpwCQ/12/2156550/png/32x32/1/_/1/2/Screenshot%202015-08-06%2018.28.07.png/EK3K2gEYj4HXQSABIAIoAQ/ngY0O__tcD9CjM_pcluSRASaonupfXJ02FLDMzCw1yU?size=1600x1200&size_mode=2)
+![https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png)
 
 Now, copy (or hardlink) `Anki/runimport` to anki source main directory and `Anki/knowledgefile.py` to /anki/importing/ subdirectory.
 
@@ -75,22 +75,22 @@ To keep a backup of your Anki database you can save it on Dropbox
 ##Test ride
 
 Create a new notebook, go to and set a stylesheet through Format->Stylesheet->Science. You should see a docked cell (kind of a toolbar).
-Write a title (CMD+0) saying "Notebook title", move down with down arrow
-Write a new section (CMD+1) saying "Section one" , move down
-Write a new subsection (CMD+2) saying "Subsection one" , move down
-Write a new text (CMD+7) saying "This is a test question with a witty answer"
-Select the text "witty answer" and press (CMD+D) the text should get green.
-Save the document in `Knowledge/Test/Subcategory/notebook.nb` filename can be different.
-Press "->Anki" in the toolbar.
-If everything goes right, after seeing "Importing to Anki..." in the status bar, you'll see "Exported 1/1 cells to anki".
-Only after exporting is finished you can open Anki. Be sure Anki is closed during exporting.
+
+ 1. Write a title (CMD+0) saying "Notebook title", move down with down
+    arrow.
+ 2. Write a new section (CMD+1) saying "Section one" , move down
+ 3. Write a new subsection (CMD+2) saying "Subsection one" , move down
+ 4. Write a new text (CMD+7) saying "This is a test question with a witty answer"
+ 5. Select the text "witty answer" and press (CMD+D) the text should get green.
+ 6. Save the document in `Knowledge/Test/Subcategory/notebook.nb` filename can be different.
+ 7. Press "->Anki" in the toolbar. If everything goes right, after seeing "Importing to Anki..." in the status bar, you'll see  "Exported 1/1 cells to anki". 
+
+    Only after exporting is finished you can open Anki. Be sure Anki is closed during exporting.
 
 Here's the final efect:
 
-![enter image description here](https://photos-3.dropbox.com/t/2/AABLckbyDrdeTLKUW72GkD7jRYdvAGDTuLb6Vgrbq4wRlA/12/2156550/png/32x32/1/_/1/2/Screenshot%202015-08-06%2020.56.25.png/EK3K2gEY-YHXQSABIAIoAQ/CaivJARHpaBrotEG9gBrbWkpEsVmPOqkannsmOdMWbg?size=1600x1200&size_mode=2)
+![https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen2.png](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen2.png)
 
 To learn some more basics try opening `Using Mathematica-Anki.pdf`
 
 More tutorials coming soon.  (The system is poorly documented, but already has the capabilities to export equations and pictures as it was built out of my own need).
-
-> Written with [StackEdit](https://stackedit.io/).
