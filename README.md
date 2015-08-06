@@ -3,6 +3,8 @@
 It's a project focusing on collecting knowledge in a systematic and efficient way.
 Why create flash cards when you can make your notes and then highlight the stuff that's important thus creating flash cards.
 
+![Example use](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen0.png)
+
 The project consists of Mathematica stylesheet and tools for creating TeX grade notebooks and Anki cards out of them. 
 
 ##Installation and prerequisites 
