@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     29456,        905]
-NotebookOptionsPosition[     22929,        719]
-NotebookOutlinePosition[     23690,        750]
-CellTagsIndexPosition[     23621,        745]
+NotebookDataLength[     29937,        920]
+NotebookOptionsPosition[     23383,        735]
+NotebookOutlinePosition[     24143,        766]
+CellTagsIndexPosition[     24074,        761]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -673,9 +673,9 @@ Cell[StyleData["EmphasisText"],
  LineSpacing->{1, 3},
  LanguageCategory->"NaturalLanguage",
  CounterIncrements->"SmallText",
- MenuSortingValue->1820,
+ FontFamily->Baskerville,
  FontSize->14,
- CellID->841006032],
+ FontWeight->Normal],
 
 Cell[StyleData["Citation"],
  MenuSortingValue->10000,
@@ -713,7 +713,23 @@ Cell[StyleData["Code"],
 Cell[StyleData["PageNumber"],
  MenuSortingValue->10000,
  FontFamily->Baskerville,
- FontSize->14]
+ FontSize->14,
+ FontWeight->Normal],
+
+Cell[StyleData["Definition"],
+ CellFrame->{{8, 0}, {0, 1}},
+ CellMargins->{{20, 12}, {3, 3}},
+ CellFrameMargins->{{8, 8}, {3, 3}},
+ CellFrameColor->RGBColor[0.500008, 0.500008, 0.749996],
+ CellFrameLabels->{{Inherited, Inherited}, {Inherited, 
+    Cell[
+     TextData[{
+       Style["Definicja", FontWeight -> Bold]}], "Text"]}},
+ TabSpacings->2.1,
+ FontFamily->Baskerville,
+ FontSize->14,
+ FontWeight->Normal,
+ FontSlant->None]
 }, Open  ]]
 }, Open  ]]
 },
@@ -727,7 +743,7 @@ PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 PrivateNotebookOptions->{"JournalStyle"->"NumberedNote",
 "SafeFileSave"->"Prescan"},
-FrontEndVersion->"10.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 23, \
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
 2015)",
 StyleDefinitions->"PrivateStylesheetFormatting.nb"
 ]
@@ -744,7 +760,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 23478, 738}
+ {"Tabela", 23931, 754}
  }
 *)
 (*NotebookFileOutline
@@ -766,7 +782,7 @@ Cell[5934, 138, 5021, 102, 30, 32, 0, "StyleData", "All", "Printout",
 Cell[CellGroupData[{
 Cell[10992, 245, 165, 3, 49, "Section",
  CellID->1448483780],
-Cell[11160, 250, 82, 2, 36, 31, 0, "StyleData", "StandardForm", "All",
+Cell[11160, 250, 82, 2, 38, 31, 0, "StyleData", "StandardForm", "All",
  MenuSortingValue->10000]
 }, Open  ]],
 Cell[CellGroupData[{
@@ -877,7 +893,7 @@ Cell[20532, 618, 114, 2, 40, 94, 1, "StyleData", "Item3Numbered", "Printout",
 Cell[CellGroupData[{
 Cell[20695, 626, 114, 2, 49, "Section",
  CellID->1154436234],
-Cell[20812, 630, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
+Cell[20812, 630, 282, 10, 4, 40, 0, "StyleData", "PageBreak", "Printout"],
 Cell[21097, 642, 146, 5, 38, 30, 0, "StyleData", "RemarkLabel", "All",
  StyleMenuListing->None,
  CellID->884038640],
@@ -886,25 +902,24 @@ Cell[21246, 649, 359, 10, 57, 25, 0, "StyleData", "Remark", "All",
 Cell[21608, 661, 120, 4, 38, 25, 0, "StyleData", "Inline", "All",
  MenuSortingValue->10000,
  CellID->1870991213],
-Cell[21731, 667, 292, 10, 58, 31, 0, "StyleData", "EmphasisText", "All",
- CounterIncrements->"SmallText",
- MenuSortingValue->1820,
- CellID->841006032],
-Cell[22026, 679, 141, 5, 40, 27, 0, "StyleData", "Citation", "All",
+Cell[21731, 667, 294, 10, 60, 31, 0, "StyleData", "EmphasisText", "All",
+ CounterIncrements->"SmallText"],
+Cell[22028, 679, 141, 5, 40, 27, 0, "StyleData", "Citation", "All",
  MenuSortingValue->10000],
 Cell[CellGroupData[{
-Cell[22192, 688, 413, 13, 46, 28, 0, "StyleData", "Reference", "All",
+Cell[22194, 688, 413, 13, 46, 28, 0, "StyleData", "Reference", "All",
  CounterIncrements->"Reference",
  CounterAssignments->{{"Item1Numbered", 0}},
  MenuSortingValue->2260],
-Cell[22608, 703, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
+Cell[22610, 703, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
 }, Open  ]],
-Cell[22709, 707, 93, 3, 64, 23, 0, "StyleData", "Code", "All",
+Cell[22711, 707, 93, 3, 64, 23, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None,
  CellID->1384996765],
-Cell[22805, 712, 96, 3, 37, 29, 0, "StyleData", "PageNumber", "All",
- MenuSortingValue->10000]
+Cell[22807, 712, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
+ MenuSortingValue->10000],
+Cell[22927, 718, 428, 13, 62, 29, 0, "StyleData", "Definition", "All"]
 }, Open  ]]
 }, Open  ]]
 }

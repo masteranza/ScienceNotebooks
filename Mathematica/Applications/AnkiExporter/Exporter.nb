@@ -10,14 +10,25 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     35190,        811]
-NotebookOptionsPosition[     34875,        795]
-NotebookOutlinePosition[     35261,        812]
-CellTagsIndexPosition[     35218,        809]
+NotebookDataLength[     38034,        882]
+NotebookOptionsPosition[     37576,        860]
+NotebookOutlinePosition[     37961,        877]
+CellTagsIndexPosition[     37918,        874]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[" "], "Input",
+ CellChangeTimes->{3.64913883035329*^9},
+ CellID->505879951],
+
+Cell[BoxData["\<\"Adding to deck [ Test ]\\nopen()\\ncacheFile()\\nopenFile()\
+\\nupdateDelimiter()\\n'unknownFormat'\"\>"], "Print",
+ CellID->28174244]
+}, Open  ]],
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{"BeginPackage", "[", 
@@ -28,8 +39,8 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"ExportToAnki", "::", "usage"}], " ", "=", 
-    "\"\<Function exporting selected sections of the notebook to Anki\>\""}], 
-   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    "\"\<Function exporting selected sections of the notebook to Anki using \
+cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], 
@@ -48,9 +59,43 @@ Cell[BoxData[{
         ",", "GetTOC", ",", "exported", ",", "filtered", ",", "splited", ",", 
        "marked", ",", "paths", ",", "fixed", ",", "final", ",", "threaded", 
        ",", "deck", ",", "title", ",", " ", "base", ",", "dat", ",", "ndir", 
-       ",", "tempPicPath"}], "}"}], ",", "\[IndentingNewLine]", 
+       ",", "tempPicPath", ",", " ", "allspecial"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"separator", "=", "\"\<#\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{"allspecial", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "\[Rule]", 
+           RowBox[{"\"\<[$]\>\"", "<>", 
+            RowBox[{"Convert`TeX`BoxesToTeX", " ", "[", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", "\"\<[/$]\>\""}]}],
+           ")"}], "&"}], "/@", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"#", ",", 
+                RowBox[{"ToString", "@", 
+                 RowBox[{"FullForm", "@", "#"}]}]}], "}"}], "&"}], "@", 
+             RowBox[{"FromCharacterCode", "[", "i", "]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "65535"}], "}"}]}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"StringMatchQ", "[", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", 
+             RowBox[{
+             "\"\<\\\"\\\\[\>\"", "~~", "___", "~~", "\"\<]\\\"\>\""}]}], 
+            "]"}], "&"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Export to Anki begins...\>\"", "]"}], 
       ";", "\[IndentingNewLine]", 
       RowBox[{"If", "[", 
@@ -669,11 +714,14 @@ Cell[BoxData[{
       RowBox[{"base", "=", 
        RowBox[{"StringReplace", "[", 
         RowBox[{"base", ",", 
-         RowBox[{"{", 
+         RowBox[{"{", "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{"\"\<[$][/$]\>\"", "\[Rule]", "\"\<\>\""}], ",", 
+           "\[IndentingNewLine]", 
            RowBox[{"\"\<{{c1::}}\>\"", "\[Rule]", "\"\<\>\""}], ",", 
+           "\[IndentingNewLine]", 
            RowBox[{"\"\<{{c1::<br>}}\>\"", "\[Rule]", "\"\<<br>\>\""}], ",", 
+           "\[IndentingNewLine]", 
            RowBox[{
             RowBox[{"(", 
              RowBox[{"\"\<\\\\text{\>\"", "~~", 
@@ -684,8 +732,17 @@ Cell[BoxData[{
               RowBox[{"c", ",", 
                RowBox[{"{", 
                 RowBox[{"\"\<$\>\"", "\[RuleDelayed]", "  ", "\"\<\>\""}], 
-                "}"}]}], "]"}]}]}]}], " ", "}"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
+                "}"}]}], "]"}]}]}]}], " ", "\[IndentingNewLine]", "}"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"base", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"StringReplace", "[", 
+          RowBox[{
+           RowBox[{"StringReplace", "[", 
+            RowBox[{"#", ",", "allspecial"}], "]"}], ",", 
+           RowBox[{"\"\<[/$][$]\>\"", "\[Rule]", " ", "\"\<\>\""}]}], "]"}], 
+         "&"}], "/@", "base"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{
       "ShowStatus", "[", "\"\<Preparing final structure...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
@@ -704,7 +761,7 @@ Cell[BoxData[{
           RowBox[{"StringMatchQ", "[", 
            RowBox[{"#", ",", "\"\<*{{c@::*\>\""}], "]"}], " ", "&"}]}], " ", 
         "]"}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"ShowStatus", "[", "\"\<Exporting...\>\"", "]"}], ";", 
+      RowBox[{"ShowStatusd", "[", "\"\<Exporting...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"Export", "[", 
        RowBox[{"\"\<text.txt\>\"", ",", "filtered"}], "]"}], ";", 
@@ -791,12 +848,20 @@ PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH;python \
    3.643446817603923*^9, 3.643446838949203*^9}, {3.6434469000815353`*^9, 
    3.643446901986238*^9}, {3.643447145603558*^9, 3.643447151365806*^9}, {
    3.6434472256390533`*^9, 3.643447266447905*^9}, 3.643793636302738*^9, {
-   3.643887287713134*^9, 3.643887288542659*^9}}]
+   3.643887287713134*^9, 3.643887288542659*^9}, {3.648979324538394*^9, 
+   3.648979331833025*^9}, {3.648979915355852*^9, 3.6489799299642878`*^9}, {
+   3.648979978410863*^9, 3.648980008201933*^9}, {3.648980130450554*^9, 
+   3.6489801325929193`*^9}, {3.648980163148357*^9, 3.648980173710216*^9}, {
+   3.648980210641265*^9, 3.6489802212156563`*^9}, {3.648981515762948*^9, 
+   3.648981520762972*^9}, 3.648982552252479*^9, {3.649137030599284*^9, 
+   3.649137033786933*^9}, {3.649137191648408*^9, 3.6491371931154337`*^9}, {
+   3.649137997809484*^9, 3.6491379996678534`*^9}, 3.649138943576408*^9, {
+   3.649139250317211*^9, 3.649139250833415*^9}, 3.64913946556496*^9}]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{720, 855},
+WindowSize->{872, 855},
 WindowMargins->{{Automatic, 0}, {Automatic, 0}},
-FrontEndVersion->"10.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 23, \
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
 2015)",
 StyleDefinitions->"Default.nb"
 ]
@@ -811,7 +876,13 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 34314, 773, 2807, "Input",
+Cell[CellGroupData[{
+Cell[579, 22, 88, 2, 28, "Input",
+ CellID->505879951],
+Cell[670, 26, 152, 2, 102, "Print",
+ CellID->28174244]
+}, Open  ]],
+Cell[837, 31, 36735, 827, 2552, "Input",
  InitializationCell->True]
 }
 ]

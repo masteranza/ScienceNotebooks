@@ -20,12 +20,13 @@
 
 
 BeginPackage["AnkiExporter`",{"PackageUtils`"}];
-ExportToAnki::usage ="Function exporting selected sections of the notebook to Anki";
+ExportToAnki::usage ="Function exporting selected sections of the notebook to Anki using cloze notes";
 
 Begin["`Private`"];
 
-ExportToAnki[sync_:True]:=Module[{separator,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath},
+ExportToAnki[sync_:True]:=Module[{separator,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial},
 separator="#";
+allspecial=(#[[1]]->"[$]"<>Convert`TeX`BoxesToTeX [#[[1]]]<>"[/$]")&/@Select[Table[{#,ToString@FullForm@#}&@FromCharacterCode[i],{i,65535}],StringMatchQ[#[[2]],"\"\\["~~___~~"]\""]&];
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
 tempPicPath=Quiet@CreateDirectory["~/Dropbox/Anki/Ranza/collection.media/"];
@@ -87,12 +88,18 @@ CounterBox["FigureCaptionNumbered"]:> ""
 ShowStatus["Fixing data... (1/2)"];
 base=(ToString[First@#]<>separator <> StringReplace[StringJoin[Last@#],{"\n"-> "<br>","\[LineSeparator]"-> "<br>"}])&/@ dat;
 ShowStatus["Fixing data... (2/2)"];
-base=StringReplace[base,{"[$][/$]"->"","{{c1::}}"->"","{{c1::<br>}}"->"<br>",("\\text{"~~Shortest[c__]~~"}"):>ToString@StringReplace[c,{"$":>  ""}] }];
+base=StringReplace[base,{
+"[$][/$]"->"",
+"{{c1::}}"->"",
+"{{c1::<br>}}"->"<br>",
+("\\text{"~~Shortest[c__]~~"}"):>ToString@StringReplace[c,{"$":>  ""}] 
+}];
+base=StringReplace[StringReplace[#,allspecial],"[/$][$]"-> ""]&/@base;
 ShowStatus["Preparing final structure..."];
 final=MapThread[StringJoin,{base,paths,celltags}];
 ShowStatus["Filtering..."];
 filtered=Select[final,StringMatchQ[#,"*{{c@::*"] & ];
-ShowStatus["Exporting..."];
+ShowStatusd["Exporting..."];
 Export["text.txt",filtered];
 ndir=NotebookDirectory[EvaluationNotebook[]];
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
