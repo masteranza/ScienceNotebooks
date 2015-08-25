@@ -26,10 +26,10 @@ Begin["`Private`"];
 
 ExportToAnki[sync_:True]:=Module[{separator,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial},
 separator="#";
-allspecial=(#[[1]]->"[$]"<>Convert`TeX`BoxesToTeX [#[[1]]]<>"[/$]")&/@Select[Table[{#,ToString@FullForm@#}&@FromCharacterCode[i],{i,65535}],StringMatchQ[#[[2]],"\"\\["~~___~~"]\""]&];
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
 tempPicPath=Quiet@CreateDirectory["~/Dropbox/Anki/Ranza/collection.media/"];
+
 TeXFix[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}",("\\text{"~~c:Except["}"]..~~"}"):>(ToString@c)}];
 TeXFixPoor[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}"}];
 EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
@@ -37,30 +37,33 @@ EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
 cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered"}];
 
 title=First@(Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Title",___]:>name,Infinity]/.{}-> {""});
+ShowStatus["Gathering section info..."];
 sections=CurrentValue[#,{"CounterValue","Section"}]&/@cells;
 subsections=CurrentValue[#,{"CounterValue","Subsection"}]&/@cells;
 subsubsections=CurrentValue[#,{"CounterValue","Subsubsection"}]&/@cells;
 celltags=ToString[StringJoin["#",Riffle[If[MatchQ[CurrentValue[#,{"CellTags"}],_String],{CurrentValue[#,{"CellTags"}]},CurrentValue[#,{"CellTags"}]]," "]]]&/@cells;
-ShowStatus["Gathering section info..."];
 allinfo=DeleteCases[Replace[Thread[{sections,subsections,subsubsections}],{x___,0...}:>{x},1],0,2];
-ShowStatus["Deleting unnecessary.."];
-GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsection"|"Subsubsection",___]:>{style,Convert`TeX`BoxesToTeX[ name,"BoxRules"->{D_String:>D}]},Infinity]/.{"Subsubsection",x_}:>x[]//.{x___,{"Subsection",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w}//.{x___,{"Section",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w};
 ShowStatus["Gathering table of contents"];
-paths=(StringJoin[separator,title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"]])&/@allinfo;
+GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsection"|"Subsubsection",___]:>{style,Convert`TeX`BoxesToTeX[ name,"BoxRules"->{D_String:>D}]},Infinity]/.{"Subsubsection",x_}:>x[]//.{x___,{"Subsection",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w}//.{x___,{"Section",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w};
 ShowStatus["Preparing paths..."];
-data=NotebookRead@cells;
+paths=(StringJoin[separator,title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"]])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
-dat=ReplaceRepeated[data,
+data=NotebookRead@cells;
+dat=Block[{n=1},ReplaceRepeated[data,
 {
-RowBox[{C__String}]:>StringJoin@C,
-StyleBox[D__,Background->None]:>StyleBox[D],
+ButtonBox[RowBox[C__],___]:> C,
+CounterBox["FigureCaptionNumbered",N_]:> (First@Cases[data,Cell[TextData[name__],___,"Figure",___,CellTags->N,___]:>name,Infinity]),
+CounterBox["EquationNumbered",N_]:> (Convert`TeX`BoxesToTeX@First@Cases[data,Cell[name_,___,CellTags->N,___]:>name,Infinity]),
+CounterBox[___]:>"",
+StyleBox[D__,Background->None,E___]:>StyleBox[D,E],
 StyleBox[D_String]:>D,
+(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>"[$]"<>Convert`TeX`BoxesToTeX[C, "BoxRules"->{StyleBox[D_,Background->LightGreen]:> "[/$]{{c"<>ToString[n]<>"::[$]" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>"[/$]}}[$]"}]<>"[/$] ",
+RowBox[{C__String}]:>StringJoin@C,
 Cell[TextData[data_],___, CellID->Nr_Integer]:> {Nr ,data},
 Cell[BoxData[data_],___, CellID->Nr_Integer]:> {Nr ,data},
 Cell[data_,___, CellID->Nr_Integer]:> {Nr ,data},
-Cell[BoxData[data_],___]:> data,
-FormBox[C_String,TextForm|TraditionalForm]:> C
-}];
+Cell[BoxData[data_],___]:> data
+}]];
 ShowStatus["Extracting data... (2/3)"];
 PrintToConsole["Identified Ank collection folder "<>tempPicPath];
 dat=Block[{pic=0},ReplaceAll[dat,{
@@ -73,17 +76,21 @@ dat=Block[{n=1},ReplaceAll[dat,{
 (FormBox[RowBox[{C__String}],TextForm]|FormBox[RowBox[{C__String}],TraditionalForm]):>StringJoin@C,
 (FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>"[$]"<>Convert`TeX`BoxesToTeX[C, "BoxRules"->{StyleBox[D_,Background->LightGreen]:> "[/$]{{c"<>ToString[n]<>"::[$]" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>"[/$]}}[$]"}]<>"[/$] ",
 
-StyleBox[D_, Background->LightGreen]:>("{{c"<>ToString[n]<>"::"<>D<>"}}"),
+StyleBox[D_,E___ ,Background->LightGreen,F___]:>("{{c"<>ToString[n]<>"::"<>
+ReplaceAll[StyleBox[D,E,F],{
+StyleBox[U_String,___,FontWeight->"Bold",___]:> ("<b>"<>U<>"</b>"),
+StyleBox[U_String,___,FontSlant->"Italic",___]:> ("<i>"<>U<>"</i>"),
+StyleBox[U_String,___,FontWeight->"Plain",___]:> U,
+StyleBox[U_String,___,FontVariations->{___,"Underline"->True,___},___]:> ("<u>"<>U<>"</u>"),
+StyleBox[U_String,___,FontVariations->__,___]:> U,
+StyleBox[U_String,___]:>U
+}]<>"}}"),
 StyleBox[D_String,___,FontWeight->"Bold",___]:> ("<b>"<>D<>"</b>"),
 StyleBox[D_String,___,FontSlant->"Italic",___]:> ("<i>"<>D<>"</i>"),
 StyleBox[D_String,___,FontWeight->"Plain",___]:> D,
 StyleBox[D_String,___,FontVariations->{___,"Underline"->True,___},___]:> ("<u>"<>D<>"</u>"),
 StyleBox[D_String,___,FontVariations->__,___]:> D,
-StyleBox[D_, Background->_]:>ToString[n],
-ButtonBox[RowBox[{_,CounterBox[_,N_],_}],___]:> (Convert`TeX`BoxesToTeX@First@Cases[data,Cell[name_,___,CellTags->N,___]:>name,Infinity]),
-ButtonBox[RowBox[{_,CounterBox[_],_}],___]:> "",
-CounterBox["FigureCaptionNumbered",N_]:> "",
-CounterBox["FigureCaptionNumbered"]:> ""
+StyleBox[D_, Background->_]:>ToString[n]
 }]];
 ShowStatus["Fixing data... (1/2)"];
 base=(ToString[First@#]<>separator <> StringReplace[StringJoin[Last@#],{"\n"-> "<br>","\[LineSeparator]"-> "<br>"}])&/@ dat;
@@ -94,7 +101,6 @@ base=StringReplace[base,{
 "{{c1::<br>}}"->"<br>",
 ("\\text{"~~Shortest[c__]~~"}"):>ToString@StringReplace[c,{"$":>  ""}] 
 }];
-base=StringReplace[StringReplace[#,allspecial],"[/$][$]"-> ""]&/@base;
 ShowStatus["Preparing final structure..."];
 final=MapThread[StringJoin,{base,paths,celltags}];
 ShowStatus["Filtering..."];
