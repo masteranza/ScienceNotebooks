@@ -33,6 +33,26 @@ tempPicPath=Quiet@CreateDirectory["~/Dropbox/Anki/Ranza/collection.media/"];
 TeXFix[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}",("\\text{"~~c:Except["}"]..~~"}"):>(ToString@c)}];
 TeXFixPoor[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}"}];
 EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
+ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
+"\[OAcute]":> "\[OAcute]",
+"\[CapitalOAcute]":> "\[CapitalOAcute]",
+"\:015b":> "\:015b",
+"\:015a":> "\:015a",
+"\[CAcute]":> "\[CAcute]",
+"\[CapitalCAcute]":> "\[CapitalCAcute]",
+"\:0119":> "\:0119",
+"\:0118":> "\:0118",
+"\:0105":> "\:0105",
+"\:0104":> "\:0104",
+"\[LSlash]":> "\[LSlash]",
+"\[CapitalLSlash]":> "\[CapitalLSlash]",
+"\:017c":> "\:017c",
+"\:017b":> "\:017b",
+"\:017a":>"\:017a",
+"\:0179":>"\:0179",
+"\:0144":>"\:0144",
+"\:0143":>"\:0143",
+StyleBox[D_,Background->LightGreen]:> "[/$]{{c"<>ToString[n]<>"::[$]" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>"[/$]}}[$]"}]<>"[/$] ";
 
 cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered"}];
 
@@ -57,7 +77,7 @@ CounterBox["EquationNumbered",N_]:> (Convert`TeX`BoxesToTeX@First@Cases[data,Cel
 CounterBox[___]:>"",
 StyleBox[D__,Background->None,E___]:>StyleBox[D,E],
 StyleBox[D_String]:>D,
-(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>"[$]"<>Convert`TeX`BoxesToTeX[C, "BoxRules"->{StyleBox[D_,Background->LightGreen]:> "[/$]{{c"<>ToString[n]<>"::[$]" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>"[/$]}}[$]"}]<>"[/$] ",
+(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>ToTex[C],
 RowBox[{C__String}]:>StringJoin@C,
 Cell[TextData[data_],___, CellID->Nr_Integer]:> {Nr ,data},
 Cell[BoxData[data_],___, CellID->Nr_Integer]:> {Nr ,data},
@@ -74,8 +94,7 @@ FormBox[RowBox[{E___,TraditionalForm}],___]:> FormBox[RowBox[{E}],TraditionalFor
 ShowStatus["Extracting data... (3/3)"];
 dat=Block[{n=1},ReplaceAll[dat,{
 (FormBox[RowBox[{C__String}],TextForm]|FormBox[RowBox[{C__String}],TraditionalForm]):>StringJoin@C,
-(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>"[$]"<>Convert`TeX`BoxesToTeX[C, "BoxRules"->{StyleBox[D_,Background->LightGreen]:> "[/$]{{c"<>ToString[n]<>"::[$]" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>"[/$]}}[$]"}]<>"[/$] ",
-
+(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>ToTex[C],
 StyleBox[D_,E___ ,Background->LightGreen,F___]:>("{{c"<>ToString[n]<>"::"<>
 ReplaceAll[StyleBox[D,E,F],{
 StyleBox[U_String,___,FontWeight->"Bold",___]:> ("<b>"<>U<>"</b>"),
@@ -98,8 +117,8 @@ ShowStatus["Fixing data... (2/2)"];
 base=StringReplace[base,{
 "[$][/$]"->"",
 "{{c1::}}"->"",
-"{{c1::<br>}}"->"<br>",
-("\\text{"~~Shortest[c__]~~"}"):>ToString@StringReplace[c,{"$":>  ""}] 
+"{{c1::<br>}}"->"<br>"
+(*,("\\text{"~~Shortest[c__]~~"}")\[RuleDelayed]ToString@StringReplace[c,{"$"\[RuleDelayed]  ""}] *)
 }];
 ShowStatus["Preparing final structure..."];
 final=MapThread[StringJoin,{base,paths,celltags}];

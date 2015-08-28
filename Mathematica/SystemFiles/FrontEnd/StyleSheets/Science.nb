@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     29937,        920]
-NotebookOptionsPosition[     23383,        735]
-NotebookOutlinePosition[     24143,        766]
-CellTagsIndexPosition[     24074,        761]
+NotebookDataLength[     30978,        957]
+NotebookOptionsPosition[     24095,        765]
+NotebookOutlinePosition[     24855,        796]
+CellTagsIndexPosition[     24786,        791]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -729,7 +729,37 @@ Cell[StyleData["Definition"],
  FontFamily->Baskerville,
  FontSize->14,
  FontWeight->Normal,
- FontSlant->None]
+ FontSlant->None],
+
+Cell[StyleData["Theorem"],
+ CellFrame->{{8, 0}, {0, 1}},
+ CellMargins->{{20, 12}, {3, 3}},
+ CellFrameMargins->{{8, 8}, {3, 3}},
+ CellFrameColor->RGBColor[0.949996, 0.500008, 0.500008],
+ CellFrameLabels->{{Inherited, Inherited}, {Inherited, 
+    Cell[
+     TextData[{
+       Style["Twierdzenie", FontWeight -> Bold]}], "Text"]}},
+ TabSpacings->2.1,
+ FontFamily->Baskerville,
+ FontSize->14,
+ FontWeight->Normal,
+ FontSlant->None,
+ CellID->113701994],
+
+Cell[StyleData["Axiom"],
+ CellID->1605923846],
+
+Cell[StyleData["Proof"],
+ CellID->1187604226],
+
+Cell[StyleData["Example"],
+ TabSpacings->2.1,
+ FontFamily->Baskerville,
+ FontSize->14,
+ FontWeight->Normal,
+ FontSlant->None,
+ Background->RGBColor[0.9, 0.9, 0.9]]
 }, Open  ]]
 }, Open  ]]
 },
@@ -760,7 +790,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 23931, 754}
+ {"Tabela", 24643, 784}
  }
 *)
 (*NotebookFileOutline
@@ -919,7 +949,14 @@ Cell[22711, 707, 93, 3, 64, 23, 0, "StyleData", "Code", "All",
  CellID->1384996765],
 Cell[22807, 712, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
  MenuSortingValue->10000],
-Cell[22927, 718, 428, 13, 62, 29, 0, "StyleData", "Definition", "All"]
+Cell[22927, 718, 428, 13, 62, 29, 0, "StyleData", "Definition", "All"],
+Cell[23358, 733, 447, 14, 62, 26, 0, "StyleData", "Theorem", "All",
+ CellID->113701994],
+Cell[23808, 749, 45, 1, 36, 24, 0, "StyleData", "Axiom", "All",
+ CellID->1605923846],
+Cell[23856, 752, 45, 1, 36, 24, 0, "StyleData", "Proof", "All",
+ CellID->1187604226],
+Cell[23904, 755, 163, 6, 56, 26, 0, "StyleData", "Example", "All"]
 }, Open  ]]
 }, Open  ]]
 }
