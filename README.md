@@ -95,4 +95,20 @@ Here's the final efect:
 
 To learn some more basics try opening `Using Mathematica-Anki.pdf`
 
+##Currently supported styles
+
+Not all cells get exported to Anki currently supported include:
+
+* Text
+* EquationNumbered
+* Equation
+* Figure
+* Item1, Item2, Item3
+* Item1Numbered, Item2Numbered, Item3Numbered
+* Theorem,
+* Example,
+* Proof
+* Axiom
+* Definition
+
 More tutorials coming soon.  (The system is poorly documented, but already has the capabilities to export equations and pictures as it was built out of my own need).
