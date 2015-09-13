@@ -24,7 +24,7 @@ ExportToAnki::usage ="Function exporting selected sections of the notebook to An
 
 Begin["`Private`"];
 
-ExportToAnki[sync_:True]:=Module[{separator,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial},
+ExportToAnki[sync_:True]:=Module[{separator,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
@@ -61,7 +61,7 @@ ShowStatus["Gathering section info..."];
 sections=CurrentValue[#,{"CounterValue","Section"}]&/@cells;
 subsections=CurrentValue[#,{"CounterValue","Subsection"}]&/@cells;
 subsubsections=CurrentValue[#,{"CounterValue","Subsubsection"}]&/@cells;
-celltags=ToString[StringJoin["#",Riffle[If[MatchQ[CurrentValue[#,{"CellTags"}],_String],{CurrentValue[#,{"CellTags"}]},CurrentValue[#,{"CellTags"}]]," "]]]&/@cells;
+celltags=ToString[StringJoin[separator,Riffle[If[MatchQ[CurrentValue[#,{"CellTags"}],_String],{CurrentValue[#,{"CellTags"}]},CurrentValue[#,{"CellTags"}]]," "]]]&/@cells;
 allinfo=DeleteCases[Replace[Thread[{sections,subsections,subsubsections}],{x___,0...}:>{x},1],0,2];
 ShowStatus["Gathering table of contents"];
 GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsection"|"Subsubsection",___]:>{style,Convert`TeX`BoxesToTeX[ name,"BoxRules"->{D_String:>D}]},Infinity]/.{"Subsubsection",x_}:>x[]//.{x___,{"Subsection",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w}//.{x___,{"Section",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w};
@@ -121,12 +121,14 @@ base=StringReplace[base,{
 (*,("\\text{"~~Shortest[c__]~~"}")\[RuleDelayed]ToString@StringReplace[c,{"$"\[RuleDelayed]  ""}] *)
 }];
 ShowStatus["Preparing final structure..."];
-final=MapThread[StringJoin,{base,paths,celltags}];
+npath=NotebookFileName[EvaluationNotebook[]];
+final=MapThread[StringJoin,{base,paths,ConstantArray[StringJoin[separator,NotebookFileName[EvaluationNotebook[]]],Length[paths]],celltags}];
 ShowStatus["Filtering..."];
 filtered=Select[final,StringMatchQ[#,"*{{c@::*"] & ];
-ShowStatusd["Exporting..."];
+ShowStatus["Exporting..."];
 Export["text.txt",filtered];
 ndir=NotebookDirectory[EvaluationNotebook[]];
+
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
 PrintToConsole[deck];
 ShowStatus["Importing to Anki..."];
