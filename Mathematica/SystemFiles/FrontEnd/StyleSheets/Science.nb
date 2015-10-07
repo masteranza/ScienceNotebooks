@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     34175,       1036]
-NotebookOptionsPosition[     27027,        841]
-NotebookOutlinePosition[     27788,        872]
-CellTagsIndexPosition[     27719,        867]
+NotebookDataLength[     34675,       1049]
+NotebookOptionsPosition[     27551,        855]
+NotebookOutlinePosition[     28311,        886]
+CellTagsIndexPosition[     28242,        881]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -513,7 +513,7 @@ Cell[StyleData["Text"],
  LineSpacing->{1.5, 0},
  ParagraphSpacing->0,
  FontFamily->Baskerville,
- FontSize->14,
+ FontSize->15,
  FontWeight->Normal,
  PagagraphIndent -> 80],
 
@@ -653,12 +653,6 @@ Cell[StyleData["RemarkLabel"],
  StyleMenuListing->None,
  FontFamily->Baskerville,
  CellID->884038640],
-
-Cell[StyleData["Inline"],
- MenuSortingValue->10000,
- FontFamily->Baskerville,
- FontSlant->"Italic",
- CellID->1870991213],
 
 Cell[StyleData["EmphasisText"],
  CellFrame->True,
@@ -813,6 +807,26 @@ Cell[StyleData["Example", StyleDefinitions -> "Text"],
  FontWeight->Normal,
  FontSlant->Plain],
 
+Cell[StyleData["Solution", StyleDefinitions -> "Text"],
+ CellFrame->{{5, 0}, {0, 1}},
+ CellMargins->{{50, 12}, {3, 3}},
+ ReturnCreatesNewCell->False,
+ CellFrameMargins->{{95, 8}, {10, 0}},
+ CellFrameColor->RGBColor[0.849996, 0.600008, 0.600008],
+ CellFrameLabels->{{
+    Cell[
+     TextData[{"Rozwi\:0105zanie "}], FontFamily -> Baskerville, FontWeight -> 
+     Bold, FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
+   Inherited, Inherited}},
+ CellFrameLabelMargins->{{-115, 10}, {1, 0}},
+ ParagraphIndent->0,
+ TabSpacings->2.1,
+ FontFamily->Baskerville,
+ FontSize->14,
+ FontWeight->Normal,
+ FontSlant->Plain,
+ CellID->1873841830],
+
 Cell[StyleData["Remark", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
  CellMargins->{{50, 12}, {3, 3}},
@@ -843,8 +857,8 @@ NotebookAutoSave->True,
 ClosingAutoSave->True,
 ClosingSaveDialog->False,
 Saveable->True,
-WindowSize->{718, 855},
-WindowMargins->{{-2, Automatic}, {Automatic, 7}},
+WindowSize->{720, 807},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 PrivateNotebookOptions->{"JournalStyle"->"NumberedNote",
@@ -866,7 +880,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 27576, 860}
+ {"Tabela", 28099, 874}
  }
 *)
 (*NotebookFileOutline
@@ -957,8 +971,8 @@ Cell[CellGroupData[{
 Cell[17742, 502, 133, 3, 49, "Section",
  CellID->61645886],
 Cell[CellGroupData[{
-Cell[17900, 509, 228, 8, 52, 23, 0, "StyleData", "Text", "All"],
-Cell[18131, 519, 74, 0, 52, 74, 0, "StyleData", "Text", "Printout"]
+Cell[17900, 509, 228, 8, 53, 23, 0, "StyleData", "Text", "All"],
+Cell[18131, 519, 74, 0, 53, 74, 0, "StyleData", "Text", "Printout"]
 }, Open  ]],
 Cell[18220, 522, 329, 11, 57, 56, 0, "StyleData", "RightText", "All",
  MenuSortingValue->1560,
@@ -1009,31 +1023,30 @@ Cell[21143, 637, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
 Cell[21428, 649, 146, 5, 38, 30, 0, "StyleData", "RemarkLabel", "All",
  StyleMenuListing->None,
  CellID->884038640],
-Cell[21577, 656, 120, 4, 38, 25, 0, "StyleData", "Inline", "All",
- MenuSortingValue->10000,
- CellID->1870991213],
-Cell[21700, 662, 294, 10, 60, 31, 0, "StyleData", "EmphasisText", "All",
+Cell[21577, 656, 294, 10, 60, 31, 0, "StyleData", "EmphasisText", "All",
  CounterIncrements->"SmallText"],
-Cell[21997, 674, 141, 5, 40, 27, 0, "StyleData", "Citation", "All",
+Cell[21874, 668, 141, 5, 40, 27, 0, "StyleData", "Citation", "All",
  MenuSortingValue->10000],
 Cell[CellGroupData[{
-Cell[22163, 683, 413, 13, 46, 28, 0, "StyleData", "Reference", "All",
+Cell[22040, 677, 413, 13, 46, 28, 0, "StyleData", "Reference", "All",
  CounterIncrements->"Reference",
  CounterAssignments->{{"Item1Numbered", 0}},
  MenuSortingValue->2260],
-Cell[22579, 698, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
+Cell[22456, 692, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
 }, Open  ]],
-Cell[22680, 702, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
+Cell[22557, 696, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
  MenuSortingValue->10000],
-Cell[22800, 708, 685, 19, 39, 54, 0, "StyleData", "Theorem", "All"],
-Cell[23488, 729, 672, 19, 39, 52, 0, "StyleData", "Axiom", "All"],
-Cell[24163, 750, 703, 20, 39, 52, 0, "StyleData", "Proof", "All",
+Cell[22677, 702, 685, 19, 39, 54, 0, "StyleData", "Theorem", "All"],
+Cell[23365, 723, 672, 19, 39, 52, 0, "StyleData", "Axiom", "All"],
+Cell[24040, 744, 703, 20, 39, 52, 0, "StyleData", "Proof", "All",
  CounterIncrements->"Proof"],
-Cell[24869, 772, 708, 20, 39, 57, 0, "StyleData", "Definition", "All",
+Cell[24746, 766, 708, 20, 39, 57, 0, "StyleData", "Definition", "All",
  CellID->826547224],
-Cell[25580, 794, 674, 19, 39, 54, 0, "StyleData", "Example", "All"],
-Cell[26257, 815, 595, 17, 39, 53, 0, "StyleData", "Remark", "All"],
-Cell[26855, 834, 144, 3, 64, 51, 0, "StyleData", "Code", "All",
+Cell[25457, 788, 674, 19, 39, 54, 0, "StyleData", "Example", "All"],
+Cell[26134, 809, 644, 18, 39, 55, 0, "StyleData", "Solution", "All",
+ CellID->1873841830],
+Cell[26781, 829, 595, 17, 39, 53, 0, "StyleData", "Remark", "All"],
+Cell[27379, 848, 144, 3, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None]
 }, Open  ]]

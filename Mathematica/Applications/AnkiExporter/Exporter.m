@@ -34,6 +34,8 @@ TeXFix[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}",("\\text{"~~c:Exce
 TeXFixPoor[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}"}];
 EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
 ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
+"\[Transpose]":>"^\\mathsf{T}",
+"\[ConjugateTranspose]":>"^\\dagger",
 "\[OAcute]":> "\[OAcute]",
 "\[CapitalOAcute]":> "\[CapitalOAcute]",
 "\:015b":> "\:015b",
@@ -54,7 +56,7 @@ ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
 "\:0143":>"\:0143",
 StyleBox[D_,Background->LightGreen]:> "[/$]{{c"<>ToString[n]<>"::[$]" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>"[/$]}}[$]"}]<>"[/$] ";
 
-cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Theorem","Example","Proof","Axiom","Definition"}];
+cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Theorem","Example","Proof","Axiom","Solution","Definition"}];
 
 title=First@(Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Title",___]:>name,Infinity]/.{}-> {""});
 ShowStatus["Gathering section info..."];
