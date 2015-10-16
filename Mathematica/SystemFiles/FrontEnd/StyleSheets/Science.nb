@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     32672,       1009]
-NotebookOptionsPosition[     25485,        814]
-NotebookOutlinePosition[     26248,        845]
-CellTagsIndexPosition[     26179,        840]
+NotebookDataLength[     39466,       1139]
+NotebookOptionsPosition[     32263,        944]
+NotebookOutlinePosition[     33026,        975]
+CellTagsIndexPosition[     32957,        970]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -172,6 +172,136 @@ Cell[StyleData[All, "Working"],
 
 Cell[StyleData[All, "Printout", StyleDefinitions -> All],
  ScreenStyleEnvironment->"Printout",
+ DockedCells->Cell[
+   BoxData[
+    GridBox[{{
+       InterpretationBox[
+        GridBox[{{
+           ButtonBox[
+            StyleBox["\"Toggle Code\"", 10, StripOnInput -> False], 
+            ButtonFunction :> CodeVisible[], Appearance -> {"AbuttingRight"}, 
+            Evaluator -> Automatic, Method -> "Preemptive"], 
+           ButtonBox[
+            StyleBox["\"Page Breaks\"", 10, StripOnInput -> False], 
+            ButtonFunction :> SetOptions[
+              SelectedNotebook[], ShowPageBreaks -> Not[
+                Last[
+                 First[
+                  Options[
+                   SelectedNotebook[], ShowPageBreaks]]]]], 
+            Appearance -> {"AbuttingLeftRight"}, Evaluator -> Automatic, 
+            Method -> "Preemptive"], 
+           ButtonBox[
+            StyleBox["\"TOC\"", 10, StripOnInput -> False], ButtonFunction :> 
+            CreateTOC[{"Section", "Subsection", "Subsubsection"}], 
+            Appearance -> {"AbuttingLeftRight"}, Evaluator -> Automatic, 
+            Method -> "Preemptive"], 
+           ButtonBox[
+            StyleBox["\"Merge+Export\"", 10, StripOnInput -> False], 
+            ButtonFunction :> MergeExport[], 
+            Appearance -> {"AbuttingLeftRight"}, Evaluator -> Automatic, 
+            Method -> "Preemptive"], 
+           ButtonBox[
+            StyleBox["\"Word Stats\"", 10, StripOnInput -> False], 
+            ButtonFunction :> WordStats[], 
+            Appearance -> {"AbuttingLeftRight"}, Evaluator -> Automatic, 
+            Method -> "Preemptive"], 
+           ButtonBox[
+            StyleBox["\"\[RightArrow] Anki\"", 10, StripOnInput -> False], 
+            ButtonFunction :> ExportToAnki[], Appearance -> {"AbuttingLeft"}, 
+            Evaluator -> Automatic, Method -> "Queued"]}}, AutoDelete -> 
+         False, GridBoxItemSize -> {
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+         ColumnSpacings -> 0], 
+        ButtonBar[{
+         Style["Toggle Code", 10] :> CodeVisible[], Style["Page Breaks", 10] :> 
+          SetOptions[
+            SelectedNotebook[], ShowPageBreaks -> Not[
+              Last[
+               First[
+                Options[
+                 SelectedNotebook[], ShowPageBreaks]]]]], Style["TOC", 10] :> 
+          CreateTOC[{"Section", "Subsection", "Subsubsection"}], 
+          Style["Merge+Export", 10] :> MergeExport[], Style["Word Stats", 10] :> 
+          WordStats[], Style["->Anki", 10] :> ExportToAnki[]}, 
+         Appearance -> {Automatic}]], 
+       GridBox[{{
+          ButtonBox["Title", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Title"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Sec", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Section"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Subsec", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Subsection"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["\[SmallCircle]", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Item1"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["1.", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Item1Numbered"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Def", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Definition"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Theo", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Theorem"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Lemma", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Lemma"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Ex", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Example"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"], " | ", 
+          ButtonBox["Sol", ButtonFunction :> (SelectionMove[
+              SelectedNotebook[], All, Cell]; FrontEndExecute[
+              FrontEndToken[
+               SelectedNotebook[], "Style", "Solution"]]), BaseStyle -> 
+           "ToolbarButton", Appearance -> None, ButtonFrame -> None, 
+           Evaluator -> Automatic, ImageSize -> Automatic, Method -> 
+           "Queued"]}}, 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, ColumnSpacings -> 
+        0]}}, GridBoxItemSize -> {"Columns" -> {
+         Scaled[0.5], 
+         Scaled[0.5]}}, ColumnAlignments -> {Left, Right}, ColumnSpacings -> 
+     2, RowAlignments -> Top]]],
  CellBracketOptions->{"Color"->RGBColor[0.269993, 0.308507, 0.6]},
  CellLabelMargins->{{12, Inherited}, {Inherited, Inherited}},
  ShowAutoStyles->False,
@@ -832,14 +962,14 @@ StyleDefinitions->"PrivateStylesheetFormatting.nb"
 (*CellTagsOutline
 CellTagsIndex->{
  "Tabela"->{
-  Cell[13885, 399, 392, 13, 52, 29, 0, "StyleData", "TableTitle", "All",
+  Cell[20663, 529, 392, 13, 52, 29, 0, "StyleData", "TableTitle", "All",
    CellTags->"Tabela",
    CellID->363134505]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 26036, 833}
+ {"Tabela", 32814, 963}
  }
 *)
 (*NotebookFileOutline
@@ -854,159 +984,159 @@ Cell[846, 31, 62, 1, 49, "Section",
 Cell[911, 34, 7041, 136, 36, 31, 0, "StyleData", "All", "Working",
  MenuSortingValue->1,
  CellID->1132720943],
-Cell[7955, 172, 269, 5, 30, 57, 0, "StyleData", "All", "Printout",
+Cell[7955, 172, 7047, 135, 30, 57, 0, "StyleData", "All", "Printout",
  MenuSortingValue->1]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8261, 182, 165, 3, 49, "Section",
+Cell[15039, 312, 165, 3, 49, "Section",
  CellID->1448483780],
-Cell[8429, 187, 82, 2, 38, 31, 0, "StyleData", "StandardForm", "All",
+Cell[15207, 317, 82, 2, 38, 31, 0, "StyleData", "StandardForm", "All",
  MenuSortingValue->10000]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8548, 194, 137, 3, 49, "Section",
+Cell[15326, 324, 137, 3, 49, "Section",
  CellID->425314283],
-Cell[8688, 199, 118, 4, 93, 24, 0, "StyleData", "Title", "All",
+Cell[15466, 329, 118, 4, 93, 24, 0, "StyleData", "Title", "All",
  MenuCommandKey->"0"],
-Cell[8809, 205, 93, 3, 45, 27, 0, "StyleData", "Subtitle", "All"],
-Cell[8905, 210, 201, 7, 41, 30, 0, "StyleData", "Subsubtitle", "All",
+Cell[15587, 335, 93, 3, 45, 27, 0, "StyleData", "Subtitle", "All"],
+Cell[15683, 340, 201, 7, 41, 30, 0, "StyleData", "Subsubtitle", "All",
  MenuSortingValue->1151],
-Cell[9109, 219, 77, 2, 30, 30, 0, "StyleData", "Institution", "All"]
+Cell[15887, 349, 77, 2, 30, 30, 0, "StyleData", "Institution", "All"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9223, 226, 112, 2, 49, "Section",
+Cell[16001, 356, 112, 2, 49, "Section",
  CellID->14768770],
-Cell[9338, 230, 157, 6, 40, 28, 0, "StyleData", "Hyperlink", "All",
+Cell[16116, 360, 157, 6, 40, 28, 0, "StyleData", "Hyperlink", "All",
  MenuSortingValue->10000,
  CellID->659579449],
-Cell[9498, 238, 66, 2, 45, 27, 0, "StyleData", "Equation", "All"],
-Cell[9567, 242, 231, 7, 45, 35, 0, "StyleData", "EquationNumbered", "All"]
+Cell[16276, 368, 66, 2, 45, 27, 0, "StyleData", "Equation", "All"],
+Cell[16345, 372, 231, 7, 45, 35, 0, "StyleData", "EquationNumbered", "All"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9835, 254, 114, 2, 49, "Section",
+Cell[16613, 384, 114, 2, 49, "Section",
  CellID->1123151459],
-Cell[9952, 258, 100, 3, 38, 31, 0, "StyleData", "SectionLabel", "All"],
+Cell[16730, 388, 100, 3, 38, 31, 0, "StyleData", "SectionLabel", "All"],
 Cell[CellGroupData[{
-Cell[10077, 265, 757, 19, 81, 26, 0, "StyleData", "Section", "All",
+Cell[16855, 395, 757, 19, 81, 26, 0, "StyleData", "Section", "All",
  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}, {
    "Subsubsubsection", 0}, {"Item1", 0}, {"Item2", 0}, {"Item3", 0}, {
    "Item1Numbered", 0}, {"Item2Numbered", 0}, {"Item3Numbered", 0}, {
    "Proof", 0}, {"Theorem", 0}, {"Definition", 0}, {"Example", 0}, {
    "Axiom", 0}}],
-Cell[10837, 286, 141, 3, 81, 82, 1, "StyleData", "Section", "Printout"]
+Cell[17615, 416, 141, 3, 81, 82, 1, "StyleData", "Section", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11015, 294, 507, 15, 66, 29, 0, "StyleData", "Subsection", "All"],
-Cell[11525, 311, 147, 3, 76, 88, 1, "StyleData", "Subsection", "Printout"]
+Cell[17793, 424, 507, 15, 66, 29, 0, "StyleData", "Subsection", "All"],
+Cell[18303, 441, 147, 3, 76, 88, 1, "StyleData", "Subsection", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11709, 319, 552, 16, 62, 32, 0, "StyleData", "Subsubsection", "All"],
-Cell[12264, 337, 153, 3, 72, 94, 1, "StyleData", "Subsubsection", "Printout"]
+Cell[18487, 449, 552, 16, 62, 32, 0, "StyleData", "Subsubsection", "All"],
+Cell[19042, 467, 153, 3, 72, 94, 1, "StyleData", "Subsubsection", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12454, 345, 437, 13, 53, 35, 0, "StyleData", "Subsubsubsection", "All"],
-Cell[12894, 360, 136, 2, 73, 100, 1, "StyleData", "Subsubsubsection", \
+Cell[19232, 475, 437, 13, 53, 35, 0, "StyleData", "Subsubsubsection", "All"],
+Cell[19672, 490, 136, 2, 73, 100, 1, "StyleData", "Subsubsubsection", \
 "Printout"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13079, 368, 117, 2, 49, "Section",
+Cell[19857, 498, 117, 2, 49, "Section",
  CellID->1602963217],
-Cell[13199, 372, 88, 3, 46, 25, 0, "StyleData", "Figure", "All",
+Cell[19977, 502, 88, 3, 46, 25, 0, "StyleData", "Figure", "All",
  MenuCommandKey->"8"],
-Cell[13290, 377, 445, 13, 74, 32, 0, "StyleData", "FigureCaption", "All",
+Cell[20068, 507, 445, 13, 74, 32, 0, "StyleData", "FigureCaption", "All",
  CounterIncrements->"FigureCaptionNumbered"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13772, 395, 110, 2, 49, "Section",
+Cell[20550, 525, 110, 2, 49, "Section",
  CellID->973890760],
-Cell[13885, 399, 392, 13, 52, 29, 0, "StyleData", "TableTitle", "All",
+Cell[20663, 529, 392, 13, 52, 29, 0, "StyleData", "TableTitle", "All",
  CellTags->"Tabela",
  CellID->363134505],
-Cell[14280, 414, 694, 20, 37, 24, 0, "StyleData", "Table", "All"]
+Cell[21058, 544, 694, 20, 37, 24, 0, "StyleData", "Table", "All"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15011, 439, 133, 3, 49, "Section",
+Cell[21789, 569, 133, 3, 49, "Section",
  CellID->61645886],
 Cell[CellGroupData[{
-Cell[15169, 446, 228, 8, 53, 23, 0, "StyleData", "Text", "All"],
-Cell[15400, 456, 74, 0, 53, 74, 0, "StyleData", "Text", "Printout"]
+Cell[21947, 576, 228, 8, 53, 23, 0, "StyleData", "Text", "All"],
+Cell[22178, 586, 74, 0, 53, 74, 0, "StyleData", "Text", "Printout"]
 }, Open  ]],
-Cell[15489, 459, 329, 11, 57, 56, 0, "StyleData", "RightText", "All",
+Cell[22267, 589, 329, 11, 57, 56, 0, "StyleData", "RightText", "All",
  MenuSortingValue->1560,
  CellID->567274044]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15855, 475, 109, 2, 49, "Section",
+Cell[22633, 605, 109, 2, 49, "Section",
  CellID->20417926],
 Cell[CellGroupData[{
-Cell[15989, 481, 214, 6, 44, 24, 0, "StyleData", "Item1", "All",
+Cell[22767, 611, 214, 6, 44, 24, 0, "StyleData", "Item1", "All",
  MenuCommandKey->"-"],
-Cell[16206, 489, 76, 0, 44, 76, 0, "StyleData", "Item1", "Printout"]
+Cell[22984, 619, 76, 0, 44, 76, 0, "StyleData", "Item1", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16319, 494, 192, 5, 44, 24, 0, "StyleData", "Item2", "All"],
-Cell[16514, 501, 97, 1, 44, 76, 0, "StyleData", "Item2", "Printout",
+Cell[23097, 624, 192, 5, 44, 24, 0, "StyleData", "Item2", "All"],
+Cell[23292, 631, 97, 1, 44, 76, 0, "StyleData", "Item2", "Printout",
  CellID->1295418899]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16648, 507, 193, 5, 44, 24, 0, "StyleData", "Item3", "All"],
-Cell[16844, 514, 97, 1, 44, 76, 0, "StyleData", "Item3", "Printout",
+Cell[23426, 637, 193, 5, 44, 24, 0, "StyleData", "Item3", "All"],
+Cell[23622, 644, 97, 1, 44, 76, 0, "StyleData", "Item3", "Printout",
  CellID->1194924769]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16990, 521, 122, 2, 49, "Section",
+Cell[23768, 651, 122, 2, 49, "Section",
  CellID->1770623558],
 Cell[CellGroupData[{
-Cell[17137, 527, 238, 6, 50, 32, 0, "StyleData", "Item1Numbered", "All",
+Cell[23915, 657, 238, 6, 50, 32, 0, "StyleData", "Item1Numbered", "All",
  MenuCommandKey->"="],
-Cell[17378, 535, 94, 1, 50, 94, 1, "StyleData", "Item1Numbered", "Printout"]
+Cell[24156, 665, 94, 1, 50, 94, 1, "StyleData", "Item1Numbered", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[17509, 541, 232, 5, 40, 32, 0, "StyleData", "Item2Numbered", "All"],
-Cell[17744, 548, 115, 2, 40, 94, 1, "StyleData", "Item2Numbered", "Printout",
+Cell[24287, 671, 232, 5, 40, 32, 0, "StyleData", "Item2Numbered", "All"],
+Cell[24522, 678, 115, 2, 40, 94, 1, "StyleData", "Item2Numbered", "Printout",
  CellID->1813736256]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[17896, 555, 233, 5, 40, 32, 0, "StyleData", "Item3Numbered", "All"],
-Cell[18132, 562, 114, 2, 40, 94, 1, "StyleData", "Item3Numbered", "Printout",
+Cell[24674, 685, 233, 5, 40, 32, 0, "StyleData", "Item3Numbered", "All"],
+Cell[24910, 692, 114, 2, 40, 94, 1, "StyleData", "Item3Numbered", "Printout",
  CellID->190574117]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18295, 570, 114, 2, 49, "Section",
+Cell[25073, 700, 114, 2, 49, "Section",
  CellID->1154436234],
-Cell[18412, 574, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
-Cell[18697, 586, 146, 5, 38, 30, 0, "StyleData", "RemarkLabel", "All",
+Cell[25190, 704, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
+Cell[25475, 716, 146, 5, 38, 30, 0, "StyleData", "RemarkLabel", "All",
  StyleMenuListing->None,
  CellID->884038640],
-Cell[18846, 593, 294, 10, 60, 31, 0, "StyleData", "EmphasisText", "All",
+Cell[25624, 723, 294, 10, 60, 31, 0, "StyleData", "EmphasisText", "All",
  CounterIncrements->"SmallText"],
-Cell[19143, 605, 141, 5, 40, 27, 0, "StyleData", "Citation", "All",
+Cell[25921, 735, 141, 5, 40, 27, 0, "StyleData", "Citation", "All",
  MenuSortingValue->10000],
 Cell[CellGroupData[{
-Cell[19309, 614, 413, 13, 46, 28, 0, "StyleData", "Reference", "All",
+Cell[26087, 744, 413, 13, 46, 28, 0, "StyleData", "Reference", "All",
  CounterIncrements->"Reference",
  CounterAssignments->{{"Item1Numbered", 0}},
  MenuSortingValue->2260],
-Cell[19725, 629, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
+Cell[26503, 759, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
 }, Open  ]],
-Cell[19826, 633, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
+Cell[26604, 763, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
  MenuSortingValue->10000],
-Cell[19946, 639, 680, 19, 39, 54, 0, "StyleData", "Theorem", "All"],
-Cell[20629, 660, 668, 19, 39, 52, 0, "StyleData", "Axiom", "All"],
-Cell[21300, 681, 699, 20, 39, 52, 0, "StyleData", "Proof", "All",
+Cell[26724, 769, 680, 19, 39, 54, 0, "StyleData", "Theorem", "All"],
+Cell[27407, 790, 668, 19, 39, 52, 0, "StyleData", "Axiom", "All"],
+Cell[28078, 811, 699, 20, 39, 52, 0, "StyleData", "Proof", "All",
  CounterIncrements->"Proof"],
-Cell[22002, 703, 704, 20, 39, 57, 0, "StyleData", "Definition", "All",
+Cell[28780, 833, 704, 20, 39, 57, 0, "StyleData", "Definition", "All",
  CellID->826547224],
-Cell[22709, 725, 670, 19, 39, 54, 0, "StyleData", "Example", "All"],
-Cell[23382, 746, 640, 18, 39, 55, 0, "StyleData", "Solution", "All",
+Cell[29487, 855, 670, 19, 39, 54, 0, "StyleData", "Example", "All"],
+Cell[30160, 876, 640, 18, 39, 55, 0, "StyleData", "Solution", "All",
  CellID->1873841830],
-Cell[24025, 766, 591, 17, 39, 53, 0, "StyleData", "Remark", "All"],
-Cell[24619, 785, 691, 20, 39, 52, 0, "StyleData", "Lemma", "All",
+Cell[30803, 896, 591, 17, 39, 53, 0, "StyleData", "Remark", "All"],
+Cell[31397, 915, 691, 20, 39, 52, 0, "StyleData", "Lemma", "All",
  CounterIncrements->"Lemma"],
-Cell[25313, 807, 144, 3, 64, 51, 0, "StyleData", "Code", "All",
+Cell[32091, 937, 144, 3, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None]
 }, Open  ]]
