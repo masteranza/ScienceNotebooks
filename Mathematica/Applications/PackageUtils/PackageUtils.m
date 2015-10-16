@@ -28,6 +28,7 @@ PrintToConsole::usage="Send to console";
 MergeExport::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 CodeVisible::usage = "Shows/Hides code and cell tags";PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
 CreateTOC::usage="Create table of contents";
+StyleButton::usage="Creates a button to create a style Cell of a specific name";
 WordStats::usage="Prints current notebook word/character stats in Status area";
 Begin["`Private`"];
 
@@ -37,6 +38,8 @@ PrintToConsole[expr_]:=(SetSelectedNotebook[MessagesNotebook[]];
 NotebookWrite[SelectedNotebook[],Cell[BoxData[ToBoxes[expr]],"Print"]]);
 
 ShowStatus[status_]:=LinkWrite[$ParentLink,SetNotebookStatusLine[FrontEnd`EvaluationNotebook[],ToString[status]]];
+
+StyleButton[name_]:=Button[name,SelectionMove[SelectedNotebook[],All,Cell];FrontEndExecute@FrontEndToken[SelectedNotebook[],"Style",name]];
 
 EmbedNote[notebookpath_,tag_]:=Block[{m},
 Catch[

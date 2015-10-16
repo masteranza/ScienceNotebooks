@@ -35,7 +35,7 @@ TeXFixPoor[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}"}];
 EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
 ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
 "\[Transpose]":>"^\\mathsf{T}",
-"\[ConjugateTranspose]":>"^\\dagger",
+"\[ConjugateTranspose]":>"^\\dagger ",
 "\[OAcute]":> "\[OAcute]",
 "\[CapitalOAcute]":> "\[CapitalOAcute]",
 "\:015b":> "\:015b",
