@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     60731,       1218]
-NotebookOptionsPosition[     59965,       1191]
-NotebookOutlinePosition[     60784,       1218]
-CellTagsIndexPosition[     60741,       1215]
+NotebookDataLength[     62649,       1265]
+NotebookOptionsPosition[     61879,       1238]
+NotebookOutlinePosition[     62702,       1265]
+CellTagsIndexPosition[     62659,       1262]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -43,7 +43,7 @@ Cell[BoxData[{
    "\"\<Send to console\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"MergeExport", "::", "usage"}], " ", "=", 
+   RowBox[{"MergeStyle", "::", "usage"}], " ", "=", 
    "\"\<Merges stylesheet with the notebook and saves in the same directory \
 with the postfix _sm\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -439,7 +439,7 @@ with the postfix _sm\>\""}], ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{
-    RowBox[{"MergeExport", "[", "]"}], ":=", 
+    RowBox[{"MergeStyle", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -565,45 +565,75 @@ with the postfix _sm\>\""}], ";"}], "\[IndentingNewLine]",
    ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{
-    RowBox[{"CodeVisible", "[", "]"}], " ", ":=", " ", 
-    RowBox[{"Module", "[", 
+   RowBox[{"CodeVisible", "[", "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"cells", ",", "show"}], "}"}], ",", "\n", "   ", 
      RowBox[{
-      RowBox[{"{", 
-       RowBox[{"cells", ",", "show"}], "}"}], ",", "\n", "   ", 
-      RowBox[{
-       RowBox[{"cells", " ", "=", " ", 
-        RowBox[{"Cells", "[", 
-         RowBox[{
-          RowBox[{"EvaluationNotebook", "[", "]"}], ",", " ", 
-          RowBox[{"CellStyle", " ", "->", " ", "\"\<Input\>\""}]}], "]"}]}], 
-       ";", "\[IndentingNewLine]", 
-       RowBox[{"show", "=", 
-        RowBox[{"Last", "@", 
-         RowBox[{"First", "@", 
-          RowBox[{"Options", "[", 
-           RowBox[{
-            RowBox[{"EvaluationNotebook", "[", "]"}], ",", "ShowCellTags"}], 
-           "]"}]}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-       RowBox[{"SetOptions", "[", 
+      RowBox[{"cells", " ", "=", " ", 
+       RowBox[{"Cells", "[", 
         RowBox[{
-         RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
-         RowBox[{"ShowCellLabel", "\[Rule]", 
-          RowBox[{"!", "show"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"SetOptions", "[", 
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", " ", 
+         RowBox[{"CellStyle", " ", "->", " ", "\"\<Input\>\""}]}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"show", "=", 
+       RowBox[{"Last", "@", 
+        RowBox[{"First", "@", 
+         RowBox[{"Options", "[", 
+          RowBox[{
+           RowBox[{"EvaluationNotebook", "[", "]"}], ",", "ShowCellTags"}], 
+          "]"}]}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"SetOptions", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        RowBox[{"ShowCellLabel", "\[Rule]", 
+         RowBox[{"!", "show"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"SetOptions", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        RowBox[{"ShowCellTags", "\[Rule]", 
+         RowBox[{"!", "show"}]}]}], "]"}], ";", "\n", "   ", 
+      RowBox[{"Map", "[", 
+       RowBox[{
         RowBox[{
-         RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
-         RowBox[{"ShowCellTags", "\[Rule]", 
-          RowBox[{"!", "show"}]}]}], "]"}], ";", "\n", "   ", 
-       RowBox[{"Map", "[", 
+         RowBox[{"SetOptions", "[", 
+          RowBox[{"#", ",", " ", 
+           RowBox[{"CellOpen", " ", "->", " ", 
+            RowBox[{"!", "show"}]}]}], "]"}], " ", "&"}], ",", " ", "cells"}],
+        "]"}], ";"}]}], "\n", "   ", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"CodeVisible", "[", "flag_", "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"cells", ",", "show"}], "}"}], ",", "\n", "   ", 
+     RowBox[{
+      RowBox[{"cells", " ", "=", " ", 
+       RowBox[{"Cells", "[", 
         RowBox[{
-         RowBox[{
-          RowBox[{"SetOptions", "[", 
-           RowBox[{"#", ",", " ", 
-            RowBox[{"CellOpen", " ", "->", " ", 
-             RowBox[{"!", "show"}]}]}], "]"}], " ", "&"}], ",", " ", 
-         "cells"}], "]"}], ";"}]}], "\n", "   ", "]"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", " ", 
+         RowBox[{"CellStyle", " ", "->", " ", "\"\<Input\>\""}]}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"SetOptions", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        RowBox[{"ShowCellLabel", "\[Rule]", "flag"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SetOptions", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        RowBox[{"ShowCellTags", "\[Rule]", "flag"}]}], "]"}], ";", "\n", 
+      "   ", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"SetOptions", "[", 
+          RowBox[{"#", ",", " ", 
+           RowBox[{"CellOpen", " ", "->", " ", "flag"}]}], "]"}], " ", "&"}], 
+        ",", " ", "cells"}], "]"}], ";"}]}], "\n", "   ", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -828,46 +858,59 @@ with the postfix _sm\>\""}], ";"}], "\[IndentingNewLine]",
     ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"PublishToPDF", "[", 
-    RowBox[{"copyPath_:", " ", "\"\<\>\""}], "]"}], " ", ":=", " ", 
-   RowBox[{"Module", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"nb", ",", " ", "nb2"}], "}"}], ",", "\n", "  ", 
+   RowBox[{
+    RowBox[{"PublishToPDF", "[", 
      RowBox[{
-      RowBox[{"nb", " ", "=", " ", 
-       RowBox[{"ToFileName", "[", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"NotebookDirectory", "[", 
-           RowBox[{"EvaluationNotebook", "[", "]"}], "]"}], "}"}], ",", " ", 
-         RowBox[{"\"\<WindowTitle\>\"", " ", "/.", " ", 
-          RowBox[{"NotebookInformation", "[", 
-           RowBox[{"SelectedNotebook", "[", "]"}], "]"}]}]}], "]"}]}], ";", 
-      "\n", "  ", 
-      RowBox[{"CodeVisible", "[", "False", "]"}], ";", "\n", "  ", 
-      RowBox[{"Export", "[", " ", 
-       RowBox[{
-        RowBox[{"nb", " ", "<>", " ", "\"\<.pdf\>\""}], ",", " ", 
-        RowBox[{"SelectedNotebook", "[", "]"}]}], "]"}], ";", "\n", "  ", 
-      RowBox[{"nb2", " ", "=", " ", 
-       RowBox[{"copyPath", " ", "<>", " ", 
-        RowBox[{"ToString", "[", 
-         RowBox[{"\"\<WindowTitle\>\"", " ", "/.", " ", 
-          RowBox[{"NotebookInformation", "[", 
-           RowBox[{"SelectedNotebook", "[", "]"}], "]"}]}], "]"}], " ", "<>", 
-        " ", "\"\<.pdf\>\""}]}], ";", "\n", "  ", 
-      RowBox[{"If", "[", 
-       RowBox[{
-        RowBox[{"copyPath", " ", "!=", " ", "\"\<\>\""}], ",", " ", 
-        RowBox[{"CopyFile", "[", 
-         RowBox[{
-          RowBox[{"nb", " ", "<>", " ", "\"\<.pdf\>\""}], ",", " ", "nb2"}], 
-         "]"}]}], "]"}], ";", "\n", "  ", 
-      RowBox[{"CodeVisible", "[", "True", "]"}], ";", "\n", "  ", 
+      RowBox[{"copyPath_:", " ", "\"\<\>\""}], ",", 
+      RowBox[{"codeVisible_:", "False"}]}], "]"}], " ", ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
       RowBox[{"{", 
-       RowBox[{"nb", ",", " ", "nb2"}], "}"}]}]}], "\n", "  ", "]"}]}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+       RowBox[{"nb", ",", " ", "nb2"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ShowStatus", "[", "\"\<Exprting PDF...\>\"", "]"}], ";", "\n",
+        "  ", 
+       RowBox[{"nb", " ", "=", " ", 
+        RowBox[{"ToFileName", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"NotebookDirectory", "[", 
+            RowBox[{"EvaluationNotebook", "[", "]"}], "]"}], "}"}], ",", " ", 
+          
+          RowBox[{"\"\<WindowTitle\>\"", " ", "/.", " ", 
+           RowBox[{"NotebookInformation", "[", 
+            RowBox[{"SelectedNotebook", "[", "]"}], "]"}]}]}], "]"}]}], ";", 
+       "\n", "  ", 
+       RowBox[{"CodeVisible", "[", "codeVisible", "]"}], ";", "\n", "  ", 
+       RowBox[{"Export", "[", " ", 
+        RowBox[{
+         RowBox[{"nb", " ", "<>", " ", "\"\<.pdf\>\""}], ",", " ", 
+         RowBox[{"SelectedNotebook", "[", "]"}]}], "]"}], ";", "\n", "  ", 
+       RowBox[{"nb2", " ", "=", " ", 
+        RowBox[{"copyPath", " ", "<>", " ", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"\"\<WindowTitle\>\"", " ", "/.", " ", 
+           RowBox[{"NotebookInformation", "[", 
+            RowBox[{"SelectedNotebook", "[", "]"}], "]"}]}], "]"}], " ", "<>",
+          " ", "\"\<.pdf\>\""}]}], ";", "\n", "  ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"copyPath", " ", "!=", " ", "\"\<\>\""}], ",", " ", 
+         RowBox[{"CopyFile", "[", 
+          RowBox[{
+           RowBox[{"nb", " ", "<>", " ", "\"\<.pdf\>\""}], ",", " ", "nb2"}], 
+          "]"}]}], "]"}], ";", "\n", "  ", 
+       RowBox[{"CodeVisible", "[", "True", "]"}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"SystemOpen", "[", 
+        RowBox[{"nb", "<>", "\"\<.pdf\>\""}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ShowStatus", "[", "\"\<PDF exported successfully\>\"", "]"}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"nb", ",", " ", "nb2"}], "}"}], ";"}]}], "\n", "  ", "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"End", "[", "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -1187,13 +1230,17 @@ with the postfix _sm\>\""}], ";"}], "\[IndentingNewLine]",
    3.6437948842586*^9}, {3.6437949818737097`*^9, 3.643794982310094*^9}, {
    3.643829001819655*^9, 3.64382900846942*^9}, {3.644821775955853*^9, 
    3.6448217956708517`*^9}, {3.6448218289164743`*^9, 3.644821868416994*^9}, {
-   3.65397595240648*^9, 3.653975991359838*^9}}]
+   3.65397595240648*^9, 3.653975991359838*^9}, {3.654336561006619*^9, 
+   3.654336562987756*^9}, {3.654336670825364*^9, 3.654336720082624*^9}, {
+   3.65433679505223*^9, 3.65433687152849*^9}, {3.654336953899078*^9, 
+   3.654337014934351*^9}, {3.654337354092495*^9, 3.65433735480361*^9}, {
+   3.654337615686054*^9, 3.654337689725101*^9}}]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{720, 807},
 WindowMargins->{{Automatic, 0}, {Automatic, 0}},
 ShowCellLabel->False,
-FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
+FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 9, \
 2015)",
 StyleDefinitions->Notebook[{
    Cell[
@@ -1203,7 +1250,7 @@ StyleDefinitions->Notebook[{
    Cell[
     StyleData["Usage"], MenuSortingValue -> 10000, CellID -> 939270989]}, 
   Visible -> False, FrontEndVersion -> 
-  "10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, 2015)", 
+  "10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 9, 2015)", 
   StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
 ]
 (* End of Notebook Content *)
@@ -1217,7 +1264,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 59404, 1169, 3705, "Input",
+Cell[557, 20, 61318, 1216, 3841, "Input",
  CellOpen->True,
  InitializationCell->True]
 }

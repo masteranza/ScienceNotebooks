@@ -25,7 +25,7 @@ ShowStatus::usage="Prints the message in the status bar";
 EmbedNote::usage="Embedes cells with tag from a notebook located at path";
 DuplicateNotebook::usage="Makes a copy of the notebook";
 PrintToConsole::usage="Send to console";
-MergeExport::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
+MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 CodeVisible::usage = "Shows/Hides code and cell tags";PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
 CreateTOC::usage="Create table of contents";
 StyleButton::usage="Creates a button to create a style Cell of a specific name";
@@ -89,7 +89,7 @@ ShowStatus["Counted: "<>characters<>" characters (with spaces) and " <> words<> 
 ];
 
 
-MergeExport[]:=Module[{path,child,childstyles,parent,nb,tmp,parentparent,parentstyles, old},(*find the parent stylesheet from the private stylesheet,a.k.a child*)
+MergeStyle[]:=Module[{path,child,childstyles,parent,nb,tmp,parentparent,parentstyles, old},(*find the parent stylesheet from the private stylesheet,a.k.a child*)
 If[NotebookDirectory[]===$Failed, Abort[]];
 path=ToFileName[{$UserBaseDirectory,"SystemFiles","FrontEnd","StyleSheets"}];
 child=Options[EvaluationNotebook[],StyleDefinitions];
@@ -116,7 +116,12 @@ SetOptions[EvaluationNotebook[],ShowCellLabel->!show];
 SetOptions[EvaluationNotebook[],ShowCellTags->!show];
    Map[SetOptions[#, CellOpen -> !show] &, cells];
    ];
-
+CodeVisible[flag_] := Module[{cells,show},
+   cells = Cells[EvaluationNotebook[], CellStyle -> "Input"];
+SetOptions[EvaluationNotebook[],ShowCellLabel->flag];
+SetOptions[EvaluationNotebook[],ShowCellTags->flag];
+   Map[SetOptions[#, CellOpen -> flag] &, cells];
+   ];
 CreateTOC[typeList_]:=Module[{toc,book,createCell,counter,cell,type,tag,tocreate,sel},
 sel=False;
 If[SelectedCells[]=={},
@@ -152,15 +157,18 @@ NotebookWrite[EvaluationNotebook[],Cell[BoxData[StyleBox[DynamicBox@GridBox[tocr
 ];
 ];
 
-PublishToPDF[copyPath_: ""] := Module[{nb, nb2},
+PublishToPDF[copyPath_: "",codeVisible_:False] := Module[{nb, nb2},
+ShowStatus["Exprting PDF..."];
   nb = ToFileName[{NotebookDirectory[EvaluationNotebook[]]}, "WindowTitle" /. NotebookInformation[SelectedNotebook[]]];
-  CodeVisible[False];
+  CodeVisible[codeVisible];
   Export[ nb <> ".pdf", SelectedNotebook[]];
   nb2 = copyPath <> ToString["WindowTitle" /. NotebookInformation[SelectedNotebook[]]] <> ".pdf";
   If[copyPath != "", CopyFile[nb <> ".pdf", nb2]];
   CodeVisible[True];
-  {nb, nb2}
-  ]
+SystemOpen[nb<>".pdf"];
+ShowStatus["PDF exported successfully"];
+{nb, nb2};
+  ];
 
 
 End[];

@@ -8,7 +8,12 @@ Why create flash cards when you can make your notes and then highlight the stuff
 The project consists of Mathematica stylesheet and tools for creating TeX grade notebooks and Anki cards out of them. 
 
 ##Installation and prerequisites 
-Installation is a bit long, but the process will be improved if enough people will ask for it. 
+Installation is a bit long and OSX only, but the process will be improved if enough people will ask for it.  
+
+#### OSX El Capitan notice
+
+For those using the math fuctionality: Be sure to install the newest MacTeX. 
+
 ###Mathematica
 The most expensive part of the setup, install a trial if you don't have the full version: https://www.wolfram.com/mathematica/trial/
 
@@ -40,7 +45,10 @@ If anki runs correctly then open your profile and import MathematicaCloze.apkg t
 
 ![https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png)
 
-Now, copy (or hardlink) `Anki/runimport` to anki source main directory and `Anki/knowledgefile.py` to /anki/importing/ subdirectory.
+Now, copy (or hardlink):
+ `Anki/runimport` to anki source main directory (`/`) 
+ `Anki/latex.py` to `/anki/` subdirectory.
+ `Anki/knowledgefile.py` to `/anki/importing/` subdirectory.
 
 **Note**: you can make use of `hardlinker.sh` just check your paths and make sure you don't have your own stuff in Mathematica Stylesheets folder and others.
 
