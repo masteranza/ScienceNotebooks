@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     44370,       1286]
-NotebookOptionsPosition[     35893,       1056]
-NotebookOutlinePosition[     36663,       1087]
-CellTagsIndexPosition[     36593,       1082]
+NotebookDataLength[     44342,       1285]
+NotebookOptionsPosition[     35870,       1055]
+NotebookOutlinePosition[     36635,       1086]
+CellTagsIndexPosition[     36565,       1081]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1036,7 +1036,6 @@ Cell[StyleData["Code", StyleDefinitions -> "Text"],
 Cell[CellGroupData[{
 
 Cell[StyleData["InlineCell"],
- ShowCodeAssist->True,
  LineSpacing->{1.5, 0},
  LanguageCategory->"Formula",
  ScriptLevel->0,
@@ -1059,7 +1058,7 @@ ClosingAutoSave->True,
 ClosingSaveDialog->False,
 Saveable->True,
 WindowSize->{720, 807},
-WindowMargins->{{-665, Automatic}, {Automatic, -1010}},
+WindowMargins->{{241, Automatic}, {Automatic, 0}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 PrivateNotebookOptions->{"JournalStyle"->"NumberedNote",
@@ -1081,7 +1080,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 36450, 1075}
+ {"Tabela", 36422, 1074}
  }
 *)
 (*NotebookFileOutline
@@ -1218,7 +1217,7 @@ Cell[26923, 727, 114, 2, 40, 94, 1, "StyleData", "Item3Numbered", "Printout",
 Cell[CellGroupData[{
 Cell[27086, 735, 114, 2, 49, "Section",
  CellID->1154436234],
-Cell[27203, 739, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
+Cell[27203, 739, 282, 10, 4, 40, 0, "StyleData", "PageBreak", "Printout"],
 Cell[27488, 751, 146, 5, 38, 30, 0, "StyleData", "RemarkLabel", "All",
  StyleMenuListing->None,
  CellID->884038640],
@@ -1280,11 +1279,11 @@ Cell[35376, 1031, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None],
 Cell[CellGroupData[{
-Cell[35501, 1037, 164, 6, 41, 29, 0, "StyleData", "InlineCell", "All",
+Cell[35501, 1037, 141, 5, 41, 29, 0, "StyleData", "InlineCell", "All",
  MenuSortingValue->10000],
-Cell[35668, 1045, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
+Cell[35645, 1044, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
 }, Open  ]],
-Cell[35788, 1050, 77, 2, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
+Cell[35765, 1049, 77, 2, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
  MenuSortingValue->10000]
 }, Open  ]]
 }, Open  ]]

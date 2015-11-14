@@ -120,3 +120,8 @@ Not all cells get exported to Anki currently supported include:
 * Definition
 
 More tutorials coming soon.  (The system is poorly documented, but already has the capabilities to export equations and pictures as it was built out of my own need).
+
+##Troubleshooting and notes
+
+Highlighting shortcut apears not to work when caps-lock is enabled.
+Someone might think that CMD+SHIFT+D will do the job and try to press it... and then BANG! You've just learned that it doesn't work, but instead splits the selected text into another cell. Serendipity.
