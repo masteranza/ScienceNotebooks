@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     44342,       1285]
-NotebookOptionsPosition[     35870,       1055]
-NotebookOutlinePosition[     36635,       1086]
-CellTagsIndexPosition[     36565,       1081]
+NotebookDataLength[     44340,       1285]
+NotebookOptionsPosition[     35868,       1055]
+NotebookOutlinePosition[     36633,       1086]
+CellTagsIndexPosition[     36563,       1081]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -809,7 +809,7 @@ Cell[StyleData["Theorem", StyleDefinitions -> "Text"],
  CellMargins->{{50, 12}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
- CellFrameColor->RGBColor[0.949996, 0.500008, 0.500008],
+ CellFrameColor->RGBColor[0.200008, 0.200008, 0.200996],
  CellFrameLabels->{{
     Cell[
      TextData[{"Theorem ", 
@@ -837,7 +837,7 @@ Cell[StyleData["Axiom", StyleDefinitions -> "Text"],
  CellMargins->{{50, 12}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
- CellFrameColor->RGBColor[0.500008, 0.900008, 0.6],
+ CellFrameColor->RGBColor[0.999996, 0.300008, 0.300008],
  CellFrameLabels->{{
     Cell[
      TextData[{"Axiom ", 
@@ -864,7 +864,7 @@ Cell[StyleData["Proof", StyleDefinitions -> "Text"],
  CellMargins->{{50, 12}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
- CellFrameColor->RGBColor[0.99, 0.99, 0.249996],
+ CellFrameColor->RGBColor[0.9, 0.5, 0.1],
  CellFrameLabels->{{
     Cell[
      TextData[{"Proof ", 
@@ -892,7 +892,7 @@ Cell[StyleData["Definition", StyleDefinitions -> "Text"],
  CellMargins->{{50, 12}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
- CellFrameColor->RGBColor[0.500008, 0.500008, 0.749996],
+ CellFrameColor->RGBColor[0.949996, 0.500008, 0.500008],
  CellFrameLabels->{{
     Cell[
      TextData[{"Definition ", 
@@ -922,7 +922,7 @@ Cell[StyleData["Example", StyleDefinitions -> "Text"],
  CellMargins->{{50, 12}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
- CellFrameColor->RGBColor[0.6, 0.6, 0.6],
+ CellFrameColor->RGBColor[0.6, 0.9, 0.6],
  CellFrameLabels->{{
     Cell[
      TextData[{"Example ", 
@@ -1058,7 +1058,7 @@ ClosingAutoSave->True,
 ClosingSaveDialog->False,
 Saveable->True,
 WindowSize->{720, 807},
-WindowMargins->{{241, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 113}, {7, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 PrivateNotebookOptions->{"JournalStyle"->"NumberedNote",
@@ -1080,7 +1080,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 36422, 1074}
+ {"Tabela", 36420, 1074}
  }
 *)
 (*NotebookFileOutline
@@ -1239,51 +1239,51 @@ Cell[28759, 806, 699, 20, 39, 54, 0, "StyleData", "Theorem", "All"],
 Cell[29461, 828, 82, 1, 39, 82, 1, "StyleData", "Theorem", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[29580, 834, 688, 20, 39, 52, 0, "StyleData", "Axiom", "All"],
-Cell[30271, 856, 76, 0, 39, 76, 0, "StyleData", "Axiom", "Printout"]
+Cell[29580, 834, 693, 20, 39, 52, 0, "StyleData", "Axiom", "All"],
+Cell[30276, 856, 76, 0, 39, 76, 0, "StyleData", "Axiom", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30384, 861, 714, 21, 39, 52, 0, "StyleData", "Proof", "All",
+Cell[30389, 861, 707, 21, 39, 52, 0, "StyleData", "Proof", "All",
  CounterIncrements->"Proof"],
-Cell[31101, 884, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
+Cell[31099, 884, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[31214, 889, 728, 21, 39, 57, 0, "StyleData", "Definition", "All",
+Cell[31212, 889, 728, 21, 39, 57, 0, "StyleData", "Definition", "All",
  CellID->826547224],
-Cell[31945, 912, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
+Cell[31943, 912, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
  CellID->1951041930]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[32091, 919, 684, 20, 39, 54, 0, "StyleData", "Example", "All"],
-Cell[32778, 941, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
+Cell[32089, 919, 684, 20, 39, 54, 0, "StyleData", "Example", "All"],
+Cell[32776, 941, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
  CellID->1472158200]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[32918, 948, 752, 22, 39, 55, 0, "StyleData", "Solution", "All",
+Cell[32916, 948, 752, 22, 39, 55, 0, "StyleData", "Solution", "All",
  CounterIncrements->"Solution",
  CellID->1873841830],
-Cell[33673, 972, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
+Cell[33671, 972, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
  CellID->1403770313]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33815, 979, 734, 22, 39, 52, 0, "StyleData", "Lemma", "All",
+Cell[33813, 979, 734, 22, 39, 52, 0, "StyleData", "Lemma", "All",
  CounterIncrements->"Lemma",
  CellID->628380021],
-Cell[34552, 1003, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
+Cell[34550, 1003, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34665, 1008, 615, 18, 39, 53, 0, "StyleData", "Remark", "All"],
-Cell[35283, 1028, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
+Cell[34663, 1008, 615, 18, 39, 53, 0, "StyleData", "Remark", "All"],
+Cell[35281, 1028, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
 }, Open  ]],
-Cell[35376, 1031, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
+Cell[35374, 1031, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None],
 Cell[CellGroupData[{
-Cell[35501, 1037, 141, 5, 41, 29, 0, "StyleData", "InlineCell", "All",
+Cell[35499, 1037, 141, 5, 41, 29, 0, "StyleData", "InlineCell", "All",
  MenuSortingValue->10000],
-Cell[35645, 1044, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
+Cell[35643, 1044, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
 }, Open  ]],
-Cell[35765, 1049, 77, 2, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
+Cell[35763, 1049, 77, 2, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
  MenuSortingValue->10000]
 }, Open  ]]
 }, Open  ]]
