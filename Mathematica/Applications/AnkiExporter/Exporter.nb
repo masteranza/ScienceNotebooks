@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     44895,        990]
-NotebookOptionsPosition[     44578,        974]
-NotebookOutlinePosition[     44966,        991]
-CellTagsIndexPosition[     44923,        988]
+NotebookDataLength[     45744,       1010]
+NotebookOptionsPosition[     45426,        994]
+NotebookOutlinePosition[     45815,       1011]
+CellTagsIndexPosition[     45772,       1008]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -471,29 +471,30 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
              RowBox[{
               RowBox[{"Cell", "[", 
                RowBox[{
-                RowBox[{"TextData", "[", "data_", "]"}], ",", "___", ",", " ", 
+                RowBox[{"TextData", "[", "data_", "]"}], ",", "style_", ",", 
+                "___", ",", " ", 
                 RowBox[{"CellID", "\[Rule]", "Nr_Integer"}]}], "]"}], 
               "\[RuleDelayed]", " ", 
               RowBox[{"{", 
-               RowBox[{"Nr", " ", ",", "data"}], "}"}]}], ",", 
+               RowBox[{"Nr", " ", ",", "data", ",", "style"}], "}"}]}], ",", 
              "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"Cell", "[", 
                RowBox[{
-                RowBox[{"BoxData", "[", "data_", "]"}], ",", "___", ",", " ", 
-                
+                RowBox[{"BoxData", "[", "data_", "]"}], ",", "style_", ",", 
+                "___", ",", " ", 
                 RowBox[{"CellID", "\[Rule]", "Nr_Integer"}]}], "]"}], 
               "\[RuleDelayed]", " ", 
               RowBox[{"{", 
-               RowBox[{"Nr", " ", ",", "data"}], "}"}]}], ",", 
+               RowBox[{"Nr", " ", ",", "data", ",", "style"}], "}"}]}], ",", 
              "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"Cell", "[", 
-               RowBox[{"data_", ",", "___", ",", " ", 
+               RowBox[{"data_", ",", "style_", ",", "___", ",", " ", 
                 RowBox[{"CellID", "\[Rule]", "Nr_Integer"}]}], "]"}], 
               "\[RuleDelayed]", " ", 
               RowBox[{"{", 
-               RowBox[{"Nr", " ", ",", "data"}], "}"}]}], ",", 
+               RowBox[{"Nr", " ", ",", "data", ",", "style"}], "}"}]}], ",", 
              "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"Cell", "[", 
@@ -789,7 +790,8 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
            RowBox[{"StringReplace", "[", 
             RowBox[{
              RowBox[{"StringJoin", "[", 
-              RowBox[{"Last", "@", "#"}], "]"}], ",", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", 
              RowBox[{"{", 
               RowBox[{
                RowBox[{"\"\<\\n\>\"", "\[Rule]", " ", "\"\<<br>\>\""}], ",", 
@@ -797,6 +799,17 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                "\"\<\[LineSeparator]\>\"", "\[Rule]", " ", "\"\<<br>\>\""}]}],
                "}"}]}], "]"}]}], ")"}], "&"}], "/@", " ", "dat"}]}], ";", 
       "\[IndentingNewLine]", 
+      RowBox[{"styleTags", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"\"\< \>\"", "<>", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "<>", "\"\<::\>\"", "<>", " ", 
+           RowBox[{"StringReplace", "[", 
+            RowBox[{"title", ",", 
+             RowBox[{"\"\< \>\"", "\[Rule]", " ", "\"\<\>\""}]}], "]"}]}], 
+          ")"}], "&"}], "/@", "dat"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Fixing data... (2/2)\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"base", "=", 
@@ -844,6 +857,12 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                 RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], "]"}], ",", 
              RowBox[{"Length", "[", "paths", "]"}]}], "]"}], ",", 
            "celltags"}], "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"final", "=", 
+       RowBox[{"MapThread", "[", 
+        RowBox[{"StringJoin", ",", 
+         RowBox[{"{", 
+          RowBox[{"final", ",", "styleTags"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Filtering...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"filtered", "=", 
@@ -861,7 +880,7 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
       RowBox[{"ndir", "=", 
        RowBox[{"NotebookDirectory", "[", 
         RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
       RowBox[{"deck", "=", 
        RowBox[{"StringReplace", "[", 
         RowBox[{
@@ -970,12 +989,13 @@ PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH;python \
    3.6543535520268173`*^9, 3.654353556411378*^9}, {3.65435453675876*^9, 
    3.654354542953511*^9}, 3.654354789282733*^9, {3.654355006024674*^9, 
    3.65435501487245*^9}, 3.654355171044422*^9, {3.654356362123364*^9, 
-   3.654356394099475*^9}, {3.654356585504972*^9, 3.6543566065554533`*^9}}]
+   3.654356394099475*^9}, {3.654356585504972*^9, 3.6543566065554533`*^9}, 
+   3.6618537190343943`*^9, 3.661853752082735*^9}]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1440, 807},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 9, \
+WindowSize->{718, 855},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 10, \
 2015)",
 StyleDefinitions->"Default.nb"
 ]
@@ -990,7 +1010,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 44017, 952, 2489, "Input",
+Cell[557, 20, 44865, 972, 3679, "Input",
  InitializationCell->True]
 }
 ]

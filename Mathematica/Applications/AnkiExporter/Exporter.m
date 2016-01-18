@@ -83,9 +83,9 @@ StyleBox[D__,Background->None,E___]:>StyleBox[D,E],
 StyleBox[D_String]:>D,
 (FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>ToTex[C],
 RowBox[{C__String}]:>StringJoin@C,
-Cell[TextData[data_],___, CellID->Nr_Integer]:> {Nr ,data},
-Cell[BoxData[data_],___, CellID->Nr_Integer]:> {Nr ,data},
-Cell[data_,___, CellID->Nr_Integer]:> {Nr ,data},
+Cell[TextData[data_],style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
+Cell[BoxData[data_],style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
+Cell[data_,style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
 Cell[BoxData[data_],___]:> data
 }]];
 ShowStatus["Extracting data... (2/3)"];
@@ -116,7 +116,8 @@ StyleBox[D_String,___,FontVariations->__,___]:> D,
 StyleBox[D_, Background->_]:>ToString[n]
 }]];
 ShowStatus["Fixing data... (1/2)"];
-base=(ToString[First@#]<>separator <> StringReplace[StringJoin[Last@#],{"\n"-> "<br>","\[LineSeparator]"-> "<br>"}])&/@ dat;
+base=(ToString[First@#]<>separator <> StringReplace[StringJoin[#[[2]]],{"\n"-> "<br>","\[LineSeparator]"-> "<br>"}])&/@ dat;
+styleTags=(" "<>#[[3]]<>"::"<> StringReplace[title," "-> ""])&/@dat;
 ShowStatus["Fixing data... (2/2)"];
 base=StringReplace[base,{
 "[$][/$]"->"",
@@ -127,12 +128,12 @@ base=StringReplace[base,{
 ShowStatus["Preparing final structure..."];
 npath=NotebookFileName[EvaluationNotebook[]];
 final=MapThread[StringJoin,{base,paths,ConstantArray[StringJoin[separator,NotebookFileName[EvaluationNotebook[]]],Length[paths]],celltags}];
+final=MapThread[StringJoin,{final,styleTags}];
 ShowStatus["Filtering..."];
 filtered=Select[final,StringMatchQ[#,"*{{c@::*"] & ];
 ShowStatus["Exporting..."];
 Export["text.txt",filtered];
 ndir=NotebookDirectory[EvaluationNotebook[]];
-
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
 PrintToConsole[deck];
 ShowStatus["Importing to Anki..."];
