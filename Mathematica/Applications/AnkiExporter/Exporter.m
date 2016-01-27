@@ -113,7 +113,8 @@ StyleBox[D_String,___,FontSlant->"Italic",___]:> ("<i>"<>D<>"</i>"),
 StyleBox[D_String,___,FontWeight->"Plain",___]:> D,
 StyleBox[D_String,___,FontVariations->{___,"Underline"->True,___},___]:> ("<u>"<>D<>"</u>"),
 StyleBox[D_String,___,FontVariations->__,___]:> D,
-StyleBox[D_, Background->_]:>ToString[n]
+StyleBox[D_, Background->_]:>ToString[n],
+RowBox[{C___String}]:>StringJoin@C
 }]];
 ShowStatus["Fixing data... (1/2)"];
 base=(ToString[First@#]<>separator <> StringReplace[StringJoin[#[[2]]],{"\n"-> "<br>","\[LineSeparator]"-> "<br>"}])&/@ dat;
