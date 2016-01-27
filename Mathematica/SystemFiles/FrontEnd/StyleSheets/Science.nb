@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     44340,       1285]
-NotebookOptionsPosition[     35868,       1055]
-NotebookOutlinePosition[     36633,       1086]
-CellTagsIndexPosition[     36563,       1081]
+NotebookDataLength[     44501,       1285]
+NotebookOptionsPosition[     36029,       1055]
+NotebookOutlinePosition[     36794,       1086]
+CellTagsIndexPosition[     36724,       1081]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -438,7 +438,7 @@ Cell[StyleData["Section"],
     Cell[
      TextData[{
        CounterBox["Section"]}], "SectionLabel", TextAlignment -> Left, 
-     CellSize -> {40, Inherited}, CellBaseline -> Baseline], None}, {
+     CellSize -> {60, Inherited}, CellBaseline -> Baseline], None}, {
    None, None}},
  CellFrameLabelMargins->0,
  TextAlignment->Left,
@@ -460,7 +460,7 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Subsection"],
  CellFrame->{{0, 0}, {0, 0}},
- CellMargins->{{10, 10}, {10, 20}},
+ CellMargins->{{10, 10}, {10, 10}},
  CellFrameMargins->{{0, 0}, {0, 0}},
  CellFrameColor->GrayLevel[0.95],
  CellFrameLabels->{{
@@ -468,7 +468,7 @@ Cell[StyleData["Subsection"],
      TextData[{
        CounterBox["Section"], ".", 
        CounterBox["Subsection"]}], "SectionLabel", TextAlignment -> Left, 
-     CellSize -> {40, Inherited}, CellBaseline -> Baseline], None}, {
+     CellSize -> {60, Inherited}, CellBaseline -> Baseline], None}, {
    None, None}},
  CellFrameLabelMargins->0,
  TextAlignment->Left,
@@ -485,7 +485,7 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Subsubsection"],
  CellFrame->{{0, 0}, {0, 0}},
- CellMargins->{{10, 10}, {20, 10}},
+ CellMargins->{{10, 10}, {10, 10}},
  CellFrameMargins->{{0, 0}, {0, 0}},
  CellFrameColor->GrayLevel[0.95],
  CellFrameLabels->{{
@@ -494,7 +494,7 @@ Cell[StyleData["Subsubsection"],
        CounterBox["Section"], ".", 
        CounterBox["Subsection"], ".", 
        CounterBox["Subsubsection"]}], "SectionLabel", TextAlignment -> Left, 
-     CellSize -> {40, Inherited}, CellBaseline -> Baseline], None}, {
+     CellSize -> {60, Inherited}, CellBaseline -> Baseline], None}, {
    None, None}},
  CellFrameLabelMargins->0,
  TextAlignment->Left,
@@ -611,7 +611,7 @@ Cell["Text", "Section",
 Cell[CellGroupData[{
 
 Cell[StyleData["Text"],
- CellMargins->{{50, Inherited}, {10, 10}},
+ CellMargins->{{70, Inherited}, {10, 10}},
  ReturnCreatesNewCell->False,
  TextJustification->0,
  LineSpacing->{1.5, 0},
@@ -806,18 +806,18 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Theorem", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.200008, 0.200008, 0.200996],
  CellFrameLabels->{{
     Cell[
-     TextData[{"Theorem ", 
+     TextData[{"Theo. ", 
        CounterBox["Section"], ".", 
        CounterBox["Theorem"]}], FontFamily -> Baskerville, FontWeight -> Bold,
-      FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+      FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 10}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -834,7 +834,7 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Axiom", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.999996, 0.300008, 0.300008],
@@ -843,9 +843,9 @@ Cell[StyleData["Axiom", StyleDefinitions -> "Text"],
      TextData[{"Axiom ", 
        CounterBox["Section"], ".", 
        CounterBox["Axiom"]}], FontFamily -> Baskerville, FontWeight -> Bold, 
-     FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+     FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 10}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -861,7 +861,7 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Proof", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.9, 0.5, 0.1],
@@ -870,9 +870,9 @@ Cell[StyleData["Proof", StyleDefinitions -> "Text"],
      TextData[{"Proof ", 
        CounterBox["Section"], ".", 
        CounterBox["Proof"]}], FontFamily -> Baskerville, FontWeight -> Bold, 
-     FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+     FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -889,18 +889,18 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Definition", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.949996, 0.500008, 0.500008],
  CellFrameLabels->{{
     Cell[
-     TextData[{"Definition ", 
+     TextData[{"Def. ", 
        CounterBox["Section"], ".", 
        CounterBox["Definition"]}], FontFamily -> Baskerville, FontWeight -> 
-     Bold, FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+     Bold, FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, 
+     "Text"], Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -919,18 +919,18 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Example", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.6, 0.9, 0.6],
  CellFrameLabels->{{
     Cell[
-     TextData[{"Example ", 
+     TextData[{"Ex. ", 
        CounterBox["Section"], ".", 
        CounterBox["Example"]}], FontFamily -> Baskerville, FontWeight -> Bold,
-      FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+      FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -948,18 +948,18 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Solution", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.849996, 0.600008, 0.600008],
  CellFrameLabels->{{
     Cell[
-     TextData[{"Solution ", 
+     TextData[{"Sol. ", 
        CounterBox["Section"], ".", 
        CounterBox["Proof"]}], FontFamily -> Baskerville, FontWeight -> Bold, 
-     FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+     FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -979,18 +979,18 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Lemma", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.39, 0.99, 0.849996],
  CellFrameLabels->{{
     Cell[
-     TextData[{"Lemma ", 
+     TextData[{"Lem. ", 
        CounterBox["Section"], ".", 
        CounterBox["Lemma"]}], FontFamily -> Baskerville, FontWeight -> Bold, 
-     FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+     FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -1008,16 +1008,16 @@ Cell[CellGroupData[{
 
 Cell[StyleData["Remark", StyleDefinitions -> "Text"],
  CellFrame->{{5, 0}, {0, 1}},
- CellMargins->{{50, 12}, {3, 3}},
+ CellMargins->{{0, 0}, {3, 3}},
  ReturnCreatesNewCell->False,
  CellFrameMargins->{{5, 8}, {10, 0}},
  CellFrameColor->RGBColor[0.3, 0.3, 0.3],
  CellFrameLabels->{{
     Cell[
-     TextData[{"Remark:"}], FontFamily -> Baskerville, FontWeight -> Bold, 
-     FontSize -> 14, CellSize -> {105, 15}, "Text"], Inherited}, {
-   Inherited, Inherited}},
- CellFrameLabelMargins->{{0, 10}, {1, 0}},
+     TextData[{"Remark"}], FontFamily -> Baskerville, FontWeight -> Bold, 
+     FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, "Text"], 
+    Inherited}, {Inherited, Inherited}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
@@ -1057,13 +1057,13 @@ NotebookAutoSave->True,
 ClosingAutoSave->True,
 ClosingSaveDialog->False,
 Saveable->True,
-WindowSize->{720, 807},
-WindowMargins->{{Automatic, 113}, {7, Automatic}},
+WindowSize->{718, 855},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 PrivateNotebookOptions->{"JournalStyle"->"NumberedNote",
 "SafeFileSave"->"Prescan"},
-FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 9, \
+FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 10, \
 2015)",
 StyleDefinitions->"PrivateStylesheetFormatting.nb"
 ]
@@ -1080,7 +1080,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 36420, 1074}
+ {"Tabela", 36581, 1074}
  }
 *)
 (*NotebookFileOutline
@@ -1137,11 +1137,11 @@ Cell[18863, 431, 774, 19, 81, 26, 0, "StyleData", "Section", "All",
 Cell[19640, 452, 141, 3, 81, 82, 1, "StyleData", "Section", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[19818, 460, 507, 15, 66, 29, 0, "StyleData", "Subsection", "All"],
+Cell[19818, 460, 507, 15, 56, 29, 0, "StyleData", "Subsection", "All"],
 Cell[20328, 477, 147, 3, 76, 88, 1, "StyleData", "Subsection", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[20512, 485, 552, 16, 62, 32, 0, "StyleData", "Subsubsection", "All"],
+Cell[20512, 485, 552, 16, 52, 32, 0, "StyleData", "Subsubsection", "All"],
 Cell[21067, 503, 153, 3, 72, 94, 1, "StyleData", "Subsubsection", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
@@ -1235,55 +1235,55 @@ Cell[28516, 794, 86, 1, 46, 86, 1, "StyleData", "Reference", "Printout"]
 Cell[28617, 798, 117, 4, 37, 29, 0, "StyleData", "PageNumber", "All",
  MenuSortingValue->10000],
 Cell[CellGroupData[{
-Cell[28759, 806, 699, 20, 39, 54, 0, "StyleData", "Theorem", "All"],
-Cell[29461, 828, 82, 1, 39, 82, 1, "StyleData", "Theorem", "Printout"]
+Cell[28759, 806, 720, 20, 39, 54, 0, "StyleData", "Theorem", "All"],
+Cell[29482, 828, 82, 1, 39, 82, 1, "StyleData", "Theorem", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[29580, 834, 693, 20, 39, 52, 0, "StyleData", "Axiom", "All"],
-Cell[30276, 856, 76, 0, 39, 76, 0, "StyleData", "Axiom", "Printout"]
+Cell[29601, 834, 716, 20, 39, 52, 0, "StyleData", "Axiom", "All"],
+Cell[30320, 856, 76, 0, 39, 76, 0, "StyleData", "Axiom", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30389, 861, 707, 21, 39, 52, 0, "StyleData", "Proof", "All",
+Cell[30433, 861, 729, 21, 39, 52, 0, "StyleData", "Proof", "All",
  CounterIncrements->"Proof"],
-Cell[31099, 884, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
+Cell[31165, 884, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[31212, 889, 728, 21, 39, 57, 0, "StyleData", "Definition", "All",
+Cell[31278, 889, 745, 21, 39, 57, 0, "StyleData", "Definition", "All",
  CellID->826547224],
-Cell[31943, 912, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
+Cell[32026, 912, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
  CellID->1951041930]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[32089, 919, 684, 20, 39, 54, 0, "StyleData", "Example", "All"],
-Cell[32776, 941, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
+Cell[32172, 919, 702, 20, 39, 54, 0, "StyleData", "Example", "All"],
+Cell[32877, 941, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
  CellID->1472158200]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[32916, 948, 752, 22, 39, 55, 0, "StyleData", "Solution", "All",
+Cell[33017, 948, 770, 22, 39, 55, 0, "StyleData", "Solution", "All",
  CounterIncrements->"Solution",
  CellID->1873841830],
-Cell[33671, 972, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
+Cell[33790, 972, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
  CellID->1403770313]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33813, 979, 734, 22, 39, 52, 0, "StyleData", "Lemma", "All",
+Cell[33932, 979, 755, 22, 39, 52, 0, "StyleData", "Lemma", "All",
  CounterIncrements->"Lemma",
  CellID->628380021],
-Cell[34550, 1003, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
+Cell[34690, 1003, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34663, 1008, 615, 18, 39, 53, 0, "StyleData", "Remark", "All"],
-Cell[35281, 1028, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
+Cell[34803, 1008, 636, 18, 39, 53, 0, "StyleData", "Remark", "All"],
+Cell[35442, 1028, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
 }, Open  ]],
-Cell[35374, 1031, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
+Cell[35535, 1031, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None],
 Cell[CellGroupData[{
-Cell[35499, 1037, 141, 5, 41, 29, 0, "StyleData", "InlineCell", "All",
+Cell[35660, 1037, 141, 5, 41, 29, 0, "StyleData", "InlineCell", "All",
  MenuSortingValue->10000],
-Cell[35643, 1044, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
+Cell[35804, 1044, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
 }, Open  ]],
-Cell[35763, 1049, 77, 2, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
+Cell[35924, 1049, 77, 2, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
  MenuSortingValue->10000]
 }, Open  ]]
 }, Open  ]]

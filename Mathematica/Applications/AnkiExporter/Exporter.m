@@ -24,7 +24,7 @@ ExportToAnki::usage ="Function exporting selected sections of the notebook to An
 
 Begin["`Private`"];
 
-ExportToAnki[sync_:True]:=Module[{separator,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
+ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
@@ -56,7 +56,7 @@ ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
 "\:0179":>"\:0179",
 "\:0144":>"\:0144",
 "\:0143":>"\:0143",
-StyleBox[D_,Background->LightGreen]:> "\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::" <>StringReplace[Convert`TeX`BoxesToTeX [D],{"{{":> " { { ","}}":> " } } "}] <>" }}\\color[HTML]{000000}"}]<>"[/$] ";
+StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[Convert`TeX`BoxesToTeX[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}]<>"[/$] ";
 
 cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Theorem","Example","Proof","Axiom","Solution","Definition"}];
 
@@ -120,6 +120,8 @@ base=(ToString[First@#]<>separator <> StringReplace[StringJoin[#[[2]]],{"\n"-> "
 styleTags=(" "<>#[[3]]<>"::"<> StringReplace[title," "-> ""])&/@dat;
 ShowStatus["Fixing data... (2/2)"];
 base=StringReplace[base,{
+("}}\\color[HTML]{000000}\\color[HTML]{1111FF}{{c"~~Shortest[c__]~~"::")->"",
+"}}{{c"~~Shortest[c__]~~"::"->"",
 "[$][/$]"->"",
 "{{c1::}}"->"",
 "{{c1::<br>}}"->"<br>"
@@ -131,6 +133,7 @@ final=MapThread[StringJoin,{base,paths,ConstantArray[StringJoin[separator,Notebo
 final=MapThread[StringJoin,{final,styleTags}];
 ShowStatus["Filtering..."];
 filtered=Select[final,StringMatchQ[#,"*{{c@::*"] & ];
+
 ShowStatus["Exporting..."];
 Export["text.txt",filtered];
 ndir=NotebookDirectory[EvaluationNotebook[]];
