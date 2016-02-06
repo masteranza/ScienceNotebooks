@@ -24,7 +24,7 @@ ExportToAnki::usage ="Function exporting selected sections of the notebook to An
 
 Begin["`Private`"];
 
-ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
+ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
@@ -65,10 +65,12 @@ ShowStatus["Gathering section info..."];
 sections=CurrentValue[#,{"CounterValue","Section"}]&/@cells;
 subsections=CurrentValue[#,{"CounterValue","Subsection"}]&/@cells;
 subsubsections=CurrentValue[#,{"CounterValue","Subsubsection"}]&/@cells;
+subsubsubsections=CurrentValue[#,{"CounterValue","Subsubsubsection"}]&/@cells;
 celltags=ToString[StringJoin[separator,Riffle[If[MatchQ[CurrentValue[#,{"CellTags"}],_String],{CurrentValue[#,{"CellTags"}]},CurrentValue[#,{"CellTags"}]]," "]]]&/@cells;
-allinfo=DeleteCases[Replace[Thread[{sections,subsections,subsubsections}],{x___,0...}:>{x},1],0,2];
+allinfo=DeleteCases[Replace[Thread[{sections,subsections,subsubsections,subsubsubsections}],{x___,0...}:>{x},1],0,2];
 ShowStatus["Gathering table of contents"];
-GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsection"|"Subsubsection",___]:>{style,Convert`TeX`BoxesToTeX[ name,"BoxRules"->{D_String:>D}]},Infinity]/.{"Subsubsection",x_}:>x[]//.{x___,{"Subsection",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w}//.{x___,{"Section",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w};
+GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsection"|"Subsubsection"|"Subsubsubsection",___]:>{style,Convert`TeX`BoxesToTeX[ name,"BoxRules"->{D_String:>D}]},Infinity]/.{"Subsubsubsection",x_}:>x[]//.
+{x___,{"Subsubsection",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w}//.{x___,{"Subsection",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w}//.{x___,{"Section",y_},z:Except[_List]...,w:PatternSequence[{_,_},___]|PatternSequence[]}:>{x,y[z],w};
 ShowStatus["Preparing paths..."];
 paths=(StringJoin[separator,title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"]])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];

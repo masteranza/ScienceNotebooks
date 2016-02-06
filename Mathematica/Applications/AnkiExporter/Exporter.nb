@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     47336,       1036]
-NotebookOptionsPosition[     47018,       1020]
-NotebookOutlinePosition[     47407,       1037]
-CellTagsIndexPosition[     47364,       1034]
+NotebookDataLength[     48685,       1068]
+NotebookOptionsPosition[     48366,       1052]
+NotebookOutlinePosition[     48755,       1069]
+CellTagsIndexPosition[     48712,       1066]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -43,13 +43,14 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
      RowBox[{"{", 
       RowBox[{
       "separator", ",", "styleTags", ",", "cells", ",", "sections", ",", 
-       "subsections", ",", "subsubsections", ",", "allinfo", ",", "cellids", 
-       ",", "celltags", ",", "data", ",", "cloze", ",", "matchEq", ",", 
-       "encoding", ",", "eqCloze", ",", "GetTOC", ",", "exported", ",", 
-       "filtered", ",", "splited", ",", "marked", ",", "paths", ",", "fixed", 
-       ",", "final", ",", "threaded", ",", "deck", ",", "title", ",", " ", 
-       "base", ",", "dat", ",", "ndir", ",", "tempPicPath", ",", " ", 
-       "allspecial", ",", "npath"}], "}"}], ",", "\[IndentingNewLine]", 
+       "subsections", ",", "subsubsections", ",", "subsubsubsections", ",", 
+       "allinfo", ",", "cellids", ",", "celltags", ",", "data", ",", "cloze", 
+       ",", "matchEq", ",", "encoding", ",", "eqCloze", ",", "GetTOC", ",", 
+       "exported", ",", "filtered", ",", "splited", ",", "marked", ",", 
+       "paths", ",", "fixed", ",", "final", ",", "threaded", ",", "deck", ",",
+        "title", ",", " ", "base", ",", "dat", ",", "ndir", ",", 
+       "tempPicPath", ",", " ", "allspecial", ",", "npath"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"separator", "=", "\"\<#\>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Export to Anki begins...\>\"", "]"}], 
@@ -252,6 +253,15 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
             RowBox[{"\"\<CounterValue\>\"", ",", "\"\<Subsubsection\>\""}], 
             "}"}]}], "]"}], "&"}], "/@", "cells"}]}], ";", 
       "\[IndentingNewLine]", 
+      RowBox[{"subsubsubsections", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"CurrentValue", "[", 
+          RowBox[{"#", ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<CounterValue\>\"", ",", "\"\<Subsubsubsection\>\""}],
+             "}"}]}], "]"}], "&"}], "/@", "cells"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"celltags", "=", 
        RowBox[{
         RowBox[{
@@ -285,8 +295,9 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
           RowBox[{
            RowBox[{"Thread", "[", 
             RowBox[{"{", 
-             RowBox[{"sections", ",", "subsections", ",", "subsubsections"}], 
-             "}"}], "]"}], ",", 
+             RowBox[{
+             "sections", ",", "subsections", ",", "subsubsections", ",", 
+              "subsubsubsections"}], "}"}], "]"}], ",", 
            RowBox[{
             RowBox[{"{", 
              RowBox[{"x___", ",", 
@@ -299,31 +310,52 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
        RowBox[{
         RowBox[{
          RowBox[{
-          RowBox[{"Cases", "[", 
-           RowBox[{
-            RowBox[{"NotebookGet", "@", 
-             RowBox[{"EvaluationNotebook", "[", "]"}]}], ",", 
+          RowBox[{
+           RowBox[{"Cases", "[", 
             RowBox[{
-             RowBox[{"Cell", "[", 
-              RowBox[{"name_", ",", 
-               RowBox[{"style", ":", 
-                RowBox[{
-                "\"\<Section\>\"", "|", "\"\<Subsection\>\"", "|", 
-                 "\"\<Subsubsection\>\""}]}], ",", "___"}], "]"}], 
-             "\[RuleDelayed]", 
-             RowBox[{"{", 
-              RowBox[{"style", ",", 
-               RowBox[{"Convert`TeX`BoxesToTeX", "[", " ", 
-                RowBox[{"name", ",", 
-                 RowBox[{"\"\<BoxRules\>\"", "\[Rule]", 
-                  RowBox[{"{", 
-                   RowBox[{"D_String", "\[RuleDelayed]", "D"}], "}"}]}]}], 
-                "]"}]}], "}"}]}], ",", "Infinity"}], "]"}], "/.", 
+             RowBox[{"NotebookGet", "@", 
+              RowBox[{"EvaluationNotebook", "[", "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"Cell", "[", 
+               RowBox[{"name_", ",", 
+                RowBox[{"style", ":", 
+                 RowBox[{
+                 "\"\<Section\>\"", "|", "\"\<Subsection\>\"", "|", 
+                  "\"\<Subsubsection\>\"", "|", 
+                  "\"\<Subsubsubsection\>\""}]}], ",", "___"}], "]"}], 
+              "\[RuleDelayed]", 
+              RowBox[{"{", 
+               RowBox[{"style", ",", 
+                RowBox[{"Convert`TeX`BoxesToTeX", "[", " ", 
+                 RowBox[{"name", ",", 
+                  RowBox[{"\"\<BoxRules\>\"", "\[Rule]", 
+                   RowBox[{"{", 
+                    RowBox[{"D_String", "\[RuleDelayed]", "D"}], "}"}]}]}], 
+                 "]"}]}], "}"}]}], ",", "Infinity"}], "]"}], "/.", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"\"\<Subsubsubsection\>\"", ",", "x_"}], "}"}], 
+            "\[RuleDelayed]", 
+            RowBox[{"x", "[", "]"}]}]}], "//.", "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{"{", 
-            RowBox[{"\"\<Subsubsection\>\"", ",", "x_"}], "}"}], 
+            RowBox[{"x___", ",", 
+             RowBox[{"{", 
+              RowBox[{"\"\<Subsubsection\>\"", ",", "y_"}], "}"}], ",", 
+             RowBox[{"z", ":", 
+              RowBox[{
+               RowBox[{"Except", "[", "_List", "]"}], "..."}]}], ",", 
+             RowBox[{"w", ":", 
+              RowBox[{
+               RowBox[{"PatternSequence", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"_", ",", "_"}], "}"}], ",", "___"}], "]"}], "|", 
+               RowBox[{"PatternSequence", "[", "]"}]}]}]}], "}"}], 
            "\[RuleDelayed]", 
-           RowBox[{"x", "[", "]"}]}]}], "//.", 
+           RowBox[{"{", 
+            RowBox[{"x", ",", 
+             RowBox[{"y", "[", "z", "]"}], ",", "w"}], "}"}]}]}], "//.", 
          RowBox[{
           RowBox[{"{", 
            RowBox[{"x___", ",", 
@@ -1016,10 +1048,10 @@ PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH;python \
    3.66287943555198*^9, 3.662879474478507*^9}, {3.6628796508531*^9, 
    3.662879654771102*^9}, {3.662879712211882*^9, 3.662879755773623*^9}, {
    3.662879896644771*^9, 3.662879924537298*^9}, {3.662925697497366*^9, 
-   3.662925698800812*^9}}]
+   3.662925698800812*^9}, {3.663496849053315*^9, 3.6634969386271667`*^9}}]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{718, 855},
+WindowSize->{720, 855},
 WindowMargins->{{Automatic, 0}, {Automatic, 0}},
 FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 10, \
 2015)",
@@ -1036,7 +1068,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 46457, 998, 3781, "Input",
+Cell[557, 20, 47805, 1030, 3867, "Input",
  InitializationCell->True]
 }
 ]
