@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     48685,       1068]
-NotebookOptionsPosition[     48366,       1052]
-NotebookOutlinePosition[     48755,       1069]
-CellTagsIndexPosition[     48712,       1066]
+NotebookDataLength[     56440,       1222]
+NotebookOptionsPosition[     56115,       1206]
+NotebookOutlinePosition[     56510,       1223]
+CellTagsIndexPosition[     56467,       1220]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -52,6 +52,11 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
        "tempPicPath", ",", " ", "allspecial", ",", "npath"}], "}"}], ",", 
      "\[IndentingNewLine]", 
      RowBox[{
+      RowBox[{"Run", "[", 
+       RowBox[{
+       "OpenRead", "[", 
+        "\"\<!osascript -e 'tell application \\\"Anki\\\" to quit'\>\"", 
+        "]"}], "]"}], ";", "\[IndentingNewLine]", 
       RowBox[{"separator", "=", "\"\<#\>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Export to Anki begins...\>\"", "]"}], 
       ";", "\[IndentingNewLine]", 
@@ -65,10 +70,17 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
          RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
       RowBox[{"tempPicPath", "=", 
        RowBox[{"Quiet", "@", 
-        RowBox[{
-        "CreateDirectory", "[", 
-         "\"\<~/Dropbox/Anki/Ranza/collection.media/\>\"", "]"}]}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Check", "[", 
+         RowBox[{
+          RowBox[{"CreateDirectory", "[", 
+           RowBox[{"\"\<~/Dropbox/Anki/Ranza/collection.media/\>\"", ",", 
+            RowBox[{
+            "CreateIntermediateDirectories", "\[Rule]", " ", "True"}]}], 
+           "]"}], ",", "\"\<~/Dropbox/Anki/Ranza/collection.media/\>\"", ",", 
+          
+          StyleBox[
+           RowBox[{"CreateDirectory", "::", "filex"}], "MessageName"]}], 
+         "]"}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"TeXFix", "[", "what_", "]"}], ":=", 
        RowBox[{"StringReplace", "[", 
@@ -104,95 +116,91 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
        RowBox[{"ToTex", "[", 
         RowBox[{"what_", ",", 
          RowBox[{"n_:", "1"}]}], "]"}], ":=", 
-       RowBox[{"\"\<[$]\>\"", "<>", 
-        RowBox[{"Convert`TeX`BoxesToTeX", "[", 
-         RowBox[{"what", ",", " ", 
-          RowBox[{"\"\<BoxRules\>\"", "\[Rule]", 
-           RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"Convert`TeX`BoxesToTeX", "[", 
+        RowBox[{"what", ",", " ", 
+         RowBox[{"\"\<BoxRules\>\"", "\[Rule]", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
             RowBox[{
-             RowBox[{
-             "\"\<\[Transpose]\>\"", "\[RuleDelayed]", 
-              "\"\<^{\\\\mathsf{T}}\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[ConjugateTranspose]\>\"", "\[RuleDelayed]", 
-              "\"\<^{\\\\dagger} \>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[HermitianConjugate]\>\"", "\[RuleDelayed]", 
-              "\"\<^{\\\\dagger} \>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[Conjugate]\>\"", "\[RuleDelayed]", "\"\<^{*} \>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[OAcute]\>\"", "\[RuleDelayed]", " ", 
-              "\"\<\[OAcute]\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[CapitalOAcute]\>\"", "\[RuleDelayed]", " ", 
-              "\"\<\[CapitalOAcute]\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:015b\>\"", "\[RuleDelayed]", " ", "\"\<\:015b\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:015a\>\"", "\[RuleDelayed]", " ", "\"\<\:015a\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[CAcute]\>\"", "\[RuleDelayed]", " ", 
-              "\"\<\[CAcute]\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[CapitalCAcute]\>\"", "\[RuleDelayed]", " ", 
-              "\"\<\[CapitalCAcute]\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:0119\>\"", "\[RuleDelayed]", " ", "\"\<\:0119\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:0118\>\"", "\[RuleDelayed]", " ", "\"\<\:0118\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:0105\>\"", "\[RuleDelayed]", " ", "\"\<\:0105\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:0104\>\"", "\[RuleDelayed]", " ", "\"\<\:0104\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[LSlash]\>\"", "\[RuleDelayed]", " ", 
-              "\"\<\[LSlash]\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\[CapitalLSlash]\>\"", "\[RuleDelayed]", " ", 
-              "\"\<\[CapitalLSlash]\>\""}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:017c\>\"", "\[RuleDelayed]", " ", "\"\<\:017c\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{
-             "\"\<\:017b\>\"", "\[RuleDelayed]", " ", "\"\<\:017b\>\""}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{"\"\<\:017a\>\"", "\[RuleDelayed]", "\"\<\:017a\>\""}], 
+            "\"\<\[Transpose]\>\"", "\[RuleDelayed]", 
+             "\"\<^{\\\\mathsf{T}}\>\""}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\[ConjugateTranspose]\>\"", "\[RuleDelayed]", 
+             "\"\<^{\\\\dagger} \>\""}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\[HermitianConjugate]\>\"", "\[RuleDelayed]", 
+             "\"\<^{\\\\dagger} \>\""}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\[Conjugate]\>\"", "\[RuleDelayed]", "\"\<^{*} \>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\[OAcute]\>\"", "\[RuleDelayed]", " ", "\"\<\[OAcute]\>\""}],
              ",", "\[IndentingNewLine]", 
-             RowBox[{"\"\<\:0179\>\"", "\[RuleDelayed]", "\"\<\:0179\>\""}], 
+            RowBox[{
+            "\"\<\[CapitalOAcute]\>\"", "\[RuleDelayed]", " ", 
+             "\"\<\[CapitalOAcute]\>\""}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:015b\>\"", "\[RuleDelayed]", " ", "\"\<\:015b\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:015a\>\"", "\[RuleDelayed]", " ", "\"\<\:015a\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\[CAcute]\>\"", "\[RuleDelayed]", " ", "\"\<\[CAcute]\>\""}],
              ",", "\[IndentingNewLine]", 
-             RowBox[{"\"\<\:0144\>\"", "\[RuleDelayed]", "\"\<\:0144\>\""}], 
+            RowBox[{
+            "\"\<\[CapitalCAcute]\>\"", "\[RuleDelayed]", " ", 
+             "\"\<\[CapitalCAcute]\>\""}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:0119\>\"", "\[RuleDelayed]", " ", "\"\<\:0119\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:0118\>\"", "\[RuleDelayed]", " ", "\"\<\:0118\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:0105\>\"", "\[RuleDelayed]", " ", "\"\<\:0105\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:0104\>\"", "\[RuleDelayed]", " ", "\"\<\:0104\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\[LSlash]\>\"", "\[RuleDelayed]", " ", "\"\<\[LSlash]\>\""}],
              ",", "\[IndentingNewLine]", 
-             RowBox[{"\"\<\:0143\>\"", "\[RuleDelayed]", "\"\<\:0143\>\""}], 
-             ",", "\[IndentingNewLine]", 
-             RowBox[{
-              RowBox[{"StyleBox", "[", 
-               RowBox[{"D_", ",", 
-                RowBox[{"Background", "\[Rule]", "LightGreen"}]}], "]"}], 
-              "\[RuleDelayed]", 
-              RowBox[{"\"\<\\\\color[HTML]{1111FF}{{c\>\"", "<>", 
-               RowBox[{"ToString", "[", "n", "]"}], "<>", "\"\<::\>\"", "<>", 
-               
-               RowBox[{"StringReplace", "[", 
-                RowBox[{
-                 RowBox[{"Convert`TeX`BoxesToTeX", "[", "D", "]"}], ",", 
-                 RowBox[{"{", 
-                  RowBox[{
-                   RowBox[{"\"\<{{\>\"", "\[RuleDelayed]", "\"\< { { \>\""}], 
-                   ",", 
-                   RowBox[{
-                   "\"\<}}\>\"", "\[RuleDelayed]", "\"\< } } \>\""}]}], 
+            RowBox[{
+            "\"\<\[CapitalLSlash]\>\"", "\[RuleDelayed]", " ", 
+             "\"\<\[CapitalLSlash]\>\""}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:017c\>\"", "\[RuleDelayed]", " ", "\"\<\:017c\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<\:017b\>\"", "\[RuleDelayed]", " ", "\"\<\:017b\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"\"\<\:017a\>\"", "\[RuleDelayed]", "\"\<\:017a\>\""}], 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{"\"\<\:0179\>\"", "\[RuleDelayed]", "\"\<\:0179\>\""}], 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{"\"\<\:0144\>\"", "\[RuleDelayed]", "\"\<\:0144\>\""}], 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{"\"\<\:0143\>\"", "\[RuleDelayed]", "\"\<\:0143\>\""}], 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"StyleBox", "[", 
+              RowBox[{"D_", ",", 
+               RowBox[{"Background", "\[Rule]", "LightGreen"}]}], "]"}], 
+             "\[RuleDelayed]", 
+             RowBox[{"\"\<\\\\color[HTML]{1111FF}{{c\>\"", "<>", 
+              RowBox[{"ToString", "[", "n", "]"}], "<>", "\"\<::\>\"", "<>", 
+              RowBox[{"StringReplace", "[", 
+               RowBox[{
+                RowBox[{"ToTex", "[", "D", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"\"\<{{\>\"", "\[RuleDelayed]", "\"\< { { \>\""}], 
+                  ",", 
+                  RowBox[{"\"\<}}\>\"", "\[RuleDelayed]", "\"\< } } \>\""}]}],
                   "}"}]}], "]"}], "<>", 
-               "\"\< }}\\\\color[HTML]{000000}\>\""}]}]}], "}"}]}]}], "]"}], 
-        "<>", "\"\<[/$] \>\""}]}], ";", "\[IndentingNewLine]", 
-      "\[IndentingNewLine]", 
+              "\"\< }}\\\\color[HTML]{000000}\>\""}]}]}], "}"}]}]}], "]"}]}], 
+      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"cells", "=", 
        RowBox[{"Cells", "[", 
         RowBox[{
@@ -461,16 +469,18 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                RowBox[{"\"\<EquationNumbered\>\"", ",", "N_"}], "]"}], 
               "\[RuleDelayed]", " ", 
               RowBox[{"(", 
-               RowBox[{"Convert`TeX`BoxesToTeX", "@", 
-                RowBox[{"First", "@", 
-                 RowBox[{"Cases", "[", 
-                  RowBox[{"data", ",", 
-                   RowBox[{
+               RowBox[{"\"\<[$]\>\"", "<>", 
+                RowBox[{"ToTex", "[", 
+                 RowBox[{"First", "@", 
+                  RowBox[{"Cases", "[", 
+                   RowBox[{"data", ",", 
+                    RowBox[{
                     RowBox[{"Cell", "[", 
                     RowBox[{"name_", ",", "___", ",", 
                     RowBox[{"CellTags", "\[Rule]", "N"}], ",", "___"}], "]"}],
-                     "\[RuleDelayed]", "name"}], ",", "Infinity"}], "]"}]}]}],
-                ")"}]}], ",", "\[IndentingNewLine]", 
+                     "\[RuleDelayed]", "name"}], ",", "Infinity"}], "]"}]}], 
+                 "]"}], "<>", "\"\<[/$] \>\""}], ")"}]}], ",", 
+             "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"CounterBox", "[", "___", "]"}], "\[RuleDelayed]", 
               "\"\<\>\""}], ",", "\[IndentingNewLine]", 
@@ -492,8 +502,10 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                 RowBox[{"FormBox", "[", 
                  RowBox[{"C__", ",", " ", "TextForm"}], "]"}]}], ")"}], 
               "\[RuleDelayed]", 
-              RowBox[{"ToTex", "[", "C", "]"}]}], ",", "\[IndentingNewLine]", 
-             
+              RowBox[{"(", 
+               RowBox[{"\"\<[$]\>\"", "<>", 
+                RowBox[{"ToTex", "[", "C", "]"}], "<>", "\"\<[/$] \>\""}], 
+               ")"}]}], ",", "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"RowBox", "[", 
                RowBox[{"{", "C__String", "}"}], "]"}], "\[RuleDelayed]", 
@@ -699,8 +711,10 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                 RowBox[{"FormBox", "[", 
                  RowBox[{"C__", ",", " ", "TextForm"}], "]"}]}], ")"}], 
               "\[RuleDelayed]", 
-              RowBox[{"ToTex", "[", "C", "]"}]}], ",", "\[IndentingNewLine]", 
-             
+              RowBox[{"(", 
+               RowBox[{"\"\<[$]\>\"", "<>", 
+                RowBox[{"ToTex", "[", "C", "]"}], "<>", "\"\<[/$] \>\""}], 
+               ")"}]}], ",", "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"StyleBox", "[", 
                RowBox[{"D_", ",", "E___", " ", ",", 
@@ -867,22 +881,146 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
            "\[IndentingNewLine]", 
            RowBox[{"\"\<{{c1::}}\>\"", "\[Rule]", "\"\<\>\""}], ",", 
            "\[IndentingNewLine]", 
-           RowBox[{"\"\<{{c1::<br>}}\>\"", "\[Rule]", "\"\<<br>\>\""}]}], 
-          "\[IndentingNewLine]", 
-          RowBox[{"(*", 
-           RowBox[{",", 
+           RowBox[{"\"\<{{c1::<br>}}\>\"", "\[Rule]", "\"\<<br>\>\""}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
             RowBox[{
              RowBox[{"(", 
-              RowBox[{"\"\<\\\\text{\>\"", "~~", 
-               RowBox[{"Shortest", "[", "c__", "]"}], "~~", "\"\<}\>\""}], 
-              ")"}], "\[RuleDelayed]", 
-             RowBox[{"ToString", "@", 
-              RowBox[{"StringReplace", "[", 
-               RowBox[{"c", ",", 
-                RowBox[{"{", 
-                 RowBox[{"\"\<$\>\"", "\[RuleDelayed]", "  ", "\"\<\>\""}], 
-                 "}"}]}], "]"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
-          "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"\"\<^{\>\"", "~~", 
+               RowBox[{"Shortest", "[", "c__", "]"}], "~~", "\"\<}^{\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+               "\"\<\\\\dagger\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+              ")"}], "/;", 
+             RowBox[{"StringFreeQ", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"\"\<}\>\"", "|", "\"\<{\>\""}]}], "]"}]}], 
+            "\[RuleDelayed]", 
+            RowBox[{"\"\<^{\>\"", "<>", "c", "<>", "\"\<\\\\dagger}\>\""}]}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"\"\<^\>\"", "~~", "c_", "~~", "\"\<^{\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+               "\"\<\\\\dagger\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+              ")"}], "/;", 
+             RowBox[{"StringFreeQ", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"\"\<}\>\"", "|", "\"\<{\>\""}]}], "]"}]}], 
+            "\[RuleDelayed]", 
+            RowBox[{"\"\<^{\>\"", "<>", "c", "<>", "\"\<\\\\dagger}\>\""}]}], 
+           ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"\"\<^{\>\"", "~~", 
+               RowBox[{"Shortest", "[", "c__", "]"}], "~~", 
+               "\"\<}^{\\\\mathsf{T}\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+              ")"}], "/;", 
+             RowBox[{"StringFreeQ", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"\"\<}\>\"", "|", "\"\<{\>\""}]}], "]"}]}], 
+            "\[RuleDelayed]", 
+            RowBox[{
+            "\"\<^{\>\"", "<>", "c", "<>", "\"\<\\\\mathsf{T}}\>\""}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"\"\<^\>\"", "~~", "c_", "~~", "\"\<^{\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+               "\"\<\\\\mathsf{T}\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+              ")"}], "/;", 
+             RowBox[{"StringFreeQ", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"\"\<}\>\"", "|", "\"\<{\>\""}]}], "]"}]}], 
+            "\[RuleDelayed]", 
+            RowBox[{
+            "\"\<^{\>\"", "<>", "c", "<>", "\"\<\\\\mathsf{T}}\>\""}]}], ",", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"\"\<^{\>\"", "~~", 
+               RowBox[{"Shortest", "[", "c__", "]"}], "~~", "\"\<}^{\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<*\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+              ")"}], "/;", 
+             RowBox[{"StringFreeQ", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"\"\<}\>\"", "|", "\"\<{\>\""}]}], "]"}]}], 
+            "\[RuleDelayed]", 
+            RowBox[{"\"\<^{\>\"", "<>", "c", "<>", "\"\<*}\>\""}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"\"\<^\>\"", "~~", "c_", "~~", "\"\<^{\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<*\>\"", "~~", 
+               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+              ")"}], "/;", 
+             RowBox[{"StringFreeQ", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"\"\<}\>\"", "|", "\"\<{\>\""}]}], "]"}]}], 
+            "\[RuleDelayed]", 
+            RowBox[{"\"\<^{\>\"", "<>", "c", "<>", "\"\<*}\>\""}]}], ",", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\"\<\\\\overset{\>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+             "\"\<\\\\mathsym{\>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+             "\"\<\\\\OverBracket\>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\"", "~~", 
+             
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+            "\[RuleDelayed]", " ", "\"\<\\\\overbrace\>\""}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\"\<\\\\underset{\>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+             "\"\<\\\\mathsym{\>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", 
+             "\"\<\\\\UnderBracket\>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\"", "~~", 
+             
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<}\>\""}], 
+            "\[RuleDelayed]", " ", "\"\<\\\\underbrace\>\""}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{",", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\"\<\\\\text{\>\"", "~~", 
+                RowBox[{"Shortest", "[", "c__", "]"}], "~~", "\"\<}\>\""}], 
+               ")"}], "\[RuleDelayed]", 
+              RowBox[{"ToString", "@", 
+               RowBox[{"StringReplace", "[", 
+                RowBox[{"c", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"\"\<$\>\"", "\[RuleDelayed]", "  ", "\"\<\>\""}], 
+                  "}"}]}], "]"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\"\<\\\\left\\\\left|\>\"", "~~", 
+             RowBox[{"Shortest", "[", "c__", "]"}], "~~", 
+             "\"\<\\\\right\\\\right|\>\""}], "\[RuleDelayed]", " ", 
+            RowBox[{
+            "\"\<\\\\left|\>\"", "~~", "c", " ", "~~", 
+             "\"\<\\\\right|\>\""}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\"\<\\\\right\\\\right| \>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<{}_\>\""}], 
+            "\[RuleDelayed]", " ", "\"\<\\\\right|_\>\""}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\"\<\\\\right\\\\right| \>\"", "~~", 
+             RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<_\>\""}], 
+            "\[RuleDelayed]", " ", "\"\<\\\\right|_\>\""}]}], 
+          "\[IndentingNewLine]", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{
       "ShowStatus", "[", "\"\<Preparing final structure...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
@@ -1048,13 +1186,29 @@ PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH;python \
    3.66287943555198*^9, 3.662879474478507*^9}, {3.6628796508531*^9, 
    3.662879654771102*^9}, {3.662879712211882*^9, 3.662879755773623*^9}, {
    3.662879896644771*^9, 3.662879924537298*^9}, {3.662925697497366*^9, 
-   3.662925698800812*^9}, {3.663496849053315*^9, 3.6634969386271667`*^9}}]
+   3.662925698800812*^9}, {3.663496849053315*^9, 3.6634969386271667`*^9}, {
+   3.665309153712616*^9, 3.6653091546938887`*^9}, {3.666685062293293*^9, 
+   3.666685102450686*^9}, 3.66668546701372*^9, {3.66668593854073*^9, 
+   3.6666859622491083`*^9}, {3.6666860290468473`*^9, 
+   3.6666860580896893`*^9}, {3.666686111720924*^9, 3.6666861352918863`*^9}, {
+   3.6666865730133247`*^9, 3.666686586563023*^9}, {3.6666912739121847`*^9, 
+   3.666691329081683*^9}, {3.6666915177299643`*^9, 3.666691518488735*^9}, {
+   3.666691878227865*^9, 3.6666918979139843`*^9}, {3.666692426891385*^9, 
+   3.666692428151021*^9}, {3.666692481216773*^9, 3.6666924830902433`*^9}, 
+   3.666702909971808*^9, {3.666702952464798*^9, 3.666702999756895*^9}, {
+   3.666703040128456*^9, 3.6667030649681063`*^9}, {3.6667038353421297`*^9, 
+   3.666703866751783*^9}, {3.6667041167308397`*^9, 3.666704127411579*^9}, {
+   3.666705333103278*^9, 3.6667053366025743`*^9}, 3.66670539845406*^9, {
+   3.666708006077963*^9, 3.666708009821781*^9}, {3.666709938976502*^9, 
+   3.66670995581584*^9}, {3.6667102871116867`*^9, 3.666710324670627*^9}, {
+   3.666711123420342*^9, 3.6667111421698027`*^9}, {3.666711449258236*^9, 
+   3.666711452533702*^9}, {3.666711504139539*^9, 3.666711504370193*^9}}]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{720, 855},
-WindowMargins->{{Automatic, 0}, {Automatic, 0}},
-FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 10, \
-2015)",
+WindowMargins->{{-958, Automatic}, {Automatic, -510}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
+2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1068,10 +1222,9 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 47805, 1030, 3867, "Input",
+Cell[557, 20, 55554, 1184, 4451, "Input",
  InitializationCell->True]
 }
 ]
 *)
 
-(* End of internal cache information *)

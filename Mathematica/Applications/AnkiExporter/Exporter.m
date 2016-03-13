@@ -25,15 +25,16 @@ ExportToAnki::usage ="Function exporting selected sections of the notebook to An
 Begin["`Private`"];
 
 ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
+Run[OpenRead["!osascript -e 'tell application \"Anki\" to quit'"]];
 separator="#";
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
-tempPicPath=Quiet@CreateDirectory["~/Dropbox/Anki/Ranza/collection.media/"];
+tempPicPath=Quiet@Check[CreateDirectory["~/Dropbox/Anki/Ranza/collection.media/",CreateIntermediateDirectories-> True],"~/Dropbox/Anki/Ranza/collection.media/",CreateDirectory::filex];
 
 TeXFix[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}",("\\text{"~~c:Except["}"]..~~"}"):>(ToString@c)}];
 TeXFixPoor[what_]:=StringReplace[what,{"[/$]}}[$][/$]"-> "[/$]}}"}];
 EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
-ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
+ToTex[what_,n_:1]:=Convert`TeX`BoxesToTeX[what, "BoxRules"->{
 "\[Transpose]":>"^{\\mathsf{T}}",
 "\[ConjugateTranspose]":>"^{\\dagger} ",
 "\[HermitianConjugate]":>"^{\\dagger} ",
@@ -56,7 +57,7 @@ ToTex[what_,n_:1]:="[$]"<>Convert`TeX`BoxesToTeX[what, "BoxRules"->{
 "\:0179":>"\:0179",
 "\:0144":>"\:0144",
 "\:0143":>"\:0143",
-StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[Convert`TeX`BoxesToTeX[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}]<>"[/$] ";
+StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[ToTex[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}];
 
 cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Theorem","Example","Proof","Axiom","Solution","Definition"}];
 
@@ -79,11 +80,11 @@ dat=Block[{n=1},ReplaceRepeated[data,
 {
 ButtonBox[RowBox[C__],___]:> C,
 CounterBox["FigureCaptionNumbered",N_]:> (First@Cases[data,Cell[TextData[name__],___,"Figure",___,CellTags->N,___]:>name,Infinity]),
-CounterBox["EquationNumbered",N_]:> (Convert`TeX`BoxesToTeX@First@Cases[data,Cell[name_,___,CellTags->N,___]:>name,Infinity]),
+CounterBox["EquationNumbered",N_]:> ("[$]"<>ToTex[First@Cases[data,Cell[name_,___,CellTags->N,___]:>name,Infinity]]<>"[/$] "),
 CounterBox[___]:>"",
 StyleBox[D__,Background->None,E___]:>StyleBox[D,E],
 StyleBox[D_String]:>D,
-(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>ToTex[C],
+(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>("[$]"<>ToTex[C]<>"[/$] "),
 RowBox[{C__String}]:>StringJoin@C,
 Cell[TextData[data_],style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
 Cell[BoxData[data_],style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
@@ -100,7 +101,7 @@ FormBox[RowBox[{E___,TraditionalForm}],___]:> FormBox[RowBox[{E}],TraditionalFor
 ShowStatus["Extracting data... (3/3)"];
 dat=Block[{n=1},ReplaceAll[dat,{
 (FormBox[RowBox[{C__String}],TextForm]|FormBox[RowBox[{C__String}],TraditionalForm]):>StringJoin@C,
-(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>ToTex[C],
+(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>("[$]"<>ToTex[C]<>"[/$] "),
 StyleBox[D_,E___ ,Background->LightGreen,F___]:>("{{c"<>ToString[n]<>"::"<>
 ReplaceAll[StyleBox[D,E,F],{
 StyleBox[U_String,___,FontWeight->"Bold",___]:> ("<b>"<>U<>"</b>"),
@@ -127,8 +128,22 @@ base=StringReplace[base,{
 "}}{{c"~~Shortest[c__]~~"::"->"",
 "[$][/$]"->"",
 "{{c1::}}"->"",
-"{{c1::<br>}}"->"<br>"
+"{{c1::<br>}}"->"<br>",
+("^{"~~Shortest[c__]~~"}^{"~~WhitespaceCharacter...~~"\\dagger"~~WhitespaceCharacter...~~"}")/;StringFreeQ[c,"}"|"{"]:>"^{"<>c<>"\\dagger}",
+("^"~~c_~~"^{"~~WhitespaceCharacter...~~"\\dagger"~~WhitespaceCharacter...~~"}")/;StringFreeQ[c,"}"|"{"]:>"^{"<>c<>"\\dagger}",
+
+("^{"~~Shortest[c__]~~"}^{\\mathsf{T}"~~WhitespaceCharacter...~~"}")/;StringFreeQ[c,"}"|"{"]:>"^{"<>c<>"\\mathsf{T}}",
+("^"~~c_~~"^{"~~WhitespaceCharacter...~~"\\mathsf{T}"~~WhitespaceCharacter...~~"}")/;StringFreeQ[c,"}"|"{"]:>"^{"<>c<>"\\mathsf{T}}",
+
+("^{"~~Shortest[c__]~~"}^{"~~WhitespaceCharacter...~~"*"~~WhitespaceCharacter...~~"}")/;StringFreeQ[c,"}"|"{"]:>"^{"<>c<>"*}",
+("^"~~c_~~"^{"~~WhitespaceCharacter...~~"*"~~WhitespaceCharacter...~~"}")/;StringFreeQ[c,"}"|"{"]:>"^{"<>c<>"*}",
+
+"\\overset{"~~WhitespaceCharacter...~~"\\mathsym{"~~WhitespaceCharacter...~~"\\OverBracket"~~WhitespaceCharacter...~~"}"~~WhitespaceCharacter...~~"}":> "\\overbrace",
+"\\underset{"~~WhitespaceCharacter...~~"\\mathsym{"~~WhitespaceCharacter...~~"\\UnderBracket"~~WhitespaceCharacter...~~"}"~~WhitespaceCharacter...~~"}":> "\\underbrace",
 (*,("\\text{"~~Shortest[c__]~~"}")\[RuleDelayed]ToString@StringReplace[c,{"$"\[RuleDelayed]  ""}] *)
+"\\left\\left|"~~Shortest[c__]~~"\\right\\right|":> "\\left|"~~c ~~"\\right|",
+"\\right\\right| "~~WhitespaceCharacter...~~"{}_":> "\\right|_",
+"\\right\\right| "~~WhitespaceCharacter...~~"_":> "\\right|_"
 }];
 ShowStatus["Preparing final structure..."];
 npath=NotebookFileName[EvaluationNotebook[]];
