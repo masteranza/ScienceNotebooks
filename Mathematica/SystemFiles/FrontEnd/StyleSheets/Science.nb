@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     43577,       1286]
-NotebookOptionsPosition[     34772,       1050]
-NotebookOutlinePosition[     35537,       1081]
-CellTagsIndexPosition[     35467,       1076]
+NotebookDataLength[     43758,       1289]
+NotebookOptionsPosition[     34952,       1053]
+NotebookOutlinePosition[     35717,       1084]
+CellTagsIndexPosition[     35647,       1079]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -641,6 +641,7 @@ Cell["Items", "Section",
 Cell[CellGroupData[{
 
 Cell[StyleData["Item1"],
+ CellDingbat->Cell["\[FilledSmallCircle]", FontSize -> 12],
  CellMargins->{{80, Inherited}, {6, 6}},
  StyleKeyMapping->{"Tab" -> "Item2", "Backspace" -> "Item1"},
  LineSpacing->{1.5, 0},
@@ -654,6 +655,7 @@ Cell[StyleData["Item1", "Printout", StyleDefinitions -> StyleData["Item1"]]]
 Cell[CellGroupData[{
 
 Cell[StyleData["Item2"],
+ CellDingbat->Cell["\[FilledSmallCircle]", FontSize -> 12],
  CellMargins->{{90, Inherited}, {6, 6}},
  StyleKeyMapping->{"Tab" -> "Item3", "Backspace" -> "Item1"},
  LineSpacing->{1.5, 0},
@@ -667,6 +669,7 @@ Cell[StyleData["Item2", "Printout", StyleDefinitions -> StyleData["Item2"]],
 Cell[CellGroupData[{
 
 Cell[StyleData["Item3"],
+ CellDingbat->Cell["\[FilledSmallCircle]", FontSize -> 12],
  CellMargins->{{120, Inherited}, {6, 6}},
  StyleKeyMapping->{"Tab" -> "Item3", "Backspace" -> "Item2"},
  LineSpacing->{1.5, 0},
@@ -1075,7 +1078,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 35324, 1069}
+ {"Tabela", 35504, 1072}
  }
 *)
 (*NotebookFileOutline
@@ -1183,109 +1186,109 @@ Cell[CellGroupData[{
 Cell[23215, 636, 109, 2, 49, "Section",
  CellID->20417926],
 Cell[CellGroupData[{
-Cell[23349, 642, 222, 6, 42, 24, 0, "StyleData", "Item1", "All",
+Cell[23349, 642, 282, 7, 42, 24, 0, "StyleData", "Item1", "All",
  MenuCommandKey->"-"],
-Cell[23574, 650, 76, 0, 42, 76, 0, "StyleData", "Item1", "Printout"]
+Cell[23634, 651, 76, 0, 42, 76, 0, "StyleData", "Item1", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23687, 655, 200, 5, 42, 24, 0, "StyleData", "Item2", "All"],
-Cell[23890, 662, 97, 1, 42, 76, 0, "StyleData", "Item2", "Printout",
+Cell[23747, 656, 260, 6, 42, 24, 0, "StyleData", "Item2", "All"],
+Cell[24010, 664, 97, 1, 42, 76, 0, "StyleData", "Item2", "Printout",
  CellID->1295418899]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24024, 668, 201, 5, 42, 24, 0, "StyleData", "Item3", "All"],
-Cell[24228, 675, 97, 1, 42, 76, 0, "StyleData", "Item3", "Printout",
+Cell[24144, 670, 261, 6, 42, 24, 0, "StyleData", "Item3", "All"],
+Cell[24408, 678, 97, 1, 42, 76, 0, "StyleData", "Item3", "Printout",
  CellID->1194924769]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24374, 682, 122, 2, 49, "Section",
+Cell[24554, 685, 122, 2, 49, "Section",
  CellID->1770623558],
 Cell[CellGroupData[{
-Cell[24521, 688, 246, 6, 48, 32, 0, "StyleData", "Item1Numbered", "All",
+Cell[24701, 691, 246, 6, 48, 32, 0, "StyleData", "Item1Numbered", "All",
  MenuCommandKey->"="],
-Cell[24770, 696, 94, 1, 48, 94, 1, "StyleData", "Item1Numbered", "Printout"]
+Cell[24950, 699, 94, 1, 48, 94, 1, "StyleData", "Item1Numbered", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24901, 702, 240, 5, 38, 32, 0, "StyleData", "Item2Numbered", "All"],
-Cell[25144, 709, 115, 2, 38, 94, 1, "StyleData", "Item2Numbered", "Printout",
+Cell[25081, 705, 240, 5, 38, 32, 0, "StyleData", "Item2Numbered", "All"],
+Cell[25324, 712, 115, 2, 38, 94, 1, "StyleData", "Item2Numbered", "Printout",
  CellID->1813736256]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[25296, 716, 241, 5, 38, 32, 0, "StyleData", "Item3Numbered", "All"],
-Cell[25540, 723, 114, 2, 38, 94, 1, "StyleData", "Item3Numbered", "Printout",
+Cell[25476, 719, 241, 5, 38, 32, 0, "StyleData", "Item3Numbered", "All"],
+Cell[25720, 726, 114, 2, 38, 94, 1, "StyleData", "Item3Numbered", "Printout",
  CellID->190574117]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[25703, 731, 114, 2, 49, "Section",
+Cell[25883, 734, 114, 2, 49, "Section",
  CellID->1154436234],
-Cell[25820, 735, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
-Cell[26105, 747, 134, 4, 36, 30, 0, "StyleData", "RemarkLabel", "All",
+Cell[26000, 738, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
+Cell[26285, 750, 134, 4, 36, 30, 0, "StyleData", "RemarkLabel", "All",
  StyleMenuListing->None],
-Cell[26242, 753, 302, 10, 58, 31, 0, "StyleData", "EmphasisText", "All",
+Cell[26422, 756, 302, 10, 58, 31, 0, "StyleData", "EmphasisText", "All",
  CounterIncrements->"SmallText"],
-Cell[26547, 765, 149, 5, 38, 27, 0, "StyleData", "Citation", "All",
+Cell[26727, 768, 149, 5, 38, 27, 0, "StyleData", "Citation", "All",
  MenuSortingValue->10000],
 Cell[CellGroupData[{
-Cell[26721, 774, 421, 13, 44, 28, 0, "StyleData", "Reference", "All",
+Cell[26901, 777, 421, 13, 44, 28, 0, "StyleData", "Reference", "All",
  CounterIncrements->"Reference",
  CounterAssignments->{{"Item1Numbered", 0}},
  MenuSortingValue->2260],
-Cell[27145, 789, 86, 1, 44, 86, 1, "StyleData", "Reference", "Printout"]
+Cell[27325, 792, 86, 1, 44, 86, 1, "StyleData", "Reference", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[27268, 795, 737, 20, 37, 54, 0, "StyleData", "Theorem", "All"],
-Cell[28008, 817, 82, 1, 37, 82, 1, "StyleData", "Theorem", "Printout"]
+Cell[27448, 798, 737, 20, 37, 54, 0, "StyleData", "Theorem", "All"],
+Cell[28188, 820, 82, 1, 37, 82, 1, "StyleData", "Theorem", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28127, 823, 733, 20, 37, 52, 0, "StyleData", "Axiom", "All"],
-Cell[28863, 845, 76, 0, 37, 76, 0, "StyleData", "Axiom", "Printout"]
+Cell[28307, 826, 733, 20, 37, 52, 0, "StyleData", "Axiom", "All"],
+Cell[29043, 848, 76, 0, 37, 76, 0, "StyleData", "Axiom", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28976, 850, 738, 21, 39, 52, 0, "StyleData", "Proof", "All",
+Cell[29156, 853, 738, 21, 39, 52, 0, "StyleData", "Proof", "All",
  CounterIncrements->"Proof"],
-Cell[29717, 873, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
+Cell[29897, 876, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[29830, 878, 753, 21, 39, 57, 0, "StyleData", "Definition", "All",
+Cell[30010, 881, 753, 21, 39, 57, 0, "StyleData", "Definition", "All",
  CellID->826547224],
-Cell[30586, 901, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
+Cell[30766, 904, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
  CellID->1951041930]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30732, 908, 711, 20, 39, 54, 0, "StyleData", "Example", "All"],
-Cell[31446, 930, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
+Cell[30912, 911, 711, 20, 39, 54, 0, "StyleData", "Example", "All"],
+Cell[31626, 933, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
  CellID->1472158200]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[31586, 937, 779, 22, 39, 55, 0, "StyleData", "Solution", "All",
+Cell[31766, 940, 779, 22, 39, 55, 0, "StyleData", "Solution", "All",
  CounterIncrements->"Solution",
  CellID->1873841830],
-Cell[32368, 961, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
+Cell[32548, 964, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
  CellID->1403770313]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[32510, 968, 764, 22, 39, 52, 0, "StyleData", "Lemma", "All",
+Cell[32690, 971, 764, 22, 39, 52, 0, "StyleData", "Lemma", "All",
  CounterIncrements->"Lemma",
  CellID->628380021],
-Cell[33277, 992, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
+Cell[33457, 995, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33390, 997, 645, 18, 39, 53, 0, "StyleData", "Remark", "All"],
-Cell[34038, 1017, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
+Cell[33570, 1000, 645, 18, 39, 53, 0, "StyleData", "Remark", "All"],
+Cell[34218, 1020, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
 }, Open  ]],
-Cell[34131, 1020, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
+Cell[34311, 1023, 100, 2, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None],
 Cell[CellGroupData[{
-Cell[34256, 1026, 175, 6, 41, 29, 0, "StyleData", "InlineCell", "All",
+Cell[34436, 1029, 175, 6, 41, 29, 0, "StyleData", "InlineCell", "All",
  MenuSortingValue->10000],
-Cell[34434, 1034, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
+Cell[34614, 1037, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
 }, Open  ]],
-Cell[34554, 1039, 111, 3, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
+Cell[34734, 1042, 111, 3, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
  MenuSortingValue->10000],
-Cell[34668, 1044, 76, 2, 35, 27, 0, "StyleData", "Graphics", "All"]
+Cell[34848, 1047, 76, 2, 35, 27, 0, "StyleData", "Graphics", "All"]
 }, Open  ]]
 }, Open  ]]
 }
