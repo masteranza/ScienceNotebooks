@@ -78,6 +78,7 @@ ShowStatus["Extracting data... (1/3)"];
 data=NotebookRead@cells;
 dat=Block[{n=1},ReplaceRepeated[data,
 {
+ButtonBox[DynamicBox[C_,___],___]:> Evaluate@C,
 ButtonBox[RowBox[C__],___]:> C,
 CounterBox["FigureCaptionNumbered",N_]:> (First@Cases[data,Cell[TextData[name__],___,"Figure",___,CellTags->N,___]:>name,Infinity]),
 CounterBox["EquationNumbered",N_]:> ("[$]"<>ToTex[First@Cases[data,Cell[name_,___,CellTags->N,___]:>name,Infinity]]<>"[/$] "),

@@ -28,6 +28,7 @@ PrintToConsole::usage="Send to console";
 MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 CodeVisible::usage = "Shows/Hides code and cell tags";PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
 CreateTOC::usage="Create table of contents";
+CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
 StyleButton::usage="Creates a button to create a style Cell of a specific name";
 WordStats::usage="Prints current notebook word/character stats in Status area";
 Begin["`Private`"];
@@ -41,6 +42,9 @@ ShowStatus[status_]:=LinkWrite[$ParentLink,SetNotebookStatusLine[FrontEnd`Evalua
 
 StyleButton[name_]:=Button[name,SelectionMove[SelectedNotebook[],All,Cell];FrontEndExecute@FrontEndToken[SelectedNotebook[],"Style",name]];
 
+
+CellStrip[data_]:=ReplaceRepeated[data,{Cell[c_,___]:>c,BoxData[d__]:>d,TextData[ff_]:>ff}]
+
 EmbedNote[notebookpath_,tag_]:=Block[{m},
 Catch[
 NotebookWrite[
@@ -52,7 +56,7 @@ Cases[First@Get[If[(m=FindFile[notebookpath])=!=$Failed,m,Throw["File \""<> note
 ]
 ];
 WordStats[]:=
-Module[{dat,data,characters,words},
+Module[{cells,dat,data,characters,words},
 cells=Cells[EvaluationNotebook[],CellStyle->{"Title","Section","Subsection","Subsubsection","Subsubsubection","Text","EquationNumbered","Equation","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered"}];
 data=NotebookRead@cells;
 dat=ReplaceRepeated[data,

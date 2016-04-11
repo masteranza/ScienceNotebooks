@@ -35,14 +35,15 @@ Item[KeyEvent["d", Modifiers -> {Command}],
 					]
 			], CurrentValue[NotebookSelection[nb], Background] = If[CurrentValue[NotebookSelection[nb], Background] == None, LightGreen, None]
 		];	
-	], MenuEvaluator -> Automatic 
+	], MenuEvaluator -> Automatic
 ],
 Item[KeyEvent["y", Modifiers -> {Control}], 
         FrontEndExecute @ Module[{nb, t},
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
             t = NotebookRead[SelectedNotebook[]];
-            NotebookWrite[nb, ButtonBox[RowBox[{"(",CounterBox["TableTitle", t],")"}],BaseStyle->"Hyperlink",ButtonData->t]];
+
+			NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["TableTitle", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]];
         ],
         MenuEvaluator -> Automatic 
     ],
@@ -52,9 +53,46 @@ Item[KeyEvent["e", Modifiers -> {Control}],
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
             t = NotebookRead[SelectedNotebook[]];
-            NotebookWrite[nb, ButtonBox[RowBox[{"(",CounterBox["Section", t],".",CounterBox["EquationNumbered", t],")"}],BaseStyle->"Hyperlink",ButtonData->t]];
+
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["EquationNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]];
         ],
         MenuEvaluator -> Automatic 
+    ],
+
+
+Item[KeyEvent["r", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{},
+             MessageDialog[
+  DynamicModule[{}, 1, 
+   Initialization :> (NotebookClose@EvaluationNotebook[];
+     Module[{m,p,eqs,eqs2,ret},
+     m = SystemDialogInput["FileOpen", ".nb"];
+     If[(m =!= $Canceled), 
+     eqs = Cases[First@Get[m], Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[], CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
+	 eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // DisplayForm)) &, eqs];
+	 If[eqs2 != {},
+       DialogInput[{ListPicker[Dynamic[p], eqs2, 
+          Multiselection -> False, Background -> White], 
+         DefaultButton[DialogReturn[ret = First@p]]}, 
+        WindowTitle -> "Pick equation"];
+       NotebookWrite[InputNotebook[], 
+        ButtonBox[
+         First@MapThread[
+           DynamicBox[
+             CellStrip[
+              First@Cases[First@Get[#1], 
+                Cell[BlankNullSequence[], CellTags -> #2, BlankNullSequence[]], Infinity]], 
+             UpdateInterval -> Infinity] &, {{m}, {ret}}], 
+         BaseStyle -> {"Hyperlink", Larger}, 
+         Tooltip -> FileNameTake[m], 
+         ButtonFunction -> (NotebookLocate[#] &), 
+         ButtonData -> {m, ret}]];];
+         ];
+     ];
+     ), SynchronousInitialization -> False], 
+  Visible -> False];
+        ],
+        MenuEvaluator -> Automatic,
     ],
 
 Item[KeyEvent["p", Modifiers -> {Control}], 
@@ -62,9 +100,11 @@ Item[KeyEvent["p", Modifiers -> {Control}],
             nb = InputNotebook[];
             SelectionMove[nb, All, Word];
             t = NotebookRead[SelectedNotebook[]];
-            NotebookWrite[nb, ButtonBox[RowBox[{"",CounterBox["FigureCaptionNumbered", t],"."}],BaseStyle->"Hyperlink",ButtonData->t]];
+
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["FigureCaptionNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]];
+
         ],
-        MenuEvaluator -> Automatic 
+        MenuEvaluator -> "Local"
     ],
 
 Item[KeyEvent["p", Modifiers -> {Control,Command}], 
