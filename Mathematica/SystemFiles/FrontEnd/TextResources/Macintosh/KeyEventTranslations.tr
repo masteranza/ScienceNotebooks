@@ -42,8 +42,8 @@ Item[KeyEvent["y", Modifiers -> {Control}],
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
             t = NotebookRead[SelectedNotebook[]];
-
-			NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["TableTitle", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]];
+            If[StringQ[t],
+			NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["TableTitle", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
         ],
         MenuEvaluator -> Automatic 
     ],
@@ -53,8 +53,8 @@ Item[KeyEvent["e", Modifiers -> {Control}],
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
             t = NotebookRead[SelectedNotebook[]];
-
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["EquationNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]];
+            If[StringQ[t],
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["EquationNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
         ],
         MenuEvaluator -> Automatic 
     ],
@@ -68,13 +68,15 @@ Item[KeyEvent["r", Modifiers -> {Control}],
      Module[{m,p,eqs,eqs2,ret},
      m = SystemDialogInput["FileOpen", ".nb"];
      If[(m =!= $Canceled), 
+     ret = 0;
      eqs = Cases[First@Get[m], Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[], CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
 	 eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // DisplayForm)) &, eqs];
 	 If[eqs2 != {},
        DialogInput[{ListPicker[Dynamic[p], eqs2, 
-          Multiselection -> False, Background -> White], 
+          AppearanceElements -> All, Multiselection -> False, Appearance -> "Frameless", Background -> White], 
          DefaultButton[DialogReturn[ret = First@p]]}, 
         WindowTitle -> "Pick equation"];
+       If[(ret != 0),
        NotebookWrite[InputNotebook[], 
         ButtonBox[
          First@MapThread[
@@ -86,7 +88,7 @@ Item[KeyEvent["r", Modifiers -> {Control}],
          BaseStyle -> {"Hyperlink", Larger}, 
          Tooltip -> FileNameTake[m], 
          ButtonFunction -> (NotebookLocate[#] &), 
-         ButtonData -> {m, ret}]];];
+         ButtonData -> {m, ret}]]];];
          ];
      ];
      ), SynchronousInitialization -> False], 
@@ -100,8 +102,8 @@ Item[KeyEvent["p", Modifiers -> {Control}],
             nb = InputNotebook[];
             SelectionMove[nb, All, Word];
             t = NotebookRead[SelectedNotebook[]];
-
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["FigureCaptionNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]];
+            If[StringQ[t],
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["FigureCaptionNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
 
         ],
         MenuEvaluator -> "Local"
