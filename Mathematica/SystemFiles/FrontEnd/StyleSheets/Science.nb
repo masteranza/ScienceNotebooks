@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     39779,       1243]
-NotebookOptionsPosition[     30219,        989]
-NotebookOutlinePosition[     30981,       1020]
-CellTagsIndexPosition[     30911,       1015]
+NotebookDataLength[     40063,       1253]
+NotebookOptionsPosition[     30501,        999]
+NotebookOutlinePosition[     31265,       1030]
+CellTagsIndexPosition[     31195,       1025]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -727,8 +727,10 @@ Cell[StyleData["Theorem", StyleDefinitions -> "Text"],
        CounterBox["Theorem"]}], FontFamily -> "Latin Modern Math", FontWeight -> 
      Bold, FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, 
      "Text"], Inherited}, {Inherited, Inherited}},
- CellFrameLabelMargins->{{10, 10}, {1, 0}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
+ ParagraphSpacing->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
  FontFamily->"Latin Modern Math",
@@ -755,8 +757,9 @@ Cell[StyleData["Axiom", StyleDefinitions -> "Text"],
        CounterBox["Axiom"]}], FontFamily -> "Latin Modern Math", FontWeight -> 
      Bold, FontSize -> 14, TextAlignment -> Right, CellSize -> {60, 15}, 
      "Text"], Inherited}, {Inherited, Inherited}},
- CellFrameLabelMargins->{{10, 10}, {1, 0}},
+ CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
  ParagraphIndent->0,
  TabSpacings->2.1,
  FontFamily->"Latin Modern Math",
@@ -784,10 +787,12 @@ Cell[StyleData["Proof", StyleDefinitions -> "Text"],
      "Text"], Inherited}, {Inherited, Inherited}},
  CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
+ ParagraphSpacing->0,
  ParagraphIndent->0,
  TabSpacings->2.1,
  CounterIncrements->"Proof",
- FontFamily->Baskerville,
+ FontFamily->"Latin Modern Math",
  FontSize->14,
  FontWeight->Normal,
  FontSlant->Plain],
@@ -812,9 +817,10 @@ Cell[StyleData["Definition", StyleDefinitions -> "Text"],
      CellSize -> {60, 15}, "Text"], Inherited}, {Inherited, Inherited}},
  CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
  ParagraphIndent->0,
  TabSpacings->2.1,
- FontFamily->Baskerville,
+ FontFamily->"Latin Modern Math",
  FontSize->14,
  FontWeight->Normal,
  FontSlant->Plain,
@@ -842,9 +848,10 @@ Cell[StyleData["Example", StyleDefinitions -> "Text"],
      "Text"], Inherited}, {Inherited, Inherited}},
  CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
  ParagraphIndent->0,
  TabSpacings->2.1,
- FontFamily->Baskerville,
+ FontFamily->"Latin Modern Math",
  FontSize->14,
  FontWeight->Normal,
  FontSlant->Plain],
@@ -871,10 +878,11 @@ Cell[StyleData["Solution", StyleDefinitions -> "Text"],
      "Text"], Inherited}, {Inherited, Inherited}},
  CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
  ParagraphIndent->0,
  TabSpacings->2.1,
  CounterIncrements->"Solution",
- FontFamily->Baskerville,
+ FontFamily->"Latin Modern Math",
  FontSize->14,
  FontWeight->Normal,
  FontSlant->Plain,
@@ -902,10 +910,11 @@ Cell[StyleData["Lemma", StyleDefinitions -> "Text"],
      "Text"], Inherited}, {Inherited, Inherited}},
  CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
  ParagraphIndent->0,
  TabSpacings->2.1,
  CounterIncrements->"Lemma",
- FontFamily->Baskerville,
+ FontFamily->"Latin Modern Math",
  FontSize->14,
  FontWeight->Normal,
  FontSlant->Plain,
@@ -929,9 +938,10 @@ Cell[StyleData["Remark", StyleDefinitions -> "Text"],
      "Text"], Inherited}, {Inherited, Inherited}},
  CellFrameLabelMargins->{{10, 0}, {1, 0}},
  TextJustification->0,
+ LineSpacing->{1.5, 0},
  ParagraphIndent->0,
  TabSpacings->2.1,
- FontFamily->Baskerville,
+ FontFamily->"Latin Modern Math",
  FontSize->14,
  FontWeight->Normal,
  FontSlant->Plain],
@@ -992,7 +1002,7 @@ ClosingAutoSave->True,
 ClosingSaveDialog->False,
 Saveable->True,
 WindowSize->{718, 855},
-WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+WindowMargins->{{76, Automatic}, {Automatic, 32}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 PrivateNotebookOptions->{"JournalStyle"->"NumberedNote",
@@ -1014,7 +1024,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Tabela", 30768, 1008}
+ {"Tabela", 31052, 1018}
  }
 *)
 (*NotebookFileOutline
@@ -1171,7 +1181,7 @@ Cell[20592, 644, 114, 2, 38, 94, 1, "StyleData", "Item3Numbered", "Printout",
 Cell[CellGroupData[{
 Cell[20755, 652, 114, 2, 49, "Section",
  CellID->1154436234],
-Cell[20872, 656, 282, 10, 1, 40, 0, "StyleData", "PageBreak", "Printout"],
+Cell[20872, 656, 282, 10, 4, 40, 0, "StyleData", "PageBreak", "Printout"],
 Cell[21157, 668, 134, 4, 36, 30, 0, "StyleData", "RemarkLabel", "All",
  StyleMenuListing->None],
 Cell[21294, 674, 302, 10, 58, 31, 0, "StyleData", "EmphasisText", "All",
@@ -1186,62 +1196,62 @@ Cell[21773, 695, 421, 13, 44, 28, 0, "StyleData", "Reference", "All",
 Cell[22197, 710, 86, 1, 44, 86, 1, "StyleData", "Reference", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[22320, 716, 737, 20, 37, 54, 0, "StyleData", "Theorem", "All"],
-Cell[23060, 738, 82, 1, 37, 82, 1, "StyleData", "Theorem", "Printout"]
+Cell[22320, 716, 782, 22, 37, 54, 0, "StyleData", "Theorem", "All"],
+Cell[23105, 740, 82, 1, 37, 82, 1, "StyleData", "Theorem", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23179, 744, 733, 20, 37, 52, 0, "StyleData", "Axiom", "All"],
-Cell[23915, 766, 76, 0, 37, 76, 0, "StyleData", "Axiom", "Printout"]
+Cell[23224, 746, 756, 21, 37, 52, 0, "StyleData", "Axiom", "All"],
+Cell[23983, 769, 76, 0, 37, 76, 0, "StyleData", "Axiom", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24028, 771, 738, 21, 39, 52, 0, "StyleData", "Proof", "All",
+Cell[24096, 774, 792, 23, 37, 52, 0, "StyleData", "Proof", "All",
  CounterIncrements->"Proof"],
-Cell[24769, 794, 76, 0, 39, 76, 0, "StyleData", "Proof", "Printout"]
+Cell[24891, 799, 76, 0, 37, 76, 0, "StyleData", "Proof", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24882, 799, 753, 21, 39, 57, 0, "StyleData", "Definition", "All",
+Cell[25004, 804, 785, 22, 37, 57, 0, "StyleData", "Definition", "All",
  CellID->826547224],
-Cell[25638, 822, 109, 2, 39, 88, 1, "StyleData", "Definition", "Printout",
+Cell[25792, 828, 109, 2, 37, 88, 1, "StyleData", "Definition", "Printout",
  CellID->1951041930]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[25784, 829, 711, 20, 39, 54, 0, "StyleData", "Example", "All"],
-Cell[26498, 851, 103, 2, 39, 82, 1, "StyleData", "Example", "Printout",
+Cell[25938, 835, 743, 21, 37, 54, 0, "StyleData", "Example", "All"],
+Cell[26684, 858, 103, 2, 37, 82, 1, "StyleData", "Example", "Printout",
  CellID->1472158200]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[26638, 858, 779, 22, 39, 55, 0, "StyleData", "Solution", "All",
+Cell[26824, 865, 811, 23, 37, 55, 0, "StyleData", "Solution", "All",
  CounterIncrements->"Solution",
  CellID->1873841830],
-Cell[27420, 882, 105, 2, 39, 84, 1, "StyleData", "Solution", "Printout",
+Cell[27638, 890, 105, 2, 37, 84, 1, "StyleData", "Solution", "Printout",
  CellID->1403770313]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[27562, 889, 764, 22, 39, 52, 0, "StyleData", "Lemma", "All",
+Cell[27780, 897, 796, 23, 37, 52, 0, "StyleData", "Lemma", "All",
  CounterIncrements->"Lemma",
  CellID->628380021],
-Cell[28329, 913, 76, 0, 39, 76, 0, "StyleData", "Lemma", "Printout"]
+Cell[28579, 922, 76, 0, 37, 76, 0, "StyleData", "Lemma", "Printout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28442, 918, 645, 18, 39, 53, 0, "StyleData", "Remark", "All"],
-Cell[29090, 938, 78, 0, 39, 78, 0, "StyleData", "Remark", "Printout"]
+Cell[28692, 927, 677, 19, 37, 53, 0, "StyleData", "Remark", "All"],
+Cell[29372, 948, 78, 0, 37, 78, 0, "StyleData", "Remark", "Printout"]
 }, Open  ]],
-Cell[29183, 941, 128, 3, 64, 51, 0, "StyleData", "Code", "All",
+Cell[29465, 951, 128, 3, 64, 51, 0, "StyleData", "Code", "All",
  MenuSortingValue->10000,
  MenuCommandKey->None],
 Cell[CellGroupData[{
-Cell[29336, 948, 175, 6, 41, 29, 0, "StyleData", "InlineCell", "All",
+Cell[29618, 958, 175, 6, 41, 29, 0, "StyleData", "InlineCell", "All",
  MenuSortingValue->10000],
-Cell[29514, 956, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
+Cell[29796, 966, 105, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout"]
 }, Open  ]],
-Cell[29634, 961, 111, 3, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
+Cell[29916, 971, 111, 3, 57, 36, 0, "StyleData", "InlineCellEditing", "All",
  MenuSortingValue->10000],
-Cell[29748, 966, 76, 2, 35, 27, 0, "StyleData", "Graphics", "All"],
-Cell[29827, 970, 120, 3, 38, 28, 0, "StyleData", "Hyperlink", "All"],
-Cell[29950, 975, 32, 0, 40, 32, 0, "StyleData", "GenericButton", "All"],
-Cell[29985, 977, 103, 3, 38, 28, 0, "StyleData", "ButtonBox", "All",
+Cell[30030, 976, 76, 2, 35, 27, 0, "StyleData", "Graphics", "All"],
+Cell[30109, 980, 120, 3, 38, 28, 0, "StyleData", "Hyperlink", "All"],
+Cell[30232, 985, 32, 0, 40, 32, 0, "StyleData", "GenericButton", "All"],
+Cell[30267, 987, 103, 3, 38, 28, 0, "StyleData", "ButtonBox", "All",
  MenuSortingValue->10000],
-Cell[30091, 982, 100, 3, 38, 25, 0, "StyleData", "Button", "All",
+Cell[30373, 992, 100, 3, 38, 25, 0, "StyleData", "Button", "All",
  MenuSortingValue->10000]
 }, Open  ]]
 }, Open  ]]

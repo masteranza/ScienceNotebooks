@@ -65,15 +65,35 @@ Item[KeyEvent["r", Modifiers -> {Control}],
              MessageDialog[
   DynamicModule[{}, 1, 
    Initialization :> (NotebookClose@EvaluationNotebook[];
-     Module[{m,p,eqs,eqs2,ret},
+     Module[{m,p,eqs,eqs2,ret,styles},
      m = SystemDialogInput["FileOpen", ".nb"];
      If[(m =!= $Canceled), 
      ret = 0;
-     eqs = Cases[First@Get[m], Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[], CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
-	 eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // DisplayForm)) &, eqs];
+     eqs = Cases[First@Get[m], 
+   Cell[BlankSequence[], Alternatives["Equation","EquationNumbered","Definition", "Example", "Text", "Theorem", "Figure", "Table", "Item1", "Item1Numbered","Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[], 
+    CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
+eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // 
+        DisplayForm)) &, eqs];
+styles = ReplaceAll[
+   eqs, {Cell[BlankSequence[], Alternatives["Equation", "EquationNumbered"], 
+      BlankNullSequence[], BlankNullSequence[]] -> LightGray, 
+    Cell[BlankSequence[], Alternatives["Section","Subsection","Subsubsection","Subsubsubsection"], 
+      BlankNullSequence[], BlankNullSequence[]] -> LightBlue, 
+    Cell[BlankSequence[], "Definition", BlankNullSequence[], 
+      BlankNullSequence[]] -> LightRed,
+    Cell[BlankSequence[], "Example", BlankNullSequence[], 
+      BlankNullSequence[]] -> LightGreen,
+    Cell[BlankSequence[], "Theorem", BlankNullSequence[], 
+      BlankNullSequence[]] -> LightGray,
+    Cell[BlankSequence[], "Proof", BlankNullSequence[], 
+      BlankNullSequence[]] -> LightOrange,
+    Cell[BlankSequence[], "Solution", BlankNullSequence[], 
+      BlankNullSequence[]] -> LightPink,
+    Cell[BlankSequence[], BlankNullSequence[], 
+      BlankNullSequence[]] -> White}];
 	 If[eqs2 != {},
        DialogInput[{ListPicker[Dynamic[p], eqs2, 
-          AppearanceElements -> All, Multiselection -> False, Appearance -> "Frameless", Background -> White], 
+          AppearanceElements -> All, Multiselection -> False, Appearance -> "Frameless", Background -> {styles}], 
          DefaultButton[DialogReturn[ret = First@p]]}, 
         WindowTitle -> "Pick equation"];
        If[(ret != 0),
