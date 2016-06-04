@@ -49,12 +49,40 @@ Item[KeyEvent["y", Modifiers -> {Control}],
     ],
 
 Item[KeyEvent["e", Modifiers -> {Control}], 
-        FrontEndExecute @ Module[{nb, t},
+        FrontEndExecute @ Module[{nb, t, cell, color},
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
             t = NotebookRead[SelectedNotebook[]];
             If[StringQ[t],
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["EquationNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
+            cell = NotebookRead[First[Cells[EvaluationNotebook[], CellTags -> {t}]]];
+            cellstyle= ReplaceAll[cell, {
+            Cell[BlankSequence[], "Equation", BlankNullSequence[]] -> "Equation", 
+            Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[]] -> "EquationNumbered", 
+    		Cell[BlankSequence[], "Definition", BlankNullSequence[]]-> "Definition",
+    		Cell[BlankSequence[], "Example", BlankNullSequence[]] -> "Example",
+    		Cell[BlankSequence[], "Exercise", BlankNullSequence[]] -> "Exercise",
+    		Cell[BlankSequence[], "Theorem", BlankNullSequence[]] -> "Theorem",
+    		Cell[BlankSequence[], "Proof", BlankNullSequence[]] -> "Proof",
+    		Cell[BlankSequence[], "Solution", BlankNullSequence[]] -> "Solution",
+    		Cell[BlankSequence[], "Lemma", BlankNullSequence[]] -> "Lemma",
+    		Cell[BlankSequence[], "Axiom", BlankNullSequence[]] -> "Axiom"
+    		Cell[BlankSequence[], "Remark", BlankNullSequence[]] -> "Remark"
+    		}];
+    		color = ReplaceAll[cell, {
+   			Cell[BlankSequence[], "Equation", BlankNullSequence[]] -> RGBColor[1, 1, 1],
+            Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[]] -> RGBColor[1, 1, 1],
+    		Cell[BlankSequence[], "Definition", BlankNullSequence[]]-> RGBColor[0.95, 0.5, 0.5],
+    		Cell[BlankSequence[], "Example", BlankNullSequence[]] -> RGBColor[0.6, 0.9, 0.6],
+    		Cell[BlankSequence[], "Exercise", BlankNullSequence[]] -> RGBColor[0.95, 0.95, 0.1],
+    		Cell[BlankSequence[], "Theorem", BlankNullSequence[]] -> RGBColor[0.2, 0.2, 0.2],
+    		Cell[BlankSequence[], "Proof", BlankNullSequence[]] -> RGBColor[0.3, 0.3, 1],
+    		Cell[BlankSequence[], "Solution", BlankNullSequence[]] -> RGBColor[0.65, 0.2, 0.45],
+    		Cell[BlankSequence[], "Lemma", BlankNullSequence[]] -> RGBColor[0.4, 1, 0.85],
+    		Cell[BlankSequence[], "Axiom", BlankNullSequence[]] -> RGBColor[1, 0.3, 0.3],
+    		Cell[BlankSequence[], "Remark", BlankNullSequence[]] -> RGBColor[0.3, 0.3, 0.3]
+    		}];
+
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox[cellstyle, t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle->{Background->RGBColor[1, 1, 1],CellFrameColor -> color, CellFrame -> 2}, Tooltip -> Map[DynamicBox[RowBox[Flatten[{CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]]}]], UpdateInterval -> Infinity] & , {t}]]]];
         ],
         MenuEvaluator -> Automatic 
     ],
@@ -70,27 +98,21 @@ Item[KeyEvent["r", Modifiers -> {Control}],
      If[(m =!= $Canceled), 
      ret = 0;
      eqs = Cases[First@Get[m], 
-   Cell[BlankSequence[], Alternatives["Equation","EquationNumbered","Definition", "Example", "Text", "Theorem", "Figure", "Table", "Item1", "Item1Numbered","Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[], 
+   Cell[BlankSequence[], Alternatives["Equation","EquationNumbered","Definition", "Example", "Exercise", "Text", "Theorem", "Figure", "Table", "Item1", "Item1Numbered","Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[], 
     CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
 eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // 
         DisplayForm)) &, eqs];
 styles = ReplaceAll[
-   eqs, {Cell[BlankSequence[], Alternatives["Equation", "EquationNumbered"], 
-      BlankNullSequence[], BlankNullSequence[]] -> LightGray, 
-    Cell[BlankSequence[], Alternatives["Section","Subsection","Subsubsection","Subsubsubsection"], 
-      BlankNullSequence[], BlankNullSequence[]] -> LightBlue, 
-    Cell[BlankSequence[], "Definition", BlankNullSequence[], 
-      BlankNullSequence[]] -> LightRed,
-    Cell[BlankSequence[], "Example", BlankNullSequence[], 
-      BlankNullSequence[]] -> LightGreen,
-    Cell[BlankSequence[], "Theorem", BlankNullSequence[], 
-      BlankNullSequence[]] -> LightGray,
-    Cell[BlankSequence[], "Proof", BlankNullSequence[], 
-      BlankNullSequence[]] -> LightOrange,
-    Cell[BlankSequence[], "Solution", BlankNullSequence[], 
-      BlankNullSequence[]] -> LightPink,
-    Cell[BlankSequence[], BlankNullSequence[], 
-      BlankNullSequence[]] -> White}];
+   eqs, {
+   	Cell[BlankSequence[], Alternatives["Equation", "EquationNumbered"], BlankNullSequence[]] -> LightGray, 
+    Cell[BlankSequence[], Alternatives["Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[]] -> LightBlue, 
+    Cell[BlankSequence[], "Definition", BlankNullSequence[]] -> LightRed,
+    Cell[BlankSequence[], "Example", BlankNullSequence[]] -> LightGreen,
+    Cell[BlankSequence[], "Exercise", BlankNullSequence[]] -> LightYellow,
+    Cell[BlankSequence[], "Theorem", BlankNullSequence[]] -> LightGray,
+    Cell[BlankSequence[], "Proof", BlankNullSequence[]] -> LightBlue,
+    Cell[BlankSequence[], "Solution", BlankNullSequence[]] -> LightPink,
+    Cell[BlankSequence[], BlankNullSequence[]] -> White}];
 	 If[eqs2 != {},
        DialogInput[{ListPicker[Dynamic[p], eqs2, 
           AppearanceElements -> All, Multiselection -> False, Appearance -> "Frameless", Background -> {styles}], 
@@ -100,10 +122,10 @@ styles = ReplaceAll[
        NotebookWrite[InputNotebook[], 
         ButtonBox[
          First@MapThread[
-           DynamicBox[
+           DynamicBox[RowBox[Flatten[{
              CellStrip[
               First@Cases[First@Get[#1], 
-                Cell[BlankNullSequence[], CellTags -> #2, BlankNullSequence[]], Infinity]], 
+                Cell[BlankNullSequence[], CellTags -> #2, BlankNullSequence[]], Infinity]]}]], 
              UpdateInterval -> Infinity] &, {{m}, {ret}}], 
          BaseStyle -> {"Hyperlink", Larger}, 
          Tooltip -> FileNameTake[m], 
