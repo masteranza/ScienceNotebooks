@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     59402,       1286]
-NotebookOptionsPosition[     59086,       1270]
-NotebookOutlinePosition[     59472,       1287]
-CellTagsIndexPosition[     59429,       1284]
+NotebookDataLength[     60121,       1298]
+NotebookOptionsPosition[     59805,       1282]
+NotebookOutlinePosition[     60191,       1299]
+CellTagsIndexPosition[     60148,       1296]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -557,18 +557,6 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
               RowBox[{"StyleBox", "[", "D_String", "]"}], "\[RuleDelayed]", 
               "D"}], ",", "\[IndentingNewLine]", 
              RowBox[{
-              RowBox[{"(", 
-               RowBox[{
-                RowBox[{"FormBox", "[", 
-                 RowBox[{"C__", ",", " ", "TraditionalForm"}], "]"}], "|", 
-                RowBox[{"FormBox", "[", 
-                 RowBox[{"C__", ",", " ", "TextForm"}], "]"}]}], ")"}], 
-              "\[RuleDelayed]", 
-              RowBox[{"(", 
-               RowBox[{"\"\<[$]\>\"", "<>", 
-                RowBox[{"ToTex", "[", "C", "]"}], "<>", "\"\<[/$] \>\""}], 
-               ")"}]}], ",", "\[IndentingNewLine]", 
-             RowBox[{
               RowBox[{"RowBox", "[", 
                RowBox[{"{", "C__String", "}"}], "]"}], "\[RuleDelayed]", 
               RowBox[{"StringJoin", "@", "C"}]}], ",", "\[IndentingNewLine]", 
@@ -607,6 +595,7 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                 RowBox[{"BoxData", "[", "data_", "]"}], ",", "___"}], "]"}], 
               "\[RuleDelayed]", " ", "data"}]}], "\[IndentingNewLine]", 
             "}"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Extracting data... (2/3)\>\"", "]"}], 
       ";", "\[IndentingNewLine]", 
       RowBox[{"PrintToConsole", "[", 
@@ -677,11 +666,13 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                     RowBox[{"Opacity", "[", "1.0", "]"}]}], "}"}], "]"}], ",",
                      "R"}], "}"}], ",", "D"}], "}"}], ",", "E"}], "]"}], 
                     "]"}], "]"}], "<>", "\"\<a.png\>\""}], ",", 
-                  RowBox[{"Graphics", "[", 
-                   RowBox[{
+                  RowBox[{"Cell", "[", 
+                   RowBox[{"BoxData", "[", 
+                    RowBox[{"GraphicsBox", "[", 
+                    RowBox[{
                     RowBox[{"{", 
-                    RowBox[{"C", ",", "D"}], "}"}], ",", "E"}], "]"}]}], 
-                 "]"}]}], "<>", "\"\<\\\">::<img src=\\\"\>\"", "<>", 
+                    RowBox[{"C", ",", "D"}], "}"}], ",", "E"}], "]"}], "]"}], 
+                   "]"}]}], "]"}]}], "<>", "\"\<\\\">::<img src=\\\"\>\"", "<>", 
                RowBox[{"FileNameTake", "@", 
                 RowBox[{"Export", "[", 
                  RowBox[{
@@ -703,8 +694,10 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                     RowBox[{"Opacity", "[", "1.0", "]"}]}], "}"}], "]"}], ",",
                      "R"}], "}"}], ",", "D"}], "}"}], ",", "E"}], "]"}], 
                     "]"}], "]"}], "<>", "\"\<.png\>\""}], ",", 
-                  RowBox[{"Graphics", "[", 
-                   RowBox[{
+                  RowBox[{"Cell", "[", 
+                   RowBox[{"BoxData", "[", 
+                    RowBox[{"GraphicsBox", "[", 
+                    RowBox[{
                     RowBox[{"{", 
                     RowBox[{"C", ",", 
                     RowBox[{"{", 
@@ -715,9 +708,21 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]",
                     RowBox[{"RGBColor", "[", 
                     RowBox[{"0.88", ",", "1", ",", "0.88"}], "]"}], ",", 
                     RowBox[{"Opacity", "[", "1.0", "]"}]}], "}"}], "]"}], ",",
-                     "R"}], "}"}], ",", "D"}], "}"}], ",", "E"}], "]"}]}], 
-                 "]"}]}], "<>", "\"\<\\\">}}\>\""}]}], ",", 
-             "\[IndentingNewLine]", 
+                     "R"}], "}"}], ",", "D"}], "}"}], ",", "E"}], "]"}], 
+                    "]"}], "]"}]}], "]"}]}], "<>", "\"\<\\\">}}\>\""}]}], ",",
+              "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"FormBox", "[", 
+                 RowBox[{"C__", ",", " ", "TraditionalForm"}], "]"}], "|", 
+                RowBox[{"FormBox", "[", 
+                 RowBox[{"C__", ",", " ", "TextForm"}], "]"}]}], ")"}], 
+              "\[RuleDelayed]", 
+              RowBox[{"(", 
+               RowBox[{"\"\<[$]\>\"", "<>", 
+                RowBox[{"ToTex", "[", "C", "]"}], "<>", "\"\<[/$] \>\""}], 
+               ")"}]}], ",", "\[IndentingNewLine]", 
              RowBox[{
               RowBox[{"FormBox", "[", 
                RowBox[{
@@ -1266,7 +1271,14 @@ PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH;python \
    3.666711123420342*^9, 3.6667111421698027`*^9}, {3.666711449258236*^9, 
    3.666711452533702*^9}, {3.666711504139539*^9, 3.666711504370193*^9}, {
    3.669207135212615*^9, 3.669207166290824*^9}, {3.669207198369543*^9, 
-   3.6692072037275877`*^9}, {3.670472984656197*^9, 3.6704729867815*^9}}]
+   3.6692072037275877`*^9}, {3.670472984656197*^9, 3.6704729867815*^9}, {
+   3.674549213926531*^9, 3.6745492249322*^9}, {3.674549272622463*^9, 
+   3.674549304298717*^9}, 3.674549401880896*^9, {3.674549993071929*^9, 
+   3.6745500365576887`*^9}, {3.6745500729978867`*^9, 3.674550098289062*^9}, {
+   3.6745501597356377`*^9, 3.6745501687570457`*^9}, {3.6745519781678457`*^9, 
+   3.6745519811541243`*^9}, {3.6745528725877953`*^9, 3.674552884036889*^9}, {
+   3.674553096081375*^9, 3.674553112306526*^9}, {3.674553211698689*^9, 
+   3.674553218047468*^9}}]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{718, 855},
@@ -1286,7 +1298,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 58525, 1248, 4673, "Input",
+Cell[557, 20, 59244, 1260, 4707, "Input",
  InitializationCell->True]
 }
 ]

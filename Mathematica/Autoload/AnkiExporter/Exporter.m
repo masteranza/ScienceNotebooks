@@ -90,17 +90,18 @@ CounterBox["EquationNumbered",N_]:> ("[$]"<>ToTex[First@Cases[data,Cell[name_,__
 CounterBox[___]:>"",
 StyleBox[D__,Background->None,E___]:>StyleBox[D,E],
 StyleBox[D_String]:>D,
-(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>("[$]"<>ToTex[C]<>"[/$] "),
 RowBox[{C__String}]:>StringJoin@C,
 Cell[TextData[data_],style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
 Cell[BoxData[data_],style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
 Cell[data_,style_,___, CellID->Nr_Integer]:> {Nr ,data,style},
 Cell[BoxData[data_],___]:> data
 }]];
+
 ShowStatus["Extracting data... (2/3)"];
 PrintToConsole["Identified Ank collection folder "<>tempPicPath];
 dat=Block[{pic=0},ReplaceAll[dat,{
-FormBox[GraphicsBox[{C__,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[0.6]}],R__RectangleBox},D___},E___],__]|GraphicsBox[{C__,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[0.6]}],R__RectangleBox},D___},E___]:>"{{c1::<img src=\""<>FileNameTake@Export[tempPicPath<>"f"<>ToString[++pic]<>ToString[Hash[Graphics[{C,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[1.0]}],R},D},E]]]<>"a.png",Graphics[{C,D},E]]<>"\">::<img src=\""<>FileNameTake@Export[tempPicPath<>"f"<>ToString[pic]<>ToString[Hash[Graphics[{C,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[1.0]}],R},D},E]]]<>".png",Graphics[{C,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[1.0]}],R},D},E]]<>"\">}}",
+FormBox[GraphicsBox[{C__,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[0.6]}],R__RectangleBox},D___},E___],__]|GraphicsBox[{C__,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[0.6]}],R__RectangleBox},D___},E___]:>"{{c1::<img src=\""<>FileNameTake@Export[tempPicPath<>"f"<>ToString[++pic]<>ToString[Hash[Graphics[{C,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[1.0]}],R},D},E]]]<>"a.png",Cell[BoxData[GraphicsBox[{C,D},E]]]]<>"\">::<img src=\""<>FileNameTake@Export[tempPicPath<>"f"<>ToString[pic]<>ToString[Hash[Graphics[{C,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[1.0]}],R},D},E]]]<>".png",Cell[BoxData[GraphicsBox[{C,{FaceForm[{RGBColor[0.88,1,0.88],Opacity[1.0]}],R},D},E]]]]<>"\">}}",
+(FormBox[C__, TraditionalForm]|FormBox[C__, TextForm]):>("[$]"<>ToTex[C]<>"[/$] "),
 FormBox[GraphicsBox[___],___]:> "",GraphicsBox[___]:> "",
 FormBox[RowBox[{E___,TraditionalForm}],___]:> FormBox[RowBox[{E}],TraditionalForm]
 }]];
