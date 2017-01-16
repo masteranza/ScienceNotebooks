@@ -19,6 +19,7 @@
 
 
 
+(* ::Input::Initialization:: *)
 BeginPackage["PackageUtils`"];
 
 ShowStatus::usage="Prints the message in the status bar";
@@ -32,9 +33,20 @@ CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
 StyleButton::usage="Creates a button to create a style Cell of a specific name";
 WordStats::usage="Prints current notebook word/character stats in Status area";
 GetReal::usage="Returns items with real coefs";
+SearchBar::usage="Search bar";
 Begin["`Private`"];
 
 DuplicateNotebook[]:=NotebookPut@NotebookGet[EvaluationNotebook[]];
+
+SearchBar[]:=ExpressionCell[Row@{InputField[Dynamic[search],String,ContinuousAction->True],"  ",Button["search",sdm],"  ",Button["show all",sa]}];
+
+sa:=DynamicModule[{nb},nb=EvaluationNotebook[];
+SetOptions[#,CellOpen->True,ShowCellBracket->True]&/@Cells[nb]]
+
+sdm:=DynamicModule[{nb},nb=EvaluationNotebook[];
+NotebookFind[nb,search,All];
+SetOptions[#,CellOpen->False,ShowCellBracket->False]&/@Cells[nb];
+SetOptions[#,CellOpen->True,ShowCellBracket->True]&/@SelectedCells[nb];]
 
 PrintToConsole[expr_]:=(SetSelectedNotebook[MessagesNotebook[]];
 NotebookWrite[SelectedNotebook[],Cell[BoxData[ToBoxes[expr]],"Print"]]);

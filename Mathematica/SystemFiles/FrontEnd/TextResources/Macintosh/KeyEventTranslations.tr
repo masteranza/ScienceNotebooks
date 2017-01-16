@@ -48,6 +48,18 @@ Item[KeyEvent["y", Modifiers -> {Control}],
         MenuEvaluator -> Automatic 
     ],
 
+Item[KeyEvent["s", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, t},
+            nb = InputNotebook[];
+            SelectionMove[nb, All, Expression];
+            t = NotebookRead[SelectedNotebook[]];
+            If[StringQ[t],
+			NotebookWrite[nb, 
+			Replace[FromCharacterCode[Join[ToCharacterCode[ToString[t]], {824}]], FromCharacterCode[{8706, 824}] :> OverlayBox[{"\<\[PartialD]\>", "\</\>"}]]
+			]];
+        ],
+        MenuEvaluator -> Automatic 
+    ],
 Item[KeyEvent["e", Modifiers -> {Control}], 
         FrontEndExecute @ Module[{nb, t, cell, color},
             nb = InputNotebook[];
@@ -97,7 +109,7 @@ Item[KeyEvent["r", Modifiers -> {Control}],
      m = SystemDialogInput["FileOpen", ".nb"];
      If[(m =!= $Canceled), 
      ret = 0;
-     eqs = Cases[First@Get[m], 
+     eqs = Cases[First@Get[m, Path-> {NotebookDirectory[]}], 
    Cell[BlankSequence[], Alternatives["Equation","EquationNumbered","Definition", "Example", "Exercise", "Text", "Theorem", "Figure", "Table", "Item1", "Item1Numbered","Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[], 
     CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
 eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // 
@@ -124,7 +136,7 @@ styles = ReplaceAll[
          First@MapThread[
            DynamicBox[RowBox[Flatten[{
              CellStrip[
-              First@Cases[First@Get[#1], 
+              First@Cases[First@Get[#1, Path-> {NotebookDirectory[]}], 
                 Cell[BlankNullSequence[], CellTags -> #2, BlankNullSequence[]], Infinity]]}]], 
              UpdateInterval -> Infinity] &, {{m}, {ret}}], 
          BaseStyle -> {"Hyperlink", Larger}, 
