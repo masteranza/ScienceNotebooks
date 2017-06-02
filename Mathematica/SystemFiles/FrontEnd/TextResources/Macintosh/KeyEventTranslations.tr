@@ -51,12 +51,8 @@ Item[KeyEvent["y", Modifiers -> {Control}],
 Item[KeyEvent["s", Modifiers -> {Control}], 
         FrontEndExecute @ Module[{nb, t},
             nb = InputNotebook[];
-            SelectionMove[nb, All, Expression];
-            t = NotebookRead[SelectedNotebook[]];
-            If[StringQ[t],
-			NotebookWrite[nb, 
-			Replace[FromCharacterCode[Join[ToCharacterCode[ToString[t]], {824}]], FromCharacterCode[{8706, 824}] :> OverlayBox[{"\<\[PartialD]\>", "\</\>"}]]
-			]];
+            
+			NotebookWrite[nb,FromCharacterCode[{824}]]
         ],
         MenuEvaluator -> Automatic 
     ],
