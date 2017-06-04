@@ -12,7 +12,7 @@ Installation is a bit long and OSX only, but the process will be improved if eno
 
 #### OSX El Capitan notice
 
-For those using the math fuctionality: Be sure to install the newest MacTeX. 
+For those using the math functionality: Be sure to install the newest MacTeX. 
 
 ### Mathematica
 The most expensive part of the setup, install a trial if you don't have the full version: https://www.wolfram.com/mathematica/trial/
