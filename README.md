@@ -1,4 +1,4 @@
-#Mathematica Anki
+# Mathematica Anki
 
 It's a project focusing on collecting knowledge in a systematic and efficient way.
 Why create flash cards when you can make your notes and then highlight the stuff that's important thus creating flash cards.
@@ -14,21 +14,21 @@ Installation is a bit long and OSX only, but the process will be improved if eno
 
 For those using the math fuctionality: Be sure to install the newest MacTeX. 
 
-###Mathematica
+### Mathematica
 The most expensive part of the setup, install a trial if you don't have the full version: https://www.wolfram.com/mathematica/trial/
 
-###Homebrew 
+### Homebrew 
 In case you don't have it already:
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-###Hardlink (optional, but useful)
+### Hardlink (optional, but useful)
     brew install hardlink-osx
     
-###Anki app
+### Anki app
 Download and install the standalone: http://ankisrs.net
 
-###Anki source (you need to have both!)
+### Anki source (you need to have both!)
 Get it from here: https://github.com/dae/anki/archive/master.zip
 
 Download it and unpack it in "XXX", you'll not be able to run ./runanki straight away, first install and run the following:
@@ -52,14 +52,14 @@ Now, copy (or hardlink):
 
 **Note**: you can make use of `hardlinker.sh` just check your paths and make sure you don't have your own stuff in Mathematica Stylesheets folder and others.
 
-###Mathematica packages and styles
+### Mathematica packages and styles
 Go to `~/Library/Mathematica/` and copy (or hardlink) there files from the `Mathematica` directory to corresponding subfolders.
 
-###Root Knowledge folder
+### Root Knowledge folder
 You can make it anywhere, but I recommend you putting it inside dropbox folder:
 
 `mkdir ~/Dropbox/Knowledge`
-###Important 2 steps in Mathematica
+### Important 2 steps in Mathematica
 
 First: Open `~/Library/Mathematica/Applications/AnkiExporter/Exporter.nb` and set appropriate paths:
 
@@ -69,7 +69,7 @@ First: Open `~/Library/Mathematica/Applications/AnkiExporter/Exporter.nb` and se
 Second: Open Mathematica and open Options Inspector (CMD+O) and search for `CreateCellID`, set the Scope to `Global Preferences` and set it to `True`
 Make sure you don't forget about this step - otherwise Export to Anki won't work.
 
-###Useful Mathematica settings (optional)
+### Useful Mathematica settings (optional)
 In Preferences -> System uncheck `Create and maintain version specific front end preferences`
 and either set Notebook Security to `Always trust` or add the Knowledge folder to Trusted Directories.
 
@@ -82,7 +82,7 @@ To keep a backup of your Anki database you can save it on Dropbox
 
 
 
-##Test ride
+## Test ride
 
 Create a new notebook, go to and set a stylesheet through Format->Stylesheet->Science. You should see a docked cell (kind of a toolbar).
 
@@ -103,7 +103,7 @@ Here's the final efect:
 
 To learn some more basics try opening `Using Mathematica-Anki.pdf`
 
-##Currently supported styles
+## Currently supported styles
 
 Not all cells get exported to Anki currently supported include:
 
@@ -121,7 +121,7 @@ Not all cells get exported to Anki currently supported include:
 
 More tutorials coming soon.  (The system is poorly documented, but already has the capabilities to export equations and pictures as it was built out of my own need).
 
-##Troubleshooting and notes
+## Troubleshooting and notes
 
 Highlighting shortcut apears not to work when caps-lock is enabled.
 Someone might think that CMD+SHIFT+D will do the job and try to press it... and then BANG! You've just learned that it doesn't work, but instead splits the selected text into another cell. Serendipity.
