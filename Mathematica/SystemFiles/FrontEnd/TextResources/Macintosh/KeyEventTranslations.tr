@@ -282,7 +282,7 @@ Item[KeyEvent["p", Modifiers -> {Control,Command}],
 
 (* Typesetting motion commands *)
 	Item[KeyEvent[" ", Modifiers -> {Control}], "MoveExpressionEnd"], 
-	Item[KeyEvent["Tab", Modifiers -> {Shift}, CellClass -> BoxFormData], "MovePreviousPlaceHolder"], 
+	Item[KeyEvent["Tab", Modifiers -> {Shift}], "MovePreviousPlaceHolder"], 
 	Item[KeyEvent["s", Modifiers -> {Command, Control}, CellClass -> BoxFormData], "MovePreviousExpression"], 
 	Item[KeyEvent["S", Modifiers -> {Control, Command, Shift}, CellClass -> BoxFormData], "MoveNextExpression"], 
 	Item[KeyEvent["S", Modifiers -> {Control, Shift}, CellClass -> BoxFormData], "DeleteNextExpression"], 
@@ -320,15 +320,13 @@ Item[KeyEvent["p", Modifiers -> {Control,Command}],
 	Item[KeyEvent["Copy"], "Copy"], 
 	Item[KeyEvent["Paste"], Paste[After]], 
 	Item[KeyEvent["Undo"], "Undo"],
+	Item[KeyEvent["z", Modifiers -> {Command}], "Undo"],
 	Item[KeyEvent["Redo"], "Redo"],
+	Item[KeyEvent["z", Modifiers -> {Shift, Command}], "Redo"],
 	Item[KeyEvent["y", Modifiers -> {Command}], "Redo"],
-	Item[KeyEvent["Help", Modifiers->{Shift}], SelectionHelpDialog[False]]
+	Item[KeyEvent["Help", Modifiers->{Shift}], SelectionHelpDialog[False]],
 	Item[KeyEvent["F1", Modifiers->{Shift}], SelectionHelpDialog[False]],
-	Item[KeyEvent["F2"], FrontEnd`CompleteSelection[True]],
-	
-(* Unsupported features and examples *)
-	Item[KeyEvent["v", Modifiers -> {Control}], "SelectionSpeakSummary"],
-	Item[KeyEvent["v", Modifiers -> {Control, Shift}], "SelectionSpeak"]
+	Item[KeyEvent["F2"], FrontEnd`CompleteSelection[True]]
 }]
 
 

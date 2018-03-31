@@ -3964,6 +3964,367 @@ Cell[BoxData[
  CellFrameMargins->0,
  CellFrameColor->RGBColor[
   0.1411764705882353, 0.592156862745098, 0.7176470588235294]],
+  
+  
+  
+(*****************************************)
+(*           Script Resources            *)
+(*****************************************)
+  
+"ScriptToolbar" -> {
+ Cell[BoxData[
+ DynamicModuleBox[{PackageToolbar`Private`functionlabel$$, 
+  PackageToolbar`Private`sectionlabel$$, 
+  PackageToolbar`Private`space$$, PackageToolbar`Private`selectcell$$,
+   PackageToolbar`Private`getMenuContents$$, 
+  PackageToolbar`Private`flattenCellGroups$$, 
+  PackageToolbar`Private`menuContents$$, 
+  PackageToolbar`Private`fEnabled$$ = True, 
+  PackageToolbar`Private`sEnabled$$ = True}, 
+  DynamicBox[PanelBox[
+    GridBox[{{
+       TemplateBox[{
+         StyleBox[
+          
+          GraphicsBox[{}, ImageSize -> {5, 0}, BaselinePosition -> 
+           Baseline], "CacheGraphics" -> False], 
+         DynamicBox[
+          ToBoxes[
+           Row[{
+             ActionMenu[
+              Button[
+               Row[{
+                 Dynamic[
+                  FEPrivate`FrontEndResource[
+                  "PackageToolbarText", "ButtonFunctions"]], 
+                 Pane[
+                  RawBoxes[
+                   StyleBox[
+                    DynamicBox[
+                    FEPrivate`ImportImage[
+                    
+                    FrontEnd`FileName[{"Toolbars", "Script"}, 
+                    "MenuIcon.png"]]], Magnification -> 0.5]], 
+                  BaselinePosition -> (Bottom -> Baseline)]}, "  "], 
+               BaseStyle -> "ControlStyleLightBold", Appearance -> 
+               FEPrivate`FrontEndResource[
+                "MUnitExpressions", "ButtonAppearances"], 
+               FrameMargins -> {{10, 10}, {0, 0}}, 
+               ImageSize -> {Automatic, 28}], 
+              Map[
+              PackageToolbar`Private`functionlabel$$[#] :> 
+               PackageToolbar`Private`selectcell$$[
+                 EvaluationNotebook[], 
+                 Part[#, 2]]& , 
+               If[
+                MatchQ[PackageToolbar`Private`menuContents$$, {
+                  Blank[List], 
+                  Blank[]}], 
+                First[PackageToolbar`Private`menuContents$$], {}]], 
+              BaselinePosition -> (Center -> Center), Enabled :> 
+              Dynamic[
+                FEPrivate`SameQ[
+                PackageToolbar`Private`fEnabled$$, True]], Appearance -> 
+              None, MenuAppearance -> "Dropdown"], 
+             ActionMenu[
+              Button[
+               Row[{
+                 Dynamic[
+                  FEPrivate`FrontEndResource[
+                  "PackageToolbarText", "ButtonSections"]], 
+                 Pane[
+                  RawBoxes[
+                   StyleBox[
+                    DynamicBox[
+                    FEPrivate`ImportImage[
+                    
+                    FrontEnd`FileName[{"Toolbars", "Script"}, 
+                    "MenuIcon.png"]]], Magnification -> 0.5]], 
+                  BaselinePosition -> (Bottom -> Baseline)]}, "  "], 
+               BaseStyle -> "ControlStyleLightBold", Appearance -> 
+               FEPrivate`FrontEndResource[
+                "MUnitExpressions", "ButtonAppearances"], 
+               FrameMargins -> {{10, 10}, {0, 0}}, 
+               ImageSize -> {Automatic, 28}], 
+              Map[
+              PackageToolbar`Private`sectionlabel$$[#] :> (
+                PackageToolbar`Private`selectcell$$[
+                  EvaluationNotebook[], 
+                  Part[#, 2]]; FrontEndTokenExecute[
+                  EvaluationNotebook[], "SelectionOpenAllGroups"])& , 
+               
+               If[
+                MatchQ[PackageToolbar`Private`menuContents$$, {
+                  Blank[], 
+                  Blank[List]}], 
+                Last[PackageToolbar`Private`menuContents$$], {}]], 
+              BaselinePosition -> (Center -> Center), Appearance -> 
+              None, Enabled :> Dynamic[
+                FEPrivate`SameQ[
+                PackageToolbar`Private`sEnabled$$, True]], 
+              MenuAppearance -> "Dropdown"]}, 
+            Spacer[5]], StandardForm]], 
+         TooltipBox[
+          ButtonBox[
+           TemplateBox[{"  ", "\"  \"", 
+             PaneBox[
+              StyleBox[
+               DynamicBox[
+                FEPrivate`ImportImage[
+                 
+                 FrontEnd`FileName[{"Toolbars", "Package"}, 
+                  "UpdateIcon.png"]]], Magnification -> 0.5], 
+              BaselinePosition -> Scaled[0.1]], 
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource[
+               "PackageToolbarText", "ButtonUpdate"], StandardForm]]},
+             "RowWithSeparators"], 
+           ButtonFunction :> (PackageToolbar`Private`menuContents$$ = 
+            PackageToolbar`Private`getMenuContents$$[
+              EvaluationNotebook[]]), Evaluator -> Automatic, Method -> 
+           "Queued", BaselinePosition -> (Center -> Center), 
+           Appearance -> 
+           FEPrivate`FrontEndResource[
+            "MUnitExpressions", "ButtonAppearances"], 
+           ImageSize -> {Automatic, 28}, 
+           FrameMargins -> {{10, 10}, {0, 0}}, BaseStyle -> 
+           "ControlStyleLight"], 
+          DynamicBox[
+           ToBoxes[
+            FEPrivate`FrontEndResource[
+            "PackageToolbarText", "TooltipUpdate"], StandardForm]]]}, 
+        "RowWithSeparator"], 
+       TemplateBox[{
+         StyleBox[
+          
+          GraphicsBox[{}, ImageSize -> {10, 0}, BaselinePosition -> 
+           Baseline], "CacheGraphics" -> False], 
+         StyleBox[
+          TemplateBox[{"  ", "\"  \"", 
+            CheckboxBox[
+             Dynamic[
+              
+              CurrentValue[$FrontEnd, {
+               "DebuggerSettings", "DebuggerEnabled"}]]], 
+            DynamicBox[
+             ToBoxes[
+              FEPrivate`FrontEndResource[
+              "PackageToolbarText", "LabelDebug"], StandardForm]]}, 
+           "RowWithSeparators"], "ControlStyleLight"], 
+         TooltipBox[
+          ButtonBox[
+           TemplateBox[{"  ", "\"  \"", 
+             PaneBox[
+              StyleBox[
+               DynamicBox[
+                FEPrivate`ImportImage[
+                 
+                 FrontEnd`FileName[{"Toolbars", "Script"}, 
+                  "RunIcon.png"]]], Magnification -> 0.5], 
+              BaselinePosition -> Scaled[0.1]], 
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource[
+               "PackageToolbarText", "ButtonRunPackage"], 
+               StandardForm]]}, "RowWithSeparators"], ButtonFunction :> 
+           FrontEnd`FrontEndToken[
+             FrontEnd`ButtonNotebook[], "EvaluateInitialization"], 
+           Enabled -> Dynamic[
+             FEPrivate`UnsameQ[FEPrivate`$LicenseType, "Player"]], 
+           Evaluator -> None, ImageSize -> {Automatic, 28}, 
+           FrameMargins -> {{10, 10}, {0, 0}}, Appearance -> 
+           FEPrivate`FrontEndResource[
+            "MUnitExpressions", "ButtonAppearances"], BaseStyle -> 
+           "ControlStyleLightBold", Method -> "Preemptive"], 
+          DynamicBox[
+           ToBoxes[
+            FEPrivate`FrontEndResource[
+            "PackageToolbarText", "TooltipRunPackage"], 
+            StandardForm]]]}, "RowWithSeparator"]}}, 
+     GridBoxAlignment -> {
+      "Columns" -> {Left, Right}, "Rows" -> {{Baseline}}}, AutoDelete -> 
+     False, GridBoxItemSize -> {"Columns" -> {{
+          Scaled[0.5]}}, "Rows" -> {{Automatic}}}], Appearance -> 
+    FEPrivate`FrontEndResource[
+     "MUnitExpressions", "StaticToolbarNinePatch"], 
+    ImageSize -> {Automatic, 50}, FrameMargins -> {{12, 12}, {8, 10}},
+     ImageMargins -> -1],
+   ImageSizeCache->{757., {21., 27.}}],
+  DynamicModuleValues:>{},
+  Initialization:>(PackageToolbar`Private`functionlabel$$[{
+       Pattern[PackageToolbar`Private`boxes, 
+        Blank[]], 
+       Pattern[PackageToolbar`Private`k, 
+        Blank[]]}] := RawBoxes[PackageToolbar`Private`boxes]; 
+   PackageToolbar`Private`sectionlabel$$[{
+       Cell[
+        Pattern[PackageToolbar`Private`str$, 
+         Blank[]], 
+        Pattern[PackageToolbar`Private`sty$, 
+         Blank[]], 
+        Pattern[PackageToolbar`Private`args$, 
+         BlankNullSequence[]]], 
+       Pattern[PackageToolbar`Private`k$, 
+        Blank[]]}] := ToString[
+      StringForm["`2` `1`", PackageToolbar`Private`str$, 
+       PackageToolbar`Private`space$$[PackageToolbar`Private`sty$]]]; 
+   PackageToolbar`Private`space$$["Title"] = ""; 
+   PackageToolbar`Private`space$$["Chapter"] = ""; 
+   PackageToolbar`Private`space$$["Section"] = "  "; 
+   PackageToolbar`Private`space$$["Subsection"] = "    "; 
+   PackageToolbar`Private`space$$["Subsubsection"] = "      "; 
+   PackageToolbar`Private`space$$[
+      Blank[]] := ""; PackageToolbar`Private`selectcell$$[
+      Pattern[PackageToolbar`Private`nb, 
+       Blank[]], 
+      Pattern[PackageToolbar`Private`k, 
+       Blank[]]] := FrontEndExecute[{
+       FrontEnd`SelectionMove[
+       PackageToolbar`Private`nb, Before, Notebook, AutoScroll -> 
+        False], 
+       FrontEnd`SelectionMove[
+       PackageToolbar`Private`nb, Next, Cell, 
+        PackageToolbar`Private`k, AutoScroll -> False], 
+       FrontEnd`FrontEndToken[
+       PackageToolbar`Private`nb, "OpenSelectionParents"]}]; 
+   PackageToolbar`Private`flattenCellGroups$$[
+      Pattern[PackageToolbar`Private`nb$, 
+       Blank[NotebookObject]]] := 
+    PackageToolbar`Private`flattenCellGroups$$[
+      NotebookGet[PackageToolbar`Private`nb$]]; 
+   PackageToolbar`Private`flattenCellGroups$$[
+      Notebook[
+       Pattern[PackageToolbar`Private`cells$, 
+        Blank[]], 
+       Pattern[PackageToolbar`Private`opts$, 
+        BlankNullSequence[]]]] := Notebook[
+      PackageToolbar`Private`flattenCellGroups$$[
+      PackageToolbar`Private`cells$], PackageToolbar`Private`opts$]; 
+   PackageToolbar`Private`flattenCellGroups$$[{
+       Pattern[PackageToolbar`Private`c$, 
+        BlankSequence[Cell]]}] := Flatten[
+      Map[
+      PackageToolbar`Private`flattenCellGroups$$, {
+       PackageToolbar`Private`c$}]]; 
+   PackageToolbar`Private`flattenCellGroups$$[
+      Cell[
+       CellGroupData[{
+         Pattern[PackageToolbar`Private`c$, 
+          BlankSequence[Cell]]}, 
+        BlankNullSequence[]], 
+       BlankNullSequence[]]] := 
+    Map[PackageToolbar`Private`flattenCellGroups$$, {
+      PackageToolbar`Private`c$}]; 
+   PackageToolbar`Private`flattenCellGroups$$[
+      Pattern[PackageToolbar`Private`c, 
+       Blank[]]] := PackageToolbar`Private`c; 
+   PackageToolbar`Private`getMenuContents$$[
+      Pattern[PackageToolbar`Private`nb$, 
+       Blank[]]] := 
+    Module[{PackageToolbar`Private`cellList$, 
+       PackageToolbar`Private`fPos$, PackageToolbar`Private`sPos$, 
+       PackageToolbar`Private`funcs$, PackageToolbar`Private`secs$}, 
+      PackageToolbar`Private`cellList$ = First[
+         PackageToolbar`Private`flattenCellGroups$$[
+         PackageToolbar`Private`nb$]]; 
+      PackageToolbar`Private`fPos$ = 
+       Position[PackageToolbar`Private`cellList$, 
+         Alternatives[
+          RowBox[{
+            Except[
+             RowBox[{
+               Blank[], "[", 
+               RowBox[{"[", 
+                 Blank[], "]"}], "]"}], 
+             Alternatives[
+              RowBox[{
+                Blank[], "[", "]"}], 
+              RowBox[{
+                Blank[], "[", 
+                Blank[], "]"}], 
+              RowBox[{
+                Blank[], "[", 
+                Condition[
+                 Pattern[PackageToolbar`Private`s, 
+                  Blank[String]], 
+                 StringMatchQ[PackageToolbar`Private`s, Whitespace]], 
+                
+                Blank[], 
+                Condition[
+                 Pattern[PackageToolbar`Private`s, 
+                  Blank[String]], 
+                 StringMatchQ[PackageToolbar`Private`s, Whitespace]], 
+                "]"}], 
+              RowBox[{
+                RowBox[{
+                  Blank[], "[", 
+                  Blank[], "]"}], "/;", 
+                BlankNullSequence[]}]]], 
+            BlankNullSequence[], 
+            Alternatives["=", ":=", "^:=", "^="], 
+            BlankNullSequence[]}], 
+          RowBox[{
+            Blank[], 
+            BlankNullSequence[], 
+            Alternatives[":=", "^:="], 
+            BlankNullSequence[]}], 
+          RowBox[{
+            Blank[], 
+            BlankNullSequence[], 
+            Alternatives["=", ":=", "^:=", "^="], 
+            RowBox[{
+              Alternatives["Function", "Compile"], 
+              BlankNullSequence[]}]}]]]; 
+      PackageToolbar`Private`sPos$ = 
+       Position[PackageToolbar`Private`cellList$, 
+         Cell[
+          Blank[], 
+          Alternatives[
+          "Title", "Chapter", "Section", "Subsection", 
+           "Subsubsection"], 
+          BlankNullSequence[]]]; 
+      PackageToolbar`Private`funcs$ = Map[First, 
+         Split[
+          Sort[
+           Apply[{
+             Part[PackageToolbar`Private`cellList$, 
+              SlotSequence[1], 1, 1], #}& , 
+            PackageToolbar`Private`fPos$, {1}]]]]; 
+      PackageToolbar`Private`secs$ = Apply[{
+          Part[PackageToolbar`Private`cellList$, 
+           SlotSequence[1]], #}& , PackageToolbar`Private`sPos$, {1}]; 
+      PackageToolbar`Private`fEnabled$$ = 
+       PackageToolbar`Private`funcs$ =!= {}; 
+      PackageToolbar`Private`sEnabled$$ = 
+       PackageToolbar`Private`secs$ =!= {}; {
+       PackageToolbar`Private`funcs$, PackageToolbar`Private`secs$}]; 
+   PackageToolbar`Private`menuContents$$ = 
+    PackageToolbar`Private`getMenuContents$$[
+      EvaluationNotebook[]]),
+  UnsavedVariables:>{
+   PackageToolbar`Private`menuContents$$}]], "SystemDockedCell",
+ CellFrame->{{0, 0}, {2, 0}},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0.2588, 0.5098, 0.12155]],
+ Cell[BoxData[
+ DynamicBox[ToBoxes[
+   CurrentValue[
+    EvaluationNotebook[], "NotebookScriptShebangLine"], StandardForm],
+  
+  ImageSizeCache->{50., {2., 9.}}]], "Text",
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {0, 0}},
+ CellFrameMargins->{{16, 0}, {5, 5}},
+ FontFamily->Dynamic[
+   CurrentValue[{StyleHints, "CodeFont"}]],
+ FontSize->12,
+ FontWeight->Plain,
+ FontColor->RGBColor[1, 1, 1],
+ Background->RGBColor[0.2588, 0.5098, 0.12155]]
+},
+
+
 
 
 
@@ -7117,7 +7478,7 @@ Cell[BoxData[GridBox[{
    "Columns" -> {Automatic, Fit}}]], "SystemDockedCell"],
 
 "StudentBar" -> Cell[],
-
+           
 "PlayerBar" -> FEPrivate`FrontEndResource["FEExpressions", "PluginToolbar"],
 
 "HomeEditionBar" -> Cell[BoxData[GridBox[{
@@ -8410,140 +8771,231 @@ licensingterms.html"]}},
      FEPrivate`FrontEndResource["CellInsertionMenu", "Tooltip"], 
      BaseStyle -> {"CellInsertionMenu"}]], 
    BaselinePosition -> Top -> Baseline]], 
- CellMargins -> {{17, 0}, {0, 0}}, Magnification -> 1]
+ CellMargins -> {{17, 0}, {0, 0}}, Magnification -> 1, DynamicUpdating -> True]
 }
+@|
+@@resource ConnectSecondaryLinks
+ToExpression[
+ "FrontEnd`Private`ConnectSecondaryLinks[FrontEnd`Private`serviceLink_,FrontEnd`Private`preemptiveLink_,FrontEnd`Private`protocol_String]:=
+  PreemptProtect[
+    FrontEnd`Private`secondaryLinkNames={FrontEnd`Private`serviceLink,FrontEnd`Private`preemptiveLink};
+    Block[{MathLink`CreateFrontEndLink},
+      MathLink`CreateFrontEndLink[]:= Module[{FrontEnd`Private`link},
+      FrontEnd`Private`link=LinkCreate[First@FrontEnd`Private`secondaryLinkNames,LinkMode->Connect];
+      MathLink`LinkSetPrintFullSymbols[FrontEnd`Private`link,True];
+      FrontEnd`Private`secondaryLinkNames=Rest[FrontEnd`Private`secondaryLinkNames];
+      FrontEnd`Private`link];
+      MathLink`CreateFrontEndLinks[];
+    ];
+    
+    If[Head@MathLink`$ServiceLink === LinkObject && Head@MathLink`$PreemptiveLink === LinkObject,
+      LinkActivate[MathLink`$ServiceLink];
+      LinkActivate[MathLink`$PreemptiveLink];
+      FE`setSystemOptions[\"LegacyFrontEnd\"->False];
+      MathLink`AddSharingLink[MathLink`$PreemptiveLink,
+        MathLink`AllowPreemptive->True,
+        MathLink`LinkSwitchPre->FrontEnd`Private`PreContextSwitchIn,
+        MathLink`LinkSwitchPost->FrontEnd`Private`PreContextSwitchOut];
+      MathLink`SetTerminating[$ParentLink,True];
+    ];
+    
+    Clear[FrontEnd`Private`secondaryLinkNames]; 
+  ]"]
 @|
 @@resource DangerousSymbols
 {
+  "$Context",
+  "$ContextPath",
+  "AbsoluteOptions",
+  "AddUsers",
+  "Begin",
+  "BeginPackage",
+  "BinaryRead",
+  "BinaryReadList",
+  "BinaryWrite",
+  "ChangeOptions",
+  "ChannelListen",
+  "ChannelListener",
+  "ChannelListeners",
+  "ChannelSend",
+  "ChannelSubscribers",
+  "Clear",
+  "ClearAll",
+  "ClearAttributes",
+  "ClearPermissions",
+  "ClearSystemCache",
+  "CloudAccountData",
+  "CloudDeploy",
+  "CloudExport",
+  "CloudExpression",
+  "CloudEvaluate",
+  "CloudGet",
+  "CloudImport",
+  "CloudLoggingData",
+  "CloudObjects",
+  "CloudPublish",
+  "CloudPut",
+  "CloudSave",
+  "CloudShare",
+  "CloudSubmit",
+  "CloudSymbol",
+  "CompiledFunction",
+  "CompressedData",
+  "CopyDatabin",
+  "CopyDirectory",
+  "CopyFile",
+  "CopyToClipboard",
+  "CreateChannel",
+  "CreateDatabin",
+  "CreateDirectory",
+  "CreateFile",
+  "CreatePermissionsGroup",
+  "CreateTemporary",
+  "CurrentValue",
+  "DatabinAdd",
+  "DatabinRemove",
+  "Databins",
+  "DatabinUpload",
+  "Decrypt",
+  "Definition",
+  "DeleteChannel",
+  "DeleteCloudExpression",
+  "DeleteDirectory",
+  "DeleteFile",
+  "DeviceOpen",
+  "DeviceRead",
+  "DeviceReadBuffer",
+  "DeviceReadLatest",
+  "DeviceReadList",
+  "DeviceReadTimeSeries",
+  "Devices",
+  "DeviceStreams",
+  "DeviceWrite",
+  "DeviceWriteBuffer",
+  "DownValues",
+  "DumpSave",
+  "Encrypt",
+  "End",
+  "EndPackage",
+  "Export",
+  "FileNames",
+  "FilePrint",
+  "FileSystemMap",
+  "FileSystemScan",
+  "Find",
+  "FindChannels",
+  "FindDevices",
+  "FindList",
+  "FrontEndExecute",
+  "FrontEndTokenExecute",
+  "FullOptions",
+  "Get",
+  "HostLookup",
+  "Import",
+  "ImportString",
+  "Install",
+  "InstallJava",
+  "InstallNET",
+  "InstallR",
+  "InstallService",
+  "JavaNew",
+  "KillProcess",
+  "LinkCreate",
+  "LinkConnect",
+  "LinkLaunch",
+  "LinkOpen",
+  "LinkRead",
+  "LinkReadHeld",
+  "LinkService",
+  "LinkWrite",
+  "LinkWriteHeld",
+  "LoadClass",
+  "LoadJavaClass",
+  "LoadNETAssembly",
+  "LoadNETType",
+  "LocalCache",
+  "LocalObject",
+  "LocalObjects",
+  "LocalSymbol",
+  "MakeExpression",
+  "MetaInformation",
+  "Names",
+  "Needs",
+  "NETNew",
+  "NotebookCreate",
+  "NotebookDelete",
+  "NotebookEvaluate",
+  "NotebookFind",
+  "NotebookGet",
+  "NotebookLocate",
+  "NotebookOpen",
+  "NotebookPrint",
+  "NotebookPut",
+  "NotebookRead",
+  "NotebookWrite",
+  "OpenAppend",
+  "OpenRead",
+  "OpenTemporary",
 	"OpenWrite",
-	"OpenAppend",
-	"OpenTemporary",
+  "Options",
+  "OwnValues",
+  "Paste",
+  "Permissions",
+  "PermissionsGroup",
+  "PermissionsGroups",
+  "ProcessConnection",
+  "Processes",
+  "ProcessInformation",
+  "ProcessStatus",
+  "Put",
+  "PutAppend",
+  "Read",
+  "ReadLine",
+  "ReadList",
+  "ReadString",
+  "Reinstall",
+  "ReinstallNET",
+  "Remove",
+  "RemoveChannelListener",
+  "RemoveUsers",
+  "RenameDirectory",
+  "RenameFile",
+  "REvaluate",
+  "RFunction",
+  "RLinkResourcesInstall",
+  "Run",
+  "RunProcess",
+  "RunThrough",
+  "Save",
+  "SelectionEvaluate",
+  "SendMail",
+  "SendMessage",
+  "SetAttributes",
+  "SetOptions",
+  "SetFileDate",
+  "SetUsers",
+  "Skip",
+  "SocketConnect",
+  "Splice",
+  "Stack",
+  "StackComplete",
+  "StartProcess",
+  "StringToStream",
+  "SubValues",
+  "Symbol",
+  "SystemOpen",
+  "Trace",
+  "TracePrint",
+  "ToExpression",
+  "Typeset`MakeExpression",
+  "Typeset`ToExpression",
+  "Uncompress",
+  "Unprotect",
+  "UpValues",
+  "URLSave",
+  "URLSaveAsynchronous",
 	"Write",
-	"WriteString",
-	"Export",
-	"BinaryWrite",
-	"Get",
-	"Put",
-	"PutAppend",
-	"Save",
-	"DumpSave",
-	"Needs",
-	"Read",
-	"ReadList",
-	"OpenRead",
-	"Import",
-	"ImportString",
-	"StringToStream",
-	"BinaryRead",
-	"BinaryReadList",
-	"DeleteFile",
-	"CopyFile",
-	"RenameFile",
-	"SetFileDate",
-	"FileNames",
-	"FilePrint",
-	"CopyDirectory",
-	"CreateDirectory",
-	"DeleteDirectory",
-	"RenameDirectory",
-	"Find",
-	"FindList",
-	"Splice",
-	
-	"LinkRead",
-	"LinkReadHeld",
-	"LinkWrite",
-	"LinkWriteHeld",
-	"LinkLaunch",
-	"LinkCreate",
-	"LinkConnect",
-	"LinkOpen",
-	"Install",
-	"Reinstall",
-	
-	"InstallJava",
-	"JavaNew",
-	"LoadJavaClass",
-	"LoadClass",
-	"InstallNET",
-	"ReinstallNET",
-	"LoadNETAssembly",
-	"LoadNETType",
-	"NETNew",
-	"InstallR",
-	"RLinkResourcesInstall",
-	"REvaluate",
-	"RFunction",
-	
-	"SocketConnect",
-	"HostLookup",
-
-	"NotebookRead",
-	"NotebookWrite",
-	"NotebookPut",
-	"NotebookDelete",
-	"NotebookFind",
-	"NotebookGet",
-	"NotebookLocate",
-	"NotebookCreate",
-	"NotebookPrint",
-	"FrontEndExecute",
-	"FrontEndTokenExecute",
-	"NotebookOpen",
-	"SystemOpen",
-	"SendMail",
-	"InstallService",
-	
-	"ToExpression",
-	"MakeExpression",
-	"CompressedData",
-	"Uncompress",
-	"Names",
-	"Symbol",
-	"Typeset`MakeExpression",
-	"Typeset`ToExpression",
-	"CompiledFunction",
-	
-	"Begin",
-	"End",
-	"BeginPackage",
-	"EndPackage",
-	"$Context",
-	"$ContextPath",
-	
-	"Trace",
-	"TracePrint",
-	"Definition",
-	"OwnValues",
-	"DownValues",
-	"UpValues",
-	"SubValues",
-	"Stack",
-	"StackComplete",
-	
-	"SetOptions",
-	"Options",
-	"AbsoluteOptions",
-	"FullOptions",
-	"CurrentValue",
-
-	"SetAttributes",
-	"Unprotect",
-	"ClearAttributes",
-	"ClearAll",
-	"ClearSystemCache",
-	"Clear",
-	"Remove",
-		
-	"Run",
-	"RunThrough",
-	"CopyToClipboard",
-	"Paste",
-	"NotebookEvaluate",
-	"SelectionEvaluate",
-	
-	"ChannelListen",
-  	"ChannelSend"
+	"WriteString"
 }
 
 @|
@@ -8635,6 +9087,7 @@ licensingterms.html"]}},
 	Internal`SetValueNoTrack,
 	Internal`ApplyColorFunction,
 	Internal`MessageMenu,
+	BoxForm`EmbedSummaryLabel,
 	BoxForm`ImageTag,
 	BoxForm`RemapValue,
 	BoxForm`RemapVariable,
