@@ -1156,7 +1156,7 @@ Cell[StyleData["InlineCell"],
  ScriptLevel->0,
  MenuSortingValue->10000,
  FontFamily->"Latin Modern Math",
- FontSize->17,ExpressionUUID->"b3022bcb-b395-4a8d-aa6f-5caba068d50f"],
+ FontSize->16,ExpressionUUID->"b3022bcb-b395-4a8d-aa6f-5caba068d50f"],
 
 Cell[StyleData["InlineCell", "Printout", StyleDefinitions -> StyleData[
  "InlineCell"]],
@@ -1166,7 +1166,7 @@ Cell[StyleData["InlineCell", "Printout", StyleDefinitions -> StyleData[
 Cell[StyleData["InlineCellEditing"],
  MenuSortingValue->10000,
  FontFamily->"Latin Modern Math",
- FontSize->17,ExpressionUUID->"e0190b76-3a48-42ab-9491-cbda8cd1fee2"],
+ FontSize->16,ExpressionUUID->"e0190b76-3a48-42ab-9491-cbda8cd1fee2"],
 
 Cell[StyleData["Graphics"],
  FontFamily->"Latin Modern Roman",
@@ -1480,11 +1480,11 @@ Cell[40236, 1145, 160, 2, 43, 84, 1, "StyleData", "Critique", "Printout",Express
  CellID->1534778854]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[40433, 1152, 230, 6, 41, 29, 0, "StyleData", "InlineCell", "All",ExpressionUUID->"b3022bcb-b395-4a8d-aa6f-5caba068d50f",
+Cell[40433, 1152, 230, 6, 40, 29, 0, "StyleData", "InlineCell", "All",ExpressionUUID->"b3022bcb-b395-4a8d-aa6f-5caba068d50f",
  MenuSortingValue->10000],
-Cell[40666, 1160, 160, 2, 41, 88, 1, "StyleData", "InlineCell", "Printout",ExpressionUUID->"b5b93e7e-ee75-4ca7-a7c6-0a2df7478c31"]
+Cell[40666, 1160, 160, 2, 40, 88, 1, "StyleData", "InlineCell", "Printout",ExpressionUUID->"b5b93e7e-ee75-4ca7-a7c6-0a2df7478c31"]
 }, Open  ]],
-Cell[40841, 1165, 166, 3, 57, 36, 0, "StyleData", "InlineCellEditing", "All",ExpressionUUID->"e0190b76-3a48-42ab-9491-cbda8cd1fee2",
+Cell[40841, 1165, 166, 3, 56, 36, 0, "StyleData", "InlineCellEditing", "All",ExpressionUUID->"e0190b76-3a48-42ab-9491-cbda8cd1fee2",
  MenuSortingValue->10000],
 Cell[41010, 1170, 277, 6, 50, 27, 0, "StyleData", "Graphics", "All",ExpressionUUID->"30ed7891-72bb-49cb-b605-bea11ab14fa0"],
 Cell[41290, 1178, 301, 7, 50, 29, 0, "StyleData", "Graphics3D", "All",ExpressionUUID->"6904cf54-398e-4fca-a767-4c876ae1b19d"],
