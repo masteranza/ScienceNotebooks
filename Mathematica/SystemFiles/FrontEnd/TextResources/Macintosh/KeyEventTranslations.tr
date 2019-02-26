@@ -6,7 +6,8 @@
 *)
 
 EventTranslations[{
-
+Item[KeyEvent["6", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SuperscriptBox["\[InvisiblePrefixScriptBase]", "\[Placeholder]"], "\[SelectionPlaceholder]"}]]}]],
+Item[KeyEvent["-", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SubscriptBox["\[InvisiblePrefixScriptBase]", "\[Placeholder]"], "\[SelectionPlaceholder]"}]]}]],
 Item[KeyEvent["d", Modifiers -> {Control}],
      FrontEndExecute[
         FrontEnd`NotebookWrite[
@@ -263,7 +264,7 @@ Item[KeyEvent["p", Modifiers -> {Control,Command}],
 	Item[KeyEvent["4", Modifiers -> {Control}], "Below"],
 	Item[KeyEvent["Keypad4", Modifiers -> {Control}], "Below"], 
 	Item[KeyEvent[",", Modifiers -> {Control}], "NewColumn"], 
-	Item[KeyEvent["Return", Modifiers -> {Control}], "NewRow"], 
+	Item[KeyEvent["M", Modifiers -> {Control}], "NewRow"], 
 	Item[KeyEvent["9", Modifiers -> {Control}], "CreateInlineCell"], 
 	Item[KeyEvent["(", Modifiers -> {Control}], "CreateInlineCell"], 
 	Item[KeyEvent["Keypad9", Modifiers -> {Control}], "CreateInlineCell"], 
