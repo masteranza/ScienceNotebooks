@@ -91,7 +91,7 @@ Item[KeyEvent["e", Modifiers -> {Control}],
     		Cell[BlankSequence[], "Remark", BlankNullSequence[]] -> RGBColor[0.3, 0.3, 0.3]
     		}];
 
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox[cellstyle, t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle->{Magnification -> FrontEnd`AbsoluteCurrentValue[
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox[cellstyle, t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle->{Magnification -> FrontEnd`CurrentValue[
      EvaluationNotebook[], Magnification], Background->RGBColor[1, 1, 1],CellFrameColor -> color, CellFrame -> 2}, Tooltip -> Map[DynamicBox[RowBox[Flatten[{CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]]}]], UpdateInterval -> Infinity] & , {t}]]]];
         ],
         MenuEvaluator -> Automatic 

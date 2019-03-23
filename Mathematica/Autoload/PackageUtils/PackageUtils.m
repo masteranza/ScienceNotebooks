@@ -26,7 +26,9 @@ ShowStatus::usage="Prints the message in the status bar";
 EmbedNote::usage="Embedes cells with tag from a notebook located at path";
 DuplicateNotebook::usage="Makes a copy of the notebook";
 PrintToConsole::usage="Send to console";
+HideOutput::usage="Hides output cells";
 MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
+CloseCollapsed::usage="Closes collapsed Section group cells \[Dash] good for retaining numbering during export of single sections";
 CodeVisible::usage = "Shows/Hides code and cell tags";PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
 CreateTOC::usage="Create table of contents";
 CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
@@ -35,19 +37,54 @@ WordStats::usage="Prints current notebook word/character stats in Status area";
 GetReal::usage="Returns items with real coefs";
 SearchBar::usage="Search bar";
 Outline::usage ="Displays document outline";
+WorkingEnv::usage="Show all cell metadata and Input cells";
+PrintoutEnv::usage="Hides all cell metadata and Input cells";
+Recent::usage="Shows recently opened notebooks";
+IncludePath::usage="Includes a path to $Path variable, for easy loading";
 Begin["`Private`"];
 
 DuplicateNotebook[]:=NotebookPut@NotebookGet[EvaluationNotebook[]];
-Outline[]:=CreatePalette[Dynamic[Refresh[Column@Cases[NotebookRead/@Cells[SelectedNotebook[],CellStyle->{"Section","Subsection","Subsubsection","Subsubsubsection"}],Cell[name_,style:"Section"|"Subsection"|"Subsubsection"|"Subsubsubsection",___,CellID->id_,___]:>Button[StringRepeat["#",Ceiling[(StringLength[style]/ 3)]-2]<>" "<>name ,(
+
+CloseCollapsed[]:=(SetOptions[#[[1]],CellOpen->!(CellOpen/.Options[#[[1]],CellOpen])];&/@Select[{#,CurrentValue[#,"CellGroupOpen"]}&/@Cells[EvaluationNotebook[], CellStyle -> "Section"],#[[2]]==$Failed||#[[2]]==Closed&];)
+
+Outline[]:=
+pal=CreatePalette[
+Dynamic[
+Refresh[
+Column[
+First/@
+DeleteCases[
+Cases[
+NotebookRead@{#},
+Cell[name_,style:"Title"|"Section"|"Subsection"|"Subsubsection"|"Subsubsubsection",___,CellID->id_,___]:>
+Button[DisplayForm[
+If[style=="Title",Cell[Style[name,TextAlignment->Axis],"Text",(*FontWeight\[Rule]Bold,*) FontSize->16,TextAlignment->Center,CellSize->{Full,Automatic}],
+Short@Row[{Style[(StringPadLeft["     ",IntegerPart[(StringLength[style]-7)/3]*2]<>ToString[CurrentValue[#,{"CounterValue",style}]]<>". "),Bold,13],Cell[name,"Text",FontSize->13,CellSize->{Full,Automatic}]},ImageSize->Full,BaseStyle->"Text"]
+]
+],(
 NotebookFind[SelectedNotebook[],id,All,CellID];
 SelectionMove[SelectedNotebook[],All,CellGroup];
 FrontEndTokenExecute["OpenCloseGroup"];
-), Appearance->"Frameless"]],UpdateInterval->1]],WindowSize->{Fit,550},WindowFloating->True, Saveable->False,WindowTitle->(WindowTitle/.AbsoluteOptions[SelectedNotebook[]])]
+), Appearance->"Frameless", Alignment->Center, ImageMargins->0, FrameMargins->{{5,0},{0,0}},Background->If[TrueQ[CurrentValue[#,"CellGroupOpen"]==Open],White,Lighter@LightGray],ImageSize->{Full,Full}]]
+&/@Cells[SelectedNotebook[],CellStyle->{"Title","Section","Subsection","Subsubsection","Subsubsubsection"}],{}],ItemSize->{30,Full},Alignment->{Center,Left}],UpdateInterval->0.5],"Temporary"],WindowSize->{Fit,650},WindowFloating->True,WindowMargins->{{Automatic,50},{Automatic,58}},WindowElements->{"VerticalScrollBar"},Saveable->False,WindowTitle->Dynamic[AbsoluteCurrentValue[SelectedNotebook[],"WindowTitle"],"Temporary",SynchronousUpdating->True]
+];
 
 SearchBar=ExpressionCell[Row@{InputField[Dynamic[search],String,ContinuousAction->True],"  ",Button["search",sdm],"  ",Button["show all",sa]}];
 
+WorkingEnv[]:=(DynamicModule[{nb},nb=SelectedNotebook[];
+SetOptions[#,CellOpen->True,ShowCellTags->True, ShowCellLabel->True,ShowCellBracket->True]&/@Cells[nb];SetOptions[EvaluationNotebook[],ScreenStyleEnvironment->"Working"]]);
+
+Recent[]:=Column[NotebooksMenu/.Options[$FrontEnd]//MapAt[ToFileName@@#[[1, ;;2]]&,{All,2}]];
+
+IncludePath[path_]:=If[Not[MemberQ[$Path,path]],$Path=Flatten[{$Path,path}]];
+
+PrintoutEnv[]:=DynamicModule[{nb},nb=SelectedNotebook[];
+SetOptions[#,ShowCellLabel->False,ShowCellTags->False,ShowCellBracket->False]&/@Cells[nb];
+SetOptions[#,CellOpen->False]&/@Cells[nb,CellStyle->"Input"];
+SetOptions[EvaluationNotebook[],ScreenStyleEnvironment->"Printout"]];
+
 sa:=DynamicModule[{nb},nb=EvaluationNotebook[];
-SetOptions[#,CellOpen->True,ShowCellBracket->True]&/@Cells[nb]]
+SetOptions[#,CellOpen->True,ShowCellLabel->True, ShowCellBracket->True]&/@Cells[nb]]
 
 sdm:=DynamicModule[{nb},nb=EvaluationNotebook[];
 NotebookFind[nb,search,All];
@@ -65,6 +102,7 @@ GetReal[sols_]:=Module[{thrd,rule},
 thrd=Thread[Variables[sols]->1];
 Pick[sols,Element[#,Reals]&/@(sols/.thrd)]
 ];
+
 CellStrip[data_]:=ReplaceRepeated[data,{Cell[c_,___]:>c,BoxData[d__]:>d,TextData[ff_]:>ff}]
 
 EmbedNote[notebookpath_,tag_]:=Block[{m},
@@ -77,6 +115,7 @@ Cases[First@Get[If[(m=FindFile[notebookpath])=!=$Failed,m,Throw["File \""<> note
 ]
 ]
 ];
+
 WordStats[]:=
 Module[{cells,dat,data,characters,words},
 cells=Cells[EvaluationNotebook[],CellStyle->{"Title","Section","Subsection","Subsubsection","Subsubsubection","Text","EquationNumbered","Equation","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered"}];
@@ -114,7 +153,6 @@ characters=ToString@Total[StringLength[#]&/@Flatten[dat]];
 ShowStatus["Counted: "<>characters<>" characters (with spaces) and " <> words<> " words"];
 ];
 
-
 MergeStyle[]:=Module[{path,child,childstyles,parent,nb,tmp,parentparent,parentstyles, old},(*find the parent stylesheet from the private stylesheet,a.k.a child*)
 If[NotebookDirectory[]===$Failed, Abort[]];
 path=ToFileName[{$UserBaseDirectory,"SystemFiles","FrontEnd","StyleSheets"}];
@@ -142,12 +180,14 @@ SetOptions[EvaluationNotebook[],ShowCellLabel->!show];
 SetOptions[EvaluationNotebook[],ShowCellTags->!show];
    Map[SetOptions[#, CellOpen -> !show] &, cells];
    ];
+
 CodeVisible[flag_] := Module[{cells,show},
    cells = Cells[EvaluationNotebook[], CellStyle -> "Input"];
 SetOptions[EvaluationNotebook[],ShowCellLabel->flag];
 SetOptions[EvaluationNotebook[],ShowCellTags->flag];
    Map[SetOptions[#, CellOpen -> flag] &, cells];
    ];
+
 CreateTOC[typeList_]:=Module[{toc,book,createCell,counter,cell,type,tag,tocreate,sel},
 sel=False;
 If[SelectedCells[]=={},
@@ -188,7 +228,7 @@ ShowStatus["Exprting PDF..."];
   nb = ToFileName[{NotebookDirectory[EvaluationNotebook[]]}, "WindowTitle" /. NotebookInformation[SelectedNotebook[]]];
   CodeVisible[codeVisible];
   Export[ nb <> ".pdf", SelectedNotebook[]];
-  nb2 = copyPath <> ToString["WindowTitle" /. NotebookInformation[SelectedNotebook[]]] <> ".pdf";
+nb2 = copyPath <> ToString["WindowTitle" /. NotebookInformation[SelectedNotebook[]]] <> ".pdf";
   If[copyPath != "", CopyFile[nb <> ".pdf", nb2]];
   CodeVisible[True];
 SystemOpen[nb<>".pdf"];
