@@ -19,6 +19,7 @@
 
 
 
+(* ::Input::Initialization:: *)
 BeginPackage["ScienceReport`",{"ErrorBarPlots`","PackageUtils`"}];
 
 RefPic::usage ="Refers to a FigureCaptionNumbered";
@@ -72,10 +73,10 @@ LinearRegressionXYError[data_?MatrixQ, errs_?MatrixQ] := Module[{n = Length[data
 bigImgSize = 550;
 smallImgSize = 350;
 
-PlotRegression[lr_, data_, errors_, labels_: {}] := Module[{dataErrors, names},
+PlotRegression[lr_, data_, errors_, labels_: {},func_:True,range_:Automatic] := Module[{dataErrors, names},
    dataErrors = MapThread[{#1, ErrorBar[#2[[1]], #2[[2]]]} &, {data, errors}];
    names = {lr[x], x*lr["ParameterConfidenceIntervals"][[2, 1]] + lr["ParameterConfidenceIntervals"][[1, 1]], x*lr["ParameterConfidenceIntervals"][[2, 2]] + lr["ParameterConfidenceIntervals"][[1, 2]]};
-   Return[Show[ErrorListPlot[dataErrors, ImageSize -> bigImgSize, Frame -> True, FrameStyle -> Gray, FrameLabel -> labels, GridLines -> Automatic, GridLinesStyle -> Directive[Gray, Dashed]], Plot[names, {x, 0, First[Last[data]]}, PlotStyle -> {Directive[Thick, Red], Directive[Dashed, Darker[Gray]], Directive[Dashed, Darker[Gray]]}, PlotLegends -> Placed[names, Above]]]]
+   Return[Show[ErrorListPlot[dataErrors,PlotMarkers->{Automatic,4},ErrorBarFunction->If[func,Function[{coords, errs}, {Opacity[0.3],Rectangle[coords+{errs[[1,1]],errs[[2,1]]},coords+{errs[[1,2]],errs[[2,2]]}]}],Automatic], ImageSize -> bigImgSize, Frame -> True, PlotRange->range,FrameStyle -> Gray, FrameLabel -> labels, GridLines -> Automatic, GridLinesStyle -> Directive[Gray, Dashed]], Plot[names, {x, 0, First[Last[data]]}, PlotStyle -> {Directive[Thick, Red], Directive[Dashed, Darker[Gray]], Directive[Dashed, Darker[Gray]]}, PlotLegends -> Placed[names, Above]]]]
    (*,TextAlignment\[Rule]Center]];*)
    ];
 

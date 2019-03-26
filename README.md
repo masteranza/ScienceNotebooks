@@ -1,85 +1,40 @@
-# Mathematica Anki
+# Mathematica Anki 2.0
 
-It's a project focusing on collecting knowledge in a systematic and efficient way.
-Why create flash cards when you can make your notes and then highlight the stuff that's important thus creating flash cards.
+
+> Thanks to AnkiConnect and recent MathJax support in Anki the installation process has been simplified! ... but beware the project is not production ready!
+
+
+The aim of this project is to collect and review knowledge in a systematic and efficient way.
+Why create flash cards when you can have beautiful notebooks with highlighted items which you'd like to remember.
+The highlighted items can then be exported to Anki as Cloze deletions with just one click.
 
 ![Example use](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen0.png)
 
 The project consists of Mathematica stylesheet and tools for creating TeX grade notebooks and Anki cards out of them. 
 
-##Installation and prerequisites 
-Installation is a bit long and OSX only, but the process will be improved if enough people will ask for it.  
+#Prerequisites
+1. Mathematica - https://www.wolfram.com/mathematica/
+2. Anki - http://ankisrs.net
+3. AnkiConnect - https://ankiweb.net/shared/info/2055492159
 
-#### OSX El Capitan notice
+## Installation
 
-For those using the math functionality: Be sure to install the newest MacTeX. 
-
-### Mathematica
-The most expensive part of the setup, install a trial if you don't have the full version: https://www.wolfram.com/mathematica/trial/
-
-### Homebrew 
-In case you don't have it already:
-
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-### Hardlink (optional, but useful)
-    brew install hardlink-osx
-    
-### Anki app
-Download and install the standalone: http://ankisrs.net
-
-### Anki source (you need to have both!)
-Get it from here: https://github.com/dae/anki/archive/master.zip
-
-Download it and unpack it in "XXX", you'll not be able to run ./runanki straight away, first install and run the following:
-
-    brew install python
-    brew install pyqt
-    brew install sip
-    ./tools/build_ui.sh
-   
-    #test run
-    ./runanki
-
-If anki runs correctly then open your profile and import MathematicaCloze.apkg to make a correct Cloze note type. You should get a temporary _SANDBOX deck - you're free to remove it, but double check if the new default note type is *MathematicaCloze* by trying to add a new card. You should see something like this: 
+1. Import MathematicaCloze.apkg to Anki. It's a special cloze note type which looks like this:
 
 ![https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png)
 
-Now, copy (or hardlink):
- `Anki/runimport` to anki source main directory (`/`) 
- `Anki/latex.py` to `/anki/` subdirectory.
- `Anki/knowledgefile.py` to `/anki/importing/` subdirectory.
+2. Go to `~/Library/Mathematica/` and copy (or symlink) files from the `Mathematica` directory to corresponding subfolders.
 
-**Note**: you can make use of `hardlinker.sh` just check your paths and make sure you don't have your own stuff in Mathematica Stylesheets folder and others.
-
-### Mathematica packages and styles
-Go to `~/Library/Mathematica/` and copy (or hardlink) there files from the `Mathematica` directory to corresponding subfolders.
-
-### Root Knowledge folder
-You can make it anywhere, but I recommend you putting it inside dropbox folder:
-
+3. Create a root `Knowledge` folder. You can make it anywhere, but I recommend you putting it inside dropbox folder:
 `mkdir ~/Dropbox/Knowledge`
-### Important 2 steps in Mathematica
 
-First: Open `~/Library/Mathematica/Applications/AnkiExporter/Exporter.nb` and set appropriate paths:
+4. Open Mathematica, Options Inspector (CMD+O) and search for `CreateCellID`, set the Scope to `Global Preferences` and set it to `True`. Make sure you don't forget about this step - otherwise we won't be able to identify Anki notes with Mathematica cells.
 
- - `~/Dropbox/Anki/Ranza/collection.media/` to your Anki database collection (if you didn't move it it's  `~/Documents/Anki/<profile-name>/collection.media/`)
- - `~/Projects/anki/runimport` to your Anki source path
+### Stuff that makes life easier (optional)
 
-Second: Open Mathematica and open Options Inspector (CMD+O) and search for `CreateCellID`, set the Scope to `Global Preferences` and set it to `True`
-Make sure you don't forget about this step - otherwise Export to Anki won't work.
-
-### Useful Mathematica settings (optional)
-In Preferences -> System uncheck `Create and maintain version specific front end preferences`
+5. In Mathematica, Preferences -> System uncheck `Create and maintain version specific front end preferences`
 and either set Notebook Security to `Always trust` or add the Knowledge folder to Trusted Directories.
-
-In Preferences -> Messages set Kernel Messages to `Print to Console` it make notebooks more tidy by printing errors and logs to a seperate notebook.
-
-###Symbolic link Anki folder to dropbox (optional)
-To keep a backup of your Anki database you can save it on Dropbox
-
-    ln -s ~/Dropbox/Anki/ ~/Documents/Anki
-
+6. In Mathematica, Preferences -> Messages set Kernel Messages to `Print to Console` it make notebooks more tidy by printing errors and logs to a seperate notebook.
 
 
 ## Test ride
@@ -124,4 +79,4 @@ More tutorials coming soon.  (The system is poorly documented, but already has t
 ## Troubleshooting and notes
 
 Highlighting shortcut apears not to work when caps-lock is enabled.
-Someone might think that CMD+SHIFT+D will do the job and try to press it... and then BANG! You've just learned that it doesn't work, but instead splits the selected text into another cell. Serendipity.
+Someone might think that CMD+SHIFT+D will do the job and try to press it... and then BANG! You've just learned that it doesn't work, but instead splits the selected text into another cell - useful. Serendipity.

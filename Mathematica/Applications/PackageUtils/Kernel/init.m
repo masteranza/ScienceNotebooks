@@ -1,3 +1,0 @@
-(* ::Package:: *)
-
-Get["PackageUtils`PackageUtils`"];
