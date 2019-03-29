@@ -58,6 +58,8 @@ ImportString[AnkiRequest["multi",res],"JSON"]];
 
 ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
+ShowStatus["Export starts"];
+PrintToConsole["Export starts"];
 TeXForm[1];
 (*System`Convert`TeXFormDump`maketex["\[LeftSkeleton]"]="\\ll ";
 System`Convert`TeXFormDump`maketex["\[RightSkeleton]"]="\\gg ";*)
@@ -68,6 +70,8 @@ System`Convert`TeXFormDump`maketex["\[CAcute]"]="\[CAcute]";
 System`Convert`TeXFormDump`maketex["\:0119"]="\:0119";
 System`Convert`TeXFormDump`maketex["\:0105"]="\:0105";
 System`Convert`TeXFormDump`maketex["\[LSlash]"]="\[LSlash]";
+System`Convert`TeXFormDump`maketex["\:017c"]="\:017c";
+System`Convert`TeXFormDump`maketex["\:017a"]="\:017a";
 (*System`Convert`TeXFormDump`maketex["&"]="\\$ ";*)
 System`Convert`TeXFormDump`maketex["~"]="\\sim ";
 (*nie zamieniaj zwyk\[LSlash]ego tekstu*)
@@ -85,7 +89,14 @@ System`Convert`CommonDump`DebugPrint["str: ",str];
 System`Convert`CommonDump`DebugPrint["CONVERTCOMMON-ConvertTextData.  Writing the string. HIJACK"];
 System`Convert`CommonDump`DebugPrint["------------------------------------------"];
 WriteString[toFormatStream,str];];
-
+(*przekieruj zwyk\[LSlash]y tekst*)
+System`Convert`CommonDump`ConvertTextData[contents_,toFormat_,toFormatStream_,conversionRules_,others___]:=Module[{cell},
+If[MatchQ[contents,Anki[_,_String]],WriteString[toFormatStream,contents/.{Anki[nr_,s_String]:>("{{c"<>ToString[nr]<>"::"<>StringReplace[s,"}}"->"} }"]<>" }} ")}];,
+System`Convert`CommonDump`DebugPrint["CONVERTCOMMON-ConvertTextData of unknown content: ",contents];
+cell=Cell[BoxData[contents],""];
+System`Convert`CommonDump`PreConvertCell[cell,toFormat,toFormatStream,conversionRules,(*System`Convert`CommonDump`*)inlineCell->True,others];
+System`Convert`CommonDump`ConvertCell[cell,toFormat,toFormatStream,conversionRules,(*System`Convert`CommonDump`*)inlineCell->True,others];
+System`Convert`CommonDump`PostConvertCell[cell,toFormat,toFormatStream,conversionRules,(*System`Convert`CommonDump`*)inlineCell->True,others];]];
 (*blokowanie zamiany na unicode wrappers - raczej nie potrzebne*)
 (*System`Convert`TeXFormDump`maketex[str_String /; StringLength[str] === 1] := (System`Convert`CommonDump`DebugPrint["------------------------------------"];
     	System`Convert`CommonDump`DebugPrint["maketex[str_String/;(StringLength@str===1)]"];
@@ -99,7 +110,8 @@ WriteString[toFormatStream,str];];
 System`Convert`TeXFormDump`maketex[Anki[nr_,boxes_]]:=(System`Convert`CommonDump`DebugPrint["------------------------------------"];
 System`Convert`CommonDump`DebugPrint["maketex[Anki[nr_, boxes__]]"];
 System`Convert`CommonDump`DebugPrint["boxes: ",boxes];
-"{{c"<>ToString[nr]<>"::"<>StringReplace[System`Convert`TeXFormDump`MakeTeX[boxes],"}}"->"} }"]<>" }} ");
+If[StringQ[boxes],"{{c"<>ToString[nr]<>"::"<>StringReplace[boxes,"}}"->"} }"]<>" }} ",
+"{{c"<>ToString[nr]<>"::"<>StringReplace[System`Convert`TeXFormDump`MakeTeX[boxes],"}}"->"} }"]<>" }} "]);
 
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
@@ -155,9 +167,10 @@ GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsec
 ShowStatus["Preparing paths..."];
 paths=(title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
-base=StringReplace[StringReplace[ImportString[ExportString[n=0;Replace[NotebookRead[#],{StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity],"TeXFragment"],
+base=StringReplace[StringReplace[ImportString[ExportString[n=0;Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity],"TeXFragment"],
 "Text"],{"\\)\\("->""}],{"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","}}"~~WhitespaceCharacter...~~"\\)"~~WhitespaceCharacter...~~"
 "~~WhitespaceCharacter...~~"\\("~~WhitespaceCharacter...~~"{{c"~~Shortest[c__]~~"::"->" \\\\ "}]&/@cells;
+PrintToConsole[base];
 (*
 dat=Block[{n=1},ReplaceRepeated[data,
 {

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     84735,       1921]
-NotebookOptionsPosition[     84115,       1900]
-NotebookOutlinePosition[     84750,       1922]
-CellTagsIndexPosition[     84707,       1919]
+NotebookDataLength[     91732,       2068]
+NotebookOptionsPosition[     91113,       2047]
+NotebookOutlinePosition[     91747,       2069]
+CellTagsIndexPosition[     91704,       2066]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -385,6 +385,10 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
       "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"separator", "=", "\"\<#\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ShowStatus", "[", "\"\<Export starts\>\"", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"PrintToConsole", "[", "\"\<Export starts\>\"", "]"}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"TeXForm", "[", "1", "]"}], ";", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
@@ -426,6 +430,14 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
        RowBox[{
        "System`Convert`TeXFormDump`maketex", "[", "\"\<\[LSlash]\>\"", "]"}], 
        "=", "\"\<\[LSlash]\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXFormDump`maketex", "[", "\"\<\:017c\>\"", "]"}], 
+       "=", "\"\<\:017c\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXFormDump`maketex", "[", "\"\<\:017a\>\"", "]"}], 
+       "=", "\"\<\:017a\>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{
@@ -543,7 +555,71 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
           "\[IndentingNewLine]", 
           RowBox[{"WriteString", "[", 
            RowBox[{"toFormatStream", ",", "str"}], "]"}], ";"}]}], "]"}]}], 
-      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"przekieruj", " ", "zwyk\[LSlash]y", " ", "tekst"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"System`Convert`CommonDump`ConvertTextData", "[", 
+        RowBox[{
+        "contents_", ",", "toFormat_", ",", "toFormatStream_", ",", 
+         "conversionRules_", ",", "others___"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", "cell", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"MatchQ", "[", 
+            RowBox[{"contents", ",", 
+             RowBox[{"Anki", "[", 
+              RowBox[{"_", ",", "_String"}], "]"}]}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"WriteString", "[", 
+             RowBox[{"toFormatStream", ",", 
+              RowBox[{"contents", "/.", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Anki", "[", 
+                  RowBox[{"nr_", ",", "s_String"}], "]"}], "\[RuleDelayed]", 
+                 RowBox[{"(", 
+                  RowBox[{"\"\<{{c\>\"", "<>", 
+                   RowBox[{"ToString", "[", "nr", "]"}], "<>", "\"\<::\>\"", "<>", 
+                   RowBox[{"StringReplace", "[", 
+                    RowBox[{"s", ",", 
+                    RowBox[{"\"\<}}\>\"", "\[Rule]", "\"\<} }\>\""}]}], "]"}],
+                    "<>", "\"\< }} \>\""}], ")"}]}], "}"}]}]}], "]"}], ";"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"System`Convert`CommonDump`DebugPrint", "[", 
+             RowBox[{
+             "\"\<CONVERTCOMMON-ConvertTextData of unknown content: \>\"", 
+              ",", "contents"}], "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"cell", "=", 
+             RowBox[{"Cell", "[", 
+              RowBox[{
+               RowBox[{"BoxData", "[", "contents", "]"}], ",", "\"\<\>\""}], 
+              "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"System`Convert`CommonDump`PreConvertCell", "[", 
+             RowBox[{
+             "cell", ",", "toFormat", ",", "toFormatStream", ",", 
+              "conversionRules", ",", 
+              RowBox[{"(*", "System`Convert`CommonDump`", "*)"}], 
+              RowBox[{"inlineCell", "\[Rule]", "True"}], ",", "others"}], 
+             "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"System`Convert`CommonDump`ConvertCell", "[", 
+             RowBox[{
+             "cell", ",", "toFormat", ",", "toFormatStream", ",", 
+              "conversionRules", ",", 
+              RowBox[{"(*", "System`Convert`CommonDump`", "*)"}], 
+              RowBox[{"inlineCell", "\[Rule]", "True"}], ",", "others"}], 
+             "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"System`Convert`CommonDump`PostConvertCell", "[", 
+             RowBox[{
+             "cell", ",", "toFormat", ",", "toFormatStream", ",", 
+              "conversionRules", ",", 
+              RowBox[{"(*", "System`Convert`CommonDump`", "*)"}], 
+              RowBox[{"inlineCell", "\[Rule]", "True"}], ",", "others"}], 
+             "]"}], ";"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{
@@ -608,15 +684,25 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
          RowBox[{"System`Convert`CommonDump`DebugPrint", "[", 
           RowBox[{"\"\<boxes: \>\"", ",", "boxes"}], "]"}], ";", 
          "\[IndentingNewLine]", 
-         RowBox[{"\"\<{{c\>\"", "<>", 
-          RowBox[{"ToString", "[", "nr", "]"}], "<>", "\"\<::\>\"", "<>", 
-          RowBox[{"StringReplace", "[", 
-           RowBox[{
-            RowBox[{"System`Convert`TeXFormDump`MakeTeX", "[", "boxes", "]"}],
-             ",", 
-            RowBox[{"\"\<}}\>\"", "\[Rule]", "\"\<} }\>\""}]}], "]"}], "<>", 
-          "\"\< }} \>\""}]}], ")"}]}], ";", "\[IndentingNewLine]", 
-      "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"StringQ", "[", "boxes", "]"}], ",", 
+           RowBox[{"\"\<{{c\>\"", "<>", 
+            RowBox[{"ToString", "[", "nr", "]"}], "<>", "\"\<::\>\"", "<>", 
+            RowBox[{"StringReplace", "[", 
+             RowBox[{"boxes", ",", 
+              RowBox[{"\"\<}}\>\"", "\[Rule]", "\"\<} }\>\""}]}], "]"}], 
+            "<>", "\"\< }} \>\""}], ",", "\[IndentingNewLine]", 
+           RowBox[{"\"\<{{c\>\"", "<>", 
+            RowBox[{"ToString", "[", "nr", "]"}], "<>", "\"\<::\>\"", "<>", 
+            RowBox[{"StringReplace", "[", 
+             RowBox[{
+              RowBox[{
+              "System`Convert`TeXFormDump`MakeTeX", "[", "boxes", "]"}], ",", 
+              
+              RowBox[{"\"\<}}\>\"", "\[Rule]", "\"\<} }\>\""}]}], "]"}], 
+            "<>", "\"\< }} \>\""}]}], "]"}]}], ")"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Export to Anki begins...\>\"", "]"}], 
       ";", "\[IndentingNewLine]", 
       RowBox[{"If", "[", 
@@ -1073,6 +1159,65 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{
                     RowBox[{
                     RowBox[{"StyleBox", "[", 
+                    RowBox[{"C_String", ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{
+                    {GrayLevel[0], RectangleBox[{0, 0}]}, 
+                    {GrayLevel[0], RectangleBox[{1, -1}]}, 
+                    {RGBColor[0.88, 1, 0.88], RectangleBox[{0, -1}, {2, 1}]}},
+                    
+                    AspectRatio->1,
+                    DefaultBaseStyle->"ColorSwatchGraphics",
+                    Frame->True,
+                    
+                    FrameStyle->RGBColor[
+                    0.5866666666666667, 0.6666666666666666, 
+                    0.5866666666666667],
+                    FrameTicks->None,
+                    
+                    ImageSize->Dynamic[{
+                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification])}],
+                    PlotRangePadding->None],
+                    StyleBox[
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.88`", ",", "1", ",", "0.88`"}], "]"}], 
+                    NumberMarks -> False]],
+                    Appearance->None,
+                    BaseStyle->{},
+                    BaselinePosition->Baseline,
+                    ButtonFunction:>With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.88, 1, 0.88]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]],
+                    DefaultBaseStyle->{},
+                    Evaluator->Automatic,
+                    Method->"Preemptive"],
+                    RGBColor[0.88, 1, 0.88],
+                    Editable->False,
+                    Selectable->False]}]}], "]"}], "\[RuleDelayed]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"n", "+=", "1"}], ";", 
+                    RowBox[{"Anki", "[", 
+                    RowBox[{"n", ",", "C"}], "]"}]}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"StyleBox", "[", 
                     RowBox[{"C___", ",", 
                     RowBox[{"Background", "\[Rule]", 
                     InterpretationBox[
@@ -1220,6 +1365,8 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                RowBox[{"Shortest", "[", "c__", "]"}], "~~", "\"\<::\>\""}], 
               "->", "\"\< \\\\\\\\ \>\""}]}], "}"}]}], "]"}], "&"}], "/@", 
         "cells"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"PrintToConsole", "[", "base", "]"}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"(*", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"dat", "=", 
@@ -1899,8 +2046,8 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
   True,ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3"]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{720, 855},
-WindowMargins->{{-27, Automatic}, {Automatic, -1126}},
+WindowSize->{1150, 1088},
+WindowMargins->{{258, Automatic}, {Automatic, 80}},
 FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
 2018)",
 StyleDefinitions->Notebook[{
@@ -1921,7 +2068,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 83554, 1878, 8560, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 90552, 2025, 6418, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]
