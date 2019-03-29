@@ -68,11 +68,9 @@ Not all cells get exported to Anki currently supported include:
 * Figure
 * Item1, Item2, Item3
 * Item1Numbered, Item2Numbered, Item3Numbered
-* Theorem,
-* Example,
-* Proof
-* Axiom
-* Definition
+* Example, Exercise, Solution
+* Question, Remark, Comment, FunFact
+* Theorem, Proof, Axiom, Definition, Lemma
 
 More tutorials coming soon.  (The system is poorly documented, but already has the capabilities to export equations and pictures as it was built out of my own need).
 

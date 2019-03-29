@@ -150,7 +150,7 @@ FormBox[GraphicsBox[___],___]:> "",
 GraphicsBox[___]:> "",
 
 StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[ToTex[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}];
-cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Theorem","Example","Exercise","FunFact","Proof","Axiom","Solution","Definition"}];
+cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Example","Exercise","Solution","Question","Remark","Comment","Theorem","Proof","Axiom","Definition","Lemma","FunFact"}];
 title=First@(Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Title",___]:>name,Infinity]/.{}-> {""});
 ShowStatus["Gathering section info..."];
 sections=CurrentValue[#,{"CounterValue","Section"}]&/@cells;
@@ -168,9 +168,10 @@ ShowStatus["Preparing paths..."];
 paths=(title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
 base=StringReplace[StringReplace[ImportString[ExportString[n=0;Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity],"TeXFragment"],
-"Text"],{"\\)\\("->""}],{"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","}}"~~WhitespaceCharacter...~~"\\)"~~WhitespaceCharacter...~~"
-"~~WhitespaceCharacter...~~"\\("~~WhitespaceCharacter...~~"{{c"~~Shortest[c__]~~"::"->" \\\\ "}]&/@cells;
-PrintToConsole[base];
+"Text"],{"\\)\\("->""}],{"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","}}"~~WhitespaceCharacter...~~"\\({{c"~~Shortest[___]~~"::"~~Shortest[c__]~~"}}\\)":>("\\("<>c<>"\\)}}"),
+(*enters in eqs*)"}}"~~WhitespaceCharacter...~~"\\)"~~WhitespaceCharacter...~~"
+"~~WhitespaceCharacter...~~"\\("~~WhitespaceCharacter...~~"{{c"~~Shortest[__]~~"::"->" \\\\ "}]&/@cells;
+(*PrintToConsole[base];*)
 (*
 dat=Block[{n=1},ReplaceRepeated[data,
 {
