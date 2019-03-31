@@ -1,7 +1,7 @@
 # Mathematica Anki 2.0
 
 
-> Thanks to AnkiConnect and recent MathJax support in Anki the installation process has been simplified! ... but beware the project is not production ready!
+> Thanks to AnkiConnect and recent MathJax support in Anki the installation process has been simplified! ... but is still being debugged, so watchout!
 
 
 The aim of this project is to collect and review knowledge in a systematic and efficient way.
@@ -12,7 +12,7 @@ The highlighted items can then be exported to Anki as Cloze deletions with just 
 
 The project consists of Mathematica stylesheet and tools for creating TeX grade notebooks and Anki cards out of them. 
 
-#Prerequisites
+# Prerequisites
 1. Mathematica - https://www.wolfram.com/mathematica/
 2. Anki - http://ankisrs.net
 3. AnkiConnect - https://ankiweb.net/shared/info/2055492159

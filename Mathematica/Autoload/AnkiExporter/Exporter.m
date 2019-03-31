@@ -25,7 +25,7 @@ ExportToAnki::usage ="Function exporting selected sections of the notebook to An
 AnkiRequest::usage="Pass Action and param (Anki Connect)";
 PrepareAnkiNote::usage="Deck name then for params and tags (opt)";
 AddOrUpdateNotes::usage="Deck name then all notes";
-
+TeXFix::usage="Joins Anki clozes in TeX string";
 Begin["`Private`"];
 AnkiRequest[action_,params_:<||>]:=
 Block[{req,json},
@@ -55,7 +55,10 @@ ImportString[AnkiRequest["multi",res],"JSON"]];
 (*PrintToConsole[ImportString[AnkiRequest["updateNoteFields",{"note"\[Rule]{"id"\[Rule]#[[1]],"fields"\[Rule]{"CellID"\[Rule]ToString[#[[2,1]]],"Text"\[Rule]#[[2,2]],"Extra"\[Rule]#[[2,3]],"Link"\[Rule]#[[2,4]]}}}],"JSON"]]&/@toUpdate;*)
 (*PrintToConsole[ImportString[AnkiRequest["notesInfo",{"notes"\[Rule]toUpdate[[All,1]]}],"JSON"]];*)
 ];
-
+TeXFix[what_]:=StringReplace[StringReplace[what,{
+"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"",
+"\\({{c"~~Shortest[c__]~~"::"~~Shortest[d__]~~"}}\\)":>("{{c"<>c<>"::\\("<>d<>"\\)}}")}],
+{"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","\\)\\("->""}];
 ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
 ShowStatus["Export starts"];
@@ -118,7 +121,7 @@ If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
 tempPicPath=Quiet@Check[CreateDirectory["~/Dropbox/Anki/Ranza/collection.media/",CreateIntermediateDirectories-> True],"~/Dropbox/Anki/Ranza/collection.media/",CreateDirectory::filex];
 
 FixStrings[data_]:=StringReplace[data,{"\[Lambda]":>"\(\\lambda\)","\[Dash]":>"-","\[Rule]":>"\(\\rightarrow\)"}];
-TeXFix[what_]:=StringReplace[what,{"\)}}\(\)"-> "\)}}",("\\text{"~~c:Except["}"]..~~"}"):>(ToString@c)}];
+(*TeXFix[what_]:=StringReplace[what,{"\)}}\(\)"\[Rule] "\)}}",("\\text{"~~c:Except["}"]..~~"}"):>(ToString@c)}];*)
 TeXFixPoor[what_]:=StringReplace[what,{"\)}}\(\)"-> "\)}}"}];
 EncodingFix[what_]:=FromCharacterCode[ToCharacterCode[what],"UTF8"];
 ToTex[what_,n_:1]:=Convert`TeX`BoxesToTeX[what, "BoxRules"->{
@@ -150,6 +153,7 @@ FormBox[GraphicsBox[___],___]:> "",
 GraphicsBox[___]:> "",
 
 StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[ToTex[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}];
+(*the above is old*)
 cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Example","Exercise","Solution","Question","Remark","Comment","Theorem","Proof","Axiom","Definition","Lemma","FunFact"}];
 title=First@(Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Title",___]:>name,Infinity]/.{}-> {""});
 ShowStatus["Gathering section info..."];
@@ -167,10 +171,8 @@ GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsec
 ShowStatus["Preparing paths..."];
 paths=(title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
-base=StringReplace[StringReplace[ImportString[ExportString[n=0;Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity],"TeXFragment"],
-"Text"],{"\\)\\("->""}],{"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","}}"~~WhitespaceCharacter...~~"\\({{c"~~Shortest[___]~~"::"~~Shortest[c__]~~"}}\\)":>("\\("<>c<>"\\)}}"),
-(*enters in eqs*)"}}"~~WhitespaceCharacter...~~"\\)"~~WhitespaceCharacter...~~"
-"~~WhitespaceCharacter...~~"\\("~~WhitespaceCharacter...~~"{{c"~~Shortest[__]~~"::"->" \\\\ "}]&/@cells;
+base=TeXFix[ImportString[ExportString[n=0;Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity],"TeXFragment"],
+"Text"]]&/@cells;
 (*PrintToConsole[base];*)
 (*
 dat=Block[{n=1},ReplaceRepeated[data,

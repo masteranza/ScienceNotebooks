@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     92506,       2084]
-NotebookOptionsPosition[     91887,       2063]
-NotebookOutlinePosition[     92521,       2085]
-CellTagsIndexPosition[     92478,       2082]
+NotebookDataLength[     92241,       2088]
+NotebookOptionsPosition[     91620,       2067]
+NotebookOutlinePosition[     92256,       2089]
+CellTagsIndexPosition[     92213,       2086]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -41,10 +41,13 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{
-    RowBox[{"AddOrUpdateNotes", "::", "usage"}], "=", 
-    "\"\<Deck name then all notes\>\""}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+   RowBox[{"AddOrUpdateNotes", "::", "usage"}], "=", 
+   "\"\<Deck name then all notes\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TeXFix", "::", "usage"}], "=", 
+   "\"\<Joins Anki clozes in TeX string\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
   ";"}], "\[IndentingNewLine]", 
@@ -117,55 +120,54 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{
-    RowBox[{"AddOrUpdateNotes", "[", 
-     RowBox[{"deck_", ",", "rawNotes_"}], "]"}], ":=", 
-    RowBox[{"Block", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-       "res", ",", "resi", ",", "toUpdate", ",", "ids", ",", "ankiIds"}], 
-       "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"AddOrUpdateNotes", "[", 
+    RowBox[{"deck_", ",", "rawNotes_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
       RowBox[{
-       RowBox[{"res", "=", 
-        RowBox[{"(", 
+      "res", ",", "resi", ",", "toUpdate", ",", "ids", ",", "ankiIds"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"res", "=", 
+       RowBox[{"(", 
+        RowBox[{"ImportString", "[", 
+         RowBox[{
+          RowBox[{"AnkiRequest", "[", 
+           RowBox[{"\"\<addNotes\>\"", ",", 
+            RowBox[{"{", 
+             RowBox[{"\"\<notes\>\"", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"PrepareAnkiNote", "[", 
+                  RowBox[{"deck", ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "4", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "5", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+                "rawNotes"}], ")"}]}], "}"}]}], "]"}], ",", "\"\<JSON\>\""}], 
+         "]"}], ")"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"PrintToConsole", "[", 
          RowBox[{"ImportString", "[", 
           RowBox[{
            RowBox[{"AnkiRequest", "[", 
-            RowBox[{"\"\<addNotes\>\"", ",", 
+            RowBox[{"\"\<multi\>\"", ",", 
              RowBox[{"{", 
-              RowBox[{"\"\<notes\>\"", "\[Rule]", 
+              RowBox[{"\"\<actions\>\"", "\[Rule]", 
                RowBox[{"(", 
                 RowBox[{
                  RowBox[{
-                  RowBox[{"PrepareAnkiNote", "[", 
-                   RowBox[{"deck", ",", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}], ",", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "2", "]"}], "]"}], ",", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "3", "]"}], "]"}], ",", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "4", "]"}], "]"}], ",", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "5", "]"}], "]"}]}], "]"}], "&"}], "/@", 
-                 "rawNotes"}], ")"}]}], "}"}]}], "]"}], ",", "\"\<JSON\>\""}],
-           "]"}], ")"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"(*", 
-        RowBox[{
-         RowBox[{"PrintToConsole", "[", 
-          RowBox[{"ImportString", "[", 
-           RowBox[{
-            RowBox[{"AnkiRequest", "[", 
-             RowBox[{"\"\<multi\>\"", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<actions\>\"", "\[Rule]", 
-                RowBox[{"(", 
-                 RowBox[{
-                  RowBox[{
-                   RowBox[{"{", 
-                    RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
                     RowBox[{"\"\<action\>\"", "->", "\"\<addNote\>\""}], ",", 
                     
                     RowBox[{"\"\<params\>\"", "\[Rule]", 
@@ -183,95 +185,93 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
                     RowBox[{"[", "4", "]"}], "]"}], ",", 
                     RowBox[{"#", "[", 
                     RowBox[{"[", "5", "]"}], "]"}]}], "]"}]}], "}"}]}]}], 
-                    "}"}], "&"}], "/@", "rawNotes"}], ")"}]}], "}"}]}], "]"}],
-             ",", "\"\<JSON\>\""}], "]"}], "]"}], ";"}], "*)"}], 
-       "\[IndentingNewLine]", 
-       RowBox[{"PrintToConsole", "[", "res", "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"res", "=", 
-        RowBox[{"(", 
-         RowBox[{"\"\<result\>\"", "/.", "res"}], ")"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"toUpdate", "=", 
+                   "}"}], "&"}], "/@", "rawNotes"}], ")"}]}], "}"}]}], "]"}], 
+           ",", "\"\<JSON\>\""}], "]"}], "]"}], ";"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"PrintToConsole", "[", "res", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"res", "=", 
+       RowBox[{"(", 
+        RowBox[{"\"\<result\>\"", "/.", "res"}], ")"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"toUpdate", "=", 
+       RowBox[{
         RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "&"}], "/@", 
+        RowBox[{"Select", "[", 
          RowBox[{
-          RowBox[{"#", "[", 
-           RowBox[{"[", "2", "]"}], "]"}], "&"}], "/@", 
-         RowBox[{"Select", "[", 
-          RowBox[{
-           RowBox[{"Thread", "[", 
-            RowBox[{"{", 
-             RowBox[{"res", ",", "rawNotes"}], "}"}], "]"}], ",", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"#", "[", 
-              RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "Null"}], "&"}]}], 
-          "]"}]}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"PrintToConsole", "[", 
-        RowBox[{"\"\<Need to update \>\"", "<>", 
-         RowBox[{"ToString", "[", 
-          RowBox[{"Length", "[", "toUpdate", "]"}], "]"}], "<>", " ", 
-         "\"\< notes\>\""}], "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Length", "[", "toUpdate", "]"}], ">", "0"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"res", "=", 
+          RowBox[{"Thread", "[", 
            RowBox[{"{", 
-            RowBox[{"\"\<actions\>\"", "\[Rule]", 
-             RowBox[{"(", 
+            RowBox[{"res", ",", "rawNotes"}], "}"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "Null"}], "&"}]}], 
+         "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"PrintToConsole", "[", 
+       RowBox[{"\"\<Need to update \>\"", "<>", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"Length", "[", "toUpdate", "]"}], "]"}], "<>", " ", 
+        "\"\< notes\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "toUpdate", "]"}], ">", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"res", "=", 
+          RowBox[{"{", 
+           RowBox[{"\"\<actions\>\"", "\[Rule]", 
+            RowBox[{"(", 
+             RowBox[{
               RowBox[{
-               RowBox[{
-                RowBox[{"{", 
-                 RowBox[{
-                  RowBox[{"\"\<action\>\"", "->", "\"\<findNotes\>\""}], ",", 
-                  
-                  RowBox[{"\"\<params\>\"", "\[Rule]", 
-                   RowBox[{"{", 
-                    RowBox[{"\"\<query\>\"", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"\"\<action\>\"", "->", "\"\<findNotes\>\""}], ",", 
+                 RowBox[{"\"\<params\>\"", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<query\>\"", "\[Rule]", 
                     RowBox[{"\"\<CellID:\>\"", "<>", 
                     RowBox[{"ToString", "[", 
                     RowBox[{"#", "[", 
                     RowBox[{"[", "1", "]"}], "]"}], "]"}]}]}], "}"}]}]}], 
-                 "}"}], "&"}], "/@", "toUpdate"}], ")"}]}], "}"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"ankiIds", "=", 
+                "}"}], "&"}], "/@", "toUpdate"}], ")"}]}], "}"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ankiIds", "=", 
+          RowBox[{
            RowBox[{
-            RowBox[{
-             RowBox[{"#", "[", 
-              RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", 
-            RowBox[{"(", 
-             RowBox[{"\"\<result\>\"", "/.", 
-              RowBox[{"ImportString", "[", 
-               RowBox[{
-                RowBox[{"AnkiRequest", "[", 
-                 RowBox[{"\"\<multi\>\"", ",", "res"}], "]"}], ",", 
-                "\"\<JSON\>\""}], "]"}]}], ")"}]}]}], ";", 
-          "\[IndentingNewLine]", "\[IndentingNewLine]", 
-          RowBox[{"toUpdate", "=", 
-           RowBox[{"Thread", "[", 
-            RowBox[{"{", 
-             RowBox[{"ankiIds", ",", "toUpdate"}], "}"}], "]"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"PrintToConsole", "[", "ankiIds", "]"}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"PrintToConsole", "[", "toUpdate", "]"}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"res", "=", 
-           RowBox[{"{", 
-            RowBox[{"\"\<actions\>\"", "\[Rule]", 
-             RowBox[{"(", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", 
+           RowBox[{"(", 
+            RowBox[{"\"\<result\>\"", "/.", 
+             RowBox[{"ImportString", "[", 
               RowBox[{
-               RowBox[{
-                RowBox[{"{", 
-                 RowBox[{
-                  RowBox[{
-                  "\"\<action\>\"", "->", "\"\<updateNoteFields\>\""}], ",", 
-                  RowBox[{"\"\<params\>\"", "\[Rule]", 
-                   RowBox[{"{", 
-                    RowBox[{"\"\<note\>\"", "\[Rule]", 
+               RowBox[{"AnkiRequest", "[", 
+                RowBox[{"\"\<multi\>\"", ",", "res"}], "]"}], ",", 
+               "\"\<JSON\>\""}], "]"}]}], ")"}]}]}], ";", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"toUpdate", "=", 
+          RowBox[{"Thread", "[", 
+           RowBox[{"{", 
+            RowBox[{"ankiIds", ",", "toUpdate"}], "}"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PrintToConsole", "[", "ankiIds", "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PrintToConsole", "[", "toUpdate", "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"res", "=", 
+          RowBox[{"{", 
+           RowBox[{"\"\<actions\>\"", "\[Rule]", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"\"\<action\>\"", "->", "\"\<updateNoteFields\>\""}],
+                  ",", 
+                 RowBox[{"\"\<params\>\"", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<note\>\"", "\[Rule]", 
                     RowBox[{"{", 
                     RowBox[{
                     RowBox[{"\"\<id\>\"", "\[Rule]", 
@@ -306,32 +306,31 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
                     RowBox[{"{", 
                     RowBox[{"\"\<allowDuplicate\>\"", "\[Rule]", "False"}], 
                     "}"}]}]}], "}"}]}], "}"}]}]}], "}"}], "&"}], "/@", 
-               "toUpdate"}], ")"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"ImportString", "[", 
-           RowBox[{
-            RowBox[{"AnkiRequest", "[", 
-             RowBox[{"\"\<multi\>\"", ",", "res"}], "]"}], ",", 
-            "\"\<JSON\>\""}], "]"}]}]}], "]"}], ";"}]}], 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
+              "toUpdate"}], ")"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"ImportString", "[", 
+          RowBox[{
+           RowBox[{"AnkiRequest", "[", 
+            RowBox[{"\"\<multi\>\"", ",", "res"}], "]"}], ",", 
+           "\"\<JSON\>\""}], "]"}]}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
       RowBox[{
        RowBox[{
-        RowBox[{
-         RowBox[{"PrintToConsole", "[", 
-          RowBox[{"ImportString", "[", 
-           RowBox[{
-            RowBox[{"AnkiRequest", "[", 
-             RowBox[{"\"\<updateNoteFields\>\"", ",", 
-              RowBox[{"{", 
-               RowBox[{"\"\<note\>\"", "\[Rule]", 
-                RowBox[{"{", 
-                 RowBox[{
-                  RowBox[{"\"\<id\>\"", "\[Rule]", 
-                   RowBox[{"#", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-                  RowBox[{"\"\<fields\>\"", "\[Rule]", 
-                   RowBox[{"{", 
-                    RowBox[{
+        RowBox[{"PrintToConsole", "[", 
+         RowBox[{"ImportString", "[", 
+          RowBox[{
+           RowBox[{"AnkiRequest", "[", 
+            RowBox[{"\"\<updateNoteFields\>\"", ",", 
+             RowBox[{"{", 
+              RowBox[{"\"\<note\>\"", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"\"\<id\>\"", "\[Rule]", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+                 RowBox[{"\"\<fields\>\"", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{
                     RowBox[{"\"\<CellID\>\"", "\[Rule]", 
                     RowBox[{"ToString", "[", 
                     RowBox[{"#", "[", 
@@ -349,23 +348,55 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
                     RowBox[{"#", "[", 
                     RowBox[{"[", 
                     RowBox[{"2", ",", "4"}], "]"}], "]"}]}]}], "}"}]}]}], 
-                 "}"}]}], "}"}]}], "]"}], ",", "\"\<JSON\>\""}], "]"}], "]"}],
-          "&"}], "/@", "toUpdate"}], ";"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{"PrintToConsole", "[", 
-        RowBox[{"ImportString", "[", 
+                "}"}]}], "}"}]}], "]"}], ",", "\"\<JSON\>\""}], "]"}], "]"}], 
+        "&"}], "/@", "toUpdate"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"PrintToConsole", "[", 
+       RowBox[{"ImportString", "[", 
+        RowBox[{
+         RowBox[{"AnkiRequest", "[", 
+          RowBox[{"\"\<notesInfo\>\"", ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<notes\>\"", "\[Rule]", 
+             RowBox[{"toUpdate", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}]}], "]"}], 
+         ",", "\"\<JSON\>\""}], "]"}], "]"}], ";"}], "*)"}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TeXFix", "[", "what_", "]"}], ":=", 
+   RowBox[{"StringReplace", "[", 
+    RowBox[{
+     RowBox[{"StringReplace", "[", 
+      RowBox[{"what", ",", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
          RowBox[{
-          RowBox[{"AnkiRequest", "[", 
-           RowBox[{"\"\<notesInfo\>\"", ",", 
-            RowBox[{"{", 
-             RowBox[{"\"\<notes\>\"", "\[Rule]", 
-              RowBox[{"toUpdate", "[", 
-               RowBox[{"[", 
-                RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}]}], "]"}], 
-          ",", "\"\<JSON\>\""}], "]"}], "]"}], ";"}], "*)"}], 
-     "\[IndentingNewLine]", "]"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+          RowBox[{"\"\<}}\>\"", "~~", 
+           RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<{{c\>\"", "~~", 
+           
+           RowBox[{"Shortest", "[", "___", "]"}], "~~", "\"\<::\>\""}], "->", 
+          "\"\<\>\""}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"\"\<\\\\({{c\>\"", "~~", 
+           RowBox[{"Shortest", "[", "c__", "]"}], "~~", "\"\<::\>\"", "~~", 
+           RowBox[{"Shortest", "[", "d__", "]"}], "~~", "\"\<}}\\\\)\>\""}], ":>", 
+          RowBox[{"(", 
+           RowBox[{
+           "\"\<{{c\>\"", "<>", "c", "<>", "\"\<::\\\\(\>\"", "<>", "d", 
+            "<>", "\"\<\\\\)}}\>\""}], ")"}]}]}], "}"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"\"\<}}\>\"", "~~", 
+         RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<{{c\>\"", "~~", 
+         RowBox[{"Shortest", "[", "___", "]"}], "~~", "\"\<::\>\""}], 
+        "\[Rule]", "\"\<\>\""}], ",", 
+       RowBox[{"\"\<\\\\)\\\\(\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"ExportToAnki", "[", 
@@ -738,24 +769,26 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
            RowBox[{
            "\"\<\[Rule]\>\"", ":>", "\"\<\\(\\\\rightarrow\\)\>\""}]}], 
           "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"TeXFix", "[", "what_", "]"}], ":=", 
-       RowBox[{"StringReplace", "[", 
-        RowBox[{"what", ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"\"\<\\)}}\\(\\)\>\"", "\[Rule]", " ", "\"\<\\)}}\>\""}], 
-           ",", 
-           RowBox[{
-            RowBox[{"(", 
-             RowBox[{"\"\<\\\\text{\>\"", "~~", 
-              RowBox[{"c", ":", 
-               RowBox[{
-                RowBox[{"Except", "[", "\"\<}\>\"", "]"}], ".."}]}], "~~", 
-              "\"\<}\>\""}], ")"}], ":>", 
-            RowBox[{"(", 
-             RowBox[{"ToString", "@", "c"}], ")"}]}]}], "}"}]}], "]"}]}], ";",
-       "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"TeXFix", "[", "what_", "]"}], ":=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"what", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\"\<\\)}}\\(\\)\>\"", "\[Rule]", " ", "\"\<\\)}}\>\""}],
+              ",", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\"\<\\\\text{\>\"", "~~", 
+                RowBox[{"c", ":", 
+                 RowBox[{
+                  RowBox[{"Except", "[", "\"\<}\>\"", "]"}], ".."}]}], "~~", 
+                "\"\<}\>\""}], ")"}], ":>", 
+              RowBox[{"(", 
+               RowBox[{"ToString", "@", "c"}], ")"}]}]}], "}"}]}], "]"}]}], 
+        ";"}], "*)"}], "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"TeXFixPoor", "[", "what_", "]"}], ":=", 
        RowBox[{"StringReplace", "[", 
@@ -913,6 +946,9 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                   "}"}]}], "]"}], "<>", 
               "\"\< }}\\\\color[HTML]{000000}\>\""}]}]}], "}"}]}]}], "]"}]}], 
       ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"the", " ", "above", " ", "is", " ", "old"}], "*)"}], 
+      "\[IndentingNewLine]", 
       RowBox[{"cells", "=", 
        RowBox[{"Cells", "[", 
         RowBox[{
@@ -1144,22 +1180,19 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
       RowBox[{"base", "=", 
        RowBox[{
         RowBox[{
-         RowBox[{"StringReplace", "[", 
-          RowBox[{
-           RowBox[{"StringReplace", "[", 
-            RowBox[{
-             RowBox[{"ImportString", "[", 
+         RowBox[{"TeXFix", "[", 
+          RowBox[{"ImportString", "[", 
+           RowBox[{
+            RowBox[{"ExportString", "[", 
+             RowBox[{
               RowBox[{
-               RowBox[{"ExportString", "[", 
+               RowBox[{"n", "=", "0"}], ";", 
+               RowBox[{"Replace", "[", 
                 RowBox[{
-                 RowBox[{
-                  RowBox[{"n", "=", "0"}], ";", 
-                  RowBox[{"Replace", "[", 
+                 RowBox[{"NotebookRead", "[", "#", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
                    RowBox[{
-                    RowBox[{"NotebookRead", "[", "#", "]"}], ",", 
-                    RowBox[{"{", 
-                    RowBox[{
-                    RowBox[{
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C_String", ",", 
                     RowBox[{"Background", "\[Rule]", 
@@ -1180,9 +1213,10 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     0.5866666666666667],
                     FrameTicks->None,
                     
-                    ImageSize->Dynamic[{
-                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification])}],
+                    ImageSize->
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}],
                     PlotRangePadding->None],
                     StyleBox[
                     RowBox[{"RGBColor", "[", 
@@ -1218,7 +1252,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", "+=", "1"}], ";", 
                     RowBox[{"Anki", "[", 
                     RowBox[{"n", ",", "C"}], "]"}]}], ")"}]}], ",", 
-                    RowBox[{
+                   RowBox[{
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C___", ",", 
                     RowBox[{"Background", "\[Rule]", 
@@ -1239,9 +1273,10 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     0.5866666666666667],
                     FrameTicks->None,
                     
-                    ImageSize->Dynamic[{
-                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification])}],
+                    ImageSize->
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}],
                     PlotRangePadding->None],
                     StyleBox[
                     RowBox[{"RGBColor", "[", 
@@ -1280,8 +1315,8 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", ",", 
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C", ",", "D"}], "]"}]}], "]"}]}], ")"}]}], ",", 
-                    " ", 
-                    RowBox[{
+                   " ", 
+                   RowBox[{
                     RowBox[{"Cell", "[", 
                     RowBox[{"C___", ",", 
                     RowBox[{"Background", "\[Rule]", 
@@ -1302,9 +1337,10 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     0.5866666666666667],
                     FrameTicks->None,
                     
-                    ImageSize->Dynamic[{
-                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification])}],
+                    ImageSize->
+                    Dynamic[{Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}],
                     PlotRangePadding->None],
                     StyleBox[
                     RowBox[{"RGBColor", "[", 
@@ -1343,42 +1379,10 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", ",", 
                     RowBox[{"Cell", "[", 
                     RowBox[{"C", ",", "D"}], "]"}]}], "]"}]}], ")"}]}]}], 
-                    "}"}], ",", "Infinity"}], "]"}]}], ",", 
-                 "\"\<TeXFragment\>\""}], "]"}], ",", "\[IndentingNewLine]", 
-               "\"\<Text\>\""}], "]"}], ",", 
-             RowBox[{"{", 
-              RowBox[{"\"\<\\\\)\\\\(\>\"", "->", "\"\<\>\""}], "}"}]}], 
-            "]"}], ",", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"\"\<}}\>\"", "~~", 
-               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<{{c\>\"", "~~", 
-               RowBox[{"Shortest", "[", "___", "]"}], "~~", "\"\<::\>\""}], 
-              "->", "\"\<\>\""}], ",", 
-             RowBox[{
-              RowBox[{"\"\<}}\>\"", "~~", 
-               RowBox[{"WhitespaceCharacter", "..."}], "~~", 
-               "\"\<\\\\({{c\>\"", "~~", 
-               RowBox[{"Shortest", "[", "___", "]"}], "~~", "\"\<::\>\"", "~~", 
-               RowBox[{"Shortest", "[", "c__", "]"}], "~~", 
-               "\"\<}}\\\\)\>\""}], ":>", 
-              RowBox[{"(", 
-               RowBox[{"\"\<\\\\(\>\"", "<>", "c", "<>", "\"\<\\\\)}}\>\""}], 
-               ")"}]}], ",", "\[IndentingNewLine]", 
-             RowBox[{"(*", 
-              RowBox[{"enters", " ", "in", " ", "eqs"}], "*)"}], 
-             RowBox[{
-              RowBox[{"\"\<}}\>\"", "~~", 
-               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<\\\\)\>\"", 
-               "~~", 
-               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<\n\>\"", "~~", 
-               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<\\\\(\>\"", 
-               "~~", 
-               RowBox[{"WhitespaceCharacter", "..."}], "~~", "\"\<{{c\>\"", "~~", 
-               RowBox[{"Shortest", "[", "__", "]"}], "~~", "\"\<::\>\""}], 
-              "->", "\"\< \\\\\\\\ \>\""}]}], "}"}]}], "]"}], "&"}], "/@", 
-        "cells"}]}], ";", "\[IndentingNewLine]", 
+                  "}"}], ",", "Infinity"}], "]"}]}], ",", 
+              "\"\<TeXFragment\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+            "\"\<Text\>\""}], "]"}], "]"}], "&"}], "/@", "cells"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{"PrintToConsole", "[", "base", "]"}], ";"}], "*)"}], 
@@ -2063,7 +2067,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1150, 1088},
-WindowMargins->{{Automatic, 141}, {Automatic, 28}},
+WindowMargins->{{Automatic, -172}, {878, Automatic}},
 FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
 2018)",
 StyleDefinitions->Notebook[{
@@ -2084,7 +2088,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 91326, 2041, 6460, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 91059, 2045, 6481, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]
