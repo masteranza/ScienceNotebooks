@@ -6,8 +6,8 @@
 *)
 
 EventTranslations[{
-Item[KeyEvent["6", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SuperscriptBox["", ""], ""}]]}]],
-Item[KeyEvent["-", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SubscriptBox["", ""], ""}]]}]],
+Item[KeyEvent["6", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SuperscriptBox["\[InvisiblePrefixScriptBase]", "\[Placeholder]"], "\[NegativeThinSpace]", "\[SelectionPlaceholder]"}]]}]],
+Item[KeyEvent["-", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SubscriptBox["\[InvisiblePrefixScriptBase]", "\[Placeholder]"], "\[NegativeThinSpace]", "\[SelectionPlaceholder]"}]]}]],
 Item[KeyEvent["d", Modifiers -> {Control}],
      FrontEndExecute[
         FrontEnd`NotebookWrite[
@@ -44,7 +44,7 @@ Item[KeyEvent["y", Modifiers -> {Control}],
             SelectionMove[nb, All, Expression];
             t = NotebookRead[SelectedNotebook[]];
             If[StringQ[t],
-			NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["TableTitle", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
+			NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["TableTitle", t], ")"}], BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
         ],
         MenuEvaluator -> Automatic 
     ],
@@ -91,7 +91,7 @@ Item[KeyEvent["e", Modifiers -> {Control}],
     		Cell[BlankSequence[], "Remark", BlankNullSequence[]] -> RGBColor[0.3, 0.3, 0.3]
     		}];
 
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox[cellstyle, t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle->{Magnification -> FrontEnd`CurrentValue[
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox[cellstyle, t], ")"}], BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle->{Magnification -> FrontEnd`CurrentValue[
      EvaluationNotebook[], Magnification], Background->RGBColor[1, 1, 1],CellFrameColor -> color, CellFrame -> 2}, Tooltip -> Map[DynamicBox[RowBox[Flatten[{CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]]}]], UpdateInterval -> Infinity] & , {t}]]]];
         ],
         MenuEvaluator -> Automatic 
