@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     92208,       2087]
-NotebookOptionsPosition[     91620,       2067]
-NotebookOutlinePosition[     92223,       2088]
-CellTagsIndexPosition[     92180,       2085]
+NotebookDataLength[     93423,       2119]
+NotebookOptionsPosition[     92835,       2099]
+NotebookOutlinePosition[     93438,       2120]
+CellTagsIndexPosition[     93395,       2117]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -47,6 +47,11 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
   RowBox[{
    RowBox[{"TeXFix", "::", "usage"}], "=", 
    "\"\<Joins Anki clozes in TeX string\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExportToCloud", "::", "usage"}], "=", 
+   "\"\<Exports Notebook to Cloud under the right path\>\""}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
@@ -399,6 +404,30 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
+   RowBox[{"ExportToCloud", "[", "]"}], ":=", 
+   RowBox[{"Information", "[", 
+    RowBox[{
+     RowBox[{"CloudDeploy", "[", 
+      RowBox[{
+       RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+       RowBox[{"\"\<user:\>\"", "<>", 
+        RowBox[{
+         RowBox[{"StringSplit", "[", 
+          RowBox[{
+           RowBox[{"CloudConnect", "[", "]"}], ",", "\"\<@\>\""}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "<>", 
+        RowBox[{"StringReplace", "[", 
+         RowBox[{
+          RowBox[{"NotebookFileName", "[", 
+           RowBox[{"EvaluationNotebook", "[", "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{
+           "e___", "~~", "\"\</Knowledge/\>\"", " ", "~~", " ", "f___"}], " ",
+            "\[RuleDelayed]", " ", 
+           RowBox[{"\"\</Knowledge/\>\"", "<>", "f"}]}]}], "]"}]}]}], "]"}], 
+     ",", "\"\<Path\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{"ExportToAnki", "[", 
     RowBox[{"sync_:", "True"}], "]"}], ":=", 
    RowBox[{"Module", "[", 
@@ -478,6 +507,10 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
       RowBox[{
        RowBox[{"System`Convert`TeXFormDump`maketex", "[", "\"\<~\>\"", "]"}], 
        "=", "\"\<\\\\sim \>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXFormDump`maketex", "[", "\"\<\[Perpendicular]\>\"", 
+        "]"}], "=", "\"\<\\\\perp \>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
        "nie", " ", "zamieniaj", " ", "zwyk\[LSlash]ego", " ", "tekstu"}], 
@@ -2018,9 +2051,8 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
          RowBox[{"Thread", "[", 
           RowBox[{"{", 
            RowBox[{"ids", ",", "base", ",", "paths", ",", 
-            RowBox[{"NotebookFileName", "[", 
-             RowBox[{"EvaluationNotebook", "[", "]"}], "]"}], ",", 
-            "celltags"}], "}"}], "]"}], ",", 
+            RowBox[{"ExportToCloud", "[", "]"}], ",", "celltags"}], "}"}], 
+          "]"}], ",", 
          RowBox[{
           RowBox[{"StringMatchQ", "[", 
            RowBox[{
@@ -2087,7 +2119,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 91059, 2045, 7174, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 92274, 2077, 7321, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]

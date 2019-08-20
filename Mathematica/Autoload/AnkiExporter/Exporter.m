@@ -26,6 +26,7 @@ AnkiRequest::usage="Pass Action and param (Anki Connect)";
 PrepareAnkiNote::usage="Deck name then for params and tags (opt)";
 AddOrUpdateNotes::usage="Deck name then all notes";
 TeXFix::usage="Joins Anki clozes in TeX string";
+ExportToCloud::usage="Exports Notebook to Cloud under the right path";
 Begin["`Private`"];
 AnkiRequest[action_,params_:<||>]:=
 Block[{req,json},
@@ -59,6 +60,7 @@ TeXFix[what_]:=StringReplace[StringReplace[what,{
 "}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"",
 "\\({{c"~~Shortest[c__]~~"::"~~Shortest[d__]~~"}}\\)":>("{{c"<>c<>"::\\("<>d<>"\\)}}")}],
 {"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","\\)\\("->""}];
+ExportToCloud[]:=Information[CloudDeploy[EvaluationNotebook[],"user:"<>StringSplit[CloudConnect[],"@"][[1]]<>StringReplace[NotebookFileName[EvaluationNotebook[]],e___~~"/Knowledge/" ~~ f___ :> "/Knowledge/"<>f]],"Path"];
 ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
 ShowStatus["Export starts"];
@@ -77,6 +79,7 @@ System`Convert`TeXFormDump`maketex["\:017c"]="\:017c";
 System`Convert`TeXFormDump`maketex["\:017a"]="\:017a";
 (*System`Convert`TeXFormDump`maketex["&"]="\\$ ";*)
 System`Convert`TeXFormDump`maketex["~"]="\\sim ";
+System`Convert`TeXFormDump`maketex["\[Perpendicular]"]="\\perp ";
 (*nie zamieniaj zwyk\[LSlash]ego tekstu*)
 System`Convert`CommonDump`ConvertTextData[contents_String,toFormat_,toFormatStream_,conversionRules_,opts___?OptionQ]:=Module[{fpre,frule,fpost,pstyle,popts,str=contents},System`Convert`CommonDump`DebugPrint["CONVERTCOMMON:ConvertTextData-general content: ",contents];
 pstyle=System`Convert`CommonDump`ParentCellStyle/.{opts}/.System`Convert`CommonDump`ParentCellStyle->"";
@@ -251,7 +254,7 @@ base=StringReplace[base,{
 }];
 ShowStatus["Preparing final structure..."];
 npath=NotebookFileName[EvaluationNotebook[]];
-filtered=Select[Thread[{ids,base,paths,NotebookFileName[EvaluationNotebook[]],celltags}],StringMatchQ[#[[2]],"*{{c@::*"] & ];
+filtered=Select[Thread[{ids,base,paths,ExportToCloud[],celltags}],StringMatchQ[#[[2]],"*{{c@::*"] & ];
 ndir=NotebookDirectory[EvaluationNotebook[]];
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
 PrintToConsole[deck];
