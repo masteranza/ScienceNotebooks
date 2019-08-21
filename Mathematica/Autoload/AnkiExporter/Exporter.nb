@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     93423,       2119]
-NotebookOptionsPosition[     92835,       2099]
-NotebookOutlinePosition[     93438,       2120]
-CellTagsIndexPosition[     93395,       2117]
+NotebookDataLength[    100444,       2301]
+NotebookOptionsPosition[     99858,       2281]
+NotebookOutlinePosition[    100459,       2302]
+CellTagsIndexPosition[    100416,       2299]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -404,28 +404,165 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"ExportToCloud", "[", "]"}], ":=", 
-   RowBox[{"Information", "[", 
+   RowBox[{"openCloseAll", "[", 
+    RowBox[{"nb_", ",", "target_String", ",", 
+     RowBox[{"to", ":", 
+      RowBox[{"(", 
+       RowBox[{"Open", "|", "Closed"}], ")"}]}]}], "]"}], ":=", 
+   RowBox[{"Do", "[", 
     RowBox[{
-     RowBox[{"CloudDeploy", "[", 
-      RowBox[{
-       RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+     RowBox[{
+      RowBox[{"SelectionMove", "[", 
+       RowBox[{"cell", ",", "All", ",", "CellGroup", ",", 
+        RowBox[{"AutoScroll", "\[Rule]", "False"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"content", "=", 
+           RowBox[{"Block", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"$Context", "=", "\"\<FrontEnd`\>\""}], ",", 
+               RowBox[{"$ContextPath", "=", 
+                RowBox[{"{", "\"\<System`\>\"", "}"}]}]}], "}"}], ",", 
+             RowBox[{"NotebookRead", "[", "nb", "]"}]}], "]"}]}], ",", 
+          RowBox[{"from", "=", 
+           RowBox[{"to", "/.", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Closed", "\[Rule]", "Open"}], ",", 
+              RowBox[{"Open", "\[Rule]", "Closed"}]}], "}"}]}]}]}], "}"}], 
+        ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"MatchQ", "[", 
+           RowBox[{"content", ",", 
+            RowBox[{"Cell", "[", 
+             RowBox[{"CellGroupData", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Cell", "[", 
+                  RowBox[{"_", ",", "target", ",", "___"}], "]"}], ",", 
+                 "__"}], "}"}], ",", "from"}], "]"}], "]"}]}], "]"}], ",", 
+          RowBox[{"NotebookWrite", "[", 
+           RowBox[{"nb", ",", 
+            RowBox[{"Cell", "[", 
+             RowBox[{"CellGroupData", "[", 
+              RowBox[{
+               RowBox[{"content", "[", 
+                RowBox[{"[", 
+                 RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", "to"}], "]"}], 
+             "]"}], ",", 
+            RowBox[{"AutoScroll", "\[Rule]", "False"}]}], "]"}]}], "]"}]}], 
+       "]"}], ";"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"cell", ",", 
+       RowBox[{"Cells", "[", 
+        RowBox[{"CellStyle", "\[Rule]", "target"}], "]"}]}], "}"}]}], "]"}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cell", "[", 
+    RowBox[{"content_", ",", "opts___"}], "]"}], ":=", 
+   RowBox[{"Cell", "[", 
+    RowBox[{
+     RowBox[{"BoxData", "[", 
+      RowBox[{"ToBoxes", "[", "content", "]"}], "]"}], ",", "opts", ",", 
+     RowBox[{"ShowStringCharacters", "->", "False"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExportToCloud", "[", "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"s", ",", "fn", ",", "cn", ",", "su"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"fn", "=", 
+       RowBox[{"StringReplace", "[", 
+        RowBox[{
+         RowBox[{"NotebookFileName", "[", 
+          RowBox[{"EvaluationNotebook", "[", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{
+          "e___", "~~", "\"\</Knowledge/\>\"", " ", "~~", " ", "f___"}], " ", 
+          "\[RuleDelayed]", " ", 
+          RowBox[{"\"\</Knowledge/\>\"", "<>", "f"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"cn", "=", 
        RowBox[{"\"\<user:\>\"", "<>", 
         RowBox[{
          RowBox[{"StringSplit", "[", 
           RowBox[{
            RowBox[{"CloudConnect", "[", "]"}], ",", "\"\<@\>\""}], "]"}], "[", 
-         RowBox[{"[", "1", "]"}], "]"}], "<>", 
-        RowBox[{"StringReplace", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "<>", "fn"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"s", "=", 
+       RowBox[{"CloudDeploy", "[", 
+        RowBox[{
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", "cn"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"su", "=", 
+       RowBox[{"Quiet", "@", 
+        RowBox[{"CloudDeploy", "[", 
          RowBox[{
-          RowBox[{"NotebookFileName", "[", 
-           RowBox[{"EvaluationNotebook", "[", "]"}], "]"}], ",", 
-          RowBox[{
+          RowBox[{"URLDispatcher", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"\"\</\>\"", "~~", "EndOfString"}], "\[RuleDelayed]", 
+              RowBox[{"Delayed", "@", 
+               RowBox[{"CloudImport", "@", "s"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"\"\</\>\"", "~~", " ", 
+               RowBox[{"base", ":", 
+                RowBox[{"Repeated", "[", 
+                 RowBox[{"DigitCharacter", ",", "20"}], "]"}]}]}], 
+              "\[RuleDelayed]", 
+              RowBox[{"Delayed", "@", 
+               RowBox[{"ExportForm", "[", 
+                RowBox[{
+                 RowBox[{"Notebook", "[", 
+                  RowBox[{
+                   RowBox[{"Append", "[", 
+                    RowBox[{
+                    RowBox[{"First", "@", 
+                    RowBox[{"CloudGet", "@", "s"}]}], ",", 
+                    RowBox[{"cell", "@", 
+                    RowBox[{"EmbeddedHTML", "[", 
+                    RowBox[{
+                    "\"\<<script>\nfunction openCloseGroup() {\n\
+wolfram.cloud.parentNotebook.evaluateExpression({\n    expression: \
+'FrontEndExecute[NotebookLocate[\\\"\>\"", "<>", "base", "<>", 
+                    "\"\<\\\"]]' });\n  \n }\n</script>\n<body \
+onload='openCloseGroup()'>\>\""}], "]"}]}]}], "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"Rest", "@", "s"}], ")"}], "/.", 
+                    RowBox[{"{", 
+                    RowBox[{"Notebook", "\[Rule]", "Sequence"}], "}"}]}]}], 
+                  "]"}], ",", "\"\<CloudCDF\>\""}], "]"}]}]}]}], "}"}], "]"}],
+           ",", 
+          RowBox[{"StringDrop", "[", 
+           RowBox[{"cn", ",", 
+            RowBox[{"-", "3"}]}], "]"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"StringDrop", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringSplit", "[", 
            RowBox[{
-           "e___", "~~", "\"\</Knowledge/\>\"", " ", "~~", " ", "f___"}], " ",
-            "\[RuleDelayed]", " ", 
-           RowBox[{"\"\</Knowledge/\>\"", "<>", "f"}]}]}], "]"}]}]}], "]"}], 
-     ",", "\"\<Path\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+            RowBox[{"CloudConnect", "[", "]"}], ",", "\"\<@\>\""}], "]"}], 
+          "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "<>", "fn"}], ",", 
+        RowBox[{"-", "3"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"ExportToAnki", "[", 
@@ -2041,6 +2178,31 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
       RowBox[{
       "ShowStatus", "[", "\"\<Preparing final structure...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"SetOptions", "[", 
+         RowBox[{"#", ",", 
+          RowBox[{"CellTags", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"ToString", "@", 
+             RowBox[{"CurrentValue", "[", 
+              RowBox[{"#", ",", "\"\<CellID\>\""}], "]"}]}], "}"}]}]}], "]"}],
+         "&"}], "/@", 
+       RowBox[{"Cells", "[", 
+        RowBox[{
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+         RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"FrontEndExecute", "[", 
+       RowBox[{"FrontEndToken", "[", 
+        RowBox[{
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\"\<SelectAll\>\""}],
+         "]"}], "]"}], ";", "\n", "\t", 
+      RowBox[{"FrontEndTokenExecute", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        "\"\<SelectionCloseAllGroups\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"npath", "=", 
        RowBox[{"NotebookFileName", "[", 
         RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], ";", 
@@ -2059,6 +2221,26 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
             RowBox[{"#", "[", 
              RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<*{{c@::*\>\""}], "]"}],
            " ", "&"}]}], " ", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"FrontEndExecute", "[", 
+       RowBox[{"FrontEndToken", "[", 
+        RowBox[{
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\"\<SelectAll\>\""}],
+         "]"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"FrontEndTokenExecute", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        "\"\<SelectionOpenAllGroups\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"SetOptions", "[", 
+         RowBox[{"#", ",", 
+          RowBox[{"CellTags", "\[Rule]", 
+           RowBox[{"{", "}"}]}]}], "]"}], "&"}], "/@", 
+       RowBox[{"Cells", "[", 
+        RowBox[{
+         RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+         RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"ndir", "=", 
        RowBox[{"NotebookDirectory", "[", 
         RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], ";", 
@@ -2099,7 +2281,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{960, 1155},
-WindowMargins->{{-195, Automatic}, {900, Automatic}},
+WindowMargins->{{Automatic, 537}, {Automatic, 50}},
 FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
 StyleDefinitions->Notebook[{
    Cell[
@@ -2119,7 +2301,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 92274, 2077, 7321, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 99297, 2259, 7972, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]

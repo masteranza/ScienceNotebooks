@@ -60,7 +60,23 @@ TeXFix[what_]:=StringReplace[StringReplace[what,{
 "}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"",
 "\\({{c"~~Shortest[c__]~~"::"~~Shortest[d__]~~"}}\\)":>("{{c"<>c<>"::\\("<>d<>"\\)}}")}],
 {"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","\\)\\("->""}];
-ExportToCloud[]:=Information[CloudDeploy[EvaluationNotebook[],"user:"<>StringSplit[CloudConnect[],"@"][[1]]<>StringReplace[NotebookFileName[EvaluationNotebook[]],e___~~"/Knowledge/" ~~ f___ :> "/Knowledge/"<>f]],"Path"];
+openCloseAll[nb_,target_String,to:(Open|Closed)]:=Do[SelectionMove[cell,All,CellGroup,AutoScroll->False];
+With[{content=Block[{$Context="FrontEnd`",$ContextPath={"System`"}},NotebookRead[nb]],from=to/.{Closed->Open,Open->Closed}},If[MatchQ[content,Cell[CellGroupData[{Cell[_,target,___],__},from]]],NotebookWrite[nb,Cell[CellGroupData[content[[1,1]],to]],AutoScroll->False]]];,{cell,Cells[CellStyle->target]}];
+cell[content_,opts___]:=Cell[BoxData[ToBoxes[content]],opts,ShowStringCharacters->False];
+ExportToCloud[]:=Block[{s,fn,cn,su},
+fn=StringReplace[NotebookFileName[EvaluationNotebook[]],e___~~"/Knowledge/" ~~ f___ :> "/Knowledge/"<>f];
+cn="user:"<>StringSplit[CloudConnect[],"@"][[1]]<>fn;
+s=CloudDeploy[EvaluationNotebook[],cn];
+su=Quiet@CloudDeploy[URLDispatcher[{"/"~~EndOfString:>Delayed@CloudImport@s,"/"~~ base:Repeated[DigitCharacter,20]:>Delayed@ExportForm[Notebook[Append[First@CloudGet@s,cell@EmbeddedHTML["<script>
+function openCloseGroup() {
+wolfram.cloud.parentNotebook.evaluateExpression({
+    expression: 'FrontEndExecute[NotebookLocate[\""<>base<>"\"]]' });
+  
+ }
+</script>
+<body onload='openCloseGroup()'>"]],(Rest@s)/.{Notebook->Sequence}],"CloudCDF"]}],StringDrop[cn,-3]];
+StringDrop[StringSplit[CloudConnect[],"@"][[1]]<>fn,-3]
+];
 ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
 separator="#";
 ShowStatus["Export starts"];
@@ -253,8 +269,15 @@ base=StringReplace[base,{
 "\\right\\right| "~~WhitespaceCharacter...~~"_":> "\\right|_"
 }];
 ShowStatus["Preparing final structure..."];
+SetOptions[#,CellTags->{ToString@CurrentValue[#,"CellID"]}]&/@Cells[EvaluationNotebook[],CellID->ids];
+FrontEndExecute[FrontEndToken[EvaluationNotebook[],"SelectAll"]];
+	FrontEndTokenExecute[EvaluationNotebook[],"SelectionCloseAllGroups"];
 npath=NotebookFileName[EvaluationNotebook[]];
 filtered=Select[Thread[{ids,base,paths,ExportToCloud[],celltags}],StringMatchQ[#[[2]],"*{{c@::*"] & ];
+FrontEndExecute[FrontEndToken[EvaluationNotebook[],"SelectAll"]];
+FrontEndTokenExecute[EvaluationNotebook[],"SelectionOpenAllGroups"];
+SetOptions[#,CellTags->{}]&/@Cells[EvaluationNotebook[],CellID->ids];
+
 ndir=NotebookDirectory[EvaluationNotebook[]];
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
 PrintToConsole[deck];
