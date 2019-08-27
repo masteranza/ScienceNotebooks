@@ -77,7 +77,8 @@ wolfram.cloud.parentNotebook.evaluateExpression({
 <body onload='openCloseGroup()'>"]],(Rest@s)/.{Notebook->Sequence}],"CloudCDF"]}],StringDrop[cn,-3]];
 StringDrop[StringSplit[CloudConnect[],"@"][[1]]<>fn,-3]
 ];
-ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath},
+ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath,backupc,cloudex},
+cloudex=If[!$CloudConnected&&$WolframID===None,If[CloudConnect[]===$Failed||CloudConnect[]===$Canceled,False,True],True];
 separator="#";
 ShowStatus["Export starts"];
 PrintToConsole["Export starts"];
@@ -268,22 +269,27 @@ base=StringReplace[base,{
 "\\right\\right| "~~WhitespaceCharacter...~~"{}_":> "\\right|_",
 "\\right\\right| "~~WhitespaceCharacter...~~"_":> "\\right|_"
 }];
-ShowStatus["Preparing final structure..."];
-SetOptions[#,CellTags->{ToString@CurrentValue[#,"CellID"]}]&/@Cells[EvaluationNotebook[],CellID->ids];
+ShowStatus["Exporting to Wolfram Cloud..."];
+ndir=NotebookDirectory[EvaluationNotebook[]];
+npath=NotebookFileName[EvaluationNotebook[]];
+If[cloudex,
+backupc=(Flatten[{CurrentValue[#,{"CellTags"}]}])&/@Cells[EvaluationNotebook[],CellID->ids];
+MapThread[SetOptions[#1,CellTags->Append[#2,ToString@CurrentValue[#,"CellID"]]]&,{Cells[EvaluationNotebook[],CellID->ids],backupc}];
 FrontEndExecute[FrontEndToken[EvaluationNotebook[],"SelectAll"]];
 	FrontEndTokenExecute[EvaluationNotebook[],"SelectionCloseAllGroups"];
-npath=NotebookFileName[EvaluationNotebook[]];
 filtered=Select[Thread[{ids,base,paths,ExportToCloud[],celltags}],StringMatchQ[#[[2]],"*{{c@::*"] & ];
 FrontEndExecute[FrontEndToken[EvaluationNotebook[],"SelectAll"]];
 FrontEndTokenExecute[EvaluationNotebook[],"SelectionOpenAllGroups"];
-SetOptions[#,CellTags->{}]&/@Cells[EvaluationNotebook[],CellID->ids];
-
-ndir=NotebookDirectory[EvaluationNotebook[]];
+MapThread[SetOptions[#1,CellTags->#2]&,{Cells[EvaluationNotebook[],CellID->ids],backupc}];
+,filtered=Select[Thread[{ids,base,paths,npath,celltags}],StringMatchQ[#[[2]],"*{{c@::*"]&];
+];
+ShowStatus["Exporting to Anki..."];
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
 PrintToConsole[deck];
 PrintToConsole[AnkiRequest["createDeck",<|"deck"->deck|>]];
 AddOrUpdateNotes[deck,filtered];
 If[sync,PrintToConsole[AnkiRequest["sync"]]];
+ShowStatus["Notebook Exported"];
 ];
 End[];
 EndPackage[];

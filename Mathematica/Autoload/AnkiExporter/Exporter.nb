@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    100444,       2301]
-NotebookOptionsPosition[     99858,       2281]
-NotebookOutlinePosition[    100459,       2302]
-CellTagsIndexPosition[    100416,       2299]
+NotebookDataLength[    103030,       2361]
+NotebookOptionsPosition[    102442,       2341]
+NotebookOutlinePosition[    103044,       2362]
+CellTagsIndexPosition[    103001,       2359]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -578,9 +578,24 @@ onload='openCloseGroup()'>\>\""}], "]"}]}]}], "]"}], ",",
        "GetTOC", ",", "exported", ",", "filtered", ",", "splited", ",", 
        "marked", ",", "paths", ",", "fixed", ",", "final", ",", "threaded", 
        ",", "deck", ",", "title", ",", " ", "base", ",", "dat", ",", "ndir", 
-       ",", "tempPicPath", ",", " ", "allspecial", ",", "npath"}], "}"}], ",",
-      "\[IndentingNewLine]", 
+       ",", "tempPicPath", ",", " ", "allspecial", ",", "npath", ",", 
+       "backupc", ",", "cloudex"}], "}"}], ",", "\[IndentingNewLine]", 
      RowBox[{
+      RowBox[{"cloudex", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"!", "$CloudConnected"}], "&&", 
+          RowBox[{"$WolframID", "===", "None"}]}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"CloudConnect", "[", "]"}], "===", "$Failed"}], "||", 
+            RowBox[{
+             RowBox[{"CloudConnect", "[", "]"}], "===", "$Canceled"}]}], ",", 
+           "False", ",", "True"}], "]"}], ",", "True"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"separator", "=", "\"\<#\>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Export starts\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
@@ -2176,74 +2191,117 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
             "\[RuleDelayed]", " ", "\"\<\\\\right|_\>\""}]}], 
           "\[IndentingNewLine]", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{
-      "ShowStatus", "[", "\"\<Preparing final structure...\>\"", "]"}], ";", 
+      "ShowStatus", "[", "\"\<Exporting to Wolfram Cloud...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"SetOptions", "[", 
-         RowBox[{"#", ",", 
-          RowBox[{"CellTags", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{"ToString", "@", 
-             RowBox[{"CurrentValue", "[", 
-              RowBox[{"#", ",", "\"\<CellID\>\""}], "]"}]}], "}"}]}]}], "]"}],
-         "&"}], "/@", 
-       RowBox[{"Cells", "[", 
-        RowBox[{
-         RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
-         RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"FrontEndExecute", "[", 
-       RowBox[{"FrontEndToken", "[", 
-        RowBox[{
-         RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\"\<SelectAll\>\""}],
-         "]"}], "]"}], ";", "\n", "\t", 
-      RowBox[{"FrontEndTokenExecute", "[", 
-       RowBox[{
-        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
-        "\"\<SelectionCloseAllGroups\>\""}], "]"}], ";", 
+      RowBox[{"ndir", "=", 
+       RowBox[{"NotebookDirectory", "[", 
+        RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"npath", "=", 
        RowBox[{"NotebookFileName", "[", 
         RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"filtered", "=", 
-       RowBox[{"Select", "[", 
+      RowBox[{"If", "[", 
+       RowBox[{"cloudex", ",", "\[IndentingNewLine]", 
         RowBox[{
-         RowBox[{"Thread", "[", 
-          RowBox[{"{", 
-           RowBox[{"ids", ",", "base", ",", "paths", ",", 
-            RowBox[{"ExportToCloud", "[", "]"}], ",", "celltags"}], "}"}], 
-          "]"}], ",", 
-         RowBox[{
-          RowBox[{"StringMatchQ", "[", 
+         RowBox[{"backupc", "=", 
+          RowBox[{
            RowBox[{
-            RowBox[{"#", "[", 
-             RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<*{{c@::*\>\""}], "]"}],
-           " ", "&"}]}], " ", "]"}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"FrontEndExecute", "[", 
-       RowBox[{"FrontEndToken", "[", 
+            RowBox[{"(", 
+             RowBox[{"Flatten", "[", 
+              RowBox[{"{", 
+               RowBox[{"CurrentValue", "[", 
+                RowBox[{"#", ",", 
+                 RowBox[{"{", "\"\<CellTags\>\"", "}"}]}], "]"}], "}"}], 
+              "]"}], ")"}], "&"}], "/@", 
+           RowBox[{"Cells", "[", 
+            RowBox[{
+             RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+             RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"MapThread", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"SetOptions", "[", 
+             RowBox[{"#1", ",", 
+              RowBox[{"CellTags", "\[Rule]", 
+               RowBox[{"Append", "[", 
+                RowBox[{"#2", ",", 
+                 RowBox[{"ToString", "@", 
+                  RowBox[{"CurrentValue", "[", 
+                   RowBox[{"#", ",", "\"\<CellID\>\""}], "]"}]}]}], "]"}]}]}],
+              "]"}], "&"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Cells", "[", 
+              RowBox[{
+               RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+               RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}], ",", 
+             "backupc"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"FrontEndExecute", "[", 
+          RowBox[{"FrontEndToken", "[", 
+           RowBox[{
+            RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+            "\"\<SelectAll\>\""}], "]"}], "]"}], ";", "\n", "\t", 
+         RowBox[{"FrontEndTokenExecute", "[", 
+          RowBox[{
+           RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+           "\"\<SelectionCloseAllGroups\>\""}], "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"filtered", "=", 
+          RowBox[{"Select", "[", 
+           RowBox[{
+            RowBox[{"Thread", "[", 
+             RowBox[{"{", 
+              RowBox[{"ids", ",", "base", ",", "paths", ",", 
+               RowBox[{"ExportToCloud", "[", "]"}], ",", "celltags"}], "}"}], 
+             "]"}], ",", 
+            RowBox[{
+             RowBox[{"StringMatchQ", "[", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<*{{c@::*\>\""}], 
+              "]"}], " ", "&"}]}], " ", "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"FrontEndExecute", "[", 
+          RowBox[{"FrontEndToken", "[", 
+           RowBox[{
+            RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+            "\"\<SelectAll\>\""}], "]"}], "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"FrontEndTokenExecute", "[", 
+          RowBox[{
+           RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+           "\"\<SelectionOpenAllGroups\>\""}], "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"MapThread", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"SetOptions", "[", 
+             RowBox[{"#1", ",", 
+              RowBox[{"CellTags", "\[Rule]", "#2"}]}], "]"}], "&"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Cells", "[", 
+              RowBox[{
+               RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+               RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}], ",", 
+             "backupc"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", ",", 
         RowBox[{
-         RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\"\<SelectAll\>\""}],
-         "]"}], "]"}], ";", "\[IndentingNewLine]", 
-      RowBox[{"FrontEndTokenExecute", "[", 
-       RowBox[{
-        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
-        "\"\<SelectionOpenAllGroups\>\""}], "]"}], ";", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"SetOptions", "[", 
-         RowBox[{"#", ",", 
-          RowBox[{"CellTags", "\[Rule]", 
-           RowBox[{"{", "}"}]}]}], "]"}], "&"}], "/@", 
-       RowBox[{"Cells", "[", 
-        RowBox[{
-         RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
-         RowBox[{"CellID", "\[Rule]", "ids"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"ndir", "=", 
-       RowBox[{"NotebookDirectory", "[", 
-        RowBox[{"EvaluationNotebook", "[", "]"}], "]"}]}], ";", 
+         RowBox[{"filtered", "=", 
+          RowBox[{"Select", "[", 
+           RowBox[{
+            RowBox[{"Thread", "[", 
+             RowBox[{"{", 
+              RowBox[{
+              "ids", ",", "base", ",", "paths", ",", "npath", ",", 
+               "celltags"}], "}"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{"StringMatchQ", "[", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<*{{c@::*\>\""}], 
+              "]"}], "&"}]}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"ShowStatus", "[", "\"\<Exporting to Anki...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"deck", "=", 
        RowBox[{"StringReplace", "[", 
@@ -2271,7 +2329,9 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
        RowBox[{"sync", ",", 
         RowBox[{"PrintToConsole", "[", 
          RowBox[{"AnkiRequest", "[", "\"\<sync\>\"", "]"}], "]"}]}], "]"}], 
-      ";"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"ShowStatus", "[", "\"\<Notebook Exported\>\"", "]"}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"End", "[", "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -2280,8 +2340,8 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
   True,ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3"]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{960, 1155},
-WindowMargins->{{Automatic, 537}, {Automatic, 50}},
+WindowSize->{960, 855},
+WindowMargins->{{16, Automatic}, {Automatic, -1086}},
 FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
 StyleDefinitions->Notebook[{
    Cell[
@@ -2301,7 +2361,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 99297, 2259, 7972, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 101881, 2319, 8119, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]
