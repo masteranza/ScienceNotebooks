@@ -52,6 +52,7 @@ Outline::usage ="Displays document outline";
 WorkingEnv::usage="Show all cell metadata and Input cells";
 PrintoutEnv::usage="Hides all cell metadata and Input cells";
 Recent::usage="Shows recently opened notebooks";
+TranslateSpecialCellStyleNames::usage="For internal usage";
 IncludePath::usage="Includes a path to $Path variable, for easy loading";
 
 
@@ -62,7 +63,7 @@ IncludePath::usage="Includes a path to $Path variable, for easy loading";
 Begin["`Private`"];
 
 DuplicateNotebook[]:=NotebookPut@NotebookGet[EvaluationNotebook[]];
-
+TranslateSpecialCellStyleNames[name_]:=If[AbsoluteCurrentValue["Language"] == "Polish",Switch[name,"Example","Przyk\[LSlash]ad","Exercise","Zadanie","Solution","Rozwi\:0105zanie","Question","Pytanie","Remark","Uwaga","Comment","Komentarz","Theorem","Twierdzenie","Proof","Dow\[OAcute]d","Axiom","Aksjomat","Definition","Definicja","Lemma","Lemat","Corollary","Wniosek"],name]
 CloseCollapsed[]:=(SetOptions[#[[1]],CellOpen->!(CellOpen/.Options[#[[1]],CellOpen])];&/@Select[{#,CurrentValue[#,"CellGroupOpen"]}&/@Cells[EvaluationNotebook[], CellStyle -> "Section"],#[[2]]==$Failed||#[[2]]==Closed&];)
 
 Outline[]:=

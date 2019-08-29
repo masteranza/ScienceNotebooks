@@ -61,38 +61,15 @@ Item[KeyEvent["e", Modifiers -> {Control}],
         FrontEndExecute @ Module[{nb, t, cell, color},
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
-            t = NotebookRead[SelectedNotebook[]];
+            t = Evaluate[NotebookRead[SelectedNotebook[]]];
             If[StringQ[t],
-            cell = NotebookRead[First[Cells[EvaluationNotebook[], CellTags -> {t}]]];
-            cellstyle= ReplaceAll[cell, {
-            Cell[BlankSequence[], "Equation", BlankNullSequence[]] -> "Equation", 
-            Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[]] -> "EquationNumbered", 
-    		Cell[BlankSequence[], "Definition", BlankNullSequence[]]-> "Definition",
-    		Cell[BlankSequence[], "Example", BlankNullSequence[]] -> "Example",
-    		Cell[BlankSequence[], "Exercise", BlankNullSequence[]] -> "Exercise",
-    		Cell[BlankSequence[], "Theorem", BlankNullSequence[]] -> "Theorem",
-    		Cell[BlankSequence[], "Proof", BlankNullSequence[]] -> "Proof",
-    		Cell[BlankSequence[], "Solution", BlankNullSequence[]] -> "Solution",
-    		Cell[BlankSequence[], "Lemma", BlankNullSequence[]] -> "Lemma",
-    		Cell[BlankSequence[], "Axiom", BlankNullSequence[]] -> "Axiom"
-    		Cell[BlankSequence[], "Remark", BlankNullSequence[]] -> "Remark"
-    		}];
-    		color = ReplaceAll[cell, {
-   			Cell[BlankSequence[], "Equation", BlankNullSequence[]] -> RGBColor[1, 1, 1],
-            Cell[BlankSequence[], "EquationNumbered", BlankNullSequence[]] -> RGBColor[1, 1, 1],
-    		Cell[BlankSequence[], "Definition", BlankNullSequence[]]-> RGBColor[0.95, 0.5, 0.5],
-    		Cell[BlankSequence[], "Example", BlankNullSequence[]] -> RGBColor[0.6, 0.9, 0.6],
-    		Cell[BlankSequence[], "Exercise", BlankNullSequence[]] -> RGBColor[0.95, 0.95, 0.1],
-    		Cell[BlankSequence[], "Theorem", BlankNullSequence[]] -> RGBColor[0.2, 0.2, 0.2],
-    		Cell[BlankSequence[], "Proof", BlankNullSequence[]] -> RGBColor[0.3, 0.3, 1],
-    		Cell[BlankSequence[], "Solution", BlankNullSequence[]] -> RGBColor[0.65, 0.2, 0.45],
-    		Cell[BlankSequence[], "Lemma", BlankNullSequence[]] -> RGBColor[0.4, 1, 0.85],
-    		Cell[BlankSequence[], "Axiom", BlankNullSequence[]] -> RGBColor[1, 0.3, 0.3],
-    		Cell[BlankSequence[], "Remark", BlankNullSequence[]] -> RGBColor[0.3, 0.3, 0.3]
-    		}];
-
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox[cellstyle, t], ")"}], BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle->{Magnification -> FrontEnd`CurrentValue[
-     EvaluationNotebook[], Magnification], Background->RGBColor[1, 1, 1],CellFrameColor -> color, CellFrame -> 2}, Tooltip -> Map[DynamicBox[RowBox[Flatten[{CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]]}]], UpdateInterval -> Infinity] & , {t}]]]];
+    		color = RGBColor[1, 1, 1];
+            NotebookWrite[nb, ButtonBox[
+            RowBox[{"(", CounterBox["Section", t], ".", With[{x=t},DynamicBox[AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],{"CounterValue", AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],"CellStyleName"]}]]], ")"}],
+            BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, 
+            TooltipStyle->{Magnification -> AbsoluteCurrentValue[EvaluationNotebook[], Magnification], Background->RGBColor[1, 1, 1], CellFrame -> 1}, 
+     		Tooltip -> With[{x=t},DynamicBox[ce=First@Cells[EvaluationNotebook[], CellTags -> {x}]; RowBox[Prepend[Flatten[{CellStrip[NotebookRead[ce]]}], StyleBox[RowBox[{TranslateSpecialCellStyleNames[AbsoluteCurrentValue[ce,"CellStyleName"]], " ", AbsoluteCurrentValue[ce,{"CounterValue","Section"}], ".", AbsoluteCurrentValue[ce,{"CounterValue", AbsoluteCurrentValue[ce, "CellStyleName"]}], "\n"}], "Subsubsection"]]], UpdateInterval -> Infinity]]]
+     		]];
         ],
         MenuEvaluator -> Automatic 
     ],
@@ -129,15 +106,14 @@ styles = ReplaceAll[
          DefaultButton[DialogReturn[ret = First@p]]}, 
         WindowTitle -> "Pick equation"];
        If[(ret != 0),
-       NotebookWrite[InputNotebook[], 
+       NotebookWrite[EvaluationNotebook[], 
         ButtonBox[
          First@MapThread[
            DynamicBox[RowBox[Flatten[{
              CellStrip[
               First@Cases[First@Get[#1, Path-> {NotebookDirectory[]}], 
                 Cell[BlankNullSequence[], CellTags -> #2, BlankNullSequence[]], Infinity]]}]], 
-             UpdateInterval -> Infinity] &, {{m}, {ret}}], 
-         BaseStyle -> {"Hyperlink", Larger}, 
+             UpdateInterval -> Infinity] &, {{m}, {ret}}],  
          Tooltip -> FileNameTake[m], 
          ButtonFunction -> (NotebookLocate[#] &), 
          ButtonData -> {m, ret}]]];];
@@ -155,7 +131,7 @@ Item[KeyEvent["p", Modifiers -> {Control}],
             SelectionMove[nb, All, Word];
             t = NotebookRead[SelectedNotebook[]];
             If[StringQ[t],
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["FigureCaptionNumbered", t], ")"}], BaseStyle -> {"Hyperlink",Larger}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["FigureCaptionNumbered", t], ")"}], BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
 
         ],
         MenuEvaluator -> "Local"
