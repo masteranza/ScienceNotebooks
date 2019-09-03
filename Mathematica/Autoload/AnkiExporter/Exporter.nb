@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    103030,       2361]
-NotebookOptionsPosition[    102442,       2341]
-NotebookOutlinePosition[    103044,       2362]
-CellTagsIndexPosition[    103001,       2359]
+NotebookDataLength[    103967,       2386]
+NotebookOptionsPosition[    103379,       2366]
+NotebookOutlinePosition[    103981,       2387]
+CellTagsIndexPosition[    103938,       2384]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -402,6 +402,30 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
         "\[Rule]", "\"\<\>\""}], ",", 
        RowBox[{"\"\<\\\\)\\\\(\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FixRefs", "[", "what_", "]"}], ":=", 
+   RowBox[{"Replace", "[", 
+    RowBox[{
+     RowBox[{"Replace", "[", 
+      RowBox[{"what", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ButtonBox", "[", 
+          RowBox[{"___", ",", 
+           RowBox[{"Tooltip", "\[Rule]", 
+            RowBox[{"DynamicBox", "[", 
+             RowBox[{"c__", ",", 
+              RowBox[{"UpdateInterval", "\[Rule]", "\[Infinity]"}]}], "]"}]}],
+            ",", "___"}], "]"}], "\[RuleDelayed]", 
+         RowBox[{"Temp", "[", "c", "]"}]}], "\[IndentingNewLine]", "}"}], ",",
+        "Infinity"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{"Temp", "[", 
+       RowBox[{"RowBox", "[", 
+        RowBox[{"{", 
+         RowBox[{"_", ",", "d___"}], "}"}], "]"}], "]"}], "\[RuleDelayed]", 
+      "d"}], ",", "Infinity"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"openCloseAll", "[", 
@@ -1372,12 +1396,13 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
              RowBox[{
               RowBox[{
                RowBox[{"n", "=", "0"}], ";", 
-               RowBox[{"Replace", "[", 
-                RowBox[{
-                 RowBox[{"NotebookRead", "[", "#", "]"}], ",", 
-                 RowBox[{"{", 
-                  RowBox[{
+               RowBox[{"FixRefs", "[", 
+                RowBox[{"Replace", "[", 
+                 RowBox[{
+                  RowBox[{"NotebookRead", "[", "#", "]"}], ",", 
+                  RowBox[{"{", 
                    RowBox[{
+                    RowBox[{
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C_String", ",", 
                     RowBox[{"Background", "\[Rule]", 
@@ -1437,7 +1462,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", "+=", "1"}], ";", 
                     RowBox[{"Anki", "[", 
                     RowBox[{"n", ",", "C"}], "]"}]}], ")"}]}], ",", 
-                   RowBox[{
+                    RowBox[{
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C___", ",", 
                     RowBox[{"Background", "\[Rule]", 
@@ -1500,8 +1525,8 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", ",", 
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C", ",", "D"}], "]"}]}], "]"}]}], ")"}]}], ",", 
-                   " ", 
-                   RowBox[{
+                    " ", 
+                    RowBox[{
                     RowBox[{"Cell", "[", 
                     RowBox[{"C___", ",", 
                     RowBox[{"Background", "\[Rule]", 
@@ -1564,7 +1589,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", ",", 
                     RowBox[{"Cell", "[", 
                     RowBox[{"C", ",", "D"}], "]"}]}], "]"}]}], ")"}]}]}], 
-                  "}"}], ",", "Infinity"}], "]"}]}], ",", 
+                   "}"}], ",", "Infinity"}], "]"}], "]"}]}], ",", 
               "\"\<TeXFragment\>\""}], "]"}], ",", "\[IndentingNewLine]", 
             "\"\<Text\>\""}], "]"}], "]"}], "&"}], "/@", "cells"}]}], ";", 
       "\[IndentingNewLine]", 
@@ -2361,7 +2386,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 101881, 2319, 8119, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 102818, 2344, 8182, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]

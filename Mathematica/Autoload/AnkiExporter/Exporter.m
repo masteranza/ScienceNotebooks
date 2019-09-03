@@ -60,6 +60,8 @@ TeXFix[what_]:=StringReplace[StringReplace[what,{
 "}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"",
 "\\({{c"~~Shortest[c__]~~"::"~~Shortest[d__]~~"}}\\)":>("{{c"<>c<>"::\\("<>d<>"\\)}}")}],
 {"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","\\)\\("->""}];
+FixRefs[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]
+},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
 openCloseAll[nb_,target_String,to:(Open|Closed)]:=Do[SelectionMove[cell,All,CellGroup,AutoScroll->False];
 With[{content=Block[{$Context="FrontEnd`",$ContextPath={"System`"}},NotebookRead[nb]],from=to/.{Closed->Open,Open->Closed}},If[MatchQ[content,Cell[CellGroupData[{Cell[_,target,___],__},from]]],NotebookWrite[nb,Cell[CellGroupData[content[[1,1]],to]],AutoScroll->False]]];,{cell,Cells[CellStyle->target]}];
 cell[content_,opts___]:=Cell[BoxData[ToBoxes[content]],opts,ShowStringCharacters->False];
@@ -191,7 +193,7 @@ GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsec
 ShowStatus["Preparing paths..."];
 paths=(title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
-base=TeXFix[ImportString[ExportString[n=0;Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity],"TeXFragment"],
+base=TeXFix[ImportString[ExportString[n=0;FixRefs[Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity]],"TeXFragment"],
 "Text"]]&/@cells;
 (*PrintToConsole[base];*)
 (*

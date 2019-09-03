@@ -61,12 +61,12 @@ Item[KeyEvent["e", Modifiers -> {Control}],
         FrontEndExecute @ Module[{nb, t, cell, ysubt, subt},
             nb = InputNotebook[];
             SelectionMove[nb, All, Expression];
-            t = Evaluate[NotebookRead[SelectedNotebook[]]];
+            t = NotebookRead[SelectedNotebook[]];           
+            t=If[Head[t]===StyleBox,First[t],t];
             If[StringQ[t],
     		ysubt=(StringContainsQ[t,"`"] && Length[StringSplit[t,"`"]]>1);
     		If[ysubt, subt=Last[StringSplit[t,"`"]]; t=First[StringSplit[t,"`"]];,subt="";];
-            NotebookWrite[nb, ButtonBox[
-            RowBox[{"(", CounterBox["Section", t], ".", With[{x=t},DynamicBox[AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],{"CounterValue", AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],"CellStyleName"]}]]],If[ysubt,".",""],If[ysubt,subt,""], ")"}],
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", With[{x=t},DynamicBox[AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],{"CounterValue", AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],"CellStyleName"]}]]],If[ysubt,".",""],If[ysubt,subt,""], ")"}],
             BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, 
             TooltipStyle->{Background->RGBColor[1, 1, 1], CellFrame -> 1}, 
      		Tooltip -> With[{x=t, y=subt, z=ysubt}, DynamicBox[ce=First@Cells[EvaluationNotebook[], CellTags -> {x}]; RowBox[Prepend[Flatten[{CellStrip[If[z,Cases[NotebookRead[ce], Cell[Pattern[A, BlankSequence[]], CellTags->y] -> Cell[A], Infinity], NotebookRead[ce]]]}], StyleBox[RowBox[{If[z,y,TranslateSpecialCellStyleNames[AbsoluteCurrentValue[ce,"CellStyleName"]]], " ", AbsoluteCurrentValue[ce,{"CounterValue","Section"}], ".", AbsoluteCurrentValue[ce,{"CounterValue", AbsoluteCurrentValue[ce, "CellStyleName"]}], "\n"}], "Subsubsection"]]], UpdateInterval -> Infinity]]]
