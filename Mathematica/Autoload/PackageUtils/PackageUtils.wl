@@ -41,7 +41,9 @@ PrintToConsole::usage="Send to console";
 HideOutput::usage="Hides output cells";
 MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 CloseCollapsed::usage="Closes collapsed Section group cells \[Dash] good for retaining numbering during export of single sections";
-CodeVisible::usage = "Shows/Hides code and cell tags";PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
+CodeVisible::usage = "Shows/Hides code and cell tags";
+PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
+ExportToTeX::usage="Generates a draft in Tex with an option to compile to PDF";
 CreateTOC::usage="Create table of contents";
 CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
 StyleButton::usage="Creates a button to create a style Cell of a specific name";
@@ -255,6 +257,105 @@ SystemOpen[nb<>".pdf"];
 ShowStatus["PDF exported successfully"];
 {nb, nb2};
   ];
+  
+  (*Options[ExportToTeX]={ExportToPDF->False,EmbedRefrencesBeforeExport->False};*)
+ExportToTeX[(*opt:OptionsPattern[]*)]:=Module[{cells,base,prolog,epilog,styles},
+(*TeXForm["1"];*)
+(*nie zamieniaj zwyk\[LSlash]ego tekstu*)
+System`Convert`CommonDump`ConvertTextData[contents_String,toFormat_,toFormatStream_,conversionRules_,opts___?OptionQ]:=Module[{fpre,frule,fpost,pstyle,popts,str=contents},System`Convert`CommonDump`DebugPrint["CONVERTCOMMON:ConvertTextData-general content: ",contents];
+pstyle=System`Convert`CommonDump`ParentCellStyle/.{opts}/.System`Convert`CommonDump`ParentCellStyle->"";
+popts=Flatten[System`Convert`CommonDump`ParentOptions/.List/@{opts}/.System`Convert`CommonDump`ParentOptions->{}];
+System`Convert`CommonDump`DebugPrint["pstyle: ",pstyle];
+{fpre,frule,fpost}=System`Convert`CommonDump`ConvertFormatRule[pstyle/.conversionRules,False];
+System`Convert`CommonDump`DebugPrint["{fpre, frule, fpost}: ","InputForm"[{fpre,frule,fpost}]];
+If[frule===Automatic,frule=System`Convert`CommonDump`ConvertText[#1,toFormat,opts]&];
+If[!(System`Convert`CommonDump`ShowQuotesQ[pstyle]||TrueQ[System`Convert`CommonDump`ShowQuotes/.Flatten[{opts}]]||TrueQ[ShowStringCharacters/.popts]),str=System`Convert`CommonDump`RemoveQuotes[str]];
+System`Convert`CommonDump`DebugPrint["str: ",frule];
+(*If[!TrueQ[System`Convert`CommonDump`ConvertText/.Flatten[{opts}]],str=frule[str]];*)
+System`Convert`CommonDump`DebugPrint["str: ",str];
+System`Convert`CommonDump`DebugPrint["CONVERTCOMMON-ConvertTextData.  Writing the string. HIJACK"];
+System`Convert`CommonDump`DebugPrint["------------------------------------------"];
+WriteString[toFormatStream,str];];
+
+System`Convert`TeXFormDump`$TeXDelimiterReplacements=System`Convert`TeXFormDump`$TeXDelimiterReplacements/.{"\\left| "|"\\right| "->"|","\\left\\| "|"\\right\\| "->"\\| "};
+
+
+EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
+
+RefEq[what_]:=Replace[what,{Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
+Cell[BoxData[ButtonBox[___,TaggingRules->{"deeptag"->c_},___],___],___]:>("\\ref{"<>ToString[c]<>"}")},Infinity];
+
+FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]],StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88],D___]:>(C)},Infinity];
+
+NameThisFigure[i_]:=Block[{labels}, labels=(CellTags/.Options[i]); 
+If[StringQ[labels]||(ListQ[labels]&&Length[labels]==1),ToString[CellTags/.Options[i]],ToString[CellID/.Options[i]]]];
+
+NameAndExport[i_,form_]:=Block[{name},
+name=NameThisFigure[i];
+FileNameTake[Export[NotebookDirectory[EvaluationNotebook[]]<>NameThisFigure[i]<>".pdf",FormBox[form,TraditionalForm],"pdf"]]
+];
+
+InsertLabel[i_]:=Block[{labels},
+labels=(CellTags/.Options[i]);
+If[StringQ[labels]||(ListQ[labels]&&Length[labels]==1),"\\label{"<>ToString[CellTags/.Options[i]]<>"}",""]];
+
+AddLabels[i_,form_]:=Block[{labels},
+labels=Replace[Cases[NotebookRead[i],Cell[___,_[form],___,CellTags->_,___],Infinity],Cell[___,_[form],___,CellTags->c_,___]:>c,Infinity];
+(If[Length[labels]==1,"{",""]<>(StringTrim@ExportString[Cell[BoxData[form],FormatType->TraditionalForm],"TeXFragment"])<>If[Length[labels]==1,"\\label{"<>First[labels]<>"}} ",""])
+  
+
+(*old code for latex ref*)
+(*(If[Length[labels]\[Equal]1,"\\labeltext{",""]<>(StringTrim@ExportString[Cell[BoxData[form],FormatType\[Rule]TraditionalForm],"TeXFragment"])<>If[Length[labels]\[Equal]1,"}{"<>First[labels]<>"} ",""])*)];
+prolog="% \\documentclass[titlepage, a4paper]{mwart}
+%\\documentclass[aps,prl,showpacs,10pt,superscriptaddress,nidanfloat,twocolumn,% draft]{revtex4-1}
+\\documentclass{article}
+\\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\\usepackage{graphicx, setspace}
+\\usepackage[export]{adjustbox}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+% \\usepackage{polski}
+\\usepackage[pdftex,colorlinks=true,citecolor=blue,linkcolor=magenta]{hyperref}
+\\usepackage{showlabels}
+% \\makeatletter
+% \\newcommand{\\labeltext}[3][]{%
+%     \\@bsphack%
+%     \\csname phantomsection\\endcsname% in case hyperref is used
+%     \\def\\tst{#1}%
+%     \\def\\labelmarkup{\\emph}% How to markup the label itself
+% %\\def\\refmarkup{\\labelmarkup}% How to markup the reference
+%     \\def\\refmarkup{}%
+%     \\ifx\\tst\\empty\\def\\@currentlabel{\\refmarkup{#2}}{\\label{#3}}%
+%     \\else\\def\\@currentlabel{\\refmarkup{#1}}{\\label{#3}}\\fi%
+%     \\@esphack%
+%     \\labelmarkup{#2}% visible printed text.
+% }
+% \\makeatother
+\\begin{document}\n";
+epilog="\\end{document}";
+(*styles=DeleteCases[FEPrivate`GetPopupList[EvaluationNotebook[],"MenuListStyles"]//FE`Evaluate//Cases[_[s_String,_]:>s],"Input"|"Output"];*)
+cells=Cells[EvaluationNotebook[]];
+cells=Select[Select[cells,(CurrentValue[#,"CellStyle"]!={"Input"})&],(CurrentValue[#,"CellStyle"]!={"Output"})&];
+base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[False(*OptionValue[EmbedRefrencesBeforeExport]*),EmbedEq,RefEq]@FixFigures[NotebookRead[i]],"TeXFragment",
+"ConversionRules"->{
+"Section"->{"\\section{",Automatic,InsertLabel[i]<>"}"},
+"Subsection"->{"\\subsection{",Automatic,InsertLabel[i]<>"}"},
+"Subsubsection"->{"\\subsubsection{",Automatic,InsertLabel[i]<>"}"},
+"Subsubsection"->{"\\subsubsection{",Automatic,InsertLabel[i]<>"}"},
+"Figure"->{"\\begin{figure}[ht!]\\centering\\includegraphics[max width=\\textwidth]{",NameAndExport[i,#]&,"}"<>InsertLabel[i]<>"\\end{figure}"},
+"EquationNumbered"->{"\\begin{equation}",Convert`TeX`BoxesToTeX[#]&,InsertLabel[i]<>"\\end{equation}"},
+"Equation"->{"\\begin{equation*}",Convert`TeX`BoxesToTeX[#]&,InsertLabel[i]<>"\\end{equation*}"},
+"InlineCell"->{"",AddLabels[i,#]&,""}
+}
+],"Text"],{i,cells}];
+Export[StringDrop[NotebookFileName[],-2]<>"tex",prolog<>base<>epilog,"Text"];
+If[True(*OptionValue[ExportToPDF]*),
+PrintToConsole["Running command: "<>"!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; ls; pdflatex "<>StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"];
+(*SetEnvironment["PATH"\[Rule]Import["!source ~/.bash_profile; echo $PATH","Text"]];*)
+Quiet@ReadList@OpenRead["!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; /Library/TeX/texbin/pdflatex "<>StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"];
+(*RunProcess@{"pdflatex.exe",StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"}*)];
+];
+
 
 
 End[];

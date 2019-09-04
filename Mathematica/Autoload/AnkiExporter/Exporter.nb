@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    103967,       2386]
-NotebookOptionsPosition[    103379,       2366]
-NotebookOutlinePosition[    103981,       2387]
-CellTagsIndexPosition[    103938,       2384]
+NotebookDataLength[    103964,       2386]
+NotebookOptionsPosition[    103376,       2366]
+NotebookOutlinePosition[    103978,       2387]
+CellTagsIndexPosition[    103935,       2384]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -563,7 +563,7 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
                     "\"\<<script>\nfunction openCloseGroup() {\n\
 wolfram.cloud.parentNotebook.evaluateExpression({\n    expression: \
 'FrontEndExecute[NotebookLocate[\\\"\>\"", "<>", "base", "<>", 
-                    "\"\<\\\"]]' });\n  \n }\n</script>\n<body \
+                    "\"\<\\\"]]' });\n}\n</script>\n<body \
 onload='openCloseGroup()'>\>\""}], "]"}]}]}], "]"}], ",", 
                    RowBox[{
                     RowBox[{"(", 
@@ -1174,7 +1174,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
             "\"\<Question\>\"", ",", "\"\<Remark\>\"", ",", "\"\<Comment\>\"",
              ",", "\"\<Theorem\>\"", ",", "\"\<Proof\>\"", ",", 
             "\"\<Axiom\>\"", ",", "\"\<Definition\>\"", ",", "\"\<Lemma\>\"", 
-            ",", "\"\<FunFact\>\""}], "}"}]}]}], "]"}]}], ";", 
+            ",", "\"\<Corollary\>\""}], "}"}]}]}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"title", "=", 
        RowBox[{"First", "@", 
@@ -2386,7 +2386,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 102818, 2344, 8182, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 102815, 2344, 8161, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]

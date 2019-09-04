@@ -73,8 +73,7 @@ su=Quiet@CloudDeploy[URLDispatcher[{"/"~~EndOfString:>Delayed@CloudImport@s,"/"~
 function openCloseGroup() {
 wolfram.cloud.parentNotebook.evaluateExpression({
     expression: 'FrontEndExecute[NotebookLocate[\""<>base<>"\"]]' });
-  
- }
+}
 </script>
 <body onload='openCloseGroup()'>"]],(Rest@s)/.{Notebook->Sequence}],"CloudCDF"]}],StringDrop[cn,-3]];
 StringDrop[StringSplit[CloudConnect[],"@"][[1]]<>fn,-3]
@@ -176,7 +175,7 @@ GraphicsBox[___]:> "",
 
 StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[ToTex[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}];
 (*the above is old*)
-cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Example","Exercise","Solution","Question","Remark","Comment","Theorem","Proof","Axiom","Definition","Lemma","FunFact"}];
+cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Example","Exercise","Solution","Question","Remark","Comment","Theorem","Proof","Axiom","Definition","Lemma","Corollary"}];
 title=First@(Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Title",___]:>name,Infinity]/.{}-> {""});
 ShowStatus["Gathering section info..."];
 sections=CurrentValue[#,{"CounterValue","Section"}]&/@cells;
