@@ -78,3 +78,19 @@ More tutorials coming soon.  (The system is poorly documented, but already has t
 
 Highlighting shortcut apears not to work when caps-lock is enabled.
 Someone might think that CMD+SHIFT+D will do the job and try to press it... and then BANG! You've just learned that it doesn't work, but instead splits the selected text into another cell - useful. Serendipity.
+
+## Useful additions
+
+If you'd like to have nice way to type in "post-integration limits" that will be compatible with TeX and Anki run this command once:
+`SetOptions[$FrontEnd, 
+ InputAliases -> 
+  Join[InputAliases /. 
+    Options[$FrontEnd, InputAliases], {"at" -> 
+     TemplateBox[{"\[SelectionPlaceholder]", "Automatic", 
+       "\[Placeholder]", "\[Placeholder]"}, "EvaluatedAt", 
+      DisplayFunction -> (SubsuperscriptBox[
+          RowBox[{#1, 
+            StyleBox["\[VerticalLine]", SpanMinSize -> 1.5, 
+             SpanSymmetric -> False]}], 
+          RowBox[{"\[MediumSpace]", #3}], 
+          RowBox[{"\[MediumSpace]", #4}]] &)]}]]`
