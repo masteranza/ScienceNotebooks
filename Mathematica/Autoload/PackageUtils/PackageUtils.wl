@@ -361,10 +361,11 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[False(*Option
 }
 ],"Text"],{i,cells}];
 base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
-base=StringReplace[StringReplace[base,{"\\)"~~ShortestMatch[C___]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
-StartOfString~~ShortestMatch[C___]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
-"\\)"~~ShortestMatch[C___]~~EndOfString:>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"]]
+base=StringReplace[StringReplace[base,{"\\)"~~Shortest[C__]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
+StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
+"\\)"~~Shortest[C__]~~EndOfString:>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"]]
 }],{"\\pmb{"->"\\bf{"}];
+base=If[StringContainsQ[base,"\\("],base,StringReplace[base,{"\\pmb{"->"\\textbf{"}]];
 (*base=StringReplace[base,{"\\&"\[Rule]"&","{array}" -> "{aligned}"}];*)
 Export[StringDrop[NotebookFileName[],-2]<>"tex",prolog<>base<>epilog,"Text"];
 ShowStatus["Trying to build the PDF from TeX (might fail)..."];

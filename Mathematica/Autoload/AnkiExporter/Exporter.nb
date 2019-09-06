@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    111382,       2556]
-NotebookOptionsPosition[    110794,       2536]
-NotebookOutlinePosition[    111396,       2557]
-CellTagsIndexPosition[    111353,       2554]
+NotebookDataLength[    116351,       2673]
+NotebookOptionsPosition[    115761,       2653]
+NotebookOutlinePosition[    116365,       2674]
+CellTagsIndexPosition[    116322,       2671]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -404,7 +404,7 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"FixRefs", "[", "what_", "]"}], ":=", 
+   RowBox[{"EmbedEq", "[", "what_", "]"}], ":=", 
    RowBox[{"Replace", "[", 
     RowBox[{
      RowBox[{"Replace", "[", 
@@ -413,19 +413,35 @@ cloze notes\>\""}], ";"}], "\[IndentingNewLine]",
         RowBox[{
          RowBox[{"ButtonBox", "[", 
           RowBox[{"___", ",", 
-           RowBox[{"Tooltip", "\[Rule]", 
+           RowBox[{"Tooltip", "->", 
             RowBox[{"DynamicBox", "[", 
              RowBox[{"c__", ",", 
-              RowBox[{"UpdateInterval", "\[Rule]", "\[Infinity]"}]}], "]"}]}],
-            ",", "___"}], "]"}], "\[RuleDelayed]", 
-         RowBox[{"Temp", "[", "c", "]"}]}], "\[IndentingNewLine]", "}"}], ",",
-        "Infinity"}], "]"}], ",", 
+              RowBox[{"UpdateInterval", "->", "\[Infinity]"}]}], "]"}]}], ",",
+            "___"}], "]"}], ":>", 
+         RowBox[{"Temp", "[", "c", "]"}]}], "}"}], ",", "Infinity"}], "]"}], 
+     ",", 
      RowBox[{
       RowBox[{"Temp", "[", 
        RowBox[{"RowBox", "[", 
         RowBox[{"{", 
-         RowBox[{"_", ",", "d___"}], "}"}], "]"}], "]"}], "\[RuleDelayed]", 
-      "d"}], ",", "Infinity"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+         RowBox[{"_", ",", "d___"}], "}"}], "]"}], "]"}], ":>", "d"}], ",", 
+     "Infinity"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"FixFigures", "[", "what_", "]"}], ":=", 
+    RowBox[{"Replace", "[", 
+     RowBox[{"what", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"BoxData", "[", 
+         RowBox[{"GraphicsBox", "[", "C___", "]"}], "]"}], ":>", 
+        RowBox[{"BoxData", "[", 
+         RowBox[{"FormBox", "[", 
+          RowBox[{
+           RowBox[{"GraphicsBox", "[", "C", "]"}], ",", "TraditionalForm"}], 
+          "]"}], "]"}]}], "}"}], ",", "Infinity"}], "]"}]}], ";"}], 
+  "\n"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"openCloseAll", "[", 
@@ -1489,12 +1505,13 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
              RowBox[{
               RowBox[{
                RowBox[{"n", "=", "0"}], ";", 
-               RowBox[{"FixRefs", "[", 
-                RowBox[{"Replace", "[", 
-                 RowBox[{
-                  RowBox[{"NotebookRead", "[", "#", "]"}], ",", 
-                  RowBox[{"{", 
-                   RowBox[{
+               RowBox[{"EmbedEq", "[", 
+                RowBox[{"FixFigures", "@", 
+                 RowBox[{"Replace", "[", 
+                  RowBox[{
+                   RowBox[{"NotebookRead", "[", "#", "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
                     RowBox[{
                     RowBox[{"StyleBox", "[", 
                     RowBox[{"C_String", ",", 
@@ -1516,10 +1533,9 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     0.5866666666666667],
                     FrameTicks->None,
                     
-                    ImageSize->
-                    Dynamic[{Automatic, 
-                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                    Magnification])}],
+                    ImageSize->Dynamic[{
+                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification])}],
                     PlotRangePadding->None],
                     StyleBox[
                     RowBox[{"RGBColor", "[", 
@@ -1576,10 +1592,9 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     0.5866666666666667],
                     FrameTicks->None,
                     
-                    ImageSize->
-                    Dynamic[{Automatic, 
-                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                    Magnification])}],
+                    ImageSize->Dynamic[{
+                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification])}],
                     PlotRangePadding->None],
                     StyleBox[
                     RowBox[{"RGBColor", "[", 
@@ -1640,10 +1655,9 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     0.5866666666666667],
                     FrameTicks->None,
                     
-                    ImageSize->
-                    Dynamic[{Automatic, 
-                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                    Magnification])}],
+                    ImageSize->Dynamic[{
+                    Automatic, 1.35 (CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification])}],
                     PlotRangePadding->None],
                     StyleBox[
                     RowBox[{"RGBColor", "[", 
@@ -1682,7 +1696,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     RowBox[{"n", ",", 
                     RowBox[{"Cell", "[", 
                     RowBox[{"C", ",", "D"}], "]"}]}], "]"}]}], ")"}]}]}], 
-                   "}"}], ",", "Infinity"}], "]"}], "]"}]}], ",", 
+                    "}"}], ",", "Infinity"}], "]"}]}], "]"}]}], ",", 
               "\"\<TeXFragment\>\"", ",", 
               RowBox[{"\"\<BoxRules\>\"", "->", 
                RowBox[{"{", 
@@ -2356,35 +2370,138 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
           RowBox[{
            RowBox[{
             RowBox[{"\"\<\\\\)\>\"", "~~", 
-             RowBox[{"ShortestMatch", "[", "C___", "]"}], "~~", 
-             "\"\<\\\\(\>\""}], "\[RuleDelayed]", 
+             RowBox[{"Shortest", "[", "C__", "]"}], "~~", "\"\<\\\\(\>\""}], 
+            "\[RuleDelayed]", 
             RowBox[{"StringJoin", "[", 
              RowBox[{"\"\<\\\\)\>\"", ",", 
               RowBox[{"StringReplace", "[", 
                RowBox[{"C", ",", 
-                RowBox[{"\"\<\\\\pmb{\>\"", "->", "\"\<\\\\textbf{\>\""}]}], 
-               "]"}], ",", "\"\<\\\\(\>\""}], "]"}]}], ",", "\n", 
+                RowBox[{
+                 RowBox[{"\"\<\\\\pmb{\>\"", "~~", 
+                  RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                 "\[RuleDelayed]", 
+                 RowBox[{"StringJoin", "[", 
+                  RowBox[{"\"\<<b>\>\"", ",", "D", ",", "\"\<</b>\>\""}], 
+                  "]"}]}]}], "]"}], ",", "\"\<\\\\(\>\""}], "]"}]}], ",", 
+           "\n", 
            RowBox[{
             RowBox[{"StartOfString", "~~", 
-             RowBox[{"ShortestMatch", "[", "C___", "]"}], "~~", 
-             "\"\<\\\\(\>\""}], "\[RuleDelayed]", 
+             RowBox[{"Shortest", "[", "C__", "]"}], "~~", "\"\<\\\\(\>\""}], 
+            "\[RuleDelayed]", 
             RowBox[{"StringJoin", "[", 
              RowBox[{
               RowBox[{"StringReplace", "[", 
                RowBox[{"C", ",", 
-                RowBox[{"\"\<\\\\pmb{\>\"", "->", "\"\<\\\\textbf{\>\""}]}], 
-               "]"}], ",", "\"\<\\\\(\>\""}], "]"}]}], ",", "\n", 
+                RowBox[{
+                 RowBox[{"\"\<\\\\pmb{\>\"", "~~", 
+                  RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                 "\[RuleDelayed]", 
+                 RowBox[{"StringJoin", "[", 
+                  RowBox[{"\"\<</b>\>\"", ",", "D", ",", "\"\<</b>\>\""}], 
+                  "]"}]}]}], "]"}], ",", "\"\<\\\\(\>\""}], "]"}]}], ",", 
+           "\n", 
            RowBox[{
             RowBox[{"\"\<\\\\)\>\"", "~~", 
-             RowBox[{"ShortestMatch", "[", "C___", "]"}], "~~", 
-             "EndOfString"}], "\[RuleDelayed]", 
+             RowBox[{"Shortest", "[", "C__", "]"}], "~~", "EndOfString"}], 
+            "\[RuleDelayed]", 
             RowBox[{"StringJoin", "[", 
              RowBox[{"\"\<\\\\)\>\"", ",", 
               RowBox[{"StringReplace", "[", 
                RowBox[{"C", ",", 
-                RowBox[{"\"\<\\\\pmb{\>\"", "->", "\"\<\\\\textbf{\>\""}]}], 
-               "]"}]}], "]"}]}]}], "\n", "}"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"\"\<\\\\pmb{\>\"", "~~", 
+                  RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                 "\[RuleDelayed]", 
+                 RowBox[{"StringJoin", "[", 
+                  RowBox[{"\"\<<b>\>\"", ",", "D", ",", "\"\<</b>\>\""}], 
+                  "]"}]}]}], "]"}]}], "]"}]}]}], "\n", "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"base", "=", 
+       RowBox[{"StringReplace", "[", 
+        RowBox[{"base", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\"\<\\\\)\>\"", "~~", 
+             RowBox[{"Shortest", "[", "C__", "]"}], "~~", "\"\<\\\\(\>\""}], 
+            "\[RuleDelayed]", 
+            RowBox[{"StringJoin", "[", 
+             RowBox[{"\"\<\\\\)\>\"", ",", 
+              RowBox[{"StringReplace", "[", 
+               RowBox[{"C", ",", 
+                RowBox[{
+                 RowBox[{"\"\<\\\\textit{\>\"", "~~", 
+                  RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                 "\[RuleDelayed]", 
+                 RowBox[{"StringJoin", "[", 
+                  RowBox[{"\"\<<i>\>\"", ",", "D", ",", "\"\<</i>\>\""}], 
+                  "]"}]}]}], "]"}], ",", "\"\<\\\\(\>\""}], "]"}]}], ",", 
+           "\n", 
+           RowBox[{
+            RowBox[{"StartOfString", "~~", 
+             RowBox[{"Shortest", "[", "C__", "]"}], "~~", "\"\<\\\\(\>\""}], 
+            "\[RuleDelayed]", 
+            RowBox[{"StringJoin", "[", 
+             RowBox[{
+              RowBox[{"StringReplace", "[", 
+               RowBox[{"C", ",", 
+                RowBox[{
+                 RowBox[{"\"\<\\\\textit{\>\"", "~~", 
+                  RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                 "\[RuleDelayed]", 
+                 RowBox[{"StringJoin", "[", 
+                  RowBox[{"\"\<</i>\>\"", ",", "D", ",", "\"\<</i>\>\""}], 
+                  "]"}]}]}], "]"}], ",", "\"\<\\\\(\>\""}], "]"}]}], ",", 
+           "\n", 
+           RowBox[{
+            RowBox[{"\"\<\\\\)\>\"", "~~", 
+             RowBox[{"Shortest", "[", "C__", "]"}], "~~", "EndOfString"}], 
+            "\[RuleDelayed]", 
+            RowBox[{"StringJoin", "[", 
+             RowBox[{"\"\<\\\\)\>\"", ",", 
+              RowBox[{"StringReplace", "[", 
+               RowBox[{"C", ",", 
+                RowBox[{
+                 RowBox[{"\"\<\\\\textit{\>\"", "~~", 
+                  RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                 "\[RuleDelayed]", 
+                 RowBox[{"StringJoin", "[", 
+                  RowBox[{"\"\<<i>\>\"", ",", "D", ",", "\"\<</i>\>\""}], 
+                  "]"}]}]}], "]"}]}], "]"}]}]}], "\n", "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"extra", " ", "case", " ", "with", " ", "no", " ", "eq"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"base", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"#", ",", "\"\<\\\\(\>\""}], "]"}], ",", "#", ",", 
+           RowBox[{"StringReplace", "[", 
+            RowBox[{"#", ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"\"\<\\\\pmb{\>\"", "~~", 
+                 RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                "\[RuleDelayed]", 
+                RowBox[{"StringJoin", "[", 
+                 RowBox[{"\"\<<b>\>\"", ",", "D", ",", "\"\<</b>\>\""}], 
+                 "]"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"\"\<\\\\textit{\>\"", "~~", 
+                 RowBox[{"Shortest", "[", "D__", "]"}], "~~", "\"\<}\>\""}], 
+                "\[RuleDelayed]", 
+                RowBox[{"StringJoin", "[", 
+                 RowBox[{"\"\<<i>\>\"", ",", "D", ",", "\"\<</i>\>\""}], 
+                 "]"}]}]}], "}"}]}], "]"}]}], "]"}], "&"}], "/@", "base"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"base", "=", 
+       RowBox[{"StringTrim", "[", 
+        RowBox[{"base", ",", "\"\<<br>\>\""}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{
       "ShowStatus", "[", "\"\<Exporting to Wolfram Cloud...\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
@@ -2536,7 +2653,7 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{960, 855},
-WindowMargins->{{Automatic, 40}, {Automatic, -1089}},
+WindowMargins->{{-172, Automatic}, {Automatic, -1124}},
 FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
 StyleDefinitions->Notebook[{
    Cell[
@@ -2556,7 +2673,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 110233, 2514, 8875, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 115200, 2631, 9379, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]
