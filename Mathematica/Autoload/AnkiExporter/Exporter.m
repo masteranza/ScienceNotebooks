@@ -136,6 +136,17 @@ System`Convert`CommonDump`DebugPrint["maketex[Anki[nr_, boxes__]]"];
 System`Convert`CommonDump`DebugPrint["boxes: ",boxes];
 If[StringQ[boxes],"{{c"<>ToString[nr]<>"::"<>StringReplace[boxes,"}}"->"} }"]<>" }} ",
 "{{c"<>ToString[nr]<>"::"<>StringReplace[System`Convert`TeXFormDump`MakeTeX[boxes],"}}"->"} }"]<>" }} "]);
+(*fixes an old MMA bug *)
+System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};
+deb=Convert`TeX`BoxesToTeX[""];
+System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};
+(*rules for 'at' notions*)
+myBoxRule[TemplateBox[{boxes_,_,lima_,limb_},___]]:=StringJoin["\\left."<>System`Convert`TeXFormDump`maketex[boxes],"\\right|_{",System`Convert`TeXFormDump`maketex[lima],"}^{",System`Convert`TeXFormDump`maketex[limb],"}"];
+
+myBoxRule[FormBox[TemplateBox[{boxes_,_,lima_,limb_},___],___]]:=StringJoin["\\left."<>System`Convert`TeXFormDump`maketex[boxes],"\\right|_{",System`Convert`TeXFormDump`maketex[lima],"}^{",System`Convert`TeXFormDump`maketex[limb],"}"];
+
+myBoxRule[FormBox[C__]]:=System`Convert`TeXFormDump`maketex[FormBox[C]];
+EqBoxToTeX[c_]:=Convert`TeX`BoxesToTeX[c,"BoxRules"->{box:(_TemplateBox|_FormBox):>(myBoxRule[box])}];
 
 ShowStatus["Export to Anki begins..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["Nothing to export"]; Abort[]];
@@ -192,7 +203,11 @@ GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsec
 ShowStatus["Preparing paths..."];
 paths=(title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
-base=TeXFix[ImportString[ExportString[n=0;FixRefs[Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity]],"TeXFragment"],
+base=TeXFix[ImportString[ExportString[n=0;FixRefs[Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity]],"TeXFragment","BoxRules"->{box:(_FormBox):>(myBoxRule[box]),
+"\[Transpose]":>"^{\\mathsf{T}}",
+"\[ConjugateTranspose]":>"^{\\dagger} ",
+"\[HermitianConjugate]":>"^{\\dagger} "},"ConversionRules"->{"Equation"->{"\\(\\begin{equation*}",EqBoxToTeX[#]&,"\\end{equation*}\\)"},
+"EquationNumbered"->{"\\(\\begin{equation*}",EqBoxToTeX[#]&,"\\end{equation*}\\)"}}],
 "Text"]]&/@cells;
 (*PrintToConsole[base];*)
 (*
@@ -270,6 +285,12 @@ base=StringReplace[base,{
 "\\right\\right| "~~WhitespaceCharacter...~~"{}_":> "\\right|_",
 "\\right\\right| "~~WhitespaceCharacter...~~"_":> "\\right|_"
 }];
+base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
+base=StringReplace[base,{"\\)"~~ShortestMatch[C___]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
+StartOfString~~ShortestMatch[C___]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
+"\\)"~~ShortestMatch[C___]~~EndOfString:>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"]]
+}];
+
 ShowStatus["Exporting to Wolfram Cloud..."];
 ndir=NotebookDirectory[EvaluationNotebook[]];
 npath=NotebookFileName[EvaluationNotebook[]];
