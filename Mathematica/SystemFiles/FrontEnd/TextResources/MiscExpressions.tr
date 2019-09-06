@@ -1,6 +1,142 @@
 @@resource FEExpressions
 {
 
+(****************************)
+(* Cell Group Openers       *)
+(****************************)
+"cellGroupOpenerInline" ->
+	Cell[BoxData[RowBox[{
+		"\[ThickSpace]",
+		StyleBox[
+			ButtonBox[
+				DynamicBox[
+					If[SameQ[CurrentValue[AttachedCellParent[],"CellGroupOpen"],Open],
+						If[CurrentValue["MouseOver"],"\:F449","\:F443","\:F443"],
+						If[CurrentValue["MouseOver"],"\:F43B","\:F442","\:F442"]
+					]
+				],
+				Appearance->"Frameless",
+				Background->None,
+				BaseStyle->None,
+				BaselinePosition->(Baseline->Baseline),
+				ButtonFunction->(
+					FEPrivate`SetCellGroupOpenerPersistence[AttachedCellParent[],True];
+					FEPrivate`SetCellGroupOpen[AttachedCellParent[],
+					If[SameQ[CurrentValue[AttachedCellParent[],"CellGroupOpen"],Open],Closed,Open]
+					];
+				&),
+				FrameMargins->0
+			],
+			FontColor->Dynamic[If[CurrentValue["MouseOver"]&&CurrentValue[{"MouseButtonTest",1}]&&ColorQ[AbsoluteCurrentValue[FontColor]],
+				FEPrivate`Darker[AbsoluteCurrentValue[FontColor]],
+				AbsoluteCurrentValue[FontColor],
+				AbsoluteCurrentValue[FontColor]
+			]]
+		]}]],
+		"SystemAttachedCell",
+		CellTags->{"CellGroupOpener"},
+		FontSize->(0.8 * Inherited),
+		Magnification->Dynamic[AbsoluteCurrentValue[ParentCell[EvaluationCell[]],Magnification]]
+	],
+
+"cellGroupOpenerInlineRound" ->
+	Cell[BoxData[RowBox[{
+		"\[ThickSpace]",
+		StyleBox[
+			ButtonBox[
+				DynamicBox[
+					If[SameQ[CurrentValue[AttachedCellParent[],"CellGroupOpen"],Open],
+						If[CurrentValue["MouseOver"],"\:F44A","\:F446","\:F446"],
+						If[CurrentValue["MouseOver"],"\:F43D","\:F43F","\:F43F"]
+					]
+				],
+				Appearance->"Frameless",
+				Background->None,
+				BaseStyle->None,
+				BaselinePosition->(Baseline->Baseline),
+				ButtonFunction->(
+					FEPrivate`SetCellGroupOpenerPersistence[AttachedCellParent[],True];
+					FEPrivate`SetCellGroupOpen[AttachedCellParent[],
+					If[SameQ[CurrentValue[AttachedCellParent[],"CellGroupOpen"],Open],Closed,Open]
+					];
+				&),
+				FrameMargins->0
+			],
+			FontColor->Dynamic[If[CurrentValue["MouseOver"]&&CurrentValue[{"MouseButtonTest",1}]&&ColorQ[AbsoluteCurrentValue[FontColor]],
+				FEPrivate`Darker[AbsoluteCurrentValue[FontColor]],
+				AbsoluteCurrentValue[FontColor],
+				AbsoluteCurrentValue[FontColor]
+			]]
+		]}]],
+		"SystemAttachedCell",
+		CellTags->{"CellGroupOpener"},
+		FontSize->(0.8 * Inherited),
+		Magnification->Dynamic[AbsoluteCurrentValue[ParentCell[EvaluationCell[]],Magnification]]
+	],
+
+"cellGroupOpenerThumbnails" ->
+	Cell[BoxData[
+		TagBox[
+			ButtonBox[
+				OverlayBox[{
+					PaneBox[
+						DynamicBox[Refresh[
+							Function[{images},
+								If[VectorQ[images,ImageQ],
+									Module[{template,imageData,width,height},
+										template=First@CurrentValue[FEPrivate`FrontEndResource["FEExpressions","ImportImageIntoDocumentTemplate"]];
+										If[template =!= $Failed,
+											imageData = ImageData[ImageAssemble[
+												Map[ImagePad[#,{{8,8},{0,0}},Automatic]&,
+													First@Transpose@ImagePartition[
+														ImagePad[
+															#,{{0, 0}, {128 - Mod[Part[ImageDimensions[#], 2], 128], 0}},White
+														]&[ImageResize[ImageTake[ImageAssemble[Transpose[{images}]],1024,2048],{256}]],
+														{256,128}
+													]
+												]
+											],"Byte"];
+											{height,width} = Part[Dimensions[imageData],{1,2}];
+											ReplaceAll[template,{"imagedata"->imageData, "height"->height, "width"->width}],
+											GraphicsBox[{RectangleBox[{0,0},{512,96}]},ImageSize->{Automatic,{96}}]
+										]
+									],
+									GraphicsBox[{RectangleBox[{0,0},{512,96}]},ImageSize->{Automatic,{96}}]
+								]
+							][First@CurrentValue[FEPrivate`CellGroupThumbnails[AttachedCellParent]]],
+							None
+						]],
+						Alignment->{Left, Center},
+						ImageMargins->16,
+						ImageSize->{Automatic,{96}},
+						ImageSizeAction->"Clip"
+					],
+					OverlayBox[{
+						GraphicsBox[{RGBColor[0, 0.666667, 1],Opacity[0.07],RectangleBox[{0, 0}, {768, 128}]},
+							ImagePadding->None,
+							ImageSize->{768, 128},
+							PlotRangePadding->None
+						],
+						DynamicBox[FEPrivate`ImportImage[FrontEnd`FileName[{"Typeset", "CellGroupOpener"}, "DetailsMagnifyHot.png"]]],
+						GraphicsBox[{RGBColor[0, 0.666667, 1],Opacity[0.03],RectangleBox[{0, 0}, {768, 128}]},
+							ImagePadding->None,
+							ImageSize->{768, 128},
+							PlotRangePadding->None
+						],
+						DynamicBox[FEPrivate`ImportImage[FrontEnd`FileName[{"Typeset", "CellGroupOpener"}, "DetailsMagnify.png"]]]},
+						Dynamic[If[SameQ[CurrentValue["MouseOver"],True],{1,2},{3,4}]],
+						Alignment->{-0.85,Center}
+					]},
+					All,2,
+					Alignment->{Left,Center}
+				],
+				Appearance->"Frameless",
+				ButtonFunction->(FEPrivate`SetCellGroupOpen[AttachedCellParent,Open]&)
+			],
+			MouseAppearanceTag["LinkHand"]
+		]
+	],"SystemAttachedCell",CellTags->{"CellGroupOpener"},CellMargins->{{32,3},{3,3}},Magnification->Dynamic[AbsoluteCurrentValue[ParentCell[EvaluationCell[]],Magnification]]],	
+
 (*****************************************)
 (*   Unevaluated Dynamic templates       *)
 (*****************************************)
@@ -21,26 +157,45 @@
 (*   Locator and Slider2D thumb appearances *)
 (********************************************)
 
-
 "LocatorDefaultThumb" ->
-GraphicsBox[InsetBox[
-   GraphicsBox[{
-     {AbsoluteThickness[1], Antialiasing->False,
-      LineBox[{{{0, -10}, {0, -2}}, {{0, 2}, {0, 10}}, {{-10, 0}, {-2, 0}}, {{2,
-        0}, {10, 0}}}], Antialiasing->True, CircleBox[{-0.5, 0.5}, 5]}, 
-     {AbsoluteThickness[3], Opacity[0.3], CircleBox[{-0.5, 0.5}, 3]}},
-    ImageSize->17,
-    PlotRange->{{-8, 8}, {-8, 8}}], {0, 0}, Center]],
+  FEPrivate`Switch[FEPrivate`$OperatingSystem,
+    "iOS",
+      GraphicsBox[{AbsoluteThickness[1], Antialiasing->False, 
+        RGBColor[0, 0.478, 1], 
+        LineBox[{{{0, -5}, {0, -2}}, {{0, 1.5}, {0, 4.5}}, {{-4.5, 
+            0}, {-1.5, 0}}, {{2, 0}, {5, 0}}}], Antialiasing->True, 
+        CircleBox[{0, 0}, 8]}, ImageSize->30, 
+        PlotRange->{{-9, 9}, {-9, 9}}],
+    _,
+      GraphicsBox[InsetBox[
+        GraphicsBox[{
+          {AbsoluteThickness[1], Antialiasing->False,
+           LineBox[{{{0, -10}, {0, -2}}, {{0, 2}, {0, 10}}, {{-10, 0}, {-2, 0}}, {{2,
+             0}, {10, 0}}}], Antialiasing->True, CircleBox[{-0.5, 0.5}, 5]}, 
+          {AbsoluteThickness[3], Opacity[0.3], CircleBox[{-0.5, 0.5}, 3]}},
+         ImageSize->17,
+         PlotRange->{{-8, 8}, {-8, 8}}], {0, 0}, Center]]
+  ],
 
 "LocatorDefaultThumbDisabled" ->
-	GraphicsBox[InsetBox[
-   GraphicsBox[{
-     {AbsoluteThickness[1], Antialiasing->False, Opacity[0.2],
-      LineBox[{{{0, -10}, {0, -2}}, {{0, 2}, {0, 10}}, {{-10, 0}, {-2, 0}}, {{2,
-        0}, {10, 0}}}], Antialiasing->True, CircleBox[{-0.5, 0.5}, 5]}, 
-     {AbsoluteThickness[3], Opacity[0.1], CircleBox[{-0.5, 0.5}, 3]}},
-    ImageSize->17,
-    PlotRange->{{-8, 8}, {-8, 8}}], {0, 0}, Center]],
+  FEPrivate`Switch[FEPrivate`$OperatingSystem,
+    "iOS",
+      GraphicsBox[{AbsoluteThickness[1], Antialiasing->False, Opacity[0.2], 
+        RGBColor[0, 0.478, 1], 
+        LineBox[{{{0, -5}, {0, -2}}, {{0, 1.5}, {0, 4.5}}, {{-4.5, 
+            0}, {-1.5, 0}}, {{2, 0}, {5, 0}}}], Antialiasing->True, 
+        CircleBox[{0, 0}, 8]}, ImageSize->30, 
+        PlotRange->{{-9, 9}, {-9, 9}}],
+    _,
+      GraphicsBox[InsetBox[
+        GraphicsBox[{
+            {AbsoluteThickness[1], Antialiasing->False, Opacity[0.2],
+             LineBox[{{{0, -10}, {0, -2}}, {{0, 2}, {0, 10}}, {{-10, 0}, {-2, 0}}, {{2,
+               0}, {10, 0}}}], Antialiasing->True, CircleBox[{-0.5, 0.5}, 5]}, 
+            {AbsoluteThickness[3], Opacity[0.1], CircleBox[{-0.5, 0.5}, 3]}},
+          ImageSize->17,
+          PlotRange->{{-8, 8}, {-8, 8}}], {0, 0}, Center]]
+  ],
 
 "Slider2DDefaultThumb" ->
 GraphicsBox[{
@@ -956,7 +1111,7 @@ GraphicsBox[
 "ImageToByteTemplate" ->			(FrontEnd`SafeImageModify[#, Image[#, "Byte"]&]&),
 "ImageToBit16Template" ->			(FrontEnd`SafeImageModify[#, Image[#, "Bit16"]&]&),
 "ImageToReal32Template" ->			(FrontEnd`SafeImageModify[#, Image[#, "Real32"]&]&),
-"ImageToRealTemplate" ->			(FrontEnd`SafeImageModify[#, Image[#, "Real"]&]&),
+"ImageToReal64Template" ->			(FrontEnd`SafeImageModify[#, Image[#, "Real64"]&]&),
 "ImageToggleInterleavingTemplate"-> (FrontEnd`SafeImageModify[#, If[Image`ImageInformation[#, "Interleaving"], Image[#, Interleaving->False], Image[#, Interleaving->True]]&]&),
 
 
@@ -981,7 +1136,7 @@ Graphics3DBox[
 "Image3DToByteTemplate" ->			(FrontEnd`SafeImageModify[#, Image3D[#, "Byte"]&]&),
 "Image3DToBit16Template" ->			(FrontEnd`SafeImageModify[#, Image3D[#, "Bit16"]&]&),
 "Image3DToReal32Template" ->			(FrontEnd`SafeImageModify[#, Image3D[#, "Real32"]&]&),
-"Image3DToRealTemplate" ->			(FrontEnd`SafeImageModify[#, Image3D[#, "Real"]&]&),
+"Image3DToReal64Template" ->			(FrontEnd`SafeImageModify[#, Image3D[#, "Real64"]&]&),
 "Image3DToggleInterleavingTemplate"-> (FrontEnd`SafeImageModify[#, If[Image`ImageInformation[#, "Interleaving"], Image3D[#, Interleaving->False], Image3D[#, Interleaving->True]]&]&),
  
  
@@ -1095,9 +1250,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipShowControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, Expression,
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1120,9 +1276,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipHideControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, Expression,
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1213,9 +1370,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipShowControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, #23, FEPrivate`Join[#22, {
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1238,9 +1396,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipHideControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, #23, FEPrivate`Join[#22, {
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1324,9 +1483,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipShowControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, Expression,
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1349,9 +1509,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipHideControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, Expression,
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1444,9 +1605,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipShowControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, #24, FEPrivate`Join[#23, {
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1469,9 +1631,10 @@ Graphics3DBox[
 							True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquareMinusIcon"]],
 							False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "SquarePlusIcon"]]},
 						Appearance -> None,
+						Background -> None,
 						ImageSize->Automatic
 					 	], FEPrivate`FrontEndResource["FEStrings", "ManipulatorTooltipHideControls"]], Alignment -> {Left}]}, {}],
-					FEPrivate`If[#9,
+					FEPrivate`If[FEPrivate`And[#9, FEPrivate`Unequal[FEPrivate`$OperatingSystem,"iOS"]],
 						{InputFieldBox[#1, #24, FEPrivate`Join[#23, {
 							FieldSize -> {{4,10},{1,2}},
 							Enabled -> #6,
@@ -1542,8 +1705,8 @@ DynamicModuleBox[{$CellContext`v$$ =
    0.8660254037844388, -0.4999999999999998}}, {{0, -1.}, {1., 0}}, {{
    0.5000000000000001, -0.8660254037844386}, {0.8660254037844386, 
    0.5000000000000001}}, {{0.8660254037844387, -0.49999999999999994`}, {
-   0.49999999999999994`, 0.8660254037844387}}}}, GridBox[{
-    {
+   0.49999999999999994`, 0.8660254037844387}}}}, OverlayBox[{
+    
      AnimatorBox[Dynamic[$CellContext`v$$], {1, 12, 1},
       AppearanceElements->{},
       DefaultDuration->1,
@@ -1686,11 +1849,7 @@ dAdBB2aIf+wblti0rJ4r4DAV6l6jaXEW8eYCDuwxIsZqyxbaQPQLOHRC/QuT
       Axes->False,
       ImageSize->Dynamic[
         FEPrivate`Switch[#, Tiny, 12, Small, 20, Medium, 25, Large, 40, _, #]],
-      PlotRange->8.5]}
-   },
-   AutoDelete->False,
-   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
-   GridBoxSpacings->{"Columns" -> {{0}}}],
+      PlotRange->8.5]}],
   DynamicModuleValues:>{},
   BaseStyle -> {CacheGraphics -> False}] &),
   
@@ -2232,12 +2391,13 @@ fpj/YOaDYotptR7O8AAAe8XnjQ==
 (*****************************************)
 
 "SlideshowToolbar" -> FEPrivate`If[
- FrontEnd`CurrentValue[
+ FEPrivate`SameQ[
+  FrontEnd`CurrentValue[
    FrontEnd`EvaluationNotebook[], {TaggingRules, "SlideshowSettings", 
-    "Toolbar"}] === False, 
+    "Toolbar"}], False], 
  Cell["", CellOpen -> False, CellMargins -> {{-1, -1}, {-1, -1}}, 
   CellElementSpacings -> {"ClosedCellHeight" -> 0}],
-Cell[BoxData[
+  Cell[BoxData[
  PanelBox[
   PaneSelectorBox[{False->GridBox[{
      {
@@ -2294,24 +2454,25 @@ $CellContext`tagFind$$ = False},
                     
                     CurrentValue[{
                     "MaxCounterValue", "SlideShowNavigationBar"}]]}], 
-                    "ControlStyle", 10], Alignment -> Left, 
-                    ImageSize -> {100, All}]], 
+                    "ControlStyle", 10], Alignment -> Left, ImageSize -> {\
+{100, 200}, All}]], 
                   GrayLevel[0.5]], 
                  Appearance -> {"Default" -> Image[CompressedData["
-1:eJzNljtrwlAUgLXt0KHFsYsUsgm+8P1+NPhAQYUEC7ZDidAOLoW2UAUH6dKC
-3cRNFBf/ieK/Kc4Kp+dYhXgLNSm5tMMXkptzz5ebe3Jzhfq9dHdgMpkej/Eg
-Kc8XDw9KSz7CC7H1dFs/xJMz5ByhRgDYy1fY/rjfYDabLcg10kbeDaa9yW1h
-nKfISyQSmZfL5YUsyyBJkmGUSqVFKBSak4NcKu9NOByeVSoVKBaLkMvlIJvN
-/kgmk9EMxVNOj8czI5fK+4bPtKJ76XQakskkJBIJQ6GcqVRqRa5tveB5N5/P
-r+/FYjGukEvtFUVx3R6NRrnCevEdANYVd7Zegmqd5gBrjjvkUo9Xj7fX68Fk
-MvlGt9vV4lW/Z13jpW9yMBjsOPv9PhQKBd3jjcfjEAwGNaMoCoxGo7VzOBxC
-tVrV1I+tK6rlQCCgi0ajAePxGGq1muY+rJdqzefz6YbWIj3xrBfXSfB6vbrx
-+/264lkvzTmun9xhvTTnbrebO//E+4rztHS5XMATp9O5JJfKeyUIwtThcABP
-rFbrlFyq/+8J0qF2m832YbfbwUgo58bZIRez1yH3JdLksL9qbnLvOP9iP/kJ
-ZtCEAw==
-                    "], "Byte", ColorSpace -> "RGB", 
-                    Interleaving -> True]}]], Appearance -> None, 
-               ImageSize -> Automatic]], True -> DynamicBox[
+1:eJzNlktLAlEUgLVatChs10YCd4IvfL8fiQ8UVJjBwFrESBa5MNAgAxfSpsB2
+4k4UN/4TxX8TrhVO55jCOEHOxFxq8Q0zd84939y5Z+5cQ/mBu93TaDSNQzxw
+wtN5vS488yd4Uaw17u9qlZtM7bFyV6n7yvvYeIqcIQcIAOzkK2x33G/QarU6
+5AppIe8q01rn1kmcx8iL3++f5fP5Oc/zwHGcauRyubnX652Rg1wi77XP55sW
+CgXIZrOQSqUgmUz+SCKRkA3FU0673T4ll8j7hs+0pHuxWAwikQiEw2FVoZzR
+aHRJrk294HknnU6v7gWDQaaQS+yNx+Or9kAgwBSpF98BYF0xZ+MlqNZpDrDm
+mEMu8XiVeLvdLozH4290Oh05XvF7VjRe+ib7/f6Ws9frQSaTUTzeUCgEHo9H
+NoIgwHA4XDkHgwEUi0VZ/aR1RbXsdrsVUa1WYTQaQalUkt1H6qVaczqdiqG1
+SEm81IvrJDgcDsW4XC5F8VIvzTmun8yRemnObTYbc/6J9xXnaWG1WoElFotl
+QS6R99JgMEzMZjOwRK/XT8gl+v8eIW1qNxqNHyaTCdSEcq6dbXJJ9jrkvkCa
+DPZXzXXuLedf7Cc/ATG2iL4=
+                    "], "Byte", ColorSpace -> "RGB", Interleaving -> 
+                    True]}]], Appearance -> None, ImageSize -> 
+               Automatic], SynchronousUpdating -> True], True -> 
+            DynamicBox[
               PopupMenuBox[
                Dynamic[
                0, With[{$CellContext`nb$ = ButtonNotebook[]}, 
@@ -2360,23 +2521,23 @@ ZtCEAw==
                     CurrentValue[{
                     "MaxCounterValue", "SlideShowNavigationBar"}]]}], 
                     "ControlStyle", 10], Alignment -> Left, 
-                    ImageSize -> {100, All}]], 
+                    ImageSize -> {{100, 200}, All}]], 
                   GrayLevel[0.8]], 
                  Appearance -> {"Default" -> Image[CompressedData["
-1:eJzFljtrAkEQgDVJkSLBMl3gBGsLn/i+8w1qcWJEUwSVpBICJhgFBUmTQFL4
-P6xt7ZRrtBRrG8tgrTCZMSqXbfTCLSm+e+ztzsfuzu6tUH6UH04MBsPTOV7k
-0otYq5Wa2TN8kZrP9+VTfLhCrhEqBICD/FQ7XO8vGI1GE3KLtJBPnWltY5sY
-5yXyGggElFwutywWi1AoFHQjm80ufT6fQg5yqbx3WD7K5/MgyzJkMhlIp9OQ
-SqV0gWJRTKfTOSKXyvuO/VzTt0QiAbFYDKLRqK5QzHg8vibXLl/w+YOc9C0c
-DnOFXGpvMpnclEuSxBXWi2MAoihyZ+clKNdpDoLBIHfIpe6vFm+/34fJZLJn
-PB5v7r1e7xivepw19bdSqYCiKDCdTvcMBgOgdai1v5FIBHDfOJp2uw2z2Qzm
-8/nGW61Wj2rH5hXlst/v10S324XFYgH1ev3oNqyXchz3LE3Q2qM9VUsb1ks5
-7vV6NUNzpqU+6w2FQuDxeLjDemnO3W43d1gvzbnL5eIO433DsV/hfwp44nA4
-VuRSeYsWi2Vot9uBJ2azeUgu1f/3AulQudVq/bLZbKAnFFMQBHJ2yMWcdch9
-gzQ4nK8a29i/nP9xnvwGdzy7Fw==
-                    "], "Byte", 
-                    ColorSpace -> "RGB", Interleaving -> True]}]], 
-               Appearance -> None, ImageSize -> Automatic]]}, 
+1:eJzFljlrAkEUgDVJkSLBdOkCCtYWnnjfB6jFihFNEaIxEhADGowBBUmTQFL4
+P6xt7ZRttBRrG8tgrfDyntGwmUY37JDi22N25n3MzJvZ0eYfhLsDlUpVO8aL
+cPPkq1ZvnlNn+JKu1O5LleJtrPJYLBWrtvwhFp4jF8gRAgA7+a62u95fUKvV
+GuQKaSIfCtPcxNYwzlPkxe12i+l0epHL5SCbzSpGKpVaOJ1OkRzkknivsXyY
+yWRAEARIJpOQSCQgHo8rAsWimBaLZUguifcN+7mib9FoFMLhMIRCIUWhmJFI
+ZEWubb7g8zs56VsgEOAKuaTeWCy2Lvf7/VxhvTgG4PP5uLP1EpTrNAcej4c7
+5JL2V4631+vBeDz+YTQare/dbncfr3ScZfW3UCiAKIowmUx+6Pf7QOtQbn+D
+wSDgvrE3rVYLptMpzGaztbdcLu/Vjs0rymWXyyWLTqcD8/kc6vX63m1YL+U4
+7lmyoLVHe6qcNqyXctzhcMiG5kxOfdbr9XrBbrdzh/XSnNtsNu6wXppzq9XK
+Hcb7imO/xP8U8MRsNi/JJfHm9Hr9wGQyAU90Ot2AXJL/7wnSpnKDwfBpNBpB
+SSimVqslZ5tczFmH3JdIg8P5qrGJ/cv5H+fJL0Iiv9I=
+                    "], "Byte", ColorSpace -> "RGB", Interleaving -> 
+                    True]}]], Appearance -> None, ImageSize -> 
+               Automatic], SynchronousUpdating -> True]}, 
            Dynamic[
             CurrentValue["MouseOver"]], ImageSize -> Automatic, 
            FrameMargins -> 0], 
@@ -2384,60 +2545,61 @@ gzQ4nK8a29i/nP9xnvwGdzy7Fw==
           EventHandlerTag[{
            "MouseDown" :> 
             Module[{$CellContext`cnt$, $CellContext`nb$ = 
-               InputNotebook[]}, $CellContext`cells$$ = {}; \
-$CellContext`cnt$ = 
-               Apply[(
-                 NotebookFind[$CellContext`nb$, #, All, #2, 
-                   AutoScroll -> False]; 
-                 CurrentValue[$CellContext`nb$, {
-                   "CellCount", True}])& , {{
-                  "SlideShowNavigationBar", CellStyle}, {
-                  "SlideShowHeader", CellTags}}, {
-                 1}]; $CellContext`cnt$ = 
-               Apply[If[$CellContext`tagFind$$ = # == 
-                   0, #2, #]& , $CellContext`cnt$]; 
-              SelectionMove[$CellContext`nb$, Before, Notebook, 
-                AutoScroll -> False]; 
-              If[$CellContext`tagFind$$, $CellContext`cells$$ = 
-                Map[# -> StringJoin["Slide ", 
-                    ToString[#]]& , 
-                  Range[$CellContext`cnt$]], 
-                Do[NotebookFind[$CellContext`nb$, 
-                    "SlideShowNavigationBar", Next, CellStyle, 
-                    AutoScroll -> False]; 
-                  SelectionMove[$CellContext`nb$, Next, Cell, 
-                    AutoScroll -> False]; 
-                  AppendTo[$CellContext`cells$$, 
-                    ReplaceAll[
-                    NotebookRead[$CellContext`nb$], 
-                    Pattern[$CellContext`s, 
-                    Blank[StyleBox]] :> With[{$CellContext`ss = Join[
-                    Take[$CellContext`s, 1], 
-                    DeleteCases[
-                    Rest[$CellContext`s], 
-                    Alternatives[
-                    Blank[String], 
-                    Blank[][FontColor, 
-                    Blank[]], 
-                    Blank[][FontSize, 
-                    Blank[]]]]]}, 
+               InputNotebook[], $CellContext`allcls$, \
+$CellContext`ssNavBarCls$, $CellContext`ssNavBarPositions$}, \
+$CellContext`cells$$ = {}; $CellContext`allcls$ = 
+               Cells[$CellContext`nb$]; $CellContext`ssNavBarCls$ = 
+               Cells[$CellContext`nb$, CellStyle -> 
+                 "SlideShowNavigationBar", CellTags -> 
+                 "SlideShowHeader"]; $CellContext`ssNavBarPositions$ = 
+               Map[Position[$CellContext`allcls$, #]& , \
+$CellContext`ssNavBarCls$]; $CellContext`cnt$ = 
+               Length[$CellContext`ssNavBarPositions$]; 
+              If[$CellContext`cnt$ > 
+                0, $CellContext`ssNavBarPositions$ = Map[First[
+                    Flatten[#]]& , $CellContext`ssNavBarPositions$]; 
+                Module[{$CellContext`ssnbPos$ = 0}, 
+                  
+                  Table[$CellContext`ssnbPos$ = 
+                    Part[$CellContext`ssNavBarPositions$, \
+$CellContext`i]; AppendTo[$CellContext`cells$$, $CellContext`i -> If[
+                    Or[
                     
-                    Condition[$CellContext`ss, 
-                    True]]]], {$CellContext`cnt$}]; \
-$CellContext`cells$$ = Replace[
-                   Part[$CellContext`cells$$, All, 1], {BoxData[
-                    Pattern[$CellContext`c, 
-                    Blank[]]] :> $CellContext`c, TextData[
-                    Pattern[$CellContext`c, 
-                    Blank[]]] :> RowBox[
-                    If[
+                    And[$CellContext`i < $CellContext`cnt$, \
+$CellContext`ssnbPos$ + 1 === 
+                    Part[$CellContext`ssNavBarPositions$, \
+$CellContext`i + 1]], 
                     
-                    ListQ[$CellContext`c], $CellContext`c, \
-{$CellContext`c}]]}, 1]; $CellContext`cells$$ = 
-                 Thread[
-                  Range[$CellContext`cnt$] -> $CellContext`cells$$]]],
-             PassEventsDown -> True, EvaluationOrder -> Before, 
-            PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+                    And[$CellContext`i === $CellContext`cnt$, 
+                    Length[$CellContext`allcls$] === \
+$CellContext`ssnbPos$]], 
+                    StyleBox[
+                    ToBoxes[
+                    StringForm[
+                    FrontEndResource[
+                    "SlideshowToolbarText", 
+                    "SlideshowToolbarEmptySlide"], $CellContext`i]], 
+                    FontSlant -> Italic, FontColor -> GrayLevel[0.7]], 
+                    Replace[
+                    NotebookRead[
+                    
+                    Part[$CellContext`allcls$, $CellContext`ssnbPos$ + 
+                    1]], {Cell[
+                    Pattern[$CellContext`str, 
+                    Blank[String]], 
+                    BlankNullSequence[]] :> $CellContext`str, Cell[
+                    Alternatives[BoxData, TextData][
+                    Pattern[$CellContext`cont, 
+                    Blank[List]]], 
+                    BlankNullSequence[]] :> RowBox[$CellContext`cont],
+                     Cell[
+                    Alternatives[BoxData, TextData][
+                    Pattern[$CellContext`cont, 
+                    Blank[]]], 
+                    BlankNullSequence[]] :> 
+                    RowBox[{$CellContext`cont}]}]]], {$CellContext`i, \
+$CellContext`cnt$}]]]; Null], PassEventsDown -> True, EvaluationOrder -> 
+            Before, Method -> "Preemptive", PassEventsUp -> True}]], 
          DynamicModuleValues :> {}]},
        "RowDefault"], 
       StyleBox[
@@ -2447,35 +2609,35 @@ $CellContext`cells$$ = Replace[
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzt0j0KwkAQBeCgFpYBL6A32COoJ5B4gSSgrSEKkm7uYP4T8Ig5wvgGptBo
-sdtZpPgyO2/hEUI28SU4zzzPuy7xCKL7Lk2j7LjAss9up3iOw0pJyMyTP9L3
-vQ8E5sedgcS2q+u6BBholBsY9G5r1dW2BCzzLTMwaP60fa+2aQhYpu4HGDSz
-7hFNXROwTqNn4dQj6qoiYJ1Gz8K9qywJWKbuoe7Cqa8qCgKW+ZaFmgnrvjLP
-CVjmKA81F1b/RPF4rOEJX/8qsoPe+a7fbvLpBb7vFy0=
-              "], {{0, 
-              19}, {19, 0}}, {0, 255},
+1:eJzt0j0KwkAQBeCgFpYBL6A32NJSSztR7BMxik2UKIjd3MH8J+ARc4TxDUzh
+X7HpLCy+zM5beISQ0fqw2HYcxzn18Vj4l2kU+deli2UVnva7MNjMwnOwC6Lx
+uotwoHrAzH8/pK5rFwjMlzsDR9uuqqqOwEBvuYFG7yZWXWVJwDKfMgON5nfb
+9yqLgoBl6j6HRjPrHlHkOQHrNHoWrXpEnmUErNPoWbTvSlMClqm7p7to1Zcl
+CQHLfMo8zYR1XxrHBCzzLfc0F1b/RHK7DeEOH/8qsrneuW2/3d+rBzchG+g=
+
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJydlDuLGlEYhiVJkT4IC6lSe7/fr6iFKN5KbXYxsVQ30bCFIt5qERGRtdw/
-IViIYGFhIVjIYrFVwGr/wZd5D3MOKlmyWjx+873nm4c5h3G+3RXTPz4oFIqf
-n6Wf9O3vwP397UPmk9QEH359v/soXXyRQUhECpVK9VXiSeJFgi7gRb4P98Nz
-I3EIBAKUSCQok8lQOp1+F/F4nPx+P5wH2fOEHp5oNEqRSITC4TCFQqH/gjnM
-u1wukp/vEIvFWAan1+slj8fzbjAP5Gd7hR89/NfgdDrhegU4K56BYDBItVqN
-nR3POMgqlcpJ5nA4hMvn84kMVKtVWiwWVK/XRQbgmU6nbC2Xy4ncbrcLl9vt
-JpvNRlarlQHHcrlklWepVIpmsxnLe72eyIHFYnnT1Wg0aLVasYo+n8/TfD5n
-Wb/fP/Gcu3BWPAPNZpPW6zWreI9wDQaDgZg5xmw2Cxf2jN5kMjFarRZtNhtW
-sTdcg+FwKGbO4S6cHXqj0chot9u03W5ZRV8sFlkPRqORmDuGu3BW6A0GA6PT
-6dBut2OVZ6VSiWVgPB6LnMNd2LNeryedTsfodru03+9Z5Rkol8ssB9ls9mTt
-LRf+B5PJhJLJ5Mk8KBQKbA3v4z9cf3Du6LVa7dXAI/EIj0ajIbVafRXyt+xR
-Qik7L/kGnoP7lfJ3VSl7ny90PB89j+IvvJiMHQ==
-              "], {{0, 19}, {
-              19, 0}}, {0, 255},
+1:eJydlDuLGmEUhockRcpAEAKpUnu/36+oEFG8kUqbXTSSxttGQwpFvNUiIiJr
+uX9CsBDBwsJCsJDFYquA1f6Dk3k/ZgaVLFktHs+cd848fN/HOF9uC4nvbziO
+u3vP/yRufnnL5ZvfyQ988y1/9yOXz2a+5n9mc9my5fYtH34UeMdDRJxcLv/M
+88DzxEMX8CQ8h+fh+cRz8Hq9FI1GKZlMUiKReBWRSIQ8Hg+cB8HzgB6eUChE
+wWCQAoEA+f3+/4I5zNvtdhLWdwiHwyyD0+VykdPpfDWYB8LanuFHD/812Gw2
+uJ4BzkrMgM/no1qtxs5OzESQVSqVk8xqtUout9stZaBardJisaB6vS5lAJ7p
+dMrupdNpKbdYLJLL4XCQ2Wwmk8nEgGO5XLIqZvF4nGazGct7vZ6UA6PR+KKr
+0WjQarViFX0mk6H5fM6yfr9/4jl34azEDDSbTVqv16ziPcI1GAwG0swxBoNB
+cmHP6PV6PaPVatFms2EVe8M1GA6H0sw5ogtnh16n0zHa7TZtt1tW0RcKBdaD
+0WgkzR0junBW6LVaLaPT6dBut2NVzIrFIsvAeDyWchHRhT1rNBpSq9WMbrdL
++/2eVTEDpVKJ5SCVSp3ce8mF/8FkMqFYLHYyD3K5HLuH9/Efrj84d/Qqlepq
+4OG5h0epVJJCobgK4Vt2zyMTnJd8A8/B8zLhuyoTvI8XOh6P1sP9BTTKkNg=
+
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -2492,32 +2654,30 @@ Qik7L/kGnoP7lfJ3VSl7ny90PB89j+IvvJiMHQ==
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzt0TEOwiAUxnGiDu6ewKPoCZp6AdqkrjbVxHTzDi2FAglHfX4kb3HlLQ4d
-fi/A8B8e5/ZR33dKqecRo27el2FoxtsBl+v46to9DieWH4lo8+dijBX00k4I
-QQNloo73Goil0o5fVw3EijurcxUQK+5kztoeiGnpzt2yJCAm7lljEhAT95Z5
-TkCZtJWZafqA6A82v77LpC5C
-              "], {{0, 19}, {19, 0}}, {0, 
-              255},
+1:eJzt0T0KwkAQhuGgFpaCJ/AWtpZ2IWK/Ca7BJoZEELvcIX+7SWCPOn4L09hm
+GosUz8BO8Razh+QZ3VdBEJRbjCh+n4oi/lx2eFyz8pFm+nbOXjrVxTFZY7ln
+GyCixZ+bpimEXNoZx1EBeaLOMCgg5uZ2BmsVEJvdscaEQGx2xzN9nwMxJb25
+6ToHxMS9vm0dEBP3uqZxQJ605bV1XYHoDxa/vkPWMv0=
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJydlLlqAlEUQIckRfoQCFildt/3ZYJaiCLMfIHipFJHTCTMH1iKWIhL6ZcI
-FhYWgoWIhZVg5R/cvPt4M7g8cSnOzNxlDvfd4n0WVen7SRCEn1fykAp/Yr1e
-0OQXEnxpv0rxmXy8MTBpNpsRE2FE2BDgDjbsPxPzfBB2oihCPp8HWZZBkqSb
-yOVykEgk0LljnhHG6MlkMpBOpyGVSkEymbwK9mF/OBwGNt8um83SHDpjsRhE
-o9GbwX6EzbZHP8bof4RQKISuPYK70nOXKJVK0Gg0uLVgMGi44vG4keNRqVRg
-PB5TePVAIGC4IpEI+P1+8Pl8Z5TLZZhMJpRWq8Xt8Xq9V13VahWm0yml3W5z
-Pacu3JWe01EUBWazGaXT6RzVTvF4PIYLz4yx2+020DQN5vM5RVXVoxoP3YW7
-w9jlch3R7XZhsVhQ0HdaP0R34a4wdjqdZ/R6PVgul5RarcbtQXQXntnhcIDd
-bufS7/dhvV5TLvXc6kKazSYMh8Nrri3uHWObzfYw6CEM0GO1WsFisTwEu8sG
-hHfmvOcOPGXLPAJ7o3d1p2N1MI/wDxwoaC8=
-              "], {{0, 19}, {19, 
-              0}}, {0, 255},
+1:eJyd1LlqAkEYwPElSZEyEAIBq9Te93orqBBRhJU8gOJGArqKRsK+gaWIhXiU
+PolgYWEhWIhYWAlWvsGX+YbZxWPFo/gp38z4Z3cKP3Jl4fuB47jaM/kQsn+R
+ajUrZ17I8CXVfgqSmP+UfsWCWOVzj2TxlXki9Ho90hFDYk3ADdbsdzrWeSe2
+kUgE0uk0ZDIZEAThKqlUCsLhMDa3rDPEGTuJRALi8TjEYjGIRqMX4Tk87/P5
+gD3fNplM0jVsBoNBCAQCV8PziD3bDvs4Y/8eXq8XWzuEd6WsnZPP56Fer2vu
+eTwetRUKhdQ1LaVSCUajEaW1z/O82vL7/eB2u8Hlcp0oFoswHo+pZrOpecbp
+dF5sSZIEk8mEarVamp3jFt6VsqYQRRGm0ynVbrcP9o45HA61he+Ms91uV8my
+DLPZjCqXywd7WpQW3h3ONpvtQKfTgfl8TmHveH+f0sK7wtlqtZ7odruwWCyo
+SqWieQYpLXxni8UCZrNZU6/Xg9VqRZ07c20LNRoNGAwGl1obvHecTSbT3bBD
+9LFjNBrBYDDchf2X9Yk31rzlP/DYhnU49o3d5Y2N5d7zcP+US2zq
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -2534,33 +2694,33 @@ hHfmvOcOPGXLPAJ7o3d1p2N1MI/wDxwoaC8=
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzlzMsJwlAQheGgLlxesAI7sAS1hNiACehWiIKkipD364aUYAkp4ZZ0PBEX
-s83NRnDxDTOz+Lf+zb0uHMe5rzlc73kIAi88rXgcw8fFX3LZfI1PAH+r67qI
-BjrPbmkNYVZPa20IgnWvbVtFhiDY95pGkSEI1r2mrhUZgmDdq6tKkSEIO9te
-VZY9QdhPbhSFIkMQ+qmdMs8VGYIwuVNkmSJDECZ3RnmaDgTBqvNpJQkE684o
-i+MXgaI5nV/wBs/VHnE=
+1:eJzlzDsKwlAQheGgFpYXXIE7sLTU0laxN8EYbCIkgriKkPfrhizBJWQJd0nj
+iVhMm5tGsPgG5hT/0rrtLxPDMPw5zt58bD3PfB4EnqPrXx3XPu/cu+3Y3tqa
+Ylx8zYCI/lbTNAF0cBrdkpKYUT0ppQJitHt1XQtQQIx+r6oEKCBGu1eVpQAF
+xGj3yqIQoICYlW6vyPMWiNkMbmSZAAXEtEM7eZoKUEDM4E6WJAIUEDO400vj
+uANitDqfVhQRo93pJWH4AoJgTOcXvAFIByMs
               "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJyVlDtrIlEYhmV3i/TLQiDV1t7v9ytqIYowllYJZCt1IbuwpPcniIiOWAUR
-QRBEEEQEwcLCQrCQIBhEAlb5B9/OG+YcZrxs1uKZme8yz5zzcZjvdz+FH580
-Gs2vK+ki3P4JPzzcPma+SEHk8ff93Wfp4asMklqtFtxIPEm8SNAFvMjv3cie
-a4l9OBymdDpNmUyGBEH4L1KpFIVCITj3sucJMTyJRILi8TjFYjGKRqMfgj70
-e71ekte3TyaT7zk4A4EA+f1+KhaLJIoi5fP59/gc6Afy2t7gRww/YzQacXK5
-nKp2iMfjgesNYFYsx2g2mzQejznwKetK3G43dwWDQZ5jRCIRarVaNJlMONiv
-sofhcrm4y+fzkdPpJIfDoQLfaLfbNJ1OOVjfYZ/dbv/QxXydTodmsxmnUCic
-dWFWLHcK+LrdLs3ncw7OF6vbbDbuwp4RW63Ws5TLZVosFpxsNquqMxdmh9hi
-sRyB/ff7fVoul5xKpXLUx1yYFWKz2awCnsFgQKvVilOtVo/6AHNhzyaTiYxG
-IwdnZDgc0nq95tRqNVWPkn+5er0ebTYbTr1eP+tRuF4xd8QGg4Gz3W45jUZD
-VTsFPBIiPHq9nnQ6HQdndLfbUalUUuVPIf/LRIlvsvOSf+Ahr7JHI9/hfb7Q
-8axYj+YvQGCdgQ==
+1:eJyVlEtrGlEUgKXNostCCRSy6tr3+/1EhYoijGTlKqE2FHQKplC69yeIiI64
+CiKCIIggiAiCCxcuBBcSBINIwFX+wek94d7LjI+mLr4ZzmO+ufdwuV9ufwrf
+36lUqvsP5CHc/A7m8zd/Uh9JcC3e/7gTM9++ir8yd5m84/Y9SX6iXBDUajVy
+RXggPBHgDJ7od1fU85mwCwaDkEwmIZVKgSAI/0UikYBAIIDOHfU8YIyeWCwG
+0WgUIpEIhMPhN8E+7He73UDXt4vH4685dPp8PvB6vVAoFECSJMjlcq/xKbAf
+oWt7QT/G6GcMh0NONptV1PZxuVzoekFwVizHaDQaMBqNOOiT1+U4nU7u8vv9
+PMcIhULQbDZhPB5zcL/yHobD4eAuj8cDdrsdbDabAvxHq9WCyWTCwfXt91mt
+1jddzNdut2E6nXJEUTzpwlmx3DHQ1+l0YDabcfB8sbrFYuEu3DPGZrP5JKVS
+CebzOSedTivqzIWzw9hkMh2A++/1erBYLDjlcvmgj7lwVhgbjUYF6On3+7Bc
+LjmVSuWgD2Eu3LPBYAC9Xs/BMzIYDGC1WnGq1aqiR86/XN1uF9brNadWq530
+yFzPOHeMdTodZ7PZcOr1uqJ2DPQQJPRotVrQaDQcPKPb7RaKxaIifwx6l0mE
+S+o85w7c55l6VPSN3sczHY+y9aj+AriDojw=
               "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -2577,35 +2737,34 @@ VTsFPBIiPHq9nnQ6HQdndLfbUalUUuVPIf/LRIlvsvOSf+Ahr7JHI9/hfb7Q
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzt0r0JwkAYxvGgFpYBJ3CDG+F0AokLJAFtDVGQTGGR7w+4ERwhI2SUjPD6
-HLxFkAh3nUWKX7j7HzxV9uHNu64cx7lv8fGC5yGOg+S8weWYPC7hGocd05GI
-Fn+k6zoJ0Y+3CE6mW23b9kCgvrrg3htvNY0PxNSkS27GW1pT1z4QU9wk3622
-tLqqfCD2Asln662qLAWMQPAGyWerraooBIxAMIALku/GW2WeCxiBYACXu+Rm
-vFVkWQ8EA7iTLrgbb+Vp6oMCd+ZN99n/eGHnA2t5GPU=
-              "], {{0, 
-              19}, {19, 0}}, {0, 255},
+1:eJzt0jsKwkAUheGgFpYDrsAdTGk5lnai2CfBGGyiREFchUXeD8gSXEKWkKVk
+CdcTuEUQhUlnYfGFmX/gVJnbp81hZBjGZYrPxrotfd+6bwUuO+9ydD1nv/Ku
+juv4C3uMOGMTIKK/H1KWpYLzl7czrHW3iqKogaB665J7rb2V5yYQq3pdcdPe
+6uRZZgKxipvi+6CtTpamJhB7gOLz4K00SSS0QPAExedBW2kcS2iBoAEBiu/a
+W0kUSWiBoAHBXXHT3orDsAaCBkSvS+7aW1EQmFCB+PDW9Y//8d8wL+OcHbA=
+
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJydlDuLGlEYhmWTYvsQCGyV2vv9fgtqIYq3Tm12MalEYRIJW/gLLBTrFUQY
-EBHERhDsBBEFC8FCFoutFqz2H3yZ9zBncBIkq8Wj53vnm4dzPuV8fahmf9xo
-NJqft9JH9v53WBDuH3MfpeLb46/vDx+kxScZhFqtFtxJiBIvEnQBL/J7d0QE
-zxeJYzgcplQqRblcjrLZ7LtIJpMUCoXgPMoeETU88XicYrEYRaNRikQi/wV9
-6Pd6vSTv75hIJFgGZyAQIL/f/27QD+S9vcGPGv5r8Hg8cL0BzIpnoFgsUq1W
-U+pTkJdKJVXmdrsVVzAYVDLQ7XZpPp9Ts9lUMoDfBTmen+Yul0tx+Xw+cjqd
-5HA4GOVymRaLBaPVail5Pp9nWa/XUzJgt9vPukClUqHVasVot9ssKxQKrBZF
-8awLs+LZKdVqlTabDaPRaDAX1v1+X9Vns9kUF86M2mq1qshkMrRcLmm73bIZ
-wYX1YDD4p5e7MDvUFotFAZ71ek273Y4mkwlhDnChHg6Hql7AXZgVarPZzIAH
-Z9nv9zSdTpkHOVzIRqOR0svhLpzZZDKR0WhkjMdjOhwONJvN2H+F5+l0muV4
-zjPOOZcgCNTpdFQeDvJ6vX7O9Yq5ozYYDFcDj8QTPHq9nnQ63VXId9mTxGfZ
-eckd+Devskcjf8P7fKHjme8H9+ofUJ+NTA==
-              "], {{0, 19}, {19, 
-              0}}, {0, 255},
+1:eJydlDuLGlEYhiVJkTIQAoGtUnu/32+gQkTxRhq12UWzBGSE2UhI4S+wUKxX
+EEEQEcRGEOwEEQULwUIWi60WrPYffJn3MGfQBMmuxTPO9843D+d8I+fLTTn9
+/Y1Kpbp7L13S17+Conj9O/NBKr4Jdz9uhWLhq/CzeFsUHTdvpfCjzDsJtVoN
+riS6Eo8S9Aoe5feuiAiezxKHYDBIiUSCMpkMpdPpFxGPxykQCMB5kD1d1PBE
+o1GKRCIUDocpFAr9F/Sh3+12k7y+QywWYxmcPp+PvF7vi0E/kNf2DD9q+C/B
+5XLB9QwwK56BfD5PlUpFqY9BXigUTjKn06m4/H6/koF2u02z2Yzq9bqSAXwX
+5Hh+nDscDsXl8XjIbreTzWZjlEolms/njEajoeTZbJZlnU5HyYDVaj3rAoIg
+0HK5ZDSbTZblcjlWd7vdsy7MimfHlMtlWq/XjFqtxly47/V6J30Wi0VxYc+o
+zWbzCalUihaLBW02GzYjuHDf7/f/6eUuzA61yWRSgGe1WtF2u6XxeEyYA1yo
+B4PBSS/gLswKtdFoZMCDvex2O5pMJsyDHC5kw+FQ6eVwF/ZsMBhIr9czRqMR
+7fd7mk6n7L/C82QyyXI85xnnnEsURWq1WiceDvJqtXrO9YS5o9bpdBcDj8Q9
+PFqtljQazUXIZ9m9xCfZ+Zoz8G+eZI9K/oX34ZWOB74enKt/AMjCkgc=
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -2632,33 +2791,32 @@ eckd+Devskcjf8P7fKHjme8H9+ofUJ+NTA==
       TemplateBox[{PaneSelectorBox[{False -> PaneBox[
             TooltipBox[
              ButtonBox[
-              
               PaneSelectorBox[{
                False -> PaneSelectorBox[{False -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBLECOU2VJahIzkCEMxPJADBL8////
-KB48OBkN00svA5l6qGXOYLEbPQyJwdTyA0i/NAmYWmE2aveo3bS2eyDz2GAp
-WwbC7oGqS4Y1BgCMmwjV
-                    "], {{0, 19}, {31, 0}}, {0, 
-                    255}, ColorFunction -> RGBColor], BaseStyle -> 
-                    "ImageGraphics", ImageSizeRaw -> {31, 19}, 
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBAkBOaF5xZnpeaopnXklqemqRRRIz
+UFAYiOWBmAWI////P4oHD05Gw/TSy0CmHmqZM1jsRg9DYjC1/ADSL00CplaY
+jdo9ajet7R7IPDZYypaBsHug6pJhjQHf7Q2Q
+                    "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
+                    ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]], True -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJzNlrtLw1AUxos6uEtBcBDnDoW+3++WDm2HhFJa+kBBV0EF8X9xtLNb3/+J
-k5MoDsXB9Xi/kHNJ4MbGQMDhF+75cs/33UeGnF1ca1d7gUDg9lA8tPP78s3N
-+YN+IIrKw93lxb4YHAlOBRCJKBAKhU4EU8GrgHzkW/CMPDP3WPBRr9ep2+3S
-YDCgfr/vC71ej6rVKtbwaeZOa7WaoWuaRp1Oh9rtNrVaLV+Ad6FQIPOcP3Rd
-NzKbzSY1Gg3CGWw2GxvQ3PJbL/sjV7DFeqDhPJj1em2rvaLyqVQqyN4C7Jc1
-Bj3W2isqn3K5LLOxZ9aY1WplG/8VlQ9TKpVkNvZcLBaNb0DFcrmkyWTiGsx3
-8gL5fP7fZLOmAl7j8dg1mO/kBXK5nMzGXbOmwku2kxfIZrMyG/fPmorFYkGj
-0cg1mO/kBTKZjMzGd8eaCngNh0PXYL6TF0in0zIbd406lUpJ5vO5bfxXVD5M
-MpmU2bhr1hj0WGuvqHwSiQRnv+G8WWNms5mt9orKJx6PI/tN8BiNRo06FotJ
-0GPF+m4Xu3rD4TCyHwVBrAF1JBIhrMNPzNx35Jr/D0FzHS8+/7d8CZ449wdL
-bV6+
-                    "], {{0, 19}, {31, 0}}, {0, 255}, 
-                    ColorFunction -> RGBColor], BaseStyle -> 
-                    "ImageGraphics", ImageSizeRaw -> {31, 19}, 
+1:eJzNljtLA0EUhYNaWAoiCBZinSKQ9/udECFJsSGEhDxQjGITIQrif0mptV3e
+/8TKShQLsbC9zgl7hyzM6rqwYPGFvSdzz7kzs8UenV5p5xsul+t6W/xoJ7eZ
+4fDkrrYjivrg+vJi0D87Htz0L/rD8OmmEHcFh4ItARG53G73geBB8CwgB/kS
+PCJPz90XvBUKBarX69RqtajZbDpCo9GgXC6HGd713Id8Pr/SNU2jarVKlUqF
+yuWyI8A7mUySfs5vtVptlVkqlahYLBLOYLlcGoBmlZ962R+5gg/MAw3nwSwW
+C0NtF5VPNptF9gfAfllj0LNe20Xlk8lkZDb2zBozn88Nz39F5cOk02mZjT2n
+UqnVO6BiNptRr9ezDNabeYFEIvFvsllTAa9ut2sZrDfzAvF4XGbjrllTYSfb
+zAvEYjGZjftnTcV0OqVOp2MZrDfzAtFoVGbjvWNNBbza7bZlsN7MC0QiEZmN
+u0YdDoclk8nE8PxXVD5MKBSS2bhr1hj0rNd2UfkEg0HOfsF5s8aMx2NDbReV
+TyAQQPaLYOTz+Va13++XoGed9f9+47dej8eD7JFgDzOg9nq9hDmcRM99Ra7+
+/bCnz/Hk8HfLp+Cec78Bnr9jeQ==
+                    "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
+                    ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]]}, 
                   Dynamic[
@@ -2666,31 +2824,31 @@ bV6+
                    FrameMargins -> 0], True -> 
                 PaneSelectorBox[{False -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBLECOU2VJahIzkCEMxPJADBL8////
-KB48OBkN00svA5l6qGXOYLM7FoibgVgGTVwGKh5LQz9wAnEBmv0wewug8tRK
-b4Tst6Cjvej299DZ3oG0e6DCnF5pbSDz2GArW+hp90DVJcMaAwB6gQLZ
-             
-                           "], {{0, 19}, {31, 0}}, {0, 255}, 
-                    ColorFunction -> RGBColor], BaseStyle -> 
-                    "ImageGraphics", ImageSizeRaw -> {31, 19}, 
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBAkBOaF5xZnpeaopnXklqemqRRRIz
+UFAYiOWBmAWI////P4oHD05Gw/TSy0CmHmqZM9jsjgXiZiCWQROXgYrH0tAP
+nEBcgGY/zN4CqDy10hsh+y3oaC+6/T10tncg7R6oMKdXWhvIPDbYyhZ62j1Q
+dcmwxgDN0weU
+                    "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> R\
+GBColor], DefaultBaseStyle -> "ImageGraphics", 
+                    ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]], True -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJy1lr2LGkEYxiVJkT4cBFKE1BaC39/fn6AWKyJqIXuQtIFLIFwh/iNX5sBC
-SKegov+E2qQx1ZEjxZEi7Zt5hn2HXVncPWGLn+PzDO/7zM4My364/qx9euHz
-+b68Fj+a/q1wc6Pfdl4JUbz9+vH6pfjzRvBeAJOIfH6//53gXvBLQB7yT/AD
-eUbuW8FjpVKhbrdLg8GA+v2+J/R6PSqVSljDHyP3vlwuS1/TNGq329RqtajZ
-bHoCemezWTL2+bHT6cjMer1O1WqVsAfr9doCPLecq+X+yBU8YT3wsB/MarWy
-6Eux61MsFpH9BPC87DGoMetLsetTKBRUNp6ZPWa5XFo0mM1mdDgcSNd1iw8N
-H/OnNXZ98vm8ysYz53I5eQfO0Wg0aLvd0n6/p9FoJD2M0PAx79QDZDKZZ2ef
-5k8mk2fn2mWz5wbcD+Qdj0c5QrutBel0WmXjrNlzQ61Ws2RDu60FqVRKZeP8
-2XMC93Kz2ci9Ho/HcoSG76YeJJNJlY17x9458E7g3OFwKD2MnI95px4gkUio
-bJw1dDweVywWC4sG0+mUdrudfOebfWj4mD+tsesTi8VUNs6aPQY1Zn0pdn2i
-0ShnP2C/2WPm87lFX4pdn0gkguwHwV0oFJI6HA4rUGPGPOeEU20gEED2neAK
-a4AOBoOEdXiJkfsbucb3w5Wxjp8ef7f8FXzn3P/hxESB
-                    
+1:eJy1lr2LGkEYxiVJkTIQDgIpQmoLwe/v709QixURtZA9Yo40BrxASCH+I1fm
+wEJIp6Ci/4TaXONVR44UR4q0b+YZdoZdWdw9YYvfDs8zvO8zOzMs+/Hyq/L5
+hcvlun7NHor6PTMcqj8ab5hoDq6/XA36nyqDb/2r/jB8+ZKZbxkfGK8YRORy
+u93vGbeMewY5yD/GL+Rpue8Yj4VCgZrNJnU6HWq3247QarUol8thDX+03Nt8
+Ps99RVGoXq9TrVajarXqCOidTCZJ2+fHRqPBM8vlMhWLRcIerFYrA/DscqpW
+9Ecu4wnrgYf9ECyXS4M+F7M+2WwW2U8A7ys8AWr0+lzM+mQyGZmNdxaeYLFY
+GDSYTqe03+9JVVWDDw0f88c1Zn3S6bTMxjunUil+B05RqVRos9nQbrejXq/H
+PYzQ8DFv1QMkEolnZx/nj8fjZ+eaZQvPDrgfyDscDnyEtlsL4vG4zMZZC88O
+pVLJkA1ttxbEYjGZjfMXnhW4l+v1mu/1aDTiIzR8O/UgGo3KbNw74Z0C3wSR
+2+12uYdR5GPeqgeIRCIyG2cNHQ6HJfP53KDBZDKh7XbLv/l6Hxo+5o9rzPqE
+QiGZjbMWngA1en0uZn2CwaDIfsB+C08wm80M+lzM+gQCAWQ/MG58Ph/Xfr9f
+gho9+jkrrGo9Hg+ybxgXWAO01+slrMNJtNzfyNX+Hy60ddw5/N/yl/FT5P4H
+NSVJPA==
                     "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
-                    RGBColor], BaseStyle -> "ImageGraphics", 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
                     ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]]}, 
@@ -2781,23 +2939,24 @@ $CellContext`tagFind$$ = False},
                     CurrentValue[{
                     "MaxCounterValue", "SlideShowNavigationBar"}]]}], 
                     "ControlStyle", 10], Alignment -> Left, 
-                    ImageSize -> {100, All}]], 
+                    ImageSize -> {{100, 200}, All}]], 
                   GrayLevel[0.5]], 
                  Appearance -> {"Default" -> Image[CompressedData["
-1:eJzNljtrwlAUgLXt0KHFsYsUsgm+8P1+NPhAQYUEC7ZDidAOLoW2UAUH6dKC
-3cRNFBf/ieK/Kc4Kp+dYhXgLNSm5tMMXkptzz5ebe3Jzhfq9dHdgMpkej/Eg
-Kc8XDw9KSz7CC7H1dFs/xJMz5ByhRgDYy1fY/rjfYDabLcg10kbeDaa9yW1h
-nKfISyQSmZfL5YUsyyBJkmGUSqVFKBSak4NcKu9NOByeVSoVKBaLkMvlIJvN
-/kgmk9EMxVNOj8czI5fK+4bPtKJ76XQakskkJBIJQ6GcqVRqRa5tveB5N5/P
-r+/FYjGukEvtFUVx3R6NRrnCevEdANYVd7Zegmqd5gBrjjvkUo9Xj7fX68Fk
-MvlGt9vV4lW/Z13jpW9yMBjsOPv9PhQKBd3jjcfjEAwGNaMoCoxGo7VzOBxC
-tVrV1I+tK6rlQCCgi0ajAePxGGq1muY+rJdqzefz6YbWIj3xrBfXSfB6vbrx
-+/264lkvzTmun9xhvTTnbrebO//E+4rztHS5XMATp9O5JJfKeyUIwtThcABP
-rFbrlFyq/+8J0qF2m832YbfbwUgo58bZIRez1yH3JdLksL9qbnLvOP9iP/kJ
-ZtCEAw==
-                    "], "Byte", ColorSpace -> "RGB", 
-                    Interleaving -> True]}]], Appearance -> None, 
-               ImageSize -> Automatic]], True -> DynamicBox[
+1:eJzNlktLAlEUgLVatChs10YCd4IvfL8fiQ8UVJjBwFrESBa5MNAgAxfSpsB2
+4k4UN/4TxX8TrhVO55jCOEHOxFxq8Q0zd84939y5Z+5cQ/mBu93TaDSNQzxw
+wtN5vS488yd4Uaw17u9qlZtM7bFyV6n7yvvYeIqcIQcIAOzkK2x33G/QarU6
+5AppIe8q01rn1kmcx8iL3++f5fP5Oc/zwHGcauRyubnX652Rg1wi77XP55sW
+CgXIZrOQSqUgmUz+SCKRkA3FU0673T4ll8j7hs+0pHuxWAwikQiEw2FVoZzR
+aHRJrk294HknnU6v7gWDQaaQS+yNx+Or9kAgwBSpF98BYF0xZ+MlqNZpDrDm
+mEMu8XiVeLvdLozH4290Oh05XvF7VjRe+ib7/f6Ws9frQSaTUTzeUCgEHo9H
+NoIgwHA4XDkHgwEUi0VZ/aR1RbXsdrsVUa1WYTQaQalUkt1H6qVaczqdiqG1
+SEm81IvrJDgcDsW4XC5F8VIvzTmun8yRemnObTYbc/6J9xXnaWG1WoElFotl
+QS6R99JgMEzMZjOwRK/XT8gl+v8eIW1qNxqNHyaTCdSEcq6dbXJJ9jrkvkCa
+DPZXzXXuLedf7Cc/ATG2iL4=
+                    "], "Byte", ColorSpace -> "RGB", Interleaving -> 
+                    True]}]], Appearance -> None, ImageSize -> 
+               Automatic], SynchronousUpdating -> True], True -> 
+            DynamicBox[
               PopupMenuBox[
                Dynamic[
                0, With[{$CellContext`nb$ = ButtonNotebook[]}, 
@@ -2842,26 +3001,27 @@ ZtCEAw==
                     "SlideshowToolbarText", 
                     "SlideshowToolbarCounterText"]], 
                     DynamicBox[
+                    
                     CurrentValue[{
                     "MaxCounterValue", "SlideShowNavigationBar"}]]}], 
                     "ControlStyle", 10], Alignment -> Left, 
-                    ImageSize -> {100, All}]], 
+                    ImageSize -> {{100, 200}, All}]], 
                   GrayLevel[0.8]], 
                  Appearance -> {"Default" -> Image[CompressedData["
-1:eJzFljtrAkEQgDVJkSLBMl3gBGsLn/i+8w1qcWJEUwSVpBICJhgFBUmTQFL4
-P6xt7ZRrtBRrG8tgrTCZMSqXbfTCLSm+e+ztzsfuzu6tUH6UH04MBsPTOV7k
-0otYq5Wa2TN8kZrP9+VTfLhCrhEqBICD/FQ7XO8vGI1GE3KLtJBPnWltY5sY
-5yXyGggElFwutywWi1AoFHQjm80ufT6fQg5yqbx3WD7K5/MgyzJkMhlIp9OQ
-SqV0gWJRTKfTOSKXyvuO/VzTt0QiAbFYDKLRqK5QzHg8vibXLl/w+YOc9C0c
-DnOFXGpvMpnclEuSxBXWi2MAoihyZ+clKNdpDoLBIHfIpe6vFm+/34fJZLJn
-PB5v7r1e7xivepw19bdSqYCiKDCdTvcMBgOgdai1v5FIBHDfOJp2uw2z2Qzm
-8/nGW61Wj2rH5hXlst/v10S324XFYgH1ev3oNqyXchz3LE3Q2qM9VUsb1ks5
-7vV6NUNzpqU+6w2FQuDxeLjDemnO3W43d1gvzbnL5eIO433DsV/hfwp44nA4
-VuRSeYsWi2Vot9uBJ2azeUgu1f/3AulQudVq/bLZbKAnFFMQBHJ2yMWcdch9
-gzQ4nK8a29i/nP9xnvwGdzy7Fw==
-                    "], "Byte", 
-                    ColorSpace -> "RGB", Interleaving -> True]}]], 
-               Appearance -> None, ImageSize -> Automatic]]}, 
+1:eJzFljlrAkEUgDVJkSLBdOkCCtYWnnjfB6jFihFNEaIxEhADGowBBUmTQFL4
+P6xt7ZRttBRrG8tgrfDyntGwmUY37JDi22N25n3MzJvZ0eYfhLsDlUpVO8aL
+cPPkq1ZvnlNn+JKu1O5LleJtrPJYLBWrtvwhFp4jF8gRAgA7+a62u95fUKvV
+GuQKaSIfCtPcxNYwzlPkxe12i+l0epHL5SCbzSpGKpVaOJ1OkRzkknivsXyY
+yWRAEARIJpOQSCQgHo8rAsWimBaLZUguifcN+7mib9FoFMLhMIRCIUWhmJFI
+ZEWubb7g8zs56VsgEOAKuaTeWCy2Lvf7/VxhvTgG4PP5uLP1EpTrNAcej4c7
+5JL2V4631+vBeDz+YTQare/dbncfr3ScZfW3UCiAKIowmUx+6Pf7QOtQbn+D
+wSDgvrE3rVYLptMpzGaztbdcLu/Vjs0rymWXyyWLTqcD8/kc6vX63m1YL+U4
+7lmyoLVHe6qcNqyXctzhcMiG5kxOfdbr9XrBbrdzh/XSnNtsNu6wXppzq9XK
+Hcb7imO/xP8U8MRsNi/JJfHm9Hr9wGQyAU90Ot2AXJL/7wnSpnKDwfBpNBpB
+SSimVqslZ5tczFmH3JdIg8P5qrGJ/cv5H+fJL0Iiv9I=
+                    "], "Byte", ColorSpace -> "RGB", Interleaving -> 
+                    True]}]], Appearance -> None, ImageSize -> 
+               Automatic], SynchronousUpdating -> True]}, 
            Dynamic[
             CurrentValue["MouseOver"]], ImageSize -> Automatic, 
            FrameMargins -> 0], 
@@ -2869,60 +3029,60 @@ gzQ4nK8a29i/nP9xnvwGdzy7Fw==
           EventHandlerTag[{
            "MouseDown" :> 
             Module[{$CellContext`cnt$, $CellContext`nb$ = 
-               InputNotebook[]}, $CellContext`cells$$ = {}; \
-$CellContext`cnt$ = 
-               Apply[(
-                 NotebookFind[$CellContext`nb$, #, All, #2, 
-                   AutoScroll -> False]; 
-                 CurrentValue[$CellContext`nb$, {
-                   "CellCount", True}])& , {{
-                  "SlideShowNavigationBar", CellStyle}, {
-                  "SlideShowHeader", CellTags}}, {
-                 1}]; $CellContext`cnt$ = 
-               Apply[If[$CellContext`tagFind$$ = # == 
-                   0, #2, #]& , $CellContext`cnt$]; 
-              SelectionMove[$CellContext`nb$, Before, Notebook, 
-                AutoScroll -> False]; 
-              If[$CellContext`tagFind$$, $CellContext`cells$$ = 
-                Map[# -> StringJoin["Slide ", 
-                    ToString[#]]& , 
-                  Range[$CellContext`cnt$]], 
-                Do[NotebookFind[$CellContext`nb$, 
-                    "SlideShowNavigationBar", Next, CellStyle, 
-                    AutoScroll -> False]; 
-                  SelectionMove[$CellContext`nb$, Next, Cell, 
-                    AutoScroll -> False]; 
-                  AppendTo[$CellContext`cells$$, 
-                    ReplaceAll[
-                    NotebookRead[$CellContext`nb$], 
-                    Pattern[$CellContext`s, 
-                    Blank[StyleBox]] :> With[{$CellContext`ss = Join[
-                    Take[$CellContext`s, 1], 
-                    DeleteCases[
-                    Rest[$CellContext`s], 
-                    Alternatives[
-                    Blank[String], 
-                    Blank[][FontColor, 
-                    Blank[]], 
-                    Blank[][FontSize, 
-                    Blank[]]]]]}, 
+               InputNotebook[], $CellContext`allcls$, \
+$CellContext`ssNavBarCls$, $CellContext`ssNavBarPositions$}, \
+$CellContext`cells$$ = {}; $CellContext`allcls$ = 
+               Cells[$CellContext`nb$]; $CellContext`ssNavBarCls$ = 
+               Cells[$CellContext`nb$, CellStyle -> 
+                 "SlideShowNavigationBar", CellTags -> 
+                 "SlideShowHeader"]; $CellContext`ssNavBarPositions$ = 
+               Map[Position[$CellContext`allcls$, #]& , \
+$CellContext`ssNavBarCls$]; $CellContext`cnt$ = 
+               Length[$CellContext`ssNavBarPositions$]; 
+              If[$CellContext`cnt$ > 
+                0, $CellContext`ssNavBarPositions$ = Map[First[
+                    Flatten[#]]& , $CellContext`ssNavBarPositions$]; 
+                Module[{$CellContext`ssnbPos$ = 0}, 
+                  
+                  Table[$CellContext`ssnbPos$ = 
+                    Part[$CellContext`ssNavBarPositions$, \
+$CellContext`i]; AppendTo[$CellContext`cells$$, $CellContext`i -> If[
+                    Or[
                     
-                    Condition[$CellContext`ss, 
-                    True]]]], {$CellContext`cnt$}]; \
-$CellContext`cells$$ = Replace[
-                   Part[$CellContext`cells$$, All, 1], {BoxData[
-                    Pattern[$CellContext`c, 
-                    Blank[]]] :> $CellContext`c, TextData[
-                    Pattern[$CellContext`c, 
-                    Blank[]]] :> RowBox[
-                    If[
+                    And[$CellContext`i < $CellContext`cnt$, \
+$CellContext`ssnbPos$ + 1 === 
+                    Part[$CellContext`ssNavBarPositions$, \
+$CellContext`i + 1]], 
                     
-                    ListQ[$CellContext`c], $CellContext`c, \
-{$CellContext`c}]]}, 1]; $CellContext`cells$$ = 
-                 Thread[
-                  Range[$CellContext`cnt$] -> $CellContext`cells$$]]],
-             PassEventsDown -> True, EvaluationOrder -> Before, 
-            PassEventsDown -> Automatic, PassEventsUp -> True}]], 
+                    And[$CellContext`i === $CellContext`cnt$, 
+                    Length[$CellContext`allcls$] === \
+$CellContext`ssnbPos$]], 
+                    StyleBox[
+                    ToBoxes[
+                    StringForm[
+                    FrontEndResource[
+                    "SlideshowToolbarText", 
+                    "SlideshowToolbarEmptySlide"], $CellContext`i]], 
+                    FontSlant -> Italic, FontColor -> GrayLevel[0.7]], 
+                    Replace[
+                    NotebookRead[
+                    Part[$CellContext`allcls$, $CellContext`ssnbPos$ + 
+                    1]], {Cell[
+                    Pattern[$CellContext`str, 
+                    Blank[String]], 
+                    BlankNullSequence[]] :> $CellContext`str, Cell[
+                    Alternatives[BoxData, TextData][
+                    Pattern[$CellContext`cont, 
+                    Blank[List]]], 
+                    BlankNullSequence[]] :> RowBox[$CellContext`cont],
+                     Cell[
+                    Alternatives[BoxData, TextData][
+                    Pattern[$CellContext`cont, 
+                    Blank[]]], 
+                    BlankNullSequence[]] :> 
+                    RowBox[{$CellContext`cont}]}]]], {$CellContext`i, \
+$CellContext`cnt$}]]]; Null], PassEventsDown -> True, EvaluationOrder -> 
+            Before, Method -> "Preemptive", PassEventsUp -> True}]], 
          DynamicModuleValues :> {}]},
        "RowDefault"], 
       StyleBox[
@@ -2932,35 +3092,35 @@ $CellContext`cells$$ = Replace[
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzt0j0KwkAQBeCgFpYBL6A32COoJ5B4gSSgrSEKkm7uYP4T8Ig5wvgGptBo
-sdtZpPgyO2/hEUI28SU4zzzPuy7xCKL7Lk2j7LjAss9up3iOw0pJyMyTP9L3
-vQ8E5sedgcS2q+u6BBholBsY9G5r1dW2BCzzLTMwaP60fa+2aQhYpu4HGDSz
-7hFNXROwTqNn4dQj6qoiYJ1Gz8K9qywJWKbuoe7Cqa8qCgKW+ZaFmgnrvjLP
-CVjmKA81F1b/RPF4rOEJX/8qsoPe+a7fbvLpBb7vFy0=
-              "], {{0, 
-              19}, {19, 0}}, {0, 255},
+1:eJzt0j0KwkAQBeCgFpYBL6A32NJSSztR7BMxik2UKIjd3MH8J+ARc4TxDUzh
+X7HpLCy+zM5beISQ0fqw2HYcxzn18Vj4l2kU+deli2UVnva7MNjMwnOwC6Lx
+uotwoHrAzH8/pK5rFwjMlzsDR9uuqqqOwEBvuYFG7yZWXWVJwDKfMgON5nfb
+9yqLgoBl6j6HRjPrHlHkOQHrNHoWrXpEnmUErNPoWbTvSlMClqm7p7to1Zcl
+CQHLfMo8zYR1XxrHBCzzLfc0F1b/RHK7DeEOH/8qsrneuW2/3d+rBzchG+g=
+
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJydlDuLGlEYhiVJkT4IC6lSe7/fr6iFKN5KbXYxsVQ30bCFIt5qERGRtdw/
-IViIYGFhIVjIYrFVwGr/wZd5D3MOKlmyWjx+873nm4c5h3G+3RXTPz4oFIqf
-n6Wf9O3vwP397UPmk9QEH359v/soXXyRQUhECpVK9VXiSeJFgi7gRb4P98Nz
-I3EIBAKUSCQok8lQOp1+F/F4nPx+P5wH2fOEHp5oNEqRSITC4TCFQqH/gjnM
-u1wukp/vEIvFWAan1+slj8fzbjAP5Gd7hR89/NfgdDrhegU4K56BYDBItVqN
-nR3POMgqlcpJ5nA4hMvn84kMVKtVWiwWVK/XRQbgmU6nbC2Xy4ncbrcLl9vt
-JpvNRlarlQHHcrlklWepVIpmsxnLe72eyIHFYnnT1Wg0aLVasYo+n8/TfD5n
-Wb/fP/Gcu3BWPAPNZpPW6zWreI9wDQaDgZg5xmw2Cxf2jN5kMjFarRZtNhtW
-sTdcg+FwKGbO4S6cHXqj0chot9u03W5ZRV8sFlkPRqORmDuGu3BW6A0GA6PT
-6dBut2OVZ6VSiWVgPB6LnMNd2LNeryedTsfodru03+9Z5Rkol8ssB9ls9mTt
-LRf+B5PJhJLJ5Mk8KBQKbA3v4z9cf3Du6LVa7dXAI/EIj0ajIbVafRXyt+xR
-Qik7L/kGnoP7lfJ3VSl7ny90PB89j+IvvJiMHQ==
-              "], {{0, 19}, {
-              19, 0}}, {0, 255},
+1:eJydlDuLGmEUhockRcpAEAKpUnu/36+oEFG8kUqbXTSSxttGQwpFvNUiIiJr
+uX9CsBDBwsJCsJDFYquA1f6Dk3k/ZgaVLFktHs+cd848fN/HOF9uC4nvbziO
+u3vP/yRufnnL5ZvfyQ988y1/9yOXz2a+5n9mc9my5fYtH34UeMdDRJxcLv/M
+88DzxEMX8CQ8h+fh+cRz8Hq9FI1GKZlMUiKReBWRSIQ8Hg+cB8HzgB6eUChE
+wWCQAoEA+f3+/4I5zNvtdhLWdwiHwyyD0+VykdPpfDWYB8LanuFHD/812Gw2
+uJ4BzkrMgM/no1qtxs5OzESQVSqVk8xqtUout9stZaBardJisaB6vS5lAJ7p
+dMrupdNpKbdYLJLL4XCQ2Wwmk8nEgGO5XLIqZvF4nGazGct7vZ6UA6PR+KKr
+0WjQarViFX0mk6H5fM6yfr9/4jl34azEDDSbTVqv16ziPcI1GAwG0swxBoNB
+cmHP6PV6PaPVatFms2EVe8M1GA6H0sw5ogtnh16n0zHa7TZtt1tW0RcKBdaD
+0WgkzR0junBW6LVaLaPT6dBut2NVzIrFIsvAeDyWchHRhT1rNBpSq9WMbrdL
++/2eVTEDpVKJ5SCVSp3ce8mF/8FkMqFYLHYyD3K5HLuH9/Efrj84d/Qqlepq
+4OG5h0epVJJCobgK4Vt2zyMTnJd8A8/B8zLhuyoTvI8XOh6P1sP9BTTKkNg=
+
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -2977,32 +3137,30 @@ Qik7L/kGnoP7lfJ3VSl7ny90PB89j+IvvJiMHQ==
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzt0TEOwiAUxnGiDu6ewKPoCZp6AdqkrjbVxHTzDi2FAglHfX4kb3HlLQ4d
-fi/A8B8e5/ZR33dKqecRo27el2FoxtsBl+v46to9DieWH4lo8+dijBX00k4I
-QQNloo73Goil0o5fVw3EijurcxUQK+5kztoeiGnpzt2yJCAm7lljEhAT95Z5
-TkCZtJWZafqA6A82v77LpC5C
-              "], {{0, 19}, {19, 0}}, {0, 
-              255},
+1:eJzt0T0KwkAQhuGgFpaCJ/AWtpZ2IWK/Ca7BJoZEELvcIX+7SWCPOn4L09hm
+GosUz8BO8Razh+QZ3VdBEJRbjCh+n4oi/lx2eFyz8pFm+nbOXjrVxTFZY7ln
+GyCixZ+bpimEXNoZx1EBeaLOMCgg5uZ2BmsVEJvdscaEQGx2xzN9nwMxJb25
+6ToHxMS9vm0dEBP3uqZxQJ605bV1XYHoDxa/vkPWMv0=
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJydlLlqAlEUQIckRfoQCFildt/3ZYJaiCLMfIHipFJHTCTMH1iKWIhL6ZcI
-FhYWgoWIhZVg5R/cvPt4M7g8cSnOzNxlDvfd4n0WVen7SRCEn1fykAp/Yr1e
-0OQXEnxpv0rxmXy8MTBpNpsRE2FE2BDgDjbsPxPzfBB2oihCPp8HWZZBkqSb
-yOVykEgk0LljnhHG6MlkMpBOpyGVSkEymbwK9mF/OBwGNt8um83SHDpjsRhE
-o9GbwX6EzbZHP8bof4RQKISuPYK70nOXKJVK0Gg0uLVgMGi44vG4keNRqVRg
-PB5TePVAIGC4IpEI+P1+8Pl8Z5TLZZhMJpRWq8Xt8Xq9V13VahWm0yml3W5z
-Pacu3JWe01EUBWazGaXT6RzVTvF4PIYLz4yx2+020DQN5vM5RVXVoxoP3YW7
-w9jlch3R7XZhsVhQ0HdaP0R34a4wdjqdZ/R6PVgul5RarcbtQXQXntnhcIDd
-bufS7/dhvV5TLvXc6kKazSYMh8Nrri3uHWObzfYw6CEM0GO1WsFisTwEu8sG
-hHfmvOcOPGXLPAJ7o3d1p2N1MI/wDxwoaC8=
-              "], {{0, 19}, {19, 
-              0}}, {0, 255},
+1:eJyd1LlqAkEYwPElSZEyEAIBq9Te93orqBBRhJU8gOJGArqKRsK+gaWIhXiU
+PolgYWEhWIhYWAlWvsGX+YbZxWPFo/gp38z4Z3cKP3Jl4fuB47jaM/kQsn+R
+ajUrZ17I8CXVfgqSmP+UfsWCWOVzj2TxlXki9Ho90hFDYk3ADdbsdzrWeSe2
+kUgE0uk0ZDIZEAThKqlUCsLhMDa3rDPEGTuJRALi8TjEYjGIRqMX4Tk87/P5
+gD3fNplM0jVsBoNBCAQCV8PziD3bDvs4Y/8eXq8XWzuEd6WsnZPP56Fer2vu
+eTwetRUKhdQ1LaVSCUajEaW1z/O82vL7/eB2u8Hlcp0oFoswHo+pZrOpecbp
+dF5sSZIEk8mEarVamp3jFt6VsqYQRRGm0ynVbrcP9o45HA61he+Ms91uV8my
+DLPZjCqXywd7WpQW3h3ONpvtQKfTgfl8TmHveH+f0sK7wtlqtZ7odruwWCyo
+SqWieQYpLXxni8UCZrNZU6/Xg9VqRZ07c20LNRoNGAwGl1obvHecTSbT3bBD
+9LFjNBrBYDDchf2X9Yk31rzlP/DYhnU49o3d5Y2N5d7zcP+US2zq
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -3019,33 +3177,33 @@ hHfmvOcOPGXLPAJ7o3d1p2N1MI/wDxwoaC8=
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzlzMsJwlAQheGgLlxesAI7sAS1hNiACehWiIKkipD364aUYAkp4ZZ0PBEX
-s83NRnDxDTOz+Lf+zb0uHMe5rzlc73kIAi88rXgcw8fFX3LZfI1PAH+r67qI
-BjrPbmkNYVZPa20IgnWvbVtFhiDY95pGkSEI1r2mrhUZgmDdq6tKkSEIO9te
-VZY9QdhPbhSFIkMQ+qmdMs8VGYIwuVNkmSJDECZ3RnmaDgTBqvNpJQkE684o
-i+MXgaI5nV/wBs/VHnE=
+1:eJzlzDsKwlAQheGgFpYXXIE7sLTU0laxN8EYbCIkgriKkPfrhizBJWQJd0nj
+iVhMm5tGsPgG5hT/0rrtLxPDMPw5zt58bD3PfB4EnqPrXx3XPu/cu+3Y3tqa
+Ylx8zYCI/lbTNAF0cBrdkpKYUT0ppQJitHt1XQtQQIx+r6oEKCBGu1eVpQAF
+xGj3yqIQoICYlW6vyPMWiNkMbmSZAAXEtEM7eZoKUEDM4E6WJAIUEDO400vj
+uANitDqfVhQRo93pJWH4AoJgTOcXvAFIByMs
               "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJyVlDtrIlEYhmV3i/TLQiDV1t7v9ytqIYowllYJZCt1IbuwpPcniIiOWAUR
-QRBEEEQEwcLCQrCQIBhEAlb5B9/OG+YcZrxs1uKZme8yz5zzcZjvdz+FH580
-Gs2vK+ki3P4JPzzcPma+SEHk8ff93Wfp4asMklqtFtxIPEm8SNAFvMjv3cie
-a4l9OBymdDpNmUyGBEH4L1KpFIVCITj3sucJMTyJRILi8TjFYjGKRqMfgj70
-e71ekte3TyaT7zk4A4EA+f1+KhaLJIoi5fP59/gc6Afy2t7gRww/YzQacXK5
-nKp2iMfjgesNYFYsx2g2mzQejznwKetK3G43dwWDQZ5jRCIRarVaNJlMONiv
-sofhcrm4y+fzkdPpJIfDoQLfaLfbNJ1OOVjfYZ/dbv/QxXydTodmsxmnUCic
-dWFWLHcK+LrdLs3ncw7OF6vbbDbuwp4RW63Ws5TLZVosFpxsNquqMxdmh9hi
-sRyB/ff7fVoul5xKpXLUx1yYFWKz2awCnsFgQKvVilOtVo/6AHNhzyaTiYxG
-IwdnZDgc0nq95tRqNVWPkn+5er0ebTYbTr1eP+tRuF4xd8QGg4Gz3W45jUZD
-VTsFPBIiPHq9nnQ6HQdndLfbUalUUuVPIf/LRIlvsvOSf+Ahr7JHI9/hfb7Q
-8axYj+YvQGCdgQ==
+1:eJyVlEtrGlEUgKXNostCCRSy6tr3+/1EhYoijGTlKqE2FHQKplC69yeIiI64
+CiKCIIggiAiCCxcuBBcSBINIwFX+wek94d7LjI+mLr4ZzmO+ufdwuV9ufwrf
+36lUqvsP5CHc/A7m8zd/Uh9JcC3e/7gTM9++ir8yd5m84/Y9SX6iXBDUajVy
+RXggPBHgDJ7od1fU85mwCwaDkEwmIZVKgSAI/0UikYBAIIDOHfU8YIyeWCwG
+0WgUIpEIhMPhN8E+7He73UDXt4vH4685dPp8PvB6vVAoFECSJMjlcq/xKbAf
+oWt7QT/G6GcMh0NONptV1PZxuVzoekFwVizHaDQaMBqNOOiT1+U4nU7u8vv9
+PMcIhULQbDZhPB5zcL/yHobD4eAuj8cDdrsdbDabAvxHq9WCyWTCwfXt91mt
+1jddzNdut2E6nXJEUTzpwlmx3DHQ1+l0YDabcfB8sbrFYuEu3DPGZrP5JKVS
+CebzOSedTivqzIWzw9hkMh2A++/1erBYLDjlcvmgj7lwVhgbjUYF6On3+7Bc
+LjmVSuWgD2Eu3LPBYAC9Xs/BMzIYDGC1WnGq1aqiR86/XN1uF9brNadWq530
+yFzPOHeMdTodZ7PZcOr1uqJ2DPQQJPRotVrQaDQcPKPb7RaKxaIifwx6l0mE
+S+o85w7c55l6VPSN3sczHY+y9aj+AriDojw=
               "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -3062,35 +3220,34 @@ VTsFPBIiPHq9nnQ6HQdndLfbUalUUuVPIf/LRIlvsvOSf+Ahr7JHI9/hfb7Q
           StyleBox[
            PaneSelectorBox[{False->
             GraphicsBox[RasterBox[CompressedData["
-1:eJzt0r0JwkAYxvGgFpYBJ3CDG+F0AokLJAFtDVGQTGGR7w+4ERwhI2SUjPD6
-HLxFkAh3nUWKX7j7HzxV9uHNu64cx7lv8fGC5yGOg+S8weWYPC7hGocd05GI
-Fn+k6zoJ0Y+3CE6mW23b9kCgvrrg3htvNY0PxNSkS27GW1pT1z4QU9wk3622
-tLqqfCD2Asln662qLAWMQPAGyWerraooBIxAMIALku/GW2WeCxiBYACXu+Rm
-vFVkWQ8EA7iTLrgbb+Vp6oMCd+ZN99n/eGHnA2t5GPU=
-              "], {{0, 
-              19}, {19, 0}}, {0, 255},
+1:eJzt0jsKwkAUheGgFpYDrsAdTGk5lnai2CfBGGyiREFchUXeD8gSXEKWkKVk
+CdcTuEUQhUlnYfGFmX/gVJnbp81hZBjGZYrPxrotfd+6bwUuO+9ydD1nv/Ku
+juv4C3uMOGMTIKK/H1KWpYLzl7czrHW3iqKogaB665J7rb2V5yYQq3pdcdPe
+6uRZZgKxipvi+6CtTpamJhB7gOLz4K00SSS0QPAExedBW2kcS2iBoAEBiu/a
+W0kUSWiBoAHBXXHT3orDsAaCBkSvS+7aW1EQmFCB+PDW9Y//8d8wL+OcHbA=
+
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}], True->
             GraphicsBox[RasterBox[CompressedData["
-1:eJydlDuLGlEYhmWTYvsQCGyV2vv9fgtqIYq3Tm12MalEYRIJW/gLLBTrFUQY
-EBHERhDsBBEFC8FCFoutFqz2H3yZ9zBncBIkq8Wj53vnm4dzPuV8fahmf9xo
-NJqft9JH9v53WBDuH3MfpeLb46/vDx+kxScZhFqtFtxJiBIvEnQBL/J7d0QE
-zxeJYzgcplQqRblcjrLZ7LtIJpMUCoXgPMoeETU88XicYrEYRaNRikQi/wV9
-6Pd6vSTv75hIJFgGZyAQIL/f/27QD+S9vcGPGv5r8Hg8cL0BzIpnoFgsUq1W
-U+pTkJdKJVXmdrsVVzAYVDLQ7XZpPp9Ts9lUMoDfBTmen+Yul0tx+Xw+cjqd
-5HA4GOVymRaLBaPVail5Pp9nWa/XUzJgt9vPukClUqHVasVot9ssKxQKrBZF
-8awLs+LZKdVqlTabDaPRaDAX1v1+X9Vns9kUF86M2mq1qshkMrRcLmm73bIZ
-wYX1YDD4p5e7MDvUFotFAZ71ek273Y4mkwlhDnChHg6Hql7AXZgVarPZzIAH
-Z9nv9zSdTpkHOVzIRqOR0svhLpzZZDKR0WhkjMdjOhwONJvN2H+F5+l0muV4
-zjPOOZcgCNTpdFQeDvJ6vX7O9Yq5ozYYDFcDj8QTPHq9nnQ63VXId9mTxGfZ
-eckd+Devskcjf8P7fKHjme8H9+ofUJ+NTA==
-              "], {{0, 19}, {19, 
-              0}}, {0, 255},
+1:eJydlDuLGlEYhiVJkTIQAoGtUnu/32+gQkTxRhq12UWzBGSE2UhI4S+wUKxX
+EEEQEcRGEOwEEQULwUIWi60WrPYffJn3MGfQBMmuxTPO9843D+d8I+fLTTn9
+/Y1Kpbp7L13S17+Conj9O/NBKr4Jdz9uhWLhq/CzeFsUHTdvpfCjzDsJtVoN
+riS6Eo8S9Aoe5feuiAiezxKHYDBIiUSCMpkMpdPpFxGPxykQCMB5kD1d1PBE
+o1GKRCIUDocpFAr9F/Sh3+12k7y+QywWYxmcPp+PvF7vi0E/kNf2DD9q+C/B
+5XLB9QwwK56BfD5PlUpFqY9BXigUTjKn06m4/H6/koF2u02z2Yzq9bqSAXwX
+5Hh+nDscDsXl8XjIbreTzWZjlEolms/njEajoeTZbJZlnU5HyYDVaj3rAoIg
+0HK5ZDSbTZblcjlWd7vdsy7MimfHlMtlWq/XjFqtxly47/V6J30Wi0VxYc+o
+zWbzCalUihaLBW02GzYjuHDf7/f/6eUuzA61yWRSgGe1WtF2u6XxeEyYA1yo
+B4PBSS/gLswKtdFoZMCDvex2O5pMJsyDHC5kw+FQ6eVwF/ZsMBhIr9czRqMR
+7fd7mk6n7L/C82QyyXI85xnnnEsURWq1WiceDvJqtXrO9YS5o9bpdBcDj8Q9
+PFqtljQazUXIZ9m9xCfZ+Zoz8G+eZI9K/oX34ZWOB74enKt/AMjCkgc=
+              "], {{0, 19}, {19, 0}}, {0, 255},
               ColorFunction->RGBColor],
-             BaseStyle->"ImageGraphics",
+             DefaultBaseStyle->"ImageGraphics",
              ImageSize->Magnification[1],
              ImageSizeRaw->{19, 19},
              PlotRange->{{0, 19}, {0, 19}}]}, Dynamic[
@@ -3121,29 +3278,29 @@ eckd+Devskcjf8P7fKHjme8H9+ofUJ+NTA==
               PaneSelectorBox[{
                False -> PaneSelectorBox[{False -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBLECOU2VJahIzkCEMxPJADBL8////
-KB48OBkN00svA5l6qGXOYLEbPQyJwdTyA0i/NAmYWmE2aveo3bS2eyDz2GAp
-WwbC7oGqS4Y1BgCMmwjV
-                    "], {{0, 19}, {31, 0}}, {0, 
-                    255}, ColorFunction -> RGBColor], BaseStyle -> 
-                    "ImageGraphics", ImageSizeRaw -> {31, 19}, 
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBAkBOaF5xZnpeaopnXklqemqRRRIz
+UFAYiOWBmAWI////P4oHD05Gw/TSy0CmHmqZM1jsRg9DYjC1/ADSL00CplaY
+jdo9ajet7R7IPDZYypaBsHug6pJhjQHf7Q2Q
+                    "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
+                    ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]], True -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJzNlrtLw1AUxos6uEtBcBDnDoW+3++WDm2HhFJa+kBBV0EF8X9xtLNb3/+J
-k5MoDsXB9Xi/kHNJ4MbGQMDhF+75cs/33UeGnF1ca1d7gUDg9lA8tPP78s3N
-+YN+IIrKw93lxb4YHAlOBRCJKBAKhU4EU8GrgHzkW/CMPDP3WPBRr9ep2+3S
-YDCgfr/vC71ej6rVKtbwaeZOa7WaoWuaRp1Oh9rtNrVaLV+Ad6FQIPOcP3Rd
-NzKbzSY1Gg3CGWw2GxvQ3PJbL/sjV7DFeqDhPJj1em2rvaLyqVQqyN4C7Jc1
-Bj3W2isqn3K5LLOxZ9aY1WplG/8VlQ9TKpVkNvZcLBaNb0DFcrmkyWTiGsx3
-8gL5fP7fZLOmAl7j8dg1mO/kBXK5nMzGXbOmwku2kxfIZrMyG/fPmorFYkGj
-0cg1mO/kBTKZjMzGd8eaCngNh0PXYL6TF0in0zIbd406lUpJ5vO5bfxXVD5M
-MpmU2bhr1hj0WGuvqHwSiQRnv+G8WWNms5mt9orKJx6PI/tN8BiNRo06FotJ
-0GPF+m4Xu3rD4TCyHwVBrAF1JBIhrMNPzNx35Jr/D0FzHS8+/7d8CZ449wdL
-bV6+
-                    "], {{0, 19}, {31, 0}}, {0, 255}, 
-                    ColorFunction -> RGBColor], BaseStyle -> 
-                    "ImageGraphics", ImageSizeRaw -> {31, 19}, 
+1:eJzNljtLA0EUhYNaWAoiCBZinSKQ9/udECFJsSGEhDxQjGITIQrif0mptV3e
+/8TKShQLsbC9zgl7hyzM6rqwYPGFvSdzz7kzs8UenV5p5xsul+t6W/xoJ7eZ
+4fDkrrYjivrg+vJi0D87Htz0L/rD8OmmEHcFh4ItARG53G73geBB8CwgB/kS
+PCJPz90XvBUKBarX69RqtajZbDpCo9GgXC6HGd713Id8Pr/SNU2jarVKlUqF
+yuWyI8A7mUySfs5vtVptlVkqlahYLBLOYLlcGoBmlZ962R+5gg/MAw3nwSwW
+C0NtF5VPNptF9gfAfllj0LNe20Xlk8lkZDb2zBozn88Nz39F5cOk02mZjT2n
+UqnVO6BiNptRr9ezDNabeYFEIvFvsllTAa9ut2sZrDfzAvF4XGbjrllTYSfb
+zAvEYjGZjftnTcV0OqVOp2MZrDfzAtFoVGbjvWNNBbza7bZlsN7MC0QiEZmN
+u0YdDoclk8nE8PxXVD5MKBSS2bhr1hj0rNd2UfkEg0HOfsF5s8aMx2NDbReV
+TyAQQPaLYOTz+Va13++XoGed9f9+47dej8eD7JFgDzOg9nq9hDmcRM99Ra7+
+/bCnz/Hk8HfLp+Cec78Bnr9jeQ==
+                    "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
+                    ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]]}, 
                   Dynamic[
@@ -3151,31 +3308,31 @@ bV6+
                    FrameMargins -> 0], True -> 
                 PaneSelectorBox[{False -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBLECOU2VJahIzkCEMxPJADBL8////
-KB48OBkN00svA5l6qGXOYLM7FoibgVgGTVwGKh5LQz9wAnEBmv0wewug8tRK
-b4Tst6Cjvej299DZ3oG0e6DCnF5pbSDz2GArW+hp90DVJcMaAwB6gQLZ
-             
-                           "], {{0, 19}, {31, 0}}, {0, 255}, 
-                    ColorFunction -> RGBColor], BaseStyle -> 
-                    "ImageGraphics", ImageSizeRaw -> {31, 19}, 
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBAkBOaF5xZnpeaopnXklqemqRRRIz
+UFAYiOWBmAWI////P4oHD05Gw/TSy0CmHmqZM9jsjgXiZiCWQROXgYrH0tAP
+nEBcgGY/zN4CqDy10hsh+y3oaC+6/T10tncg7R6oMKdXWhvIPDbYyhZ62j1Q
+dcmwxgDN0weU
+                    "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
+                    ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]], True -> GraphicsBox[
                     RasterBox[CompressedData["
-1:eJy1lr2LGkEYxiVJkT4cBFKE1BaC39/fn6AWKyJqIXuQtIFLIFwh/iNX5sBC
-SKegov+E2qQx1ZEjxZEi7Zt5hn2HXVncPWGLn+PzDO/7zM4My364/qx9euHz
-+b68Fj+a/q1wc6Pfdl4JUbz9+vH6pfjzRvBeAJOIfH6//53gXvBLQB7yT/AD
-eUbuW8FjpVKhbrdLg8GA+v2+J/R6PSqVSljDHyP3vlwuS1/TNGq329RqtajZ
-bHoCemezWTL2+bHT6cjMer1O1WqVsAfr9doCPLecq+X+yBU8YT3wsB/MarWy
-6Eux61MsFpH9BPC87DGoMetLsetTKBRUNp6ZPWa5XFo0mM1mdDgcSNd1iw8N
-H/OnNXZ98vm8ysYz53I5eQfO0Wg0aLvd0n6/p9FoJD2M0PAx79QDZDKZZ2ef
-5k8mk2fn2mWz5wbcD+Qdj0c5QrutBel0WmXjrNlzQ61Ws2RDu60FqVRKZeP8
-2XMC93Kz2ci9Ho/HcoSG76YeJJNJlY17x9458E7g3OFwKD2MnI95px4gkUio
-bJw1dDweVywWC4sG0+mUdrudfOebfWj4mD+tsesTi8VUNs6aPQY1Zn0pdn2i
-0ShnP2C/2WPm87lFX4pdn0gkguwHwV0oFJI6HA4rUGPGPOeEU20gEED2neAK
-a4AOBoOEdXiJkfsbucb3w5Wxjp8ef7f8FXzn3P/hxESB
-                    
+1:eJy1lr2LGkEYxiVJkTIQDgIpQmoLwe/v709QixURtZA9Yo40BrxASCH+I1fm
+wEJIp6Ci/4TaXONVR44UR4q0b+YZdoZdWdw9YYvfDs8zvO8zOzMs+/Hyq/L5
+hcvlun7NHor6PTMcqj8ab5hoDq6/XA36nyqDb/2r/jB8+ZKZbxkfGK8YRORy
+u93vGbeMewY5yD/GL+Rpue8Yj4VCgZrNJnU6HWq3247QarUol8thDX+03Nt8
+Ps99RVGoXq9TrVajarXqCOidTCZJ2+fHRqPBM8vlMhWLRcIerFYrA/DscqpW
+9Ecu4wnrgYf9ECyXS4M+F7M+2WwW2U8A7ys8AWr0+lzM+mQyGZmNdxaeYLFY
+GDSYTqe03+9JVVWDDw0f88c1Zn3S6bTMxjunUil+B05RqVRos9nQbrejXq/H
+PYzQ8DFv1QMkEolnZx/nj8fjZ+eaZQvPDrgfyDscDnyEtlsL4vG4zMZZC88O
+pVLJkA1ttxbEYjGZjfMXnhW4l+v1mu/1aDTiIzR8O/UgGo3KbNw74Z0C3wSR
+2+12uYdR5GPeqgeIRCIyG2cNHQ6HJfP53KDBZDKh7XbLv/l6Hxo+5o9rzPqE
+QiGZjbMWngA1en0uZn2CwaDIfsB+C08wm80M+lzM+gQCAWQ/MG58Ph/Xfr9f
+gho9+jkrrGo9Hg+ybxgXWAO01+slrMNJtNzfyNX+Hy60ddw5/N/yl/FT5P4H
+NSVJPA==
                     "], {{0, 19}, {31, 0}}, {0, 255}, ColorFunction -> 
-                    RGBColor], BaseStyle -> "ImageGraphics", 
+                    RGBColor], DefaultBaseStyle -> "ImageGraphics", 
                     ImageSizeRaw -> {31, 19}, 
                     PlotRange -> {{0, 31}, {0, 19}}, ImageSize -> 
                     Magnification[1]]}, 
@@ -3224,12 +3381,11 @@ a4AOBoOEdXiJkfsbucb3w5Wxjp8ef7f8FXzn3P/hxESB
        FrontEnd`CurrentValue[
         EvaluationNotebook[], WindowSize], Full]]]],
    ImageSize->Full],
-  Appearance->{Default -> Image[CompressedData["
-1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBLECOU2VJahIzkCENxSC2NbWB1aAH
-ltQGFtQG5tQGptQGJtQGxtQGRtQGBtQG+tQGetQGOtQG2tQGmtQGGtQGatQG
-qtQGKtQGytQGStQGCtQG8oMeyFEbyFIbAACskYDA
-      "], "Byte", ColorSpace -> 
-      "RGB", Interleaving -> True]},
+  Appearance->Image[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBAkBOaF5xZnpeaopnXklqemqRRRIz
+UFAaikFsa2oDq0EPLKkNLKgNzKkNTKkNTKgNjKkNjKgNDKgN9KkN9KgNdKgN
+tKkNNKkNNKgN1KgNVKkNVKgNlKkNlKgNFKgN5Ac9kKM2kKU2AADgQ4V7
+    "], "Byte", ColorSpace -> "RGB", Interleaving -> True],
   ImageSize->{
     Scaled[1], Automatic}]], "SystemDockedCell",
  CellFrame->0.01,
@@ -3247,6 +3403,7 @@ qtQGKtQGytQGStQGCtQG8oMeyFEbyFIbAACskYDA
      Blank[], None]]],
  CellFrameMargins->{{0, -5}, {-2, 0}},
  CellFrameColor->GrayLevel[0.1]]
+
 ],
 
 (*The next two are used in the SlideShow palette*)
@@ -3368,9 +3525,7 @@ qtQGKtQGytQGStQGCtQG8oMeyFEbyFIbAACskYDA
 Cell[BoxData[
  PanelBox[
   StyleBox[
-   TemplateBox[{StyleBox[
-      GraphicsBox[{}, ImageSize -> {9, 0}, BaselinePosition -> 
-       Baseline], "CacheGraphics" -> False],TemplateBox[{
+   TemplateBox[{TemplateBox[{9}, "Spacer1"],TemplateBox[{
        TooltipBox[
         DynamicModuleBox[{$CellContext`destination$$ = 0}, 
          DynamicBox[
@@ -3401,9 +3556,7 @@ Cell[BoxData[
         DynamicBox[
          FEPrivate`FrontEndResource[
          "HelpToolbarText", "TooltipBack"]]], 
-       StyleBox[
-        GraphicsBox[{}, ImageSize -> {2, 0}, BaselinePosition -> 
-         Baseline], "CacheGraphics" -> False], 
+       TemplateBox[{2}, "Spacer1"], 
        TooltipBox[
         DynamicModuleBox[{$CellContext`destination$$ = 0}, 
          DynamicBox[
@@ -3418,10 +3571,10 @@ Cell[BoxData[
            ButtonBox[
             PaneSelectorBox[{True -> DynamicBox[
                 FEPrivate`ImportImage[
+                 
                  FrontEnd`FileName[{"Toolbars", "DocCenter"}, 
                   "ForwardIconHot.png"]]], False -> DynamicBox[
                 FEPrivate`ImportImage[
-                 
                  FrontEnd`FileName[{"Toolbars", "DocCenter"}, 
                   "ForwardIcon.png"]]]}, 
              Dynamic[
@@ -3440,9 +3593,7 @@ Cell[BoxData[
         DynamicBox[
          FEPrivate`FrontEndResource[
          "HelpToolbarText", "TooltipHistory"]]], 
-       StyleBox[
-        GraphicsBox[{}, ImageSize -> {13, 0}, BaselinePosition -> 
-         Baseline], "CacheGraphics" -> False], 
+       TemplateBox[{13}, "Spacer1"], 
        TooltipBox[
         ButtonBox[
          PaneSelectorBox[{True -> DynamicBox[
@@ -3463,10 +3614,8 @@ Cell[BoxData[
          Automatic, Method -> "Preemptive"], 
         DynamicBox[
          FEPrivate`FrontEndResource[
-         "HelpToolbarText", "TooltipHome"]]]}, "RowDefault"],StyleBox[
-     
-      GraphicsBox[{}, ImageSize -> {39, 0}, BaselinePosition -> 
-       Baseline], "CacheGraphics" -> False],FrameBox[
+         "HelpToolbarText", "TooltipHome"]]]}, "RowDefault"],
+     TemplateBox[{39}, "Spacer1"],FrameBox[
       StyleBox[
        DynamicBox[
         FEPrivate`FrontEndResource[
@@ -3479,9 +3628,8 @@ Cell[BoxData[
           FEPrivate`$OperatingSystem, "MacOSX", {{3, 3}, {0, -1}}, 
            "Windows", {{0, 2}, {0, 2}}, 
            Blank[], {{2, 2}, {0, 0}}]}], FrameStyle -> None, 
-      FrameMargins -> {{0, 0}, {4, 0}}],StyleBox[
-      GraphicsBox[{}, ImageSize -> {12, 0}, BaselinePosition -> 
-       Baseline], "CacheGraphics" -> False],TooltipBox[
+      FrameMargins -> {{0, 0}, {4, 0}}],TemplateBox[{12}, "Spacer1"],
+     TooltipBox[
       ButtonBox[
        PaneSelectorBox[{True -> DynamicBox[
            FEPrivate`ImportImage[
@@ -3493,8 +3641,7 @@ Cell[BoxData[
             FrontEnd`FileName[{"Toolbars", "DocCenter"}, 
              "RevertIcon.png"]]]}, 
         Dynamic[
-         CurrentValue["MouseOver"]]], ButtonFunction :> 
-       FrontEndToken[
+         CurrentValue["MouseOver"]]], ButtonFunction :> FrontEndToken[
          FrontEnd`ButtonNotebook[], "Revert", False], Evaluator -> 
        None, Appearance -> None, Method -> "Preemptive"], 
       DynamicBox[
@@ -3505,11 +3652,11 @@ Cell[BoxData[
    ButtonBoxOptions->{BaselinePosition->(Baseline -> Baseline)}],
   Alignment->{Left, Center},
   Appearance->Image[CompressedData["
-1:eJztx10KgmAUhOEP86JtCG3ElmArULLbwAJxr/1ZUZaVW+i4g7k54MX7wAwz
-SbHNNlEIYTe3yvI6raq8WcV2ls2+LGY2Fpa1ZdwDAAAAgMn7QfYFHHwABz1k
-b8hegIMOcPCE7AHZHXBwg+wKWQvZBXBwBhycAAdHyA6Q/QE6n0AK
-    "], "Byte", 
-    ColorSpace -> "RGB", Interleaving -> True],
+1:eJztyDkKAkEUhOFGE0OvIHgIU0PTEQ8ww7SDSQs9gnhXl3HBfbmC7Q0qeWDw
+f1CPqtcr5tm05ZyrO+lk+XIYY74ad9OYhHpWBV+OwsJXPg6Kdnr2U8qUX/8A
+AAAA+HtvyF6AgSdg4AHZHbIbYOAKGLhAdobsBBg4QnaAbA9ZAxjYAQa2gIEN
+ZGvIvp8pRMU=
+    "], "Byte", ColorSpace -> "RGB", Interleaving -> True],
   ImageSize->{
     Scaled[1], Full}]], "DockedCell",
  CellFrame->0,
@@ -3558,34 +3705,12 @@ Cell[BoxData[
        FEPrivate`FrontEndResource[
        "HelpToolbarText", "SearchString2"]]}], FontSize -> 11]],
   ImageSizeCache->{4., {0., 0.}}]], "DockedCell", "ControlStyle",
- CellFrame->Dynamic[
-   FEPrivate`If[
-    FEPrivate`UnsameQ[
-     FrontEnd`CurrentValue[
-      FrontEnd`EvaluationNotebook[], {TaggingRules, "LinkTrails"}, 
-      ""], ""], {{0, 0}, {3, 0}}, {{0, 0}, {0, 0}}]],
+ CellFrame->0,
  CellMargins->{{0, -10}, {0, -1}},
  CellOpen->Dynamic[FrontEnd`CurrentValue[
      FrontEnd`EvaluationNotebook[], {
      TaggingRules, "SearchTextTranslated"}, ""] =!= ""],
  CellFrameMargins->{{146, 5}, {3, 0}},
- CellFrameColor->Dynamic[
-   FEPrivate`If[
-    FEPrivate`SameQ[
-     FrontEnd`CurrentValue[
-      FrontEnd`EvaluationNotebook[], {TaggingRules, "LinkTrails"}, 
-      ""], ""], 
-    CurrentValue["ToolbarBackground"], 
-    FEPrivate`Switch[
-     FrontEnd`CurrentValue[
-      FrontEnd`EvaluationNotebook[], {TaggingRules, "ColorType"}], 
-     "SymbolColor", 
-     RGBColor[0.481193, 0.528023, 0.813489], "GuideColor", 
-     RGBColor[1, 0.6, 0], "TutorialColor", 
-     RGBColor[0.641154, 0.223011, 0.0623026], "RootColor", 
-     RGBColor[1, 0, 0], 
-     Blank[], 
-     GrayLevel[0.8]]]],
  ShowCodeAssist->False,
  LineIndent->0,
  LinebreakAdjustments->{1, 10, 0, 100, 0},
@@ -3595,6 +3720,13 @@ Cell[BoxData[
  DynamicBox[FrontEnd`CurrentValue[
    FrontEnd`EvaluationNotebook[], {TaggingRules, "LinkTrails"}, ""],
   ImageSizeCache->{4., {0., 0.}}]], "DockedLinkTrail",
+ CellFrame->Dynamic[
+   FEPrivate`If[
+    FEPrivate`SameQ[
+     FrontEnd`CurrentValue[
+      FrontEnd`EvaluationNotebook[], {
+      TaggingRules, "Metadata", "WorkflowDockedCell"}, ""], ""], {{0, 
+    0}, {0, 0}}, {{0, 0}, {3, 0}}]],
  CellOpen->Dynamic[FrontEnd`CurrentValue[
      FrontEnd`EvaluationNotebook[], {TaggingRules, "LinkTrails"}, ""] =!= 
    ""],
@@ -3609,13 +3741,65 @@ Cell[BoxData[
      FrontEnd`CurrentValue[
       FrontEnd`EvaluationNotebook[], {TaggingRules, "ColorType"}], 
      "SymbolColor", 
-     RGBColor[0.481193, 0.528023, 0.813489], "GuideColor", 
-     RGBColor[1, 0.6, 0], "TutorialColor", 
+     RGBColor[0.023529, 0.427451, 0.729412], "GuideColor", 
+     RGBColor[0.85098, 0.376078, 0], "TutorialColor", 
      RGBColor[0.641154, 0.223011, 0.0623026], "RootColor", 
-     RGBColor[1, 0, 0], 
+     RGBColor[1, 0, 0], "WorkflowColor", 
+     RGBColor[0.2157, 0.6588, 0.6745], 
      Blank[], 
      GrayLevel[0.8]]]],
- ShowCodeAssist->False]
+ ShowCodeAssist->False,
+ Background->Dynamic[
+   FEPrivate`If[
+    FEPrivate`SameQ[
+     FrontEnd`CurrentValue[
+      FrontEnd`EvaluationNotebook[], {TaggingRules, "LinkTrails"}, 
+      ""], ""], 
+    GrayLevel[0.8627450980392157], Inherited]]],
+
+Cell[BoxData[
+ DynamicBox[FrontEnd`CurrentValue[
+   FrontEnd`EvaluationNotebook[], {
+   TaggingRules, "Metadata", "WorkflowDockedCell"}, ""],
+  ImageSizeCache->{4., {0., 0.}}]], "WorkflowDockedCell",
+ CellFrame->Dynamic[
+   FEPrivate`If[
+    FEPrivate`UnsameQ[
+     FrontEnd`CurrentValue[
+      FrontEnd`EvaluationNotebook[], {
+      TaggingRules, "Metadata", "WorkflowDockedCell"}, ""], ""], {{0, 
+    0}, {1, 0}}, {{0, 0}, {3, 0}}]],
+ CellOpen->Dynamic[FrontEnd`CurrentValue[
+     FrontEnd`EvaluationNotebook[], {
+     TaggingRules, "Metadata", "WorkflowDockedCell"}, ""] =!= ""],
+ CellFrameMargins->{{25, 0}, {14, -3}},
+ CellFrameColor->Dynamic[
+   FEPrivate`If[
+    FEPrivate`UnsameQ[
+     FrontEnd`CurrentValue[
+      FrontEnd`EvaluationNotebook[], {
+      TaggingRules, "Metadata", "WorkflowDockedCell"}, ""], ""], 
+    GrayLevel[0.8], 
+    FEPrivate`Switch[
+     FrontEnd`CurrentValue[
+      FrontEnd`EvaluationNotebook[], {TaggingRules, "ColorType"}], 
+     "SymbolColor", 
+     RGBColor[0.023529, 0.427451, 0.729412], "GuideColor", 
+     RGBColor[0.85098, 0.376078, 0], "TutorialColor", 
+     RGBColor[0.641154, 0.223011, 0.0623026], "RootColor", 
+     RGBColor[1, 0, 0], "WorkflowColor", 
+     RGBColor[0.2157, 0.6588, 0.6745], 
+     Blank[], 
+     GrayLevel[0.8]]]],
+ ShowCodeAssist->False,
+ Background->Dynamic[
+   FEPrivate`If[
+    FEPrivate`SameQ[
+     FrontEnd`CurrentValue[
+      FrontEnd`EvaluationNotebook[], {
+      TaggingRules, "Metadata", "WorkflowDockedCell"}, ""], ""], 
+    GrayLevel[0.8627450980392157], 
+    GrayLevel[0.96863]]]]
 },
 
 "HelpViewerActionMenu" -> 
@@ -3636,17 +3820,13 @@ Cell[BoxData[
   PackageToolbar`Private`sectionlabel$$, 
   PackageToolbar`Private`space$$, PackageToolbar`Private`selectcell$$,
    PackageToolbar`Private`getMenuContents$$, 
-  PackageToolbar`Private`flattenCellGroups$$, 
   PackageToolbar`Private`menuContents$$, 
-  PackageToolbar`Private`fEnabled$$ = True, 
-  PackageToolbar`Private`sEnabled$$ = True}, 
+  PackageToolbar`Private`fEnabled$$, 
+  PackageToolbar`Private`sEnabled$$}, 
   DynamicBox[PanelBox[
     GridBox[{{
        TemplateBox[{
-         StyleBox[
-          
-          GraphicsBox[{}, ImageSize -> {5, 0}, BaselinePosition -> 
-           Baseline], "CacheGraphics" -> False], 
+         TemplateBox[{5}, "Spacer1"], 
          DynamicBox[
           ToBoxes[
            Row[{
@@ -3743,7 +3923,10 @@ Cell[BoxData[
             PackageToolbar`Private`getMenuContents$$[
               EvaluationNotebook[]]), Evaluator -> Automatic, Method -> 
            "Queued", BaselinePosition -> (Center -> Center), 
-           Appearance -> FEPrivate`FrontEndResource["MUnitExpressions", "ButtonAppearances"], ImageSize -> {Automatic, 28}, 
+           Appearance -> 
+           FEPrivate`FrontEndResource[
+            "MUnitExpressions", "ButtonAppearances"], 
+           ImageSize -> {Automatic, 28}, 
            FrameMargins -> {{10, 10}, {0, 0}}, BaseStyle -> 
            "ControlStyleLight"], 
           DynamicBox[
@@ -3752,10 +3935,7 @@ Cell[BoxData[
             "PackageToolbarText", "TooltipUpdate"], StandardForm]]]}, 
         "RowWithSeparator"], 
        TemplateBox[{
-         StyleBox[
-          
-          GraphicsBox[{}, ImageSize -> {10, 0}, BaselinePosition -> 
-           Baseline], "CacheGraphics" -> False], 
+         TemplateBox[{10}, "Spacer1"], 
          StyleBox[
           TemplateBox[{"  ", "\"  \"", 
             CheckboxBox[
@@ -3806,7 +3986,7 @@ Cell[BoxData[
      "MUnitExpressions", "StaticToolbarNinePatch"], 
     ImageSize -> {Automatic, 50}, FrameMargins -> {{12, 12}, {8, 10}},
      ImageMargins -> -1],
-   ImageSizeCache->{765., {21., 27.}}],
+   ImageSizeCache->{789., {21., 27.}}],
   DynamicModuleValues:>{},
   Initialization:>(PackageToolbar`Private`functionlabel$$[{
        Pattern[PackageToolbar`Private`boxes, 
@@ -3844,46 +4024,15 @@ Cell[BoxData[
         PackageToolbar`Private`k, AutoScroll -> False], 
        FrontEnd`FrontEndToken[
        PackageToolbar`Private`nb, "OpenSelectionParents"]}]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Pattern[PackageToolbar`Private`nb$, 
-       Blank[NotebookObject]]] := 
-    PackageToolbar`Private`flattenCellGroups$$[
-      NotebookGet[PackageToolbar`Private`nb$]]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Notebook[
-       Pattern[PackageToolbar`Private`cells$, 
-        Blank[]], 
-       Pattern[PackageToolbar`Private`opts$, 
-        BlankNullSequence[]]]] := Notebook[
-      PackageToolbar`Private`flattenCellGroups$$[
-      PackageToolbar`Private`cells$], PackageToolbar`Private`opts$]; 
-   PackageToolbar`Private`flattenCellGroups$$[{
-       Pattern[PackageToolbar`Private`c$, 
-        BlankSequence[Cell]]}] := Flatten[
-      Map[
-      PackageToolbar`Private`flattenCellGroups$$, {
-       PackageToolbar`Private`c$}]]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Cell[
-       CellGroupData[{
-         Pattern[PackageToolbar`Private`c$, 
-          BlankSequence[Cell]]}, 
-        BlankNullSequence[]], 
-       BlankNullSequence[]]] := 
-    Map[PackageToolbar`Private`flattenCellGroups$$, {
-      PackageToolbar`Private`c$}]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Pattern[PackageToolbar`Private`c, 
-       Blank[]]] := PackageToolbar`Private`c; 
    PackageToolbar`Private`getMenuContents$$[
       Pattern[PackageToolbar`Private`nb$, 
        Blank[]]] := 
     Module[{PackageToolbar`Private`cellList$, 
        PackageToolbar`Private`fPos$, PackageToolbar`Private`sPos$, 
-       PackageToolbar`Private`funcs$, PackageToolbar`Private`secs$}, 
+       PackageToolbar`Private`funcs$, PackageToolbar`Private`secs$, 
+       PackageToolbar`Private`boxSortKey$}, 
       PackageToolbar`Private`cellList$ = First[
-         PackageToolbar`Private`flattenCellGroups$$[
-         PackageToolbar`Private`nb$]]; 
+         NotebookTools`FlattenCellGroups[PackageToolbar`Private`nb$]]; 
       PackageToolbar`Private`fPos$ = 
        Position[PackageToolbar`Private`cellList$, 
          Alternatives[
@@ -3939,14 +4088,19 @@ Cell[BoxData[
           Alternatives[
           "Title", "Chapter", "Section", "Subsection", 
            "Subsubsection"], 
-          BlankNullSequence[]]]; 
+          BlankNullSequence[]]]; PackageToolbar`Private`boxSortKey$[
+         Pattern[PackageToolbar`Private`expr, 
+          Blank[]]] := FirstCase[PackageToolbar`Private`expr, 
+         Blank[String], 
+         Missing[], Infinity]; 
       PackageToolbar`Private`funcs$ = Map[First, 
          Split[
-          Sort[
+          SortBy[
            Apply[{
              Part[PackageToolbar`Private`cellList$, 
               SlotSequence[1], 1, 1], #}& , 
-            PackageToolbar`Private`fPos$, {1}]]]]; 
+            PackageToolbar`Private`fPos$, {1}], {
+           PackageToolbar`Private`boxSortKey$, Null& }]]]; 
       PackageToolbar`Private`secs$ = Apply[{
           Part[PackageToolbar`Private`cellList$, 
            SlotSequence[1]], #}& , PackageToolbar`Private`sPos$, {1}]; 
@@ -3959,7 +4113,9 @@ Cell[BoxData[
     PackageToolbar`Private`getMenuContents$$[
       EvaluationNotebook[]]),
   UnsavedVariables:>{
-   PackageToolbar`Private`menuContents$$}]], "SystemDockedCell",
+   PackageToolbar`Private`menuContents$$, 
+    PackageToolbar`Private`fEnabled$$, 
+    PackageToolbar`Private`sEnabled$$}]], "SystemDockedCell",
  CellFrame->{{0, 0}, {2, 0}},
  CellFrameMargins->0,
  CellFrameColor->RGBColor[
@@ -3972,22 +4128,18 @@ Cell[BoxData[
 (*****************************************)
   
 "ScriptToolbar" -> {
- Cell[BoxData[
+Cell[BoxData[
  DynamicModuleBox[{PackageToolbar`Private`functionlabel$$, 
   PackageToolbar`Private`sectionlabel$$, 
   PackageToolbar`Private`space$$, PackageToolbar`Private`selectcell$$,
    PackageToolbar`Private`getMenuContents$$, 
-  PackageToolbar`Private`flattenCellGroups$$, 
   PackageToolbar`Private`menuContents$$, 
-  PackageToolbar`Private`fEnabled$$ = True, 
-  PackageToolbar`Private`sEnabled$$ = True}, 
+  PackageToolbar`Private`fEnabled$$, 
+  PackageToolbar`Private`sEnabled$$}, 
   DynamicBox[PanelBox[
     GridBox[{{
        TemplateBox[{
-         StyleBox[
-          
-          GraphicsBox[{}, ImageSize -> {5, 0}, BaselinePosition -> 
-           Baseline], "CacheGraphics" -> False], 
+         TemplateBox[{5}, "Spacer1"], 
          DynamicBox[
           ToBoxes[
            Row[{
@@ -4096,10 +4248,7 @@ Cell[BoxData[
             "PackageToolbarText", "TooltipUpdate"], StandardForm]]]}, 
         "RowWithSeparator"], 
        TemplateBox[{
-         StyleBox[
-          
-          GraphicsBox[{}, ImageSize -> {10, 0}, BaselinePosition -> 
-           Baseline], "CacheGraphics" -> False], 
+         TemplateBox[{10}, "Spacer1"], 
          StyleBox[
           TemplateBox[{"  ", "\"  \"", 
             CheckboxBox[
@@ -4150,7 +4299,7 @@ Cell[BoxData[
      "MUnitExpressions", "StaticToolbarNinePatch"], 
     ImageSize -> {Automatic, 50}, FrameMargins -> {{12, 12}, {8, 10}},
      ImageMargins -> -1],
-   ImageSizeCache->{757., {21., 27.}}],
+   ImageSizeCache->{789., {21., 27.}}],
   DynamicModuleValues:>{},
   Initialization:>(PackageToolbar`Private`functionlabel$$[{
        Pattern[PackageToolbar`Private`boxes, 
@@ -4188,46 +4337,15 @@ Cell[BoxData[
         PackageToolbar`Private`k, AutoScroll -> False], 
        FrontEnd`FrontEndToken[
        PackageToolbar`Private`nb, "OpenSelectionParents"]}]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Pattern[PackageToolbar`Private`nb$, 
-       Blank[NotebookObject]]] := 
-    PackageToolbar`Private`flattenCellGroups$$[
-      NotebookGet[PackageToolbar`Private`nb$]]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Notebook[
-       Pattern[PackageToolbar`Private`cells$, 
-        Blank[]], 
-       Pattern[PackageToolbar`Private`opts$, 
-        BlankNullSequence[]]]] := Notebook[
-      PackageToolbar`Private`flattenCellGroups$$[
-      PackageToolbar`Private`cells$], PackageToolbar`Private`opts$]; 
-   PackageToolbar`Private`flattenCellGroups$$[{
-       Pattern[PackageToolbar`Private`c$, 
-        BlankSequence[Cell]]}] := Flatten[
-      Map[
-      PackageToolbar`Private`flattenCellGroups$$, {
-       PackageToolbar`Private`c$}]]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Cell[
-       CellGroupData[{
-         Pattern[PackageToolbar`Private`c$, 
-          BlankSequence[Cell]]}, 
-        BlankNullSequence[]], 
-       BlankNullSequence[]]] := 
-    Map[PackageToolbar`Private`flattenCellGroups$$, {
-      PackageToolbar`Private`c$}]; 
-   PackageToolbar`Private`flattenCellGroups$$[
-      Pattern[PackageToolbar`Private`c, 
-       Blank[]]] := PackageToolbar`Private`c; 
    PackageToolbar`Private`getMenuContents$$[
       Pattern[PackageToolbar`Private`nb$, 
        Blank[]]] := 
     Module[{PackageToolbar`Private`cellList$, 
        PackageToolbar`Private`fPos$, PackageToolbar`Private`sPos$, 
-       PackageToolbar`Private`funcs$, PackageToolbar`Private`secs$}, 
+       PackageToolbar`Private`funcs$, PackageToolbar`Private`secs$, 
+       PackageToolbar`Private`boxSortKey$}, 
       PackageToolbar`Private`cellList$ = First[
-         PackageToolbar`Private`flattenCellGroups$$[
-         PackageToolbar`Private`nb$]]; 
+         NotebookTools`FlattenCellGroups[PackageToolbar`Private`nb$]]; 
       PackageToolbar`Private`fPos$ = 
        Position[PackageToolbar`Private`cellList$, 
          Alternatives[
@@ -4283,14 +4401,19 @@ Cell[BoxData[
           Alternatives[
           "Title", "Chapter", "Section", "Subsection", 
            "Subsubsection"], 
-          BlankNullSequence[]]]; 
+          BlankNullSequence[]]]; PackageToolbar`Private`boxSortKey$[
+         Pattern[PackageToolbar`Private`expr, 
+          Blank[]]] := FirstCase[PackageToolbar`Private`expr, 
+         Blank[String], 
+         Missing[], Infinity]; 
       PackageToolbar`Private`funcs$ = Map[First, 
          Split[
-          Sort[
+          SortBy[
            Apply[{
              Part[PackageToolbar`Private`cellList$, 
               SlotSequence[1], 1, 1], #}& , 
-            PackageToolbar`Private`fPos$, {1}]]]]; 
+            PackageToolbar`Private`fPos$, {1}], {
+           PackageToolbar`Private`boxSortKey$, Null& }]]]; 
       PackageToolbar`Private`secs$ = Apply[{
           Part[PackageToolbar`Private`cellList$, 
            SlotSequence[1]], #}& , PackageToolbar`Private`sPos$, {1}]; 
@@ -4303,11 +4426,14 @@ Cell[BoxData[
     PackageToolbar`Private`getMenuContents$$[
       EvaluationNotebook[]]),
   UnsavedVariables:>{
-   PackageToolbar`Private`menuContents$$}]], "SystemDockedCell",
+   PackageToolbar`Private`menuContents$$, 
+    PackageToolbar`Private`fEnabled$$, 
+    PackageToolbar`Private`sEnabled$$}]], "SystemDockedCell",
  CellFrame->{{0, 0}, {2, 0}},
  CellFrameMargins->0,
  CellFrameColor->RGBColor[0.2588, 0.5098, 0.12155]],
- Cell[BoxData[
+
+Cell[BoxData[
  DynamicBox[ToBoxes[
    CurrentValue[
     EvaluationNotebook[], "NotebookScriptShebangLine"], StandardForm],
@@ -4837,33 +4963,27 @@ Cell[BoxData[
 (*          Plugin Resources             *)
 (*****************************************)
 
-"PluginToolbar" ->
-Cell[BoxData[
- PanelBox[
-  PaneBox[
-   TemplateBox[{InterpretationBox[
-      StyleBox[
-       GraphicsBox[{}, ImageSize -> {12, 0}, BaselinePosition -> 
-        Baseline], "CacheGraphics" -> False], 
-      Spacer[12]],TagBox[
-      GridBox[{{
-         PaneSelectorBox[{False -> RowBox[{
-              RowBox[{
-                ButtonBox[
-                 PaneSelectorBox[{True -> DynamicBox[
-                    FEPrivate`ImportImage[
+"PluginToolbar" -> Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      TemplateBox[{13}, "Spacer1"],PaneSelectorBox[{False -> RowBox[{
+            RowBox[{
+              ButtonBox[
+               PaneSelectorBox[{True -> DynamicBox[
+                   FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "PlayerLogo.png"]]], False -> DynamicBox[
-                    FEPrivate`ImportImage[
+                   FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "PlayerproLogo.png"]]]}, 
-                  Dynamic[
-                   FEPrivate`PlayerQ[]]], ButtonFunction :> 
-                 FrontEndExecute[
-                   FrontEnd`NotebookLocate[{
-                    URL[
+                Dynamic[
+                 FEPrivate`PlayerQ[]]], ButtonFunction :> 
+               FrontEndExecute[
+                 FrontEnd`NotebookLocate[{
+                   URL[
                     FEPrivate`StringJoin[
                     FEPrivate`If[
                     FEPrivate`PlayerQ[], 
@@ -4878,32 +4998,20 @@ Cell[BoxData[
                     "&version=", FEPrivate`$ProductVersion, "&os=", 
                     FEPrivate`$SystemID, "&buildid=", 
                     FEPrivate`ToString[FEPrivate`$CreationID]]], 
-                    None}]], ButtonNote -> FEPrivate`If[
-                   FEPrivate`PlayerQ[], "http://www.wolfram.com/cdf/",
-                    "http://www.wolfram.com/products/playerpro/"]]}], 
-              "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              DynamicBox[
-               FEPrivate`ImportImage[
-                FrontEnd`FileName[{"Toolbars", "Player"}, 
-                 "Separator.png"]]], "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              PaneSelectorBox[{True -> RowBox[{
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                   None}]], ButtonNote -> FEPrivate`If[
+                 FEPrivate`PlayerQ[], "http://www.wolfram.com/cdf/", 
+                 "http://www.wolfram.com/products/playerpro/"]]}], 
+            TemplateBox[{12}, "Spacer1"], 
+            DynamicBox[
+             FEPrivate`ImportImage[
+              
+              FrontEnd`FileName[{"Toolbars", "Player"}, 
+               "Separator.png"]]], 
+            TemplateBox[{12}, "Spacer1"], 
+            PaneSelectorBox[{True -> RowBox[{
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -4915,8 +5023,8 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`Plugin`Open[]& ), 
-                    ButtonNote -> Dynamic[
+                   ButtonFunction :> (FEPrivate`Plugin`Open[]& ), 
+                   ButtonNote -> Dynamic[
                     FEPrivate`StringJoin[
                     FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Open"], 
@@ -4924,24 +5032,18 @@ Cell[BoxData[
                     FEPrivate`PlayerQ[], "Wolfram CDF Player", 
                     FEPrivate`PlayerProQ[], "Wolfram Player Pro", 
                     True, "Mathematica"]]]], 
-                    Dynamic[
-                    FEPrivate`StringJoin[
+                  Dynamic[
+                   FEPrivate`StringJoin[
                     FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Open"], 
                     FEPrivate`Which[
                     FEPrivate`PlayerQ[], "Wolfram CDF Player", 
                     FEPrivate`PlayerProQ[], "Wolfram Player Pro", 
                     True, "Mathematica"]]]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                 TemplateBox[{12}, "Spacer1"], 
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -4953,22 +5055,16 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`Plugin`Save[]& ), 
-                    ButtonNote -> 
-                    FEPrivate`FrontEndResource[
+                   ButtonFunction :> (FEPrivate`Plugin`Save[]& ), 
+                   ButtonNote -> 
+                   FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "SaveAs"]], 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "SaveAs"]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "ProductSpecificToolbarText", "SaveAs"]], 
+                 TemplateBox[{12}, "Spacer1"], 
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -4980,37 +5076,25 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`If[
+                   ButtonFunction :> (FEPrivate`If[
                     FEPrivate`SameQ[
                     FrontEnd`CurrentValue["PluginEnabled"], True], 
                     FEPrivate`Plugin`Print[], 
                     FrontEndToken["PrintDialog"]]& ), ButtonNote -> 
-                    FEPrivate`FrontEndResource[
+                   FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Print"]], 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "Print"]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   DynamicBox[
-                    FEPrivate`ImportImage[
-                    
-                    FrontEnd`FileName[{"Toolbars", "Player"}, 
+                  FEPrivate`FrontEndResource[
+                  "ProductSpecificToolbarText", "Print"]], 
+                 TemplateBox[{12}, "Spacer1"], 
+                 DynamicBox[
+                  FEPrivate`ImportImage[
+                   
+                   FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "Separator.png"]]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   PaneBox[
-                    StyleBox[
-                    GridBox[{{
+                 TemplateBox[{12}, "Spacer1"], 
+                 PaneBox[
+                  StyleBox[
+                   GridBox[{{
                     TooltipBox[
                     ButtonBox[
                     PaneSelectorBox[{False -> DynamicBox[
@@ -5064,14 +5148,14 @@ Cell[BoxData[
                     "Rows" -> {{Automatic}}}, 
                     GridBoxSpacings -> {
                     "Columns" -> {{0}}, "Rows" -> {{Automatic}}}], 
-                    ButtonBoxOptions -> {
+                   ButtonBoxOptions -> {
                     ButtonFunction :> (FrontEndExecute[
                     FrontEndToken[
                     FrontEnd`ButtonNotebook[], #]]& )}]]}], False -> 
-                RowBox[{
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+              RowBox[{
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5083,59 +5167,53 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`If[
+                   ButtonFunction :> (FEPrivate`If[
                     FEPrivate`SameQ[
                     FrontEnd`CurrentValue["PluginEnabled"], True], 
                     FEPrivate`Plugin`Print[], 
                     FrontEndToken["PrintDialog"]]& ), ButtonNote -> 
-                    FEPrivate`FrontEndResource[
+                   FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Print"]], 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "Print"]]}]}, 
-               Dynamic[
-                FEPrivate`SameQ[
-                 FrontEnd`CurrentValue["PluginEnabled"], True]]], 
-              "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              DynamicModuleBox[{$CellContext`e$$ = ""}, 
-               StyleBox[
-                TemplateBox[{"  ", "\"  \"", 
-                  TagBox[
-                   InputFieldBox[
-                    Dynamic[$CellContext`e$$], Boxes, BoxID -> 
-                    "PluginToolbarSearchField", FieldHint -> 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "FindHint"], 
-                    FieldHintStyle -> {"DialogStyle", Italic}, 
-                    ContinuousAction -> True, 
-                    BaseStyle -> {"ControlStyle", "TextStyling"}, 
-                    ImageSize -> FEPrivate`If[
+                  FEPrivate`FrontEndResource[
+                  "ProductSpecificToolbarText", "Print"]]}]}, 
+             Dynamic[
+              FEPrivate`SameQ[
+               FrontEnd`CurrentValue["PluginEnabled"], True]], 
+             ImageSize -> Automatic], 
+            TemplateBox[{12}, "Spacer1"], 
+            DynamicModuleBox[{$CellContext`e$$ = ""}, 
+             StyleBox[
+              TemplateBox[{"  ", "\"  \"", 
+                TagBox[
+                 InputFieldBox[
+                  Dynamic[$CellContext`e$$], Boxes, BoxID -> 
+                  "PluginToolbarSearchField", FieldHint -> 
+                  FEPrivate`FrontEndResource[
+                   "ProductSpecificToolbarText", "FindHint"], 
+                  FieldHintStyle -> {"DialogStyle", Italic}, 
+                  ContinuousAction -> True, 
+                  BaseStyle -> {"ControlStyle", "TextStyling"}, 
+                  ImageSize -> FEPrivate`If[
                     FEPrivate`SameQ[
                     FEPrivate`$OperatingSystem, "MacOSX"], {120, 
-                    22}, {120, 23}], FieldSize -> {
+                    24}, {120, 25}], FieldSize -> {
                     DirectedInfinity[1], 1}, BaselinePosition -> 
-                    FEPrivate`Switch[
-                    FEPrivate`$OperatingSystem, "MacOSX", Scaled[0.6] -> 
+                  FEPrivate`Switch[
+                   FEPrivate`$OperatingSystem, "MacOSX", Scaled[0.6] -> 
                     Scaled[0.5], "Windows", Scaled[0.68] -> 
                     Scaled[0.5], 
                     Blank[], Scaled[0.6] -> Scaled[0.5]]], 
-                   
-                   EventHandlerTag[{
-                    "ReturnKeyDown" :> FrontEndExecute[{
+                 
+                 EventHandlerTag[{
+                  "ReturnKeyDown" :> FrontEndExecute[{
                     FrontEnd`NotebookFind[
                     FrontEnd`InputNotebook[], $CellContext`e$$, 
                     FlashSelection -> True]}], PassEventsDown -> True,
-                     EvaluationOrder -> After, Method -> "Preemptive",
-                     PassEventsUp -> True}]], 
-                  TooltipBox[
-                   ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                    EvaluationOrder -> After, Method -> "Preemptive", 
+                   PassEventsUp -> True}]], 
+                TooltipBox[
+                 ButtonBox[
+                  PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5145,17 +5223,17 @@ Cell[BoxData[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "PreviousIcon-Hover.png"]]]}, 
-                    Dynamic[
+                   Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
-                    Automatic, FrameMargins -> 0], ButtonData -> 
-                    Previous, ButtonNote -> 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "FindPrevious"]], 
-                   FEPrivate`FrontEndResource[
+                   Automatic, FrameMargins -> 0], ButtonData -> 
+                  Previous, ButtonNote -> 
+                  FEPrivate`FrontEndResource[
                    "ProductSpecificToolbarText", "FindPrevious"]], 
-                  TooltipBox[
-                   ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "ProductSpecificToolbarText", "FindPrevious"]], 
+                TooltipBox[
+                 ButtonBox[
+                  PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5164,70 +5242,55 @@ Cell[BoxData[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "NextIcon-Hover.png"]]]}, 
-                    Dynamic[
+                   Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
-                    Automatic, FrameMargins -> 0], ButtonData -> Next,
-                     ButtonNote -> 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "FindNext"]], 
-                   FEPrivate`FrontEndResource[
-                   "ProductSpecificToolbarText", "FindNext"]]}, 
-                 "RowWithSeparators"], 
-                ButtonBoxOptions -> {
-                 ButtonFunction :> (FrontEndExecute[{
-                    FrontEnd`NotebookFind[
+                   Automatic, FrameMargins -> 0], ButtonData -> Next, 
+                  ButtonNote -> 
+                  FEPrivate`FrontEndResource[
+                   "ProductSpecificToolbarText", "FindNext"]], 
+                 FEPrivate`FrontEndResource[
+                 "ProductSpecificToolbarText", "FindNext"]]}, 
+               "RowWithSeparators"], 
+              ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+                   FrontEnd`NotebookFind[
                     FrontEnd`InputNotebook[], $CellContext`e$$, #, 
                     FlashSelection -> True]}]& )}, StripOnInput -> 
-                False], DynamicModuleValues :> {}], 
-              "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              DynamicBox[
-               FEPrivate`ImportImage[
-                
-                FrontEnd`FileName[{"Toolbars", "Player"}, 
-                 "Separator.png"]]], "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              PopupMenuBox[
-               Dynamic[
-                FrontEnd`CurrentValue[
-                 FrontEnd`EvaluationNotebook[], "Magnification"], 
-                FrontEnd`Private`SetCurrentValue[
-                 FrontEnd`EvaluationNotebook[], 
-                 Magnification, #]& ], {
-               0.5 -> "\"50%\"", 0.75 -> "\"75%\"", 1. -> "\"100%\"", 
-                1.25 -> "\"125%\"", 1.5 -> "\"150%\"", 2. -> 
-                "\"200%\"", 3. -> "\"300%\""}, ImageSize -> All, 
-               FrameMargins -> {{0, 3}, {0, 0}}, BaselinePosition -> 
-               Scaled[0.45], MenuStyle -> "DialogStyle"]}], True -> 
-           RowBox[{
-              RowBox[{
-                ButtonBox[
-                 PaneSelectorBox[{True -> DynamicBox[
-                    FEPrivate`ImportImage[
+              False], DynamicModuleValues :> {}], 
+            TemplateBox[{12}, "Spacer1"], 
+            DynamicBox[
+             FEPrivate`ImportImage[
+              
+              FrontEnd`FileName[{"Toolbars", "Player"}, 
+               "Separator.png"]]], 
+            TemplateBox[{12}, "Spacer1"], 
+            PopupMenuBox[
+             Dynamic[
+              FrontEnd`CurrentValue[
+               FrontEnd`EvaluationNotebook[], "Magnification"], 
+              FrontEnd`Private`SetCurrentValue[
+               FrontEnd`EvaluationNotebook[], Magnification, #]& ], {
+             0.5 -> "\"50%\"", 0.75 -> "\"75%\"", 1. -> "\"100%\"", 
+              1.25 -> "\"125%\"", 1.5 -> "\"150%\"", 2. -> "\"200%\"",
+               3. -> "\"300%\""}, ImageSize -> All, 
+             FrameMargins -> {{0, 3}, {0, 0}}, BaselinePosition -> 
+             Scaled[0.45], MenuStyle -> "DialogStyle"]}], True -> 
+         RowBox[{
+            RowBox[{
+              ButtonBox[
+               PaneSelectorBox[{True -> DynamicBox[
+                   FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "PlayerLogo.png"]]], False -> DynamicBox[
-                    FEPrivate`ImportImage[
+                   FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "PlayerproLogo.png"]]]}, 
-                  Dynamic[
-                   FEPrivate`PlayerQ[]]], ButtonFunction :> 
-                 FrontEndExecute[
-                   FrontEnd`NotebookLocate[{
-                    URL[
+                Dynamic[
+                 FEPrivate`PlayerQ[]]], ButtonFunction :> 
+               FrontEndExecute[
+                 FrontEnd`NotebookLocate[{
+                   URL[
                     FEPrivate`StringJoin[
                     FEPrivate`If[
                     FEPrivate`PlayerQ[], 
@@ -5242,33 +5305,20 @@ Cell[BoxData[
                     "&version=", FEPrivate`$ProductVersion, "&os=", 
                     FEPrivate`$SystemID, "&buildid=", 
                     FEPrivate`ToString[FEPrivate`$CreationID]]], 
-                    None}]], ButtonNote -> FEPrivate`If[
-                   FEPrivate`PlayerQ[], "http://www.wolfram.com/cdf/",
-                    "http://www.wolfram.com/products/playerpro/"]]}], 
-              "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              DynamicBox[
-               FEPrivate`ImportImage[
-                
-                FrontEnd`FileName[{"Toolbars", "Player"}, 
-                 "Separator.png"]]], "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              PaneSelectorBox[{True -> RowBox[{
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                   None}]], ButtonNote -> FEPrivate`If[
+                 FEPrivate`PlayerQ[], "http://www.wolfram.com/cdf/", 
+                 "http://www.wolfram.com/products/playerpro/"]]}], 
+            TemplateBox[{12}, "Spacer1"], 
+            DynamicBox[
+             FEPrivate`ImportImage[
+              
+              FrontEnd`FileName[{"Toolbars", "Player"}, 
+               "Separator.png"]]], 
+            TemplateBox[{12}, "Spacer1"], 
+            PaneSelectorBox[{True -> RowBox[{
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5280,8 +5330,8 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`Plugin`Open[]& ), 
-                    ButtonNote -> Dynamic[
+                   ButtonFunction :> (FEPrivate`Plugin`Open[]& ), 
+                   ButtonNote -> Dynamic[
                     FEPrivate`StringJoin[
                     FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Open"], 
@@ -5289,24 +5339,18 @@ Cell[BoxData[
                     FEPrivate`PlayerQ[], "Wolfram CDF Player", 
                     FEPrivate`PlayerProQ[], "Wolfram Player Pro", 
                     True, "Mathematica"]]]], 
-                    Dynamic[
-                    FEPrivate`StringJoin[
+                  Dynamic[
+                   FEPrivate`StringJoin[
                     FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Open"], 
                     FEPrivate`Which[
                     FEPrivate`PlayerQ[], "Wolfram CDF Player", 
                     FEPrivate`PlayerProQ[], "Wolfram Player Pro", 
                     True, "Mathematica"]]]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                 TemplateBox[{12}, "Spacer1"], 
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5318,22 +5362,16 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`Plugin`Save[]& ), 
-                    ButtonNote -> 
-                    FEPrivate`FrontEndResource[
+                   ButtonFunction :> (FEPrivate`Plugin`Save[]& ), 
+                   ButtonNote -> 
+                   FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "SaveAs"]], 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "SaveAs"]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "ProductSpecificToolbarText", "SaveAs"]], 
+                 TemplateBox[{12}, "Spacer1"], 
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5345,42 +5383,29 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`If[
+                   ButtonFunction :> (FEPrivate`If[
                     FEPrivate`SameQ[
                     FrontEnd`CurrentValue["PluginEnabled"], True], 
                     FEPrivate`Plugin`Print[], 
                     FrontEndToken["PrintDialog"]]& ), ButtonNote -> 
-                    FEPrivate`FrontEndResource[
+                   FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Print"]], 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "Print"]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   DynamicBox[
-                    FEPrivate`ImportImage[
-                    
-                    FrontEnd`FileName[{"Toolbars", "Player"}, 
+                  FEPrivate`FrontEndResource[
+                  "ProductSpecificToolbarText", "Print"]], 
+                 TemplateBox[{12}, "Spacer1"], 
+                 DynamicBox[
+                  FEPrivate`ImportImage[
+                   
+                   FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "Separator.png"]]], 
-                   InterpretationBox[
-                    StyleBox[
-                    
-                    GraphicsBox[{}, ImageSize -> {12, 0}, 
-                    BaselinePosition -> Baseline], "CacheGraphics" -> 
-                    False], 
-                    Spacer[12]], 
-                   PaneBox[
-                    StyleBox[
-                    GridBox[{{
+                 TemplateBox[{12}, "Spacer1"], 
+                 PaneBox[
+                  StyleBox[
+                   GridBox[{{
                     TooltipBox[
                     ButtonBox[
                     PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
-                    
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
                     "CopyIcon-Default.png"]]], True -> DynamicBox[
                     FEPrivate`ImportImage[
@@ -5429,14 +5454,14 @@ Cell[BoxData[
                     "Rows" -> {{Automatic}}}, 
                     GridBoxSpacings -> {
                     "Columns" -> {{0}}, "Rows" -> {{Automatic}}}], 
-                    ButtonBoxOptions -> {
+                   ButtonBoxOptions -> {
                     ButtonFunction :> (FrontEndExecute[
                     FrontEndToken[
                     FrontEnd`ButtonNotebook[], #]]& )}]]}], False -> 
-                RowBox[{
-                   TooltipBox[
-                    ButtonBox[
-                    PaneSelectorBox[{False -> DynamicBox[
+              RowBox[{
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False -> DynamicBox[
                     FEPrivate`ImportImage[
                     
                     FrontEnd`FileName[{"Toolbars", "Player"}, 
@@ -5448,100 +5473,160 @@ Cell[BoxData[
                     Dynamic[
                     CurrentValue["MouseOver"]], ImageSize -> 
                     Automatic, FrameMargins -> 0], 
-                    ButtonFunction :> (FEPrivate`If[
+                   ButtonFunction :> (FEPrivate`If[
                     FEPrivate`SameQ[
                     FrontEnd`CurrentValue["PluginEnabled"], True], 
                     FEPrivate`Plugin`Print[], 
                     FrontEndToken["PrintDialog"]]& ), ButtonNote -> 
-                    FEPrivate`FrontEndResource[
+                   FEPrivate`FrontEndResource[
                     "ProductSpecificToolbarText", "Print"]], 
-                    FEPrivate`FrontEndResource[
-                    "ProductSpecificToolbarText", "Print"]]}]}, 
-               Dynamic[
-                FEPrivate`SameQ[
-                 FrontEnd`CurrentValue["PluginEnabled"], True]]], 
-              "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              DynamicBox[
-               FEPrivate`ImportImage[
-                
-                FrontEnd`FileName[{"Toolbars", "Player"}, 
-                 "Separator.png"]]], "\[InvisibleSpace]", 
-              InterpretationBox[
-               StyleBox[
-                
-                GraphicsBox[{}, ImageSize -> {12, 0}, 
-                 BaselinePosition -> Baseline], "CacheGraphics" -> 
-                False], 
-               Spacer[12]], "\[InvisibleSpace]", 
-              PopupMenuBox[
-               Dynamic[
-                FrontEnd`CurrentValue[
-                 FrontEnd`EvaluationNotebook[], "Magnification"], 
-                FrontEnd`Private`SetCurrentValue[
-                 FrontEnd`EvaluationNotebook[], 
-                 Magnification, #]& ], {
-               0.5 -> "\"50%\"", 0.75 -> "\"75%\"", 1. -> "\"100%\"", 
-                1.25 -> "\"125%\"", 1.5 -> "\"150%\"", 2. -> 
-                "\"200%\"", 3. -> "\"300%\""}, ImageSize -> All, 
-               FrameMargins -> {{0, 3}, {0, 0}}, BaselinePosition -> 
-               Scaled[0.45], MenuStyle -> "DialogStyle"]}]}, 
-          Dynamic[
-           FrontEnd`CurrentValue[
-            FrontEnd`EvaluationNotebook[], Deployed, False]], 
-          ImageSize -> Automatic], 
-         ItemBox["\"\"", ItemSize -> Fit, StripOnInput -> False], 
-         PaneSelectorBox[{False -> "\"\"", True -> ButtonBox[
-             PaneBox[
-              PaneSelectorBox[{False -> DynamicBox[
-                  FEPrivate`ImportImage[
-                   FrontEnd`FileName[{"Toolbars", "Player"}, 
-                    "FreeCDF-Default.png"]]], True -> DynamicBox[
-                  FEPrivate`ImportImage[
-                   
-                   FrontEnd`FileName[{"Toolbars", "Player"}, 
-                    "FreeCDF-Hover.png"]]]}, 
-               Dynamic[
-                CurrentValue["MouseOver"]], ImageSize -> Automatic, 
-               FrameMargins -> 0], ImageMargins -> {{0, 10}, {0, 0}}],
-              BaseStyle -> "Hyperlink", ButtonNote -> 
-             "http://www.wolfram.com/cdf/cdflicense.html", ButtonData -> {
-               URL["http://www.wolfram.com/cdf/cdflicense.html"], 
-               None}]}, 
-          Dynamic[
-           FEPrivate`NotebookIsFreeCDF[]], Alignment -> Center, 
-          ImageSize -> {Automatic, 31}, 
-          FrameMargins -> {{0, 8}, {0, 0}}]}}, AutoDelete -> False, 
-       GridBoxItemSize -> {
-        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
-      "Grid"]},
-    "RowDefault"],
-   ImageSize->{
-     FrontEnd`AbsoluteCurrentValue[{WindowSize, 1}], All}],
-  Alignment->{Left, Center},
-  Appearance->None,
-  Background->RGBColor[
-   0.8980392156862745, 0.8980392156862745, 0.8980392156862745],
-  FrameMargins->None,
-  ImageMargins->0,
-  ImageSize->Full]], "PluginDockedCell",
+                  FEPrivate`FrontEndResource[
+                  "ProductSpecificToolbarText", "Print"]]}]}, 
+             Dynamic[
+              FEPrivate`SameQ[
+               FrontEnd`CurrentValue["PluginEnabled"], True]], 
+             ImageSize -> Automatic], 
+            TemplateBox[{12}, "Spacer1"], 
+            DynamicBox[
+             FEPrivate`ImportImage[
+              
+              FrontEnd`FileName[{"Toolbars", "Player"}, 
+               "Separator.png"]]], 
+            TemplateBox[{12}, "Spacer1"], 
+            PopupMenuBox[
+             Dynamic[
+              FrontEnd`CurrentValue[
+               FrontEnd`EvaluationNotebook[], "Magnification"], 
+              FrontEnd`Private`SetCurrentValue[
+               FrontEnd`EvaluationNotebook[], Magnification, #]& ], {
+             0.5 -> "\"50%\"", 0.75 -> "\"75%\"", 1. -> "\"100%\"", 
+              1.25 -> "\"125%\"", 1.5 -> "\"150%\"", 2. -> "\"200%\"",
+               3. -> "\"300%\""}, ImageSize -> All, 
+             FrameMargins -> {{0, 3}, {0, 0}}, BaselinePosition -> 
+             Scaled[0.45], MenuStyle -> "DialogStyle"]}]}, 
+        Dynamic[
+         FrontEnd`CurrentValue[
+          FrontEnd`EvaluationNotebook[], Deployed, False]], ImageSize -> 
+        Automatic]},
+      "RowDefault"]}
+   },
+   AutoDelete->False,
+   GridBoxItemSize->{
+    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{0}}}],
+  "Grid"]], "PluginDockedCell",
  ScrollingOptions->{"HorizontalScrollRange"->0},
  CellFrame->False,
- CellMargins->{{0, -4}, {-1, -1}},
+ CellMargins->{{0, 0}, {0, 0}},
  CellBracketOptions->{"Margins"->{0, 0},
  "OverlapContent"->True},
  CellContext->Cell,
- Background->None,
+ CellFrameMargins->{{0, 0}, {0, 0}},
+ Background->RGBColor[
+  0.8980392156862745, 0.8980392156862745, 0.8980392156862745],
  ButtonBoxOptions->{Appearance->None,
  Evaluator->None,
  Method->"Preemptive"},
  PaneSelectorBoxOptions->{ImageSize->Automatic}],
+ 
+"CDFExportToolbar" -> Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     PaneBox[
+      TemplateBox[{TemplateBox[{13}, "Spacer1"],StyleBox[
+         PaneSelectorBox[{False -> DynamicBox[
+             FEPrivate`FrontEndResource[
+             "ProductSpecificToolbarText", "FreeCDFPreview"]], True -> 
+           DynamicBox[
+             FEPrivate`FrontEndResource[
+             "ProductSpecificToolbarText", "EnterpriseCDFPreview"]]}, 
+          
+          FEPrivate`SameQ[
+           FEPrivate`PlayerProQ[], True]], FontColor -> 
+         RGBColor[0.2, 0.2, 0.2], FontFamily -> "Helvetica", 
+         FontWeight -> "Regular", FontSize -> 11, StripOnInput -> 
+         False]},
+       "RowDefault"],
+      Alignment->{Left, Center},
+      ImageMargins->{{0, 0}, {0, 0}},
+      ImageSize->{All, 30}], 
+     ButtonBox[
+      PaneSelectorBox[{False->
+       FrameBox[
+        TemplateBox[{DynamicBox[
+           FEPrivate`ImportImage[
+            
+            FrontEnd`FileName[{"Toolbars", "Player"}, 
+             "CDFNotebook-Default.png"]]],TemplateBox[{5}, "Spacer1"],
+          PaneBox[
+           StyleBox[
+            DynamicBox[
+             FEPrivate`FrontEndResource[
+             "ProductSpecificToolbarText", "ExportCDF"]], FontColor -> 
+            RGBColor[0.2, 0.2, 0.2, 1.], FontFamily -> "Helvetica", 
+            FontWeight -> "Regular", FontSize -> 11, StripOnInput -> 
+            False], ImageSize -> {Automatic, Full}, Alignment -> 
+           Bottom, FrameMargins -> {{0, 0}, {1, 0}}]},
+         "RowDefault"],
+        Background->RGBColor[1., 0.81175, 0.051],
+        FrameMargins->5,
+        FrameStyle->None,
+        StripOnInput->False], True->
+       FrameBox[
+        TemplateBox[{DynamicBox[
+           FEPrivate`ImportImage[
+            
+            FrontEnd`FileName[{"Toolbars", "Player"}, 
+             "CDFNotebook-Hover.png"]]],TemplateBox[{5}, "Spacer1"],
+          PaneBox[
+           StyleBox[
+            DynamicBox[
+             FEPrivate`FrontEndResource[
+             "ProductSpecificToolbarText", "ExportCDF"]], FontColor -> 
+            RGBColor[0.2, 0.2, 0.2, 0.7], FontFamily -> "Helvetica", 
+            FontWeight -> "Regular", FontSize -> 11, StripOnInput -> 
+            False], ImageSize -> {Automatic, Full}, Alignment -> 
+           Bottom, FrameMargins -> {{0, 0}, {1, 0}}]},
+         "RowDefault"],
+        Background->RGBColor[0.96865, 0.8392, 0.26665],
+        FrameMargins->5,
+        FrameStyle->None,
+        StripOnInput->False]}, Dynamic[
+        CurrentValue["MouseOver"]],
+       FrameMargins->0,
+       ImageSize->Automatic],
+      Appearance->None,
+      ButtonFunction:>
+       Module[{$CellContext`outfile = AbsoluteCurrentValue[
+           InputNotebook[], WindowTitle]}, $CellContext`outfile = 
+         SystemDialogInput["FileSave", {
+            If[
+             StringQ[$CellContext`outfile], $CellContext`outfile, 
+             "Untitled.cdf"], {
+            FrontEndResource["DeployCDFDialog", "SaveFormat"] -> {
+              "*.cdf"}}}, WindowTitle -> 
+           FrontEndResource["DeployCDFDialog", "SaveLocation"]]; If[
+          StringQ[$CellContext`outfile], 
+          MathLink`CallFrontEnd[
+           FrontEnd`CDFDeploy[$CellContext`outfile, 
+            InputNotebook[]]]]],
+      Evaluator->Automatic,
+      ImageMargins->{{0, 0}, {0, 0}},
+      ImageSize->{All, 30},
+      Method->"Queued"]}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{
+    "Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.5]}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {0, 0}, "Rows" -> {0, 0}}],
+  "Grid"]], "CDFExportDockedCell",
+ CellFrame->{{False, False}, {False, 1}},
+ CellFrameMargins->{{0, -3}, {0, -1}},
+ CellFrameColor->RGBColor[0.96856, 0.8392, 0.26665],
+ Background->RGBColor[0.9961, 0.91765, 0.55685]],
+ 
 
 "PluginUpdateStripe" ->
 Cell[BoxData[
@@ -7478,7 +7563,7 @@ Cell[BoxData[GridBox[{
    "Columns" -> {Automatic, Fit}}]], "SystemDockedCell"],
 
 "StudentBar" -> Cell[],
-           
+
 "PlayerBar" -> FEPrivate`FrontEndResource["FEExpressions", "PluginToolbar"],
 
 "HomeEditionBar" -> Cell[BoxData[GridBox[{
@@ -8642,136 +8727,288 @@ licensingterms.html"]}},
 "CellInsertionMenu" -> Cell[BoxData[
   PaneBox[TooltipBox[
     ActionMenuBox[
-     DynamicBox[
-      FEPrivate`ImportImage[
-       FrontEnd`FileName[{"Misc"}, 
-        "CellInsertionPointBitmap.png"]]], {PaneBox[
-        GridBox[{{PaneBox[
+     PaneBox[DynamicBox[
+       FEPrivate`ImportImage[
+        FrontEnd`FileName[{"Misc"}, "CellInsertionPointBitmap.png"]]],
+       BaselinePosition -> 
+       Center -> 
+        Center], {GridBox[{{PaneBox[
+           DynamicBox[
+            FEPrivate`ImportImage[
+             FrontEnd`FileName[{"Misc"}, "InsertionMath.png"]]], 
+           FrameMargins -> {{0, 0}, {2, 0}}], 
+          StyleBox[
+           DynamicBox[
+            FEPrivate`FrontEndResource["CellInsertionMenu", 
+             "MathematicaInput"]], "CellInsertionMenu"], 
+          StyleBox[
+           StyleBox[
             DynamicBox[
-             FEPrivate`ImportImage[
-              FrontEnd`FileName[{"Misc"}, "InsertionMath.png"]]], 
-            BaselinePosition -> Scaled[0.45] -> Center, 
-            ImageSize -> 14], 
-           PaneSelectorBox[{True -> 
-              DynamicBox[
+             FEPrivate`FrontEndResource["CellInsertionMenu", 
+              "MathematicaInput2"]], "CellInsertionMenuDefaultLabel"],
+            "CellInsertionMenuShortcut"]}}, 
+        GridBoxAlignment -> {"Columns" -> {Center, Left, Right}, 
+          "Rows" -> {{Baseline}}}, AutoDelete -> False, 
+        GridBoxItemSize -> {"Columns" -> {2, 
+            FEPrivate`First[
+             FEPrivate`StringWidth[{FEPrivate`FrontEndResource[
+                "CellInsertionMenu", "MathematicaInput"], 
                FEPrivate`FrontEndResource["CellInsertionMenu", 
-                "MathematicaInput"], 
-               BaseStyle -> {"CellInsertionMenu"}], 
-             False -> "\"Wolfram|Alpha query\""}, True, 
-            ImageSize -> All, Alignment -> {Left, Automatic}], 
-           PaneSelectorBox[{True -> 
-              DynamicBox[
+                "FreeformInput"], 
+               
                FEPrivate`FrontEndResource["CellInsertionMenu", 
-                "MathematicaInput2"], 
-               BaseStyle -> {"CellInsertionMenu"}], 
-             False -> 
-              StyleBox["\"(default)\"", "CellInsertionMenuShortcut"]},
-             True, ImageSize -> All, 
-            Alignment -> {Right, Automatic}]}}, 
-         GridBoxAlignment -> {"Columns" -> {{Right}}, 
-           "Rows" -> {{Baseline}}}, AutoDelete -> False, 
-         GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}},
-          GridBoxSpacings -> {"Columns" -> {0, 0.6, 0, 0}, 
-           "Rows" -> {{Automatic}}}], 
-        ImageMargins -> {{0, 0}, {1, 1}}] :> 
+                "WAQuery"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "ExternalLanguageInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "TextStyle"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "OtherStyle"]}, "CellInsertionMenu"]], 
+            FEPrivate`First[
+             FEPrivate`StringWidth[
+              FEPrivate`FrontEndResource["CellInsertionMenu", 
+               "ShortcutColumnMaxStringLen"], 
+              "CellInsertionMenuDefaultLabel"]]}, 
+          "Rows" -> {{Automatic}}}, 
+        GridBoxSpacings -> {"Columns" -> {{0}}, 
+          "ColumnsIndexed" -> {2 -> 0.3, 3 -> 0.5}, 
+          "Rows" -> {{0}}}] :> 
        FrontEndTokenExecute[EvaluationNotebook[], "Style", "Input"], 
       Delimiter, 
-      PaneBox[GridBox[{{PaneBox[
+      GridBox[{{PaneBox[
+           DynamicBox[
+            FEPrivate`ImportImage[
+             FrontEnd`FileName[{"Misc"}, "InsertionFreeform.png"]]], 
+           FrameMargins -> {{0, 0}, {2, 0}}], 
+          StyleBox[
+           DynamicBox[
+            FEPrivate`FrontEndResource["CellInsertionMenu", 
+             "FreeformInput"]], "CellInsertionMenu"], 
+          
+          StyleBox[
+           StyleBox[
             DynamicBox[
-             FEPrivate`ImportImage[
-              FrontEnd`FileName[{"Misc"}, "InsertionFreeform.png"]]], 
-            BaselinePosition -> Scaled[0.45] -> Center, 
-            ImageSize -> 14], 
-           PaneSelectorBox[{True -> 
-              DynamicBox[
+             FEPrivate`FrontEndResource["CellInsertionMenu", 
+              "FreeformInput2"]], "CellInsertionMenuShortcut"], 
+           "CellInsertionMenuShortcut"]}}, 
+        GridBoxAlignment -> {"Columns" -> {Center, Left, Right}, 
+          "Rows" -> {{Baseline}}}, AutoDelete -> False, 
+        GridBoxItemSize -> {"Columns" -> {2, 
+            FEPrivate`First[
+             FEPrivate`StringWidth[{FEPrivate`FrontEndResource[
+                "CellInsertionMenu", "MathematicaInput"], 
                FEPrivate`FrontEndResource["CellInsertionMenu", 
-                "FreeformInput"], BaseStyle -> {"CellInsertionMenu"}],
-              False -> "\"Wolfram|Alpha query\""}, True, 
-            ImageSize -> All, Alignment -> {Left, Automatic}], 
-           PaneSelectorBox[{True -> 
-              DynamicBox[
+                "FreeformInput"], 
                FEPrivate`FrontEndResource["CellInsertionMenu", 
-                "FreeformInput2"], 
-               BaseStyle -> {"CellInsertionMenu"}], 
-             False -> 
-              StyleBox["\"(default)\"", "CellInsertionMenuShortcut"]},
-             True, ImageSize -> All, 
-            Alignment -> {Right, Automatic}]}}, 
-         GridBoxAlignment -> {"Columns" -> {{Right}}, 
-           "Rows" -> {{Baseline}}}, AutoDelete -> False, 
-         GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}},
-          GridBoxSpacings -> {"Columns" -> {0, 0.6, 0, 0}, 
-           "Rows" -> {{Automatic}}}], 
-        ImageMargins -> {{0, 0}, {1, 1}}] :> 
+                "WAQuery"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "ExternalLanguageInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "TextStyle"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "OtherStyle"]}, "CellInsertionMenu"]], 
+            FEPrivate`First[
+             FEPrivate`StringWidth[
+              FEPrivate`FrontEndResource["CellInsertionMenu", 
+               "ShortcutColumnMaxStringLen"], 
+              "CellInsertionMenuDefaultLabel"]]}, 
+          "Rows" -> {{Automatic}}}, 
+        GridBoxSpacings -> {"Columns" -> {{0}}, 
+          "ColumnsIndexed" -> {2 -> 0.3, 3 -> 0.5}, 
+          "Rows" -> {{0}}}] :> 
        FrontEndTokenExecute[EvaluationNotebook[], "Style", 
         "WolframAlphaShort"], 
-      PaneBox[GridBox[{{PaneBox[
+      GridBox[{{PaneBox[
+           DynamicBox[
+            FEPrivate`ImportImage[
+             FrontEnd`FileName[{"Misc"}, "InsertionAlpha.png"]]], 
+           FrameMargins -> {{0, 0}, {2, 0}}], 
+          StyleBox[
+           DynamicBox[
+            FEPrivate`FrontEndResource["CellInsertionMenu", 
+             "WAQuery"]], "CellInsertionMenu"], 
+          StyleBox[
+           StyleBox[
             DynamicBox[
-             FEPrivate`ImportImage[
-              FrontEnd`FileName[{"Misc"}, "InsertionAlpha.png"]]], 
-            BaselinePosition -> Scaled[0.45] -> Center, 
-            ImageSize -> 14], 
-           PaneSelectorBox[{True -> 
-              DynamicBox[
+             FEPrivate`FrontEndResource["CellInsertionMenu", 
+              "WAQuery2"]], "CellInsertionMenuShortcut"], 
+           "CellInsertionMenuShortcut"]}}, 
+        GridBoxAlignment -> {"Columns" -> {Center, Left, Right}, 
+          "Rows" -> {{Baseline}}}, AutoDelete -> False, 
+        GridBoxItemSize -> {"Columns" -> {2, 
+            FEPrivate`First[
+             FEPrivate`StringWidth[{FEPrivate`FrontEndResource[
+                "CellInsertionMenu", "MathematicaInput"], 
                FEPrivate`FrontEndResource["CellInsertionMenu", 
-                "WAQuery"], BaseStyle -> {"CellInsertionMenu"}], 
-             False -> "\"Wolfram|Alpha query\""}, True, 
-            ImageSize -> All, Alignment -> {Left, Automatic}], 
-           PaneSelectorBox[{True -> 
-              DynamicBox[
+                "FreeformInput"], 
+               
                FEPrivate`FrontEndResource["CellInsertionMenu", 
-                "WAQuery2"], BaseStyle -> {"CellInsertionMenu"}], 
-             False -> 
-              StyleBox["\"(default)\"", "CellInsertionMenuShortcut"]},
-             True, ImageSize -> All, 
-            Alignment -> {Right, Automatic}]}}, 
-         GridBoxAlignment -> {"Columns" -> {{Right}}, 
-           "Rows" -> {{Baseline}}}, AutoDelete -> False, 
-         GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}},
-          GridBoxSpacings -> {"Columns" -> {0, 0.6, 0, 0}, 
-           "Rows" -> {{Automatic}}}], 
-        ImageMargins -> {{0, 0}, {1, 1}}] :> 
+                "WAQuery"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "ExternalLanguageInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "TextStyle"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "OtherStyle"]}, "CellInsertionMenu"]], 
+            FEPrivate`First[
+             FEPrivate`StringWidth[
+              FEPrivate`FrontEndResource["CellInsertionMenu", 
+               "ShortcutColumnMaxStringLen"], 
+              "CellInsertionMenuDefaultLabel"]]}, 
+          "Rows" -> {{Automatic}}}, 
+        GridBoxSpacings -> {"Columns" -> {{0}}, 
+          "ColumnsIndexed" -> {2 -> 0.3, 3 -> 0.5}, 
+          "Rows" -> {{0}}}] :> 
        FrontEndTokenExecute[EvaluationNotebook[], "Style", 
-        "WolframAlphaLong"], Delimiter, 
-      PaneBox[GridBox[{{PaneBox[
-            DynamicBox[
-             FEPrivate`ImportImage[
-              FrontEnd`FileName[{"Misc"}, "InsertionText.png"]]], 
-            BaselinePosition -> Scaled[0.4] -> Center, 
-            ImageSize -> 14], 
+        "WolframAlphaLong"], 
+      GridBox[{{PaneBox[
+           DynamicBox[
+            FEPrivate`ImportImage[
+             FrontEnd`FileName[{"Misc"}, "InsertionExternal.png"]]], 
+           FrameMargins -> {{0, 0}, {2, 0}}], 
+          StyleBox[
            DynamicBox[
             FEPrivate`FrontEndResource["CellInsertionMenu", 
-             "TextStyle"], BaseStyle -> {"CellInsertionMenu"}]}}, 
-         GridBoxAlignment -> {"Columns" -> {{Right}}, 
-           "Rows" -> {{Baseline}}}, AutoDelete -> False, 
-         GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}},
-          GridBoxSpacings -> {"Columns" -> {0, 0.6, 2, 0}, 
-           "Rows" -> {{Automatic}}}], 
-        ImageMargins -> {{0, 0}, {1, 1}}] :> 
+             "ExternalLanguageInput"]], "CellInsertionMenu"], 
+          
+          StyleBox[
+           StyleBox[
+            DynamicBox[
+             FEPrivate`FrontEndResource["CellInsertionMenu", 
+              "ExternalLanguageInput2"]], 
+            "CellInsertionMenuShortcut"], 
+           "CellInsertionMenuShortcut"]}}, 
+        GridBoxAlignment -> {"Columns" -> {Center, Left, Right}, 
+          "Rows" -> {{Baseline}}}, AutoDelete -> False, 
+        GridBoxItemSize -> {"Columns" -> {2, 
+            FEPrivate`First[
+             FEPrivate`StringWidth[{FEPrivate`FrontEndResource[
+                "CellInsertionMenu", "MathematicaInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "FreeformInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "WAQuery"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "ExternalLanguageInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "TextStyle"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "OtherStyle"]}, "CellInsertionMenu"]], 
+            FEPrivate`First[
+             FEPrivate`StringWidth[
+              FEPrivate`FrontEndResource["CellInsertionMenu", 
+               "ShortcutColumnMaxStringLen"], 
+              "CellInsertionMenuDefaultLabel"]]}, 
+          "Rows" -> {{Automatic}}}, 
+        GridBoxSpacings -> {"Columns" -> {{0}}, 
+          "ColumnsIndexed" -> {2 -> 0.3, 3 -> 0.5}, 
+          "Rows" -> {{0}}}] :> 
+       FrontEndTokenExecute[EvaluationNotebook[], "Style", 
+        "ExternalLanguage"], Delimiter, 
+      GridBox[{{PaneBox[
+           DynamicBox[
+            FEPrivate`ImportImage[
+             FrontEnd`FileName[{"Misc"}, "InsertionText.png"]]], 
+           FrameMargins -> {{0, 0}, {2, 0}}], 
+          StyleBox[
+           DynamicBox[
+            FEPrivate`FrontEndResource["CellInsertionMenu", 
+             "TextStyle"]], "CellInsertionMenu"], 
+          StyleBox[
+           PaneSelectorBox[{True -> 
+              StyleBox[
+               DynamicBox[
+                FEPrivate`FrontEndResource["CellInsertionMenu", 
+                 "TextStyle2Mac"]], 
+               "CellInsertionMenuStyleShortcutLabel"], 
+             False -> 
+              StyleBox[
+               DynamicBox[
+                FEPrivate`FrontEndResource["CellInsertionMenu", 
+                 "TextStyle2"]], 
+               "CellInsertionMenuStyleShortcutLabel"]}, 
+            FEPrivate`$OperatingSystem === "MacOSX", 
+            ImageSize -> {Automatic, Automatic}], 
+           "CellInsertionMenuShortcut"]}}, 
+        GridBoxAlignment -> {"Columns" -> {Center, Left, Right}, 
+          "Rows" -> {{Baseline}}}, AutoDelete -> False, 
+        GridBoxItemSize -> {"Columns" -> {2, 
+            FEPrivate`First[
+             FEPrivate`StringWidth[{FEPrivate`FrontEndResource[
+                "CellInsertionMenu", "MathematicaInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "FreeformInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "WAQuery"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "ExternalLanguageInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "TextStyle"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "OtherStyle"]}, "CellInsertionMenu"]], 
+            FEPrivate`First[
+             FEPrivate`StringWidth[
+              FEPrivate`FrontEndResource["CellInsertionMenu", 
+               "ShortcutColumnMaxStringLen"], 
+              "CellInsertionMenuDefaultLabel"]]}, 
+          "Rows" -> {{Automatic}}}, 
+        GridBoxSpacings -> {"Columns" -> {{0}}, 
+          "ColumnsIndexed" -> {2 -> 0.3, 3 -> 0.5}, 
+          "Rows" -> {{0}}}] :> 
        FrontEndTokenExecute[EvaluationNotebook[], "Style", "Text"], 
-      PaneBox[GridBox[{{PaneBox[
-            DynamicBox[
-             FEPrivate`ImportImage[
-              FrontEnd`FileName[{"Misc"}, "InsertionOther.png"]]], 
-            BaselinePosition -> Scaled[0.4] -> Center, 
-            ImageSize -> 14], 
+      GridBox[{{PaneBox[
+           
+           DynamicBox[
+            FEPrivate`ImportImage[
+             FrontEnd`FileName[{"Misc"}, "InsertionOther.png"]]], 
+           FrameMargins -> {{0, 0}, {2, 0}}], 
+          StyleBox[
            DynamicBox[
             FEPrivate`FrontEndResource["CellInsertionMenu", 
-             "OtherStyle"], BaseStyle -> {"CellInsertionMenu"}]}}, 
-         GridBoxAlignment -> {"Columns" -> {{Right}}, 
-           "Rows" -> {{Baseline}}}, AutoDelete -> False, 
-         GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}},
-          GridBoxSpacings -> {"Columns" -> {0, 0.6, 2, 0}, 
-           "Rows" -> {{Automatic}}}], 
-        ImageMargins -> {{0, 0}, {1, 1}}, 
-        ImageSize -> {Automatic, 26}] :> 
+             "OtherStyle"]], "CellInsertionMenu"], 
+          StyleBox[
+           StyleBox[
+            DynamicBox[
+             FEPrivate`FrontEndResource["CellInsertionMenu", 
+              "OtherStyle2"]], "CellInsertionMenuShortcut"], 
+           "CellInsertionMenuShortcut"]}}, 
+        GridBoxAlignment -> {"Columns" -> {Center, Left, Right}, 
+          "Rows" -> {{Baseline}}}, AutoDelete -> False, 
+        GridBoxItemSize -> {"Columns" -> {2, 
+            FEPrivate`First[
+             FEPrivate`StringWidth[{FEPrivate`FrontEndResource[
+                "CellInsertionMenu", "MathematicaInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "FreeformInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "WAQuery"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "ExternalLanguageInput"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "TextStyle"], 
+               FEPrivate`FrontEndResource["CellInsertionMenu", 
+                "OtherStyle"]}, "CellInsertionMenu"]], 
+            FEPrivate`First[
+             FEPrivate`StringWidth[
+              FEPrivate`FrontEndResource["CellInsertionMenu", 
+               "ShortcutColumnMaxStringLen"], 
+              "CellInsertionMenuDefaultLabel"]]}, 
+          "Rows" -> {{Automatic}}}, 
+        GridBoxSpacings -> {"Columns" -> {{0}}, 
+          "ColumnsIndexed" -> {2 -> 0.3, 3 -> 0.5}, 
+          "Rows" -> {{0}}}] :> 
        FrontEndTokenExecute[EvaluationNotebook[], "StyleOther"]}, 
      Appearance -> None], 
-    DynamicBox[
-     FEPrivate`FrontEndResource["CellInsertionMenu", "Tooltip"], 
-     BaseStyle -> {"CellInsertionMenu"}]], 
-   BaselinePosition -> Top -> Baseline]], 
- CellMargins -> {{17, 0}, {0, 0}}, Magnification -> 1, DynamicUpdating -> True]
+    StyleBox[
+     DynamicBox[
+      FEPrivate`FrontEndResource["CellInsertionMenu", "Tooltip"]], 
+     "CellInsertionMenu"]], BaselinePosition -> Top -> Baseline]], 
+ CellMargins -> {{17, 0}, {0, 0}}, Magnification -> 1, FontSize -> 0.1],
+
+"NumericalApproximationElider" -> StyleBox[
+    "\[Ellipsis]",
+    "NumericalApproximationElider"
+]
 }
 @|
 @@resource ConnectSecondaryLinks
@@ -8781,7 +9018,7 @@ ToExpression[
     FrontEnd`Private`secondaryLinkNames={FrontEnd`Private`serviceLink,FrontEnd`Private`preemptiveLink};
     Block[{MathLink`CreateFrontEndLink},
       MathLink`CreateFrontEndLink[]:= Module[{FrontEnd`Private`link},
-      FrontEnd`Private`link=LinkCreate[First@FrontEnd`Private`secondaryLinkNames,LinkMode->Connect];
+      FrontEnd`Private`link=LinkCreate[First@FrontEnd`Private`secondaryLinkNames,LinkMode->Connect,LinkProtocol->FrontEnd`Private`protocol];
       MathLink`LinkSetPrintFullSymbols[FrontEnd`Private`link,True];
       FrontEnd`Private`secondaryLinkNames=Rest[FrontEnd`Private`secondaryLinkNames];
       FrontEnd`Private`link];
@@ -8804,14 +9041,31 @@ ToExpression[
 @|
 @@resource DangerousSymbols
 {
+  "$CCompiler",
+  "$CCompilerDefaultDirectory",
   "$Context",
   "$ContextPath",
+  "$CurrentWebSession",
+  "$DefaultNetworkInterface",
+  "$Initialization",
+  "$InitializationContexts",
+  "$MailSettings",
+  "$MobilePhone",
+  "$NetworkInterfaces",
+  "$PreInitialization",
+  "$SSHAuthentication",
+  "$Username",
+  "$UserName",
+  "$WebSessions",
+  "$WolframID",
   "AbsoluteOptions",
   "AddUsers",
   "Begin",
   "BeginPackage",
+  "BinaryDeserialize",
   "BinaryRead",
   "BinaryReadList",
+  "BinarySerialize",
   "BinaryWrite",
   "ChangeOptions",
   "ChannelListen",
@@ -8839,6 +9093,7 @@ ToExpression[
   "CloudShare",
   "CloudSubmit",
   "CloudSymbol",
+  "CompiledCodeFunction",
   "CompiledFunction",
   "CompressedData",
   "CopyDatabin",
@@ -8848,20 +9103,27 @@ ToExpression[
   "CreateChannel",
   "CreateDatabin",
   "CreateDirectory",
+  "CreateExecutable",
   "CreateFile",
+  "CreateLibrary",
+  "CreateObjectFile",
   "CreatePermissionsGroup",
   "CreateTemporary",
+  "CurrentNotebookImage",
+  "CurrentScreenImage",
   "CurrentValue",
   "DatabinAdd",
   "DatabinRemove",
   "Databins",
   "DatabinUpload",
   "Decrypt",
+  "DecryptFile",
   "Definition",
   "DeleteChannel",
   "DeleteCloudExpression",
   "DeleteDirectory",
   "DeleteFile",
+  "DeleteObject",
   "DeviceOpen",
   "DeviceRead",
   "DeviceReadBuffer",
@@ -8875,31 +9137,55 @@ ToExpression[
   "DownValues",
   "DumpSave",
   "Encrypt",
+  "EncryptFile",
   "End",
   "EndPackage",
   "Export",
+  "ExternalEvaluate",
+  "ExternalEvaluators",
+  "ExternalFunction",
+  "ExternalSessions",
+  "ExternalSessionObject",
+  "ExternalValue",
+  "FileConvert",
+  "FileHandler",
   "FileNames",
   "FilePrint",
+  "FileSize",
   "FileSystemMap",
   "FileSystemScan",
   "Find",
   "FindChannels",
   "FindDevices",
+  "FindLibrary",
   "FindList",
   "FrontEndExecute",
   "FrontEndTokenExecute",
+  "FunctionCompile",
+  "FunctionCompileExport",
+  "FunctionCompileExportByteArray",
+  "FunctionCompileExportLibrary",
+  "FunctionCompileExportString",
   "FullOptions",
   "Get",
   "HostLookup",
   "Import",
   "ImportString",
+  "Initialize",
+  "InitializationObjects",
+  "InitializationValue",
   "Install",
   "InstallJava",
   "InstallNET",
   "InstallR",
   "InstallService",
+  "Interpreter",
   "JavaNew",
   "KillProcess",
+  "LibraryFunctionLoad",
+  "LibraryFunctionUnload",
+  "LibraryLoad",
+  "LibraryUnload",
   "LinkCreate",
   "LinkConnect",
   "LinkLaunch",
@@ -8917,11 +9203,25 @@ ToExpression[
   "LocalObject",
   "LocalObjects",
   "LocalSymbol",
+  "MailCollection",
+  "MailExecute",
+  "MailFolder",
+  "MailFolderObject",
+  "MailItem",
+  "MailSearch",
+  "MailServerConnect",
+  "MailServerConnection",
   "MakeExpression",
   "MetaInformation",
   "Names",
   "Needs",
   "NETNew",
+  "NetworkPacketCapture",
+  "NetworkPacketCaptureDuring",
+  "NetworkPacketRecording",
+  "NetworkPacketRecordingDuring",
+  "NetworkPacketTrace",
+  "NotebookCapture",
   "NotebookCreate",
   "NotebookDelete",
   "NotebookEvaluate",
@@ -8936,16 +9236,19 @@ ToExpression[
   "OpenAppend",
   "OpenRead",
   "OpenTemporary",
-	"OpenWrite",
+  "OpenWrite",
   "Options",
   "OwnValues",
   "Paste",
   "Permissions",
   "PermissionsGroup",
   "PermissionsGroups",
+  "PersistentObjects",
+  "PersistentValue",
   "ProcessConnection",
   "Processes",
   "ProcessInformation",
+  "ProcessObject",
   "ProcessStatus",
   "Put",
   "PutAppend",
@@ -8953,8 +9256,14 @@ ToExpression[
   "ReadLine",
   "ReadList",
   "ReadString",
+  "RegisterExternalEvaluator",
   "Reinstall",
   "ReinstallNET",
+  "RemoteConnect",
+  "RemoteConnectionObject",
+  "RemoteFile",
+  "RemoteRun",
+  "RemoteRunProcess",
   "Remove",
   "RemoveChannelListener",
   "RemoveUsers",
@@ -8967,23 +9276,37 @@ ToExpression[
   "RunProcess",
   "RunThrough",
   "Save",
+  "ScreenCapture",
   "SelectionEvaluate",
+  "SendEvent",
   "SendMail",
   "SendMessage",
+  "SendSMS",
   "SetAttributes",
   "SetOptions",
   "SetFileDate",
   "SetUsers",
   "Skip",
+  "SocketBind",
   "SocketConnect",
+  "SocketListen",
+  "SocketPoll",
+  "SocketOpen",
+  "SocketSubmit",
   "Splice",
   "Stack",
   "StackComplete",
+  "StartExternalSession",
   "StartProcess",
+  "StartWebServer",
+  "StartWebSession",
   "StringToStream",
   "SubValues",
   "Symbol",
+  "SystemInstall",
   "SystemOpen",
+  "SystemProcesses",
+  "SystemProcessData",
   "Trace",
   "TracePrint",
   "ToExpression",
@@ -8991,11 +9314,19 @@ ToExpression[
   "Typeset`ToExpression",
   "Uncompress",
   "Unprotect",
+  "UnregisterExternalEvaluator",
   "UpValues",
   "URLSave",
   "URLSaveAsynchronous",
-	"Write",
-	"WriteString"
+  "WebElementObject",
+  "WebExecute",
+  "WebImage",
+  "WebSessionObject",
+  "Write",
+  "WriteString",
+  "ZMQConnect", 
+  "ZMQRead", 
+  "ZMQWrite"
 }
 
 @|
@@ -9046,6 +9377,7 @@ ToExpression[
 	FEPrivate`And,
 	FEPrivate`$CreationID,
 	FEPrivate`Drop,
+	FEPrivate`FrontEndResourceString,
 	FEPrivate`Head,
 	FEPrivate`If,
 	FEPrivate`ImageIndicesDisplayFunction,
