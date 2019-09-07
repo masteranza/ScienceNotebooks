@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    116351,       2673]
-NotebookOptionsPosition[    115761,       2653]
-NotebookOutlinePosition[    116365,       2674]
-CellTagsIndexPosition[    116322,       2671]
+NotebookDataLength[    125544,       2872]
+NotebookOptionsPosition[    124953,       2852]
+NotebookOutlinePosition[    125557,       2873]
+CellTagsIndexPosition[    125514,       2870]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -641,7 +641,9 @@ onload='openCloseGroup()'>\>\""}], "]"}]}]}], "]"}], ",",
       "\[IndentingNewLine]", 
       RowBox[{"PrintToConsole", "[", "\"\<Export starts\>\"", "]"}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"TeXForm", "[", "1", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ExportString", "[", 
+       RowBox[{"\"\<Exp\>\"", ",", "\"\<TeXFragment\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{
@@ -994,12 +996,11 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
            RowBox[{
            "\"\<\\\\left\\\\| \>\"", " ", "|", " ", 
             "\"\<\\\\right\\\\| \>\""}], " ", "->", " ", "\"\<\\\\| \>\""}]}],
-          "}"}]}]}], ";", "\n", 
+          "}"}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{"rules", " ", 
         RowBox[{"for", " ", "'"}], 
-        RowBox[{"at", "'"}], " ", "notions"}], "*)"}], "\[IndentingNewLine]", 
-      
+        RowBox[{"at", "'"}], " ", "notions"}], "*)"}], "\n", 
       RowBox[{
        RowBox[{"myBoxRule", "[", 
         RowBox[{"TemplateBox", "[", 
@@ -1495,6 +1496,101 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
          "&"}], "/@", "allinfo"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"ShowStatus", "[", "\"\<Extracting data... (1/3)\>\"", "]"}], 
       ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "line", " ", "splitter", " ", "extended", " ", "to", " ", "5000", " ", 
+        "characters"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXDump`cleanUpFile", "[", "fileName_String", "]"}], 
+       " ", ":=", " ", "\n", " ", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"streamIn", ",", " ", "streamOut", ",", " ", 
+           RowBox[{"insideComment", " ", "=", " ", "False"}], ",", " ", 
+           RowBox[{"charNum", " ", "=", " ", "0"}], ",", " ", "\n", "   ", 
+           "scratchFileName", ",", " ", "charIn", ",", " ", 
+           RowBox[{"charLast", " ", "=", " ", "\"\<\>\""}]}], "}"}], ",", " ",
+          "\n", "   \t ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"streamIn", ",", " ", "streamOut"}], "}"}], " ", "=", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"OpenRead", "[", "fileName", "]"}], ",", " ", 
+             RowBox[{"System`ConvertersDump`Utilities`OpenTempFile", "[", 
+              RowBox[{"CharacterEncoding", " ", "->", " ", 
+               RowBox[{"{", "}"}]}], "]"}]}], "}"}]}], ";", "\n", "  \t", 
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"charIn", " ", "=", " ", 
+               RowBox[{"Read", "[", 
+                RowBox[{"streamIn", ",", " ", "Character"}], "]"}]}], ")"}], 
+             " ", "=!=", " ", "EndOfFile"}], ",", " ", "\n", "   ", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"charLast", " ", "=!=", " ", "\"\<\\\\\>\""}], " ", "&&",
+                 " ", 
+                RowBox[{"charIn", " ", "===", " ", "\"\<%\>\""}]}], ",", " ", 
+               
+               RowBox[{"insideComment", " ", "=", " ", "True"}]}], "]"}], ";",
+              "\n", "   \t", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"charIn", " ", "===", " ", "\"\<\\n\>\""}], ",", " ", 
+               RowBox[{
+                RowBox[{"insideComment", " ", "=", " ", "False"}], ";", "\n", 
+                "    \t", 
+                RowBox[{"charNum", " ", "=", " ", 
+                 RowBox[{"-", "1"}]}]}]}], "]"}], ";", "\n", "   \t", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"charNum", " ", ">=", " ", "5000"}], " ", "&&", " ", 
+                RowBox[{"Or", " ", "@@", " ", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"charIn", " ", "===", " ", "#1"}], " ", "&"}], 
+                   ")"}], " ", "/@", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<\\t\>\"", ",", " ", "\"\< \>\""}], 
+                   "}"}]}]}]}], ",", " ", "\n", "    ", 
+               RowBox[{
+                RowBox[{"WriteString", "[", 
+                 RowBox[{"streamOut", ",", " ", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"!", " ", "insideComment"}], ",", " ", 
+                    "\"\<\\n\>\"", ",", " ", "\"\<\\n%\>\""}], "]"}]}], "]"}],
+                 ";", "\n", "    \t", 
+                RowBox[{"charNum", " ", "=", " ", "0"}]}], ",", " ", 
+               RowBox[{
+                RowBox[{"WriteString", "[", 
+                 RowBox[{"streamOut", ",", " ", "charIn"}], "]"}], ";", "\n", 
+                "    \t", 
+                RowBox[{"++", "charNum"}]}]}], "]"}], ";", "\n", "   \t", 
+             RowBox[{"charLast", " ", "=", " ", "charIn"}], ";"}]}], "]"}], 
+          ";", "\n", "  \t", 
+          RowBox[{"Scan", "[", 
+           RowBox[{"Close", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"streamIn", ",", " ", "streamOut"}], "}"}]}], "]"}], ";",
+           "\n", "  \t", 
+          RowBox[{"DeleteFile", "[", "fileName", "]"}], ";", "\n", "  \t", 
+          RowBox[{"CopyFile", "[", 
+           RowBox[{
+            RowBox[{"scratchFileName", " ", "=", " ", 
+             RowBox[{"First", "[", "streamOut", "]"}]}], ",", " ", 
+            "fileName"}], "]"}], ";", "\n", "  \t", 
+          RowBox[{"DeleteFile", "[", "scratchFileName", "]"}], ";"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"base", "=", 
        RowBox[{
         RowBox[{
@@ -1703,7 +1799,9 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                 RowBox[{
                  RowBox[{
                   RowBox[{"box", ":", 
-                   RowBox[{"(", "_FormBox", ")"}]}], ":>", 
+                   RowBox[{"(", 
+                    RowBox[{"_TemplateBox", "|", "_FormBox"}], ")"}]}], ":>", 
+                  
                   RowBox[{"(", 
                    RowBox[{"myBoxRule", "[", "box", "]"}], ")"}]}], ",", "\n", 
                  RowBox[{
@@ -1733,6 +1831,101 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
                     "\"\<\\\\end{equation*}\\\\)\>\""}], "}"}]}]}], "}"}]}]}],
               "]"}], ",", "\[IndentingNewLine]", "\"\<Text\>\""}], "]"}], 
           "]"}], "&"}], "/@", "cells"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "line", " ", "splitter", " ", "extended", " ", "to", " ", "5000", " ", 
+        "characters"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXDump`cleanUpFile", "[", "fileName_String", "]"}], 
+       " ", ":=", " ", "\n", " ", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"streamIn", ",", " ", "streamOut", ",", " ", 
+           RowBox[{"insideComment", " ", "=", " ", "False"}], ",", " ", 
+           RowBox[{"charNum", " ", "=", " ", "0"}], ",", " ", "\n", "   ", 
+           "scratchFileName", ",", " ", "charIn", ",", " ", 
+           RowBox[{"charLast", " ", "=", " ", "\"\<\>\""}]}], "}"}], ",", " ",
+          "\n", "   \t ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"streamIn", ",", " ", "streamOut"}], "}"}], " ", "=", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"OpenRead", "[", "fileName", "]"}], ",", " ", 
+             RowBox[{"System`ConvertersDump`Utilities`OpenTempFile", "[", 
+              RowBox[{"CharacterEncoding", " ", "->", " ", 
+               RowBox[{"{", "}"}]}], "]"}]}], "}"}]}], ";", "\n", "  \t", 
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"charIn", " ", "=", " ", 
+               RowBox[{"Read", "[", 
+                RowBox[{"streamIn", ",", " ", "Character"}], "]"}]}], ")"}], 
+             " ", "=!=", " ", "EndOfFile"}], ",", " ", "\n", "   ", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"charLast", " ", "=!=", " ", "\"\<\\\\\>\""}], " ", "&&",
+                 " ", 
+                RowBox[{"charIn", " ", "===", " ", "\"\<%\>\""}]}], ",", " ", 
+               
+               RowBox[{"insideComment", " ", "=", " ", "True"}]}], "]"}], ";",
+              "\n", "   \t", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"charIn", " ", "===", " ", "\"\<\\n\>\""}], ",", " ", 
+               RowBox[{
+                RowBox[{"insideComment", " ", "=", " ", "False"}], ";", "\n", 
+                "    \t", 
+                RowBox[{"charNum", " ", "=", " ", 
+                 RowBox[{"-", "1"}]}]}]}], "]"}], ";", "\n", "   \t", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"charNum", " ", ">=", " ", "144"}], " ", "&&", " ", 
+                RowBox[{"Or", " ", "@@", " ", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"charIn", " ", "===", " ", "#1"}], " ", "&"}], 
+                   ")"}], " ", "/@", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<\\t\>\"", ",", " ", "\"\< \>\""}], 
+                   "}"}]}]}]}], ",", " ", "\n", "    ", 
+               RowBox[{
+                RowBox[{"WriteString", "[", 
+                 RowBox[{"streamOut", ",", " ", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"!", " ", "insideComment"}], ",", " ", 
+                    "\"\<\\n\>\"", ",", " ", "\"\<\\n%\>\""}], "]"}]}], "]"}],
+                 ";", "\n", "    \t", 
+                RowBox[{"charNum", " ", "=", " ", "0"}]}], ",", " ", 
+               RowBox[{
+                RowBox[{"WriteString", "[", 
+                 RowBox[{"streamOut", ",", " ", "charIn"}], "]"}], ";", "\n", 
+                "    \t", 
+                RowBox[{"++", "charNum"}]}]}], "]"}], ";", "\n", "   \t", 
+             RowBox[{"charLast", " ", "=", " ", "charIn"}], ";"}]}], "]"}], 
+          ";", "\n", "  \t", 
+          RowBox[{"Scan", "[", 
+           RowBox[{"Close", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"streamIn", ",", " ", "streamOut"}], "}"}]}], "]"}], ";",
+           "\n", "  \t", 
+          RowBox[{"DeleteFile", "[", "fileName", "]"}], ";", "\n", "  \t", 
+          RowBox[{"CopyFile", "[", 
+           RowBox[{
+            RowBox[{"scratchFileName", " ", "=", " ", 
+             RowBox[{"First", "[", "streamOut", "]"}]}], ",", " ", 
+            "fileName"}], "]"}], ";", "\n", "  \t", 
+          RowBox[{"DeleteFile", "[", "scratchFileName", "]"}], ";"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{"PrintToConsole", "[", "base", "]"}], ";"}], "*)"}], 
@@ -2197,6 +2390,12 @@ HIJACK\>\"", "]"}], ";", "\[IndentingNewLine]",
         RowBox[{"base", ",", 
          RowBox[{"{", "\[IndentingNewLine]", 
           RowBox[{
+           RowBox[{"\"\<\\\\medspace\>\"", "\[Rule]", "\"\<\>\""}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"\"\<\\n\\\\)\>\"", "\[Rule]", "\"\<\\\\)\>\""}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"\"\<<br>\\\\)\>\"", "\[Rule]", "\"\<\\\\)\>\""}], ",", 
+           "\[IndentingNewLine]", 
            RowBox[{
             RowBox[{"(", 
              RowBox[{
@@ -2673,7 +2872,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 115200, 2631, 9379, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 124392, 2830, 10261, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]

@@ -84,7 +84,7 @@ cloudex=If[!$CloudConnected&&$WolframID===None,If[CloudConnect[]===$Failed||Clou
 separator="#";
 ShowStatus["Export starts"];
 PrintToConsole["Export starts"];
-TeXForm[1];
+ExportString["Exp","TeXFragment"];
 (*System`Convert`TeXFormDump`maketex["\[LeftSkeleton]"]="\\ll ";
 System`Convert`TeXFormDump`maketex["\[RightSkeleton]"]="\\gg ";*)
 System`Convert`TeXFormDump`maketex["\[OAcute]"]="\[OAcute]";
@@ -141,6 +141,7 @@ If[StringQ[boxes],"{{c"<>ToString[nr]<>"::"<>StringReplace[boxes,"}}"->"} }"]<>"
 System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};
 deb=Convert`TeX`BoxesToTeX[""];
 System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};
+
 (*rules for 'at' notions*)
 myBoxRule[TemplateBox[{boxes_,_,lima_,limb_},___]]:=StringJoin["\\left."<>System`Convert`TeXFormDump`maketex[boxes],"\\right|_{",System`Convert`TeXFormDump`maketex[lima],"}^{",System`Convert`TeXFormDump`maketex[limb],"}"];
 
@@ -204,12 +205,48 @@ GetTOC=Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Section"|"Subsec
 ShowStatus["Preparing paths..."];
 paths=(title<>"/"<>Riffle[Head/@(GetTOC[[#/.List->Sequence]]&/@Reverse@NestList[Most,#,Length[#]-1]),"/"])&/@allinfo;
 ShowStatus["Extracting data... (1/3)"];
-base=TeXFix[ImportString[ExportString[n=0;EmbedEq[FixFigures@Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity]],"TeXFragment","BoxRules"->{box:(_FormBox):>(myBoxRule[box]),
+(*line splitter extended to 5000 characters*)
+System`Convert`TeXDump`cleanUpFile[fileName_String] := 
+ Module[{streamIn, streamOut, insideComment = False, charNum = 0, 
+   scratchFileName, charIn, charLast = ""}, 
+   	 {streamIn, streamOut} = {OpenRead[fileName], System`ConvertersDump`Utilities`OpenTempFile[CharacterEncoding -> {}]};
+  	While[(charIn = Read[streamIn, Character]) =!= EndOfFile, 
+   If[charLast =!= "\\" && charIn === "%", insideComment = True];
+   	If[charIn === "\n", insideComment = False;
+    	charNum = -1];
+   	If[charNum >= 5000 && Or @@ (charIn === #1 &) /@ {"\t", " "}, 
+    WriteString[streamOut, If[! insideComment, "\n", "\n%"]];
+    	charNum = 0, WriteString[streamOut, charIn];
+    	++charNum];
+   	charLast = charIn;];
+  	Scan[Close, {streamIn, streamOut}];
+  	DeleteFile[fileName];
+  	CopyFile[scratchFileName = First[streamOut], fileName];
+  	DeleteFile[scratchFileName];];
+base=TeXFix[ImportString[ExportString[n=0;EmbedEq[FixFigures@Replace[NotebookRead[#],{StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88]]:>(n+=1;Anki[n,C]),StyleBox[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,StyleBox[C,D]]), Cell[C___,Background->RGBColor[0.88, 1, 0.88],D___]:>(n+=1;Anki[n,Cell[C,D]])},Infinity]],"TeXFragment","BoxRules"->{box:(_TemplateBox|_FormBox):>(myBoxRule[box]),
 "\[Transpose]":>"^{\\mathsf{T}}",
 "\[ConjugateTranspose]":>"^{\\dagger} ",
 "\[HermitianConjugate]":>"^{\\dagger} "},"ConversionRules"->{"Equation"->{"\\(\\begin{equation*}",EqBoxToTeX[#]&,"\\end{equation*}\\)"},
 "EquationNumbered"->{"\\(\\begin{equation*}",EqBoxToTeX[#]&,"\\end{equation*}\\)"}}],
 "Text"]]&/@cells;
+(*line splitter extended to 5000 characters*)
+System`Convert`TeXDump`cleanUpFile[fileName_String] := 
+ Module[{streamIn, streamOut, insideComment = False, charNum = 0, 
+   scratchFileName, charIn, charLast = ""}, 
+   	 {streamIn, streamOut} = {OpenRead[fileName], System`ConvertersDump`Utilities`OpenTempFile[CharacterEncoding -> {}]};
+  	While[(charIn = Read[streamIn, Character]) =!= EndOfFile, 
+   If[charLast =!= "\\" && charIn === "%", insideComment = True];
+   	If[charIn === "\n", insideComment = False;
+    	charNum = -1];
+   	If[charNum >= 144 && Or @@ (charIn === #1 &) /@ {"\t", " "}, 
+    WriteString[streamOut, If[! insideComment, "\n", "\n%"]];
+    	charNum = 0, WriteString[streamOut, charIn];
+    	++charNum];
+   	charLast = charIn;];
+  	Scan[Close, {streamIn, streamOut}];
+  	DeleteFile[fileName];
+  	CopyFile[scratchFileName = First[streamOut], fileName];
+  	DeleteFile[scratchFileName];];
 (*PrintToConsole[base];*)
 (*
 dat=Block[{n=1},ReplaceRepeated[data,
@@ -263,6 +300,9 @@ ids=CurrentValue[#,"CellID"]&/@ cells;
 (*styleTags=(" "<>#[[3]]<>"::"<> StringReplace[title," "\[Rule] ""])&/@dat;*)
 ShowStatus["Fixing data... (2/2)"];
 base=StringReplace[base,{
+"\\medspace"->"",
+"\n\\)"->"\\)",
+"<br>\\)"->"\\)",
 ("}}\\color[HTML]{000000}\\color[HTML]{1111FF}{{c"~~Shortest[c__]~~"::")->"",
 "}}{{c"~~Shortest[c__]~~"::"->"",
 "\(\)"->"",

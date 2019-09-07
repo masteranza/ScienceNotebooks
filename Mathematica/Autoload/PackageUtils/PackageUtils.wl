@@ -259,7 +259,7 @@ ShowStatus["PDF exported successfully"];
   
   (*Options[ExportToTeX]={ExportToPDF->False,EmbedRefrencesBeforeExport->False};*)
 ExportToTeX[(*opt:OptionsPattern[]*)]:=Module[{cells,base,prolog,epilog,styles,deb},
-ShowStatus["Exporting to TeX..."];
+ShowStatus["Initializing TeX export..."];
 deb=TeXForm["1"];
 (*nie zamieniaj zwyk\[LSlash]ego tekstu*)
 System`Convert`CommonDump`ConvertTextData[contents_String,toFormat_,toFormatStream_,conversionRules_,opts___?OptionQ]:=Module[{fpre,frule,fpost,pstyle,popts,str=contents},System`Convert`CommonDump`DebugPrint["CONVERTCOMMON:ConvertTextData-general content: ",contents];
@@ -283,8 +283,8 @@ System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDum
 
 EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
 
-RefEq[what_]:=Replace[what,{Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
-Cell[BoxData[ButtonBox[___,TaggingRules->{"deeptag"->c_},___],___],___]:>("\\ref{"<>ToString[c]<>"}")},Infinity];
+RefEq[what_]:=Replace[Replace[what,{Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
+Cell[BoxData[ButtonBox[___,TaggingRules->{"deeptag"->c_},___],___],___]:>("\\ref{"<>ToString[c]<>"}")},Infinity],{Cell[C_,CellTags->t_]:>Cell[C,"InlineCell",CellTags->t]},Infinity];
 
 FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]],StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88],D___]:>(C)},Infinity];
 
@@ -302,7 +302,7 @@ If[StringQ[labels]||(ListQ[labels]&&Length[labels]==1),"\\label{"<>ToString[Cell
 
 AddLabels[i_,form_]:=Block[{labels},
 labels=Replace[Cases[NotebookRead[i],Cell[___,_[form],___,CellTags->_,___],Infinity],Cell[___,_[form],___,CellTags->c_,___]:>c,Infinity];
-(If[Length[labels]==1,"{",""]<>(StringTrim@ExportString[Cell[BoxData[form],FormatType->TraditionalForm],"TeXFragment"])<>If[Length[labels]==1,"\\label{"<>First[labels]<>"}} ",""])
+(If[Length[labels]==1,"\\({",""]<>(StringTrim@EqBoxToTeX[form])<>If[Length[labels]==1,"\\label{"<>First[labels]<>"}}\\) ",""])
 (*old code for latex ref*)
 (*(If[Length[labels]\[Equal]1,"\\labeltext{",""]<>(StringTrim@ExportString[Cell[BoxData[form],FormatType\[Rule]TraditionalForm],"TeXFragment"])<>If[Length[labels]\[Equal]1,"}{"<>First[labels]<>"} ",""])*)];
 
@@ -341,9 +341,11 @@ prolog="% \\documentclass[titlepage, a4paper]{mwart}
 % \\makeatother
 \\begin{document}\n";
 epilog="\\end{document}";
+ShowStatus["Gathering cells..."];
 (*styles=DeleteCases[FEPrivate`GetPopupList[EvaluationNotebook[],"MenuListStyles"]//FE`Evaluate//Cases[_[s_String,_]:>s],"Input"|"Output"];*)
 cells=Cells[EvaluationNotebook[]];
 cells=Select[Select[Select[cells,(CurrentValue[#,"CellStyle"]!={"Input"})&],(CurrentValue[#,"CellStyle"]!={"Output"})&],(CurrentValue[#,"CellStyle"]!={"Print"})&];
+ShowStatus["Processing cells..."];
 base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[False(*OptionValue[EmbedRefrencesBeforeExport]*),EmbedEq,RefEq]@FixFigures[NotebookRead[i]],"TeXFragment",
 "BoxRules"->{box:(_FormBox):>(myBoxRule[box]),
 "\[Transpose]":>"^{\\mathsf{T}}",
@@ -360,6 +362,7 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[False(*Option
 "InlineCell"->{"",AddLabels[i,#]&,""}
 }
 ],"Text"],{i,cells}];
+ShowStatus["Postprocessing cells..."];
 base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
 base=StringReplace[StringReplace[base,{"\\)"~~Shortest[C__]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
 StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
@@ -367,6 +370,7 @@ StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\tex
 }],{"\\pmb{"->"\\bf{"}];
 base=If[StringContainsQ[base,"\\("],base,StringReplace[base,{"\\pmb{"->"\\textbf{"}]];
 (*base=StringReplace[base,{"\\&"\[Rule]"&","{array}" -> "{aligned}"}];*)
+ShowStatus["Exporting TeX file..."];
 Export[StringDrop[NotebookFileName[],-2]<>"tex",prolog<>base<>epilog,"Text"];
 ShowStatus["Trying to build the PDF from TeX (might fail)..."];
 If[True(*OptionValue[ExportToPDF]*),
