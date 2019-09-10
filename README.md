@@ -23,7 +23,9 @@ The project consists of Mathematica stylesheet and tools for creating TeX grade 
 
 ![https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png](https://raw.githubusercontent.com/masteranza/MathematicaAnki/master/screen1.png)
 
-2. Go to `~/Library/Mathematica/` and copy (or symlink) files from the `Mathematica` directory to corresponding subfolders.
+2. Go to `~/Library/Mathematica/` and copy (or symlink) files from the `Mathematica` directory to corresponding subfolders. Install the `.otf` fonts on your system manually if you don't have them.
+
+> Warning! This project includes a variety of additions! 1. Custom package called `PackageUtils` (needed), custom stylesheet called `Science` (needed), `StrongFieldUtils`, `ScienceReport` and `PathAutoUpdate` packages (not needed), FrontEnd overloads located in `TextResources` folder and `Kernel` (also not needed). 
 
 3. Create a root `Knowledge` folder. You can make it anywhere, but I recommend you putting it inside dropbox folder:
 `mkdir ~/Dropbox/Knowledge`
