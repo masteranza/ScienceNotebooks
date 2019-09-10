@@ -67,10 +67,10 @@ Item[KeyEvent["e", Modifiers -> {Control}],
     		ysubt=(StringContainsQ[t,"`"] && Length[StringSplit[t,"`"]]>1);
     		If[ysubt, subt=Last[StringSplit[t,"`"]]; t=First[StringSplit[t,"`"]];,subt="";];
             NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", With[{x=t},DynamicBox[AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],{"CounterValue", AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],"CellStyleName"]}]]],If[ysubt,".",""],If[ysubt,subt,""], ")"}],
-            TaggingRules->{"deeptag"->If[ysubt,subt,t]},
+            TaggingRules->{"deeptag"->If[ysubt,subt,t], "TeXtag"->If[ysubt,StringJoin[t,subt],t]},
             BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, 
             TooltipStyle->{Background->RGBColor[1, 1, 1], CellFrame -> 1}, 
-     		Tooltip -> With[{x=t, y=subt, z=ysubt}, DynamicBox[ce=First@Cells[EvaluationNotebook[], CellTags -> {x}]; RowBox[Prepend[Flatten[{CellStrip[If[z,Cases[NotebookRead[ce], Cell[Pattern[A, BlankSequence[]], CellTags->y] -> Cell[A], Infinity], NotebookRead[ce]]]}], StyleBox[RowBox[{If[z,y,TranslateSpecialCellStyleNames[AbsoluteCurrentValue[ce,"CellStyleName"]]], " ", AbsoluteCurrentValue[ce,{"CounterValue","Section"}], ".", AbsoluteCurrentValue[ce,{"CounterValue", AbsoluteCurrentValue[ce, "CellStyleName"]}], "\n"}], "Subsubsection"]]], UpdateInterval -> Infinity]]]
+     		Tooltip -> With[{x=t, y=subt, z=ysubt}, DynamicBox[RefCellTooltip[x,If[z,y,None]], UpdateInterval -> Infinity]]]
      		]];
         ],
         MenuEvaluator -> Automatic 
