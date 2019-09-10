@@ -60,7 +60,8 @@ TeXFix[what_]:=StringReplace[StringReplace[what,{
 "}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"",
 "\\({{c"~~Shortest[c__]~~"::"~~Shortest[d__]~~"}}\\)":>("{{c"<>c<>"::\\("<>d<>"\\)}}")}],
 {"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","\\)\\("->""}];
-EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
+EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>TempAnki[c]},Infinity],{TempAnki[RowBox[{_,d___}]]:>RowBox[{d}]},Infinity];
+
 FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]]},Infinity];
 
 openCloseAll[nb_,target_String,to:(Open|Closed)]:=Do[SelectionMove[cell,All,CellGroup,AutoScroll->False];
@@ -99,6 +100,10 @@ System`Convert`TeXFormDump`maketex["\:017a"]="\:017a";
 (*System`Convert`TeXFormDump`maketex["&"]="\\$ ";*)
 System`Convert`TeXFormDump`maketex["~"]="\\sim ";
 System`Convert`TeXFormDump`maketex["\[Perpendicular]"]="\\perp ";
+System`Convert`TeXFormDump`maketex["\[TensorWedge]"]="\\wedge ";System`Convert`TeXFormDump`maketex["\[Wedge]"]="\\wedge ";
+System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
+System`Convert`TeXFormDump`maketex["\[LineSeparator]"]="\n";
+
 (*nie zamieniaj zwyk\[LSlash]ego tekstu*)
 System`Convert`CommonDump`ConvertTextData[contents_String,toFormat_,toFormatStream_,conversionRules_,opts___?OptionQ]:=Module[{fpre,frule,fpost,pstyle,popts,str=contents},System`Convert`CommonDump`DebugPrint["CONVERTCOMMON:ConvertTextData-general content: ",contents];
 pstyle=System`Convert`CommonDump`ParentCellStyle/.{opts}/.System`Convert`CommonDump`ParentCellStyle->"";

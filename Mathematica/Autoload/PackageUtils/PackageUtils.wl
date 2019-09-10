@@ -55,6 +55,8 @@ WorkingEnv::usage="Show all cell metadata and Input cells";
 PrintoutEnv::usage="Hides all cell metadata and Input cells";
 Recent::usage="Shows recently opened notebooks";
 TranslateSpecialCellStyleNames::usage="For internal usage";
+RefCellTooltip::usage="Generates a tooltip for referenced cells, takes tag and subtag";
+ContentsByCellStyle::usage="Extracts (assumed)text contents of a cells by style";
 IncludePath::usage="Includes a path to $Path variable, for easy loading";
 
 
@@ -63,7 +65,7 @@ IncludePath::usage="Includes a path to $Path variable, for easy loading";
 
 
 Begin["`Private`"];
-
+RefCellTooltip[x_,y_:None]:=Block[{ce},ce=First@Cells[EvaluationNotebook[], CellTags -> {x}]; RowBox[Prepend[Flatten[{CellStrip[If[y=!=None,Cases[NotebookRead[ce], Cell[Pattern[A, BlankSequence[]], CellTags->y] -> Cell[A], Infinity], NotebookRead[ce]]]}], StyleBox[RowBox[{If[y=!=None,y,TranslateSpecialCellStyleNames[AbsoluteCurrentValue[ce,"CellStyleName"]]], " ", AbsoluteCurrentValue[ce,{"CounterValue","Section"}], ".", AbsoluteCurrentValue[ce,{"CounterValue", AbsoluteCurrentValue[ce, "CellStyleName"]}], "\n"}], "Subsubsection"]]]];
 DuplicateNotebook[]:=NotebookPut@NotebookGet[EvaluationNotebook[]];
 TranslateSpecialCellStyleNames[name_]:=If[AbsoluteCurrentValue["Language"] == "Polish",Switch[name,"Example","Przyk\[LSlash]ad","Exercise","Zadanie","Solution","Rozwi\:0105zanie","Question","Pytanie","Remark","Uwaga","Comment","Komentarz",
 "Theorem","Twierdzenie","Proof","Dow\[OAcute]d","Axiom","Aksjomat","Definition","Definicja","Lemma","Lemat","Corollary","Wniosek","Title","Tytu\[LSlash]","Subtitle","Podtytu\[LSlash]","Author","Autor","Section","Sekcja","Subsection","Podsekcja","Subsubsection","Podpodsekcja","Text","Tekst","Item1","Pozycja","Equation","R\[OAcute]wnanie","EquationNumbered","R\[OAcute]wnanie numerowane","Figure","Rysunek","Table","Tabela",_,name],name]
@@ -244,6 +246,9 @@ NotebookWrite[EvaluationNotebook[],Cell[BoxData[StyleBox[DynamicBox@GridBox[tocr
 ];
 ];
 
+ContentsByCellStyle[style_]:=Block[{cs},cs=Cells[EvaluationNotebook[],CellStyle->style];
+If[Length[cs]>0,CellStrip/@NotebookRead[cs],{""}]];
+
 PublishToPDF[copyPath_: "",codeVisible_:False] := Module[{nb, nb2},
 ShowStatus["Exprting PDF..."];
   nb = ToFileName[{NotebookDirectory[EvaluationNotebook[]]}, "WindowTitle" /. NotebookInformation[SelectedNotebook[]]];
@@ -258,9 +263,28 @@ ShowStatus["PDF exported successfully"];
   ];
   
   (*Options[ExportToTeX]={ExportToPDF->False,EmbedRefrencesBeforeExport->False};*)
-ExportToTeX[(*opt:OptionsPattern[]*)]:=Module[{cells,base,prolog,epilog,styles,deb},
+ExportToTeX[(*opt:OptionsPattern[]*)]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil},
 ShowStatus["Initializing TeX export..."];
-deb=TeXForm["1"];
+Quiet@ExportString["Exp","TeXFragment"];
+System`Convert`TeXFormDump`maketex["\[OAcute]"]="\[OAcute]";
+System`Convert`TeXFormDump`maketex["\[CloseCurlyQuote]"]="'";
+System`Convert`TeXFormDump`maketex["\:015b"]="\:015b";
+System`Convert`TeXFormDump`maketex["\[CAcute]"]="\[CAcute]";
+System`Convert`TeXFormDump`maketex["\:0119"]="\:0119";
+System`Convert`TeXFormDump`maketex["\:0105"]="\:0105";
+System`Convert`TeXFormDump`maketex["\[LSlash]"]="\[LSlash]";
+System`Convert`TeXFormDump`maketex["\:017c"]="\:017c";
+System`Convert`TeXFormDump`maketex["\:017a"]="\:017a";
+(*System`Convert`TeXFormDump`maketex["&"]="\\$ ";*)
+System`Convert`TeXFormDump`maketex["~"]="\\sim ";
+System`Convert`TeXFormDump`maketex["\[Perpendicular]"]="\\perp ";
+System`Convert`TeXFormDump`maketex["\[TensorWedge]"]="\\wedge ";
+System`Convert`TeXFormDump`maketex["\[Wedge]"]="\\wedge ";
+System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
+System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
+System`Convert`TeXFormDump`maketex["\[LineSeparator]"]="\n";
+System`Convert`TeXFormDump`maketex[":="]="\\coloneqq\,";
+
 (*nie zamieniaj zwyk\[LSlash]ego tekstu*)
 System`Convert`CommonDump`ConvertTextData[contents_String,toFormat_,toFormatStream_,conversionRules_,opts___?OptionQ]:=Module[{fpre,frule,fpost,pstyle,popts,str=contents},System`Convert`CommonDump`DebugPrint["CONVERTCOMMON:ConvertTextData-general content: ",contents];
 pstyle=System`Convert`CommonDump`ParentCellStyle/.{opts}/.System`Convert`CommonDump`ParentCellStyle->"";
@@ -282,9 +306,8 @@ System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDum
 
 
 EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
-
-RefEq[what_]:=Replace[Replace[what,{Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
-Cell[BoxData[ButtonBox[___,TaggingRules->{"deeptag"->c_},___],___],___]:>("\\ref{"<>ToString[c]<>"}")},Infinity],{Cell[C_,CellTags->t_]:>Cell[C,"InlineCell",CellTags->t]},Infinity];
+RefEq[what_]:=Replace[Replace[what,{Cell[BoxData[ButtonBox[___,TaggingRules->{"deeptag"->_,"TeXtag"->c_},___],___],___]:>("\\ref{"<>ToString[c]<>"}"), Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
+Cell[C_,D___,FormatType->"TraditionalForm",E___]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E],Cell[C_,D___]:>Cell[C,"InlineCell",D]},Infinity],{Cell[C_,CellTags->t_]:>Cell[C,"InlineCell",CellTags->t]},Infinity];
 
 FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]],StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88],D___]:>(C)},Infinity];
 
@@ -295,33 +318,63 @@ NameAndExport[i_,form_]:=Block[{name},
 name=NameThisFigure[i];
 FileNameTake[Export[NotebookDirectory[EvaluationNotebook[]]<>NameThisFigure[i]<>".pdf",FormBox[form,TraditionalForm],"pdf"]]
 ];
+SL[x_]:=If[StringQ[x],x,First@x];
+CheckLabels[labels_,sublabels_:None,inlineQ_:False]:=Block[{hasLabels,hasSublabels},
+hasLabels=(StringQ[labels]||(ListQ[labels]&&Length[labels]>0));
+hasSublabels=(StringQ[sublabels]||(ListQ[sublabels]&&Length[sublabels]>0));
+If[hasLabels && Length[labels]>1,
+PrintToConsole["One of the cells has more than one label "<>ToString[labels]<>" using first"];];
+If[hasSublabels && Length[sublabels]>1,
+PrintToConsole["One of the cells has more than one label "<>ToString[sublabels]<>" using first"];];
 
-InsertLabel[i_]:=Block[{labels},
+If[hasLabels && hasSublabels,"\\label{"<>SL@labels<>SL@sublabels<>"}",
+If[hasLabels &&!inlineQ,"\\label{"<>SL@labels<>"}",If[hasSublabels,"\\label{"<>SL@sublabels<>"}",""]]]
+];
+LeftB[i_]:=If[(StringQ[#]||(ListQ[#]&&Length[#]>0))& @(CellTags/.Options[i]),"{",""];
+RightB[i_]:=If[(StringQ[#]||(ListQ[#]&&Length[#]>0))& @(CellTags/.Options[i]),"}",""];
+AddLabel[i_]:=Block[{labels},
 labels=(CellTags/.Options[i]);
-If[StringQ[labels]||(ListQ[labels]&&Length[labels]==1),"\\label{"<>ToString[CellTags/.Options[i]]<>"}",""]];
+CheckLabels[labels]];
 
-AddLabels[i_,form_]:=Block[{labels},
+AddInlineLabels[i_,form_]:=Block[{parentLabels,labels,formattedLabel},
+formattedLabel=None;
+parentLabels=(CellTags/.Options[i]);
 labels=Replace[Cases[NotebookRead[i],Cell[___,_[form],___,CellTags->_,___],Infinity],Cell[___,_[form],___,CellTags->c_,___]:>c,Infinity];
-(If[Length[labels]==1,"\\({",""]<>(StringTrim@EqBoxToTeX[form])<>If[Length[labels]==1,"\\label{"<>First[labels]<>"}}\\) ",""])
-(*old code for latex ref*)
-(*(If[Length[labels]\[Equal]1,"\\labeltext{",""]<>(StringTrim@ExportString[Cell[BoxData[form],FormatType\[Rule]TraditionalForm],"TeXFragment"])<>If[Length[labels]\[Equal]1,"}{"<>First[labels]<>"} ",""])*)];
+formattedLabel=CheckLabels[parentLabels,labels,True];
+("\\("<>(StringTrim@EqBoxToTeX[form])<>formattedLabel<>"\\)")];
 
-(*myBoxRule[TemplateBox[{boxes_,"Automatic",var_,lima_,limb_},___]]:=
-StringJoin[System`Convert`TeXFormDump`maketex[boxes],"\\bigg|_{",System`Convert`TeXFormDump`maketex[var],"=",System`Convert`TeXFormDump`maketex[lima],"}{",System`Convert`TeXFormDump`maketex[limb],"}"];*)
 myBoxRule[TemplateBox[{boxes_,_,lima_,limb_},___]]:=StringJoin["\\left."<>System`Convert`TeXFormDump`maketex[boxes],"\\right|_{",System`Convert`TeXFormDump`maketex[lima],"}^{",System`Convert`TeXFormDump`maketex[limb],"}"];
 
 myBoxRule[FormBox[TemplateBox[{boxes_,_,lima_,limb_},___],___]]:=StringJoin["\\left."<>System`Convert`TeXFormDump`maketex[boxes],"\\right|_{",System`Convert`TeXFormDump`maketex[lima],"}^{",System`Convert`TeXFormDump`maketex[limb],"}"];
 
-myBoxRule[FormBox[C__]]:=System`Convert`TeXFormDump`maketex[FormBox[C]];
-EqBoxToTeX[c_]:=Convert`TeX`BoxesToTeX[c,"BoxRules"->{box:(_TemplateBox|_FormBox):>(myBoxRule[box])}];
+myBoxRule[FormBox[C__]]:=(System`Convert`TeXFormDump`maketex[FormBox[C]]);
+EqBoxToTeX[c_]:=(Convert`TeX`BoxesToTeX[c,"BoxRules"->{box:(_TemplateBox|_FormBox):>(myBoxRule[box])}]);
+title=ContentsByCellStyle["Title"];
+author=ContentsByCellStyle["Author"];
+abstract=ContentsByCellStyle["Abstract"];
+affil=ContentsByCellStyle["Affiliation"];
 prolog="% \\documentclass[titlepage, a4paper]{mwart}
 %\\documentclass[aps,prl,showpacs,10pt,superscriptaddress,nidanfloat,twocolumn,% draft]{revtex4-1}
 \\documentclass{article}
+\\usepackage[margin=0.8in]{geometry}
 \\usepackage{amsmath,amsfonts,amssymb,amsthm}
 \\usepackage{graphicx, setspace}
+\\usepackage{authblk}
+\\usepackage{mathtools}
 \\usepackage[export]{adjustbox}
 \\usepackage[utf8]{inputenc}
 \\usepackage[T1]{fontenc}
+\\newtheorem{theorem}{"<>TranslateSpecialCellStyleNames["Theorem"]<>"}[section]
+\\newtheorem{example}{"<>TranslateSpecialCellStyleNames["Example"]<>"}[section]
+\\newtheorem{exercise}{"<>TranslateSpecialCellStyleNames["Exercise"]<>"}[section]
+\\newtheorem{solution}[exercise]{"<>TranslateSpecialCellStyleNames["Solution"]<>"}
+\\newtheorem{corollary}{"<>TranslateSpecialCellStyleNames["Corollary"]<>"}[theorem]
+\\newtheorem{lemma}[theorem]{"<>TranslateSpecialCellStyleNames["Lemma"]<>"}
+\\newtheorem{definition}{"<>TranslateSpecialCellStyleNames["Definition"]<>"}[section]
+\\newtheorem{axiom}{"<>TranslateSpecialCellStyleNames["Axiom"]<>"}[section]
+\\newtheorem*{remark}{"<>TranslateSpecialCellStyleNames["Remark"]<>"}
+\\newtheorem*{comment}{"<>TranslateSpecialCellStyleNames["Comment"]<>"}
+\\newtheorem{question}{"<>TranslateSpecialCellStyleNames["Question"]<>"}[section]
 % \\usepackage{polski}
 \\usepackage[pdftex,colorlinks=true,citecolor=blue,linkcolor=magenta]{hyperref}
 \\usepackage{showlabels}
@@ -339,29 +392,85 @@ prolog="% \\documentclass[titlepage, a4paper]{mwart}
 %     \\labelmarkup{#2}% visible printed text.
 % }
 % \\makeatother
-\\begin{document}\n";
+\\title{"<>First[title]<>"}\n"<>
+StringRiffle[MapIndexed["\\author["<>ToString[First[#2]]<>"]{"<>#1<>"}"&,author],"\n"]<>
+StringRiffle[MapIndexed["\\affil["<>ToString[First[#2]]<>"]{"<>#1<>"}\n"&,affil],"\n"]<>
+"\\date{}
+\\renewcommand\\Affilfont{\\itshape\\small}
+\\begin{document}
+\\maketitle
+\\tableofcontents{}\n";
 epilog="\\end{document}";
 ShowStatus["Gathering cells..."];
 (*styles=DeleteCases[FEPrivate`GetPopupList[EvaluationNotebook[],"MenuListStyles"]//FE`Evaluate//Cases[_[s_String,_]:>s],"Input"|"Output"];*)
 cells=Cells[EvaluationNotebook[]];
 cells=Select[Select[Select[cells,(CurrentValue[#,"CellStyle"]!={"Input"})&],(CurrentValue[#,"CellStyle"]!={"Output"})&],(CurrentValue[#,"CellStyle"]!={"Print"})&];
 ShowStatus["Processing cells..."];
+(*line splitter extended to 5000 characters*)
+System`Convert`TeXDump`cleanUpFile[fileName_String] := 
+ Module[{streamIn, streamOut, insideComment = False, charNum = 0, 
+   scratchFileName, charIn, charLast = ""}, 
+   	 {streamIn, streamOut} = {OpenRead[fileName], System`ConvertersDump`Utilities`OpenTempFile[CharacterEncoding -> {}]};
+  	While[(charIn = Read[streamIn, Character]) =!= EndOfFile, 
+   If[charLast =!= "\\" && charIn === "%", insideComment = True];
+   	If[charIn === "\n", insideComment = False;
+    	charNum = -1];
+   	If[charNum >= 5000 && Or @@ (charIn === #1 &) /@ {"\t", " "}, 
+    WriteString[streamOut, If[! insideComment, "\n", "\n%"]];
+    	charNum = 0, WriteString[streamOut, charIn];
+    	++charNum];
+   	charLast = charIn;];
+  	Scan[Close, {streamIn, streamOut}];
+  	DeleteFile[fileName];
+  	CopyFile[scratchFileName = First[streamOut], fileName];
+  	DeleteFile[scratchFileName];];
 base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[False(*OptionValue[EmbedRefrencesBeforeExport]*),EmbedEq,RefEq]@FixFigures[NotebookRead[i]],"TeXFragment",
 "BoxRules"->{box:(_FormBox):>(myBoxRule[box]),
 "\[Transpose]":>"^{\\mathsf{T}}",
 "\[ConjugateTranspose]":>"^{\\dagger} ",
 "\[HermitianConjugate]":>"^{\\dagger} "},
 "ConversionRules"->{
-"Section"->{"\\section{",Automatic,InsertLabel[i]<>"}"},
-"Subsection"->{"\\subsection{",Automatic,InsertLabel[i]<>"}"},
-"Subsubsection"->{"\\subsubsection{",Automatic,InsertLabel[i]<>"}"},
-"Subsubsection"->{"\\subsubsection{",Automatic,InsertLabel[i]<>"}"},
-"Figure"->{"\\begin{figure}[ht!]\\centering\\includegraphics[max width=\\textwidth]{",NameAndExport[i,#]&,"}"<>InsertLabel[i]<>"\\end{figure}"},
-"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,InsertLabel[i]<>"\\end{equation}"},
-"Equation"->{"\\begin{equation*}",EqBoxToTeX[#]&,InsertLabel[i]<>"\\end{equation*}"},
-"InlineCell"->{"",AddLabels[i,#]&,""}
+"Text"->{LeftB[i],Automatic,StringJoin[AddLabel[i],RightB[i]]},
+"Chapter"->{"\\part{",Automatic,AddLabel[i]<>"}"},
+"Section"->{"\\section{",Automatic,AddLabel[i]<>"}"},
+"Subsection"->{"\\subsection{",Automatic,AddLabel[i]<>"}"},
+"Subsubsection"->{"\\subsubsection{",Automatic,AddLabel[i]<>"}"},
+"Example"->{"\\begin{example}",Automatic,AddLabel[i]<>"\\end{example}"},
+"Exercise"->{"\\begin{exercise}",Automatic,AddLabel[i]<>"\\end{exercise}"},
+"Solution"->{"\\begin{solution}",Automatic,AddLabel[i]<>"\\end{solution}"},
+"Question"->{"\\begin{question}",Automatic,AddLabel[i]<>"\\end{question}"},
+"Remark"->{"\\begin{remark}",Automatic,AddLabel[i]<>"\\end{remark}"},
+"Comment"->{"\\begin{comment}",Automatic,AddLabel[i]<>"\\end{comment}"},
+"Theorem"->{"\\begin{theorem}",Automatic,AddLabel[i]<>"\\end{theorem}"},
+"Proof"->{"\\begin{proof}",Automatic,AddLabel[i]<>"\\end{proof}"},
+"Axiom"->{"\\begin{axiom}",Automatic,AddLabel[i]<>"\\end{axiom}"},
+"Definition"->{"\\begin{definition}",Automatic,AddLabel[i]<>"\\end{definition}"},
+"Lemma"->{"\\begin{lemma}",Automatic,AddLabel[i]<>"\\end{lemma}"},
+"Corollary"->{"\\begin{corollary}",Automatic,AddLabel[i]<>"\\end{corollary}"},
+"Figure"->{"\\begin{figure}[ht!]\\centering\\includegraphics[max width=\\textwidth]{",NameAndExport[i,#]&,"}"<>AddLabel[i]<>"\\end{figure}"},
+"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},
+"Equation"->{"\\begin{equation*}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation*}"},
+"InlineCell"->{"",AddInlineLabels[i,#]&,""}
 }
 ],"Text"],{i,cells}];
+(*line splitter restored to 144 characters*)
+System`Convert`TeXDump`cleanUpFile[fileName_String] := 
+ Module[{streamIn, streamOut, insideComment = False, charNum = 0, 
+   scratchFileName, charIn, charLast = ""}, 
+   	 {streamIn, streamOut} = {OpenRead[fileName], System`ConvertersDump`Utilities`OpenTempFile[CharacterEncoding -> {}]};
+  	While[(charIn = Read[streamIn, Character]) =!= EndOfFile, 
+   If[charLast =!= "\\" && charIn === "%", insideComment = True];
+   	If[charIn === "\n", insideComment = False;
+    	charNum = -1];
+   	If[charNum >= 5000 && Or @@ (charIn === #1 &) /@ {"\t", " "}, 
+    WriteString[streamOut, If[! insideComment, "\n", "\n%"]];
+    	charNum = 0, WriteString[streamOut, charIn];
+    	++charNum];
+   	charLast = charIn;];
+  	Scan[Close, {streamIn, streamOut}];
+  	DeleteFile[fileName];
+  	CopyFile[scratchFileName = First[streamOut], fileName];
+  	DeleteFile[scratchFileName];];
 ShowStatus["Postprocessing cells..."];
 base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
 base=StringReplace[StringReplace[base,{"\\)"~~Shortest[C__]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
@@ -369,6 +478,8 @@ StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\tex
 "\\)"~~Shortest[C__]~~EndOfString:>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"]]
 }],{"\\pmb{"->"\\bf{"}];
 base=If[StringContainsQ[base,"\\("],base,StringReplace[base,{"\\pmb{"->"\\textbf{"}]];
+(*make inline matrixes small*)
+base=StringReplace[base,"\\("~~Shortest[C__]~~"\\)":>StringReplace[C,{"{array}{c"~~Repeated["c"]..~~"}":>"{smallmatrix}","{array}":>"{smallmatrix}"}]];
 (*base=StringReplace[base,{"\\&"\[Rule]"&","{array}" -> "{aligned}"}];*)
 ShowStatus["Exporting TeX file..."];
 Export[StringDrop[NotebookFileName[],-2]<>"tex",prolog<>base<>epilog,"Text"];
