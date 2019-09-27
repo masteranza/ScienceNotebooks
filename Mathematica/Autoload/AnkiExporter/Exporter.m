@@ -103,6 +103,7 @@ System`Convert`TeXFormDump`maketex["\[Perpendicular]"]="\\perp ";
 System`Convert`TeXFormDump`maketex["\[TensorWedge]"]="\\wedge ";System`Convert`TeXFormDump`maketex["\[Wedge]"]="\\wedge ";
 System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
 System`Convert`TeXFormDump`maketex["\[LineSeparator]"]="\n";
+System`Convert`TeXFormDump`maketex[":="]=":=";
 
 (*nie zamieniaj zwyk\[LSlash]ego tekstu*)
 System`Convert`CommonDump`ConvertTextData[contents_String,toFormat_,toFormatStream_,conversionRules_,opts___?OptionQ]:=Module[{fpre,frule,fpost,pstyle,popts,str=contents},System`Convert`CommonDump`DebugPrint["CONVERTCOMMON:ConvertTextData-general content: ",contents];
@@ -146,6 +147,9 @@ If[StringQ[boxes],"{{c"<>ToString[nr]<>"::"<>StringReplace[boxes,"}}"->"} }"]<>"
 System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};
 deb=Convert`TeX`BoxesToTeX[""];
 System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};
+(*use defaults*)
+myBoxRule[TemplateBox[boxes_,rule_]]:=System`Convert`TeXFormDump`maketex[TemplateBox[boxes,rule]];
+myBoxRule[TemplateBox[boxes_,rule_,ruleb_]]:=System`Convert`TeXFormDump`maketex[TemplateBox[boxes,rule,ruleb]];
 
 (*rules for 'at' notions*)
 myBoxRule[TemplateBox[{boxes_,_,lima_,limb_},___]]:=StringJoin["\\left."<>System`Convert`TeXFormDump`maketex[boxes],"\\right|_{",System`Convert`TeXFormDump`maketex[lima],"}^{",System`Convert`TeXFormDump`maketex[limb],"}"];
@@ -193,7 +197,7 @@ GraphicsBox[___]:> "",
 
 StyleBox[D_,Background->LightGreen]:>"\\color[HTML]{1111FF}{{c"<>ToString[n]<>"::"<>StringReplace[ToTex[D],{"{{":>" { { ","}}":>" } } "}]<>" }}\\color[HTML]{000000}"}];
 (*the above is old*)
-cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation","Figure","Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Example","Exercise","Solution","Question","Remark","Comment","Theorem","Proof","Axiom","Definition","Lemma","Corollary"}];
+cells=Cells[EvaluationNotebook[],CellStyle->{"Text","EquationNumbered","Equation",(*"Figure",*)"Item1","Item2","Item3","Item1Numbered","Item2Numbered","Item3Numbered","Example","Exercise","Solution","Question","Remark","Comment","Theorem","Proof","Axiom","Definition","Lemma","Corollary"}];
 title=First@(Cases[NotebookGet@EvaluationNotebook[],Cell[name_,style:"Title",___]:>name,Infinity]/.{}-> {""});
 ShowStatus["Gathering section info..."];
 sections=CurrentValue[#,{"CounterValue","Section"}]&/@cells;

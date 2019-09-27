@@ -66,7 +66,7 @@ Item[KeyEvent["e", Modifiers -> {Control}],
             If[StringQ[t],
     		ysubt=(StringContainsQ[t,"`"] && Length[StringSplit[t,"`"]]>1);
     		If[ysubt, subt=Last[StringSplit[t,"`"]]; t=First[StringSplit[t,"`"]];,subt="";];
-            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", With[{x=t},DynamicBox[AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],{"CounterValue", AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],"CellStyleName"]}]]],If[ysubt,".",""],If[ysubt,subt,""], ")"}],
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", With[{x=t},DynamicBox[AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],{"CounterValue", (If[#==="Board","Table",#])&@AbsoluteCurrentValue[First[Cells[EvaluationNotebook[], CellTags -> {x}]],"CellStyleName"]}]]],If[ysubt,".",""],If[ysubt,subt,""], ")"}],
             TaggingRules->{"deeptag"->If[ysubt,subt,t], "TeXtag"->If[ysubt,StringJoin[t,subt],t]},
             BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, 
             TooltipStyle->{Background->RGBColor[1, 1, 1], CellFrame -> 1}, 
@@ -76,7 +76,15 @@ Item[KeyEvent["e", Modifiers -> {Control}],
         MenuEvaluator -> Automatic 
     ],
 
-
+Item[KeyEvent["z", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, clip},
+            clip = Evaluate@ToExpression[NotebookGet[ClipboardNotebook[]][[1, 1, 1]]];
+            NotebookWrite[SelectedNotebook[], With[{t = clip[[1]], s = clip[[2]], r = clip[[3]], c = clip[[4]]}, 
+  			Cell[BoxData[ButtonBox[RowBox[{"[","\[DoubleStruckCapitalZ]","]"}],TaggingRules -> {"citekey" -> s, "zotero" -> t, "collection" -> c},
+  			BaseStyle -> {"Hyperlink"}, ButtonFunction :> SystemOpen[t], Tooltip -> r, TooltipStyle->{Background->RGBColor[1, 1, 1], CellFrame -> 1}]], "Cite"]]]
+        ],
+        MenuEvaluator -> Automatic 
+    ],
 Item[KeyEvent["r", Modifiers -> {Control}], 
         FrontEndExecute @ Module[{},
              MessageDialog[
