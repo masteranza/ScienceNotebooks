@@ -55,6 +55,7 @@ CustomTeXCommands::usage="Option for ExportToTeX";
 TeXLanguage::usage="Option for ExportToTeX";
 ShowTeXLabels::usage="Option for ExportToTeX";
 TeXLineSpread::usage="Option for ExportToTeX";
+TeXPlotScale::usage="Option for ExportToTeX";
 ExportToTeX::usage="Generates a draft in Tex with an option to compile to PDF";
 CreateTOC::usage="Create table of contents";
 CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
@@ -330,7 +331,7 @@ ShowStatus["PDF exported successfully"];
   
 Options[ExportToTeX]={ExportToPDF->False,EmbedRefrencesBeforeExport->False,WriteTOC->False,BibFile->"",
 WriteAuthors->False,WriteDate->False,WriteTitle->True,CustomTeXCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
-ShowTeXLabels->False,SetTeXMargin->"0.8in"};
+ShowTeXLabels->False,SetTeXMargin->"0.8in",TeXPlotScale->"0.7"};
 ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil},
 ShowStatus["Initializing TeX export..."];
 PrintToConsole["ExportToPDF is " <> ToString[OptionValue[ExportToPDF]]];
@@ -343,6 +344,7 @@ PrintToConsole["BibFile is " <> ToString[OptionValue[BibFile]]];
 PrintToConsole["CustomTeXCommands is " <> ToString[OptionValue[CustomTeXCommands]]];
 PrintToConsole["TeXLanguage is " <> ToString[OptionValue[TeXLanguage]]];
 PrintToConsole["ShowTeXLabels is " <> ToString[OptionValue[ShowTeXLabels]]];
+PrintToConsole["TeXPlotScale is " <> ToString[OptionValue[TeXPlotScale]]];
 Quiet@ExportString["\[Lambda]","TeXFragment"];
 System`Convert`TeXFormDump`maketex["\[OAcute]"]="\[OAcute]";
 System`Convert`TeXFormDump`maketex["\[CloseCurlyQuote]"]="'";
@@ -385,7 +387,7 @@ System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDum
 
 
 EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
-RefEq[what_]:=Replace[Replace[what,{Cell[BoxData[ButtonBox[___,TaggingRules->{___,"deeptag"->_,"TeXtag"->c_,___},___],___],___]:>("\\ref{"<>ToString[c]<>"}"), Cell[BoxData[ButtonBox[___,TaggingRules->{___,"citekey"->c_,___},___],___],___]:>("\\cite{"<>ToString[c]<>"}"), Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
+RefEq[what_]:=Replace[Replace[what,{Cell[BoxData[ButtonBox[___,TaggingRules->{___,"deeptag"->_,"TeXtag"->c_,___},___],___],___]:>("~\\ref{"<>ToString[c]<>"}"), Cell[BoxData[ButtonBox[___,TaggingRules->{___,"citekey"->c_,___},___],___],___]:>("~\\cite{"<>ToString[c]<>"}"), Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
 Cell[C_,D___,FormatType->"TraditionalForm",E___]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E],Cell[C_,D___]:>Cell[C,"InlineCell",D]},Infinity],{Cell[C_,CellTags->t_]:>Cell[C,"InlineCell",CellTags->t]},Infinity];
 
 FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]],StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88],D___]:>(C)},Infinity];
@@ -477,7 +479,7 @@ prolog="% \\documentclass[titlepage, a4paper]{mwart}
 \\linespread{"<>ToString[OptionValue[TeXLineSpread]]<>"}
 \\usepackage[pdftex,colorlinks=true,citecolor=blue,linkcolor=magenta]{hyperref}\n"
 <>If[OptionValue[ShowTeXLabels],"\\usepackage{showlabels} %Comment this in production",""]<>
-"\\usepackage[backend=bibtex]{biblatex}
+"\\usepackage[backend=bibtex,sorting=none]{biblatex}
 \\bibliography{"<>OptionValue[BibFile]<>"}\n"<>
 OptionValue[CustomTeXCommands]<>"
 % \\usepackage[backend=bibtex]{biblatex}
@@ -562,7 +564,7 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[E
 "Lemma"->{"\\begin{lemma}",Automatic,AddLabel[i]<>"\\end{lemma}"},
 "Corollary"->{"\\begin{corollary}",Automatic,AddLabel[i]<>"\\end{corollary}"},
 "Abstract"->{"\\begin{abstract}",Automatic,"\\end{abstract}"},
-"Figure"->{"\\begin{figure}[ht!]\\centering\\includegraphics[scale=0.7,max width=\\textwidth]",NameAndExport[i,#]&,AddLabel[i]<>"\\end{figure}"},
+"Figure"->{"\\begin{figure}[ht!]\\centering\\includegraphics[scale="<>OptionValue[TeXPlotScale]<>",max width=\\textwidth]",NameAndExport[i,#]&,AddLabel[i]<>"\\end{figure}"},
 "FigureCaption"->{"\\caption{",Automatic,"}"},
 "Board"->{"\\begin{table}[ht!]\\centering",CaptionTable[i,#]&,AddLabel[i]<>"\\end{table}"},
 "EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},
@@ -591,8 +593,10 @@ System`Convert`TeXDump`cleanUpFile[fileName_String] :=
 ShowStatus["Postprocessing cells..."];
 (*fix figure captions*)
 
-base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&StringFreeQ[t,"}"]) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
+base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&(!StringContainsQ[c,"\\ref"]||((StringCount[c,"{"]==StringCount[c,"\\ref"])&&(StringCount[c,"}"]==StringCount[c,"\\ref"])))&&StringFreeQ[t,"}"]) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
 base=StringReplace[base,{"\\end{equation*}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation*}\n\\begin{equation*}","\\end{equation}"~~Whitespace~~"\\begin{equation}"->"\\end{equation}\n\\begin{equation}","\\end{equation}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation}\n\\begin{equation*}"}];
+(*remove spacing for glueing TeX ref*)
+base=StringReplace[base,{Whitespace~~"~\\"->"~\\"}];
 base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
 base=StringReplace[StringReplace[base,{"\\)"~~Shortest[C__]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
 StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
