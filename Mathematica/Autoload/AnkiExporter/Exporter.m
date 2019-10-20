@@ -60,7 +60,7 @@ TeXFix[what_]:=StringReplace[StringReplace[what,{
 "}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"",
 "\\({{c"~~Shortest[c__]~~"::"~~Shortest[d__]~~"}}\\)":>("{{c"<>c<>"::\\("<>d<>"\\)}}")}],
 {"}}"~~WhitespaceCharacter...~~"{{c"~~Shortest[___]~~"::"->"","\\)\\("->""}];
-EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>TempAnki[c]},Infinity],{TempAnki[RowBox[{_,d___}]]:>RowBox[{d}]},Infinity];
+EmbedEq[what_]:=Replace[Replace[what,{Cell[BoxData[ButtonBox[___,TaggingRules->{___,"citekey"->d_,___,"zotero"->c_,___},___],___],___]:>("<a href=\""<>c<>"\">["<>d<>"]</a>"),ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>TempAnki[c]},Infinity],{TempAnki[RowBox[{_,d___}]]:>RowBox[{d}]},Infinity];
 
 FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]]},Infinity];
 

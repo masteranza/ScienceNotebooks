@@ -76,6 +76,7 @@ Figure::usage="Creates reusable Figure with caption from input";
 IncludePath::usage="Includes a path to $Path variable, for easy loading";
 FullDerivativesForm::usage="Prints eqs in TraditionalForm transforming derivatives to standard, LaTeX readable form";
 FieldTheoryForm::usage="Prints eqs in TraditionalForm and moves derivatives to subscripts, best used on not-already-subscripted symbols";
+ReferenceBox::usage="Used for printing dynamic references in text. Takes tag, subtag";
 
 
 (* ::Section:: *)
@@ -83,8 +84,27 @@ FieldTheoryForm::usage="Prints eqs in TraditionalForm and moves derivatives to s
 
 
 Begin["`Private`"];
-FullDerivativesForm[f_]:=TraditionalForm[f/.Derivative[inds__][g_][vars__]:>Apply[Defer[D[g[vars],##]]&,Transpose[{{vars},{inds}}]/.{{var_,0}:>Sequence[],{var_,1}:>{var}}]]
-FieldTheoryForm[f_]:=TraditionalForm[f//.{Derivative[inds__][g_][vars__]:>Subscript[g,(*ToExpression@RowBox@*)Symbol@StringJoin[ToString/@Riffle[MapThread[ConstantArray[#1,#2]//.{List->Sequence}&,{{vars},{inds}}],"\[Null]"]]]}/.{F_Symbol[a__]/;((ToString[Context[F]]=!="System`")(*&&({(DownValues@\[Epsilon])[[1,1,1]]/.(#->\[ScriptZero]&/@{a})}=={Power[\[ScriptZero]_,Length[{a}]]})*)):>F}]
+FullDerivativesForm[f_]:=TraditionalForm[f/.Derivative[inds__][g_][vars__]:>Apply[Defer[D[g[vars],##]]&,Transpose[{{vars},{inds}}]/.{{var_,0}:>Sequence[],{var_,1}:>{var}}]];
+FieldTheoryForm[f_,parameterVars_List:{}]:=TraditionalForm[f//.{Derivative[inds__][g_Subscript][vars__Symbol]:>(Subscript[g[[1]](*,ToString/@*),##2&@@g,(*ToExpression@RowBox@*)Symbol@StringJoin[ToString/@Riffle[MapThread[ConstantArray[#1,#2]//.{List->Sequence}&,{{vars},{inds}}],"\[Null]"] ]]),Derivative[inds__][g_][vars__Symbol]:>Subscript[g,(*ToExpression@RowBox@*)Symbol@StringJoin[ToString/@Riffle[MapThread[ConstantArray[#1,#2]//.{List->Sequence}&,{{vars},{inds}}],"\[Null]"]]]}/.{(F_Symbol|F_Subscript)[a__]/;(ToString[Quiet[Check[Context[F],"SubscriptedSymbol",General::ssle],General::ssle]]=!="System`"):>F},ParameterVariables->parameterVars];
+ReferenceBox[t_,ysubt_,subt_]:=Block[{style,secID},
+ style=(If[#==="Board","Table",#])&@AbsoluteCurrentValue[First[Cells[EvaluationNotebook[],CellTags->{t}]],"CellStyleName"];
+ secID=AbsoluteCurrentValue[First[Cells[EvaluationNotebook[],CellTags->{t}]],{"CounterValue","Section"}];
+ RowBox[
+   If[style==="Section",
+     {"(",secID,")"},
+     If[secID===0,
+       If[ysubt,{"(",AbsoluteCurrentValue[First[Cells[EvaluationNotebook[],CellTags->{t}]],{"CounterValue",style}],".",subt,")"},{"(",AbsoluteCurrentValue[First[Cells[EvaluationNotebook[],CellTags->{t}]],{"CounterValue",style}],")"}],
+       If[ysubt,{"(",secID,".",AbsoluteCurrentValue[First[Cells[EvaluationNotebook[],CellTags->{t}]],{"CounterValue",style}],".",subt,")"},{"(",secID,".",AbsoluteCurrentValue[First[Cells[EvaluationNotebook[],CellTags->{t}]],{"CounterValue",style}],")"}]
+     ]
+   ]]];
+ RefCellTooltip[x_,y_:None]:=Block[{ce,cs,secID,capt},
+ ce=First@Cells[EvaluationNotebook[], CellTags -> {x}];
+ cs=AbsoluteCurrentValue[ce,"CellStyleName"]; 
+ secID=AbsoluteCurrentValue[ce,{"CounterValue","Section"}];
+ capt=If[secID===0,{If[y=!=None,y,TranslateSpecialCellStyleNames[cs]], " ", AbsoluteCurrentValue[ce,{"CounterValue", If[cs==="Board","Table",cs]}], "\n"},
+ {If[y=!=None,y,TranslateSpecialCellStyleNames[cs]], " ", secID, ".", AbsoluteCurrentValue[ce,{"CounterValue", If[cs==="Board","Table",cs]}], "\n"}];
+ RowBox[Prepend[Flatten[{CellStrip[If[y=!=None,Cases[NotebookRead[ce], Cell[Pattern[A, BlankSequence[]], CellTags->y] -> Cell[A], Infinity], NotebookRead[ce]]]}], 
+ StyleBox[RowBox[capt], "Subsubsection"]]]];
 
 
 ObjCaption[style_String]:=RowBox[{TranslateSpecialCellStyleNames[style],CurrentValue[{"CounterValue","Section"}],".",CurrentValue[{"CounterValue",If[style==="Board","Table",style]}]}];
@@ -132,7 +152,7 @@ SelectionMove[EvaluationNotebook[],Previous,Expression,2,AutoScroll->False];
 ExtFT[cs_,cont_]:=If[cs==="Board",Replace[cont,{FormBox[GridBox[{_,{C___},{D___}},E___],F___]:>FormBox[GridBox[{{C},{D}},E],F]},Infinity],If[cs==="Figure",Replace[cont,{FormBox[GridBox[{{C___},_,{D___}},E___],F___]:>FormBox[GridBox[{{C},{D}},E],F]},Infinity],cont]];
 BoardColumn[content_,tag_:Automatic,opts___]:=Board[content,tag,False,opts];
 *)
-RefCellTooltip[x_,y_:None]:=Block[{ce,cs},ce=First@Cells[EvaluationNotebook[], CellTags -> {x}];cs=AbsoluteCurrentValue[ce,"CellStyleName"]; RowBox[Prepend[Flatten[{CellStrip[If[y=!=None,Cases[NotebookRead[ce], Cell[Pattern[A, BlankSequence[]], CellTags->y] -> Cell[A], Infinity], NotebookRead[ce]]]}], StyleBox[RowBox[{If[y=!=None,y,TranslateSpecialCellStyleNames[cs]], " ", AbsoluteCurrentValue[ce,{"CounterValue","Section"}], ".", AbsoluteCurrentValue[ce,{"CounterValue", If[cs==="Board","Table",cs]}], "\n"}], "Subsubsection"]]]];
+
 DuplicateNotebook[]:=NotebookPut@NotebookGet[EvaluationNotebook[]];
 TranslateSpecialCellStyleNames[name_]:=If[AbsoluteCurrentValue["Language"] == "Polish",Switch[name,"Example","Przyk\[LSlash]ad","Exercise","Zadanie","Solution","Rozwi\:0105zanie","Question","Pytanie","Remark","Uwaga","Comment","Komentarz",
 "Theorem","Twierdzenie","Proof","Dow\[OAcute]d","Axiom","Aksjomat","Definition","Definicja","Lemma","Lemat","Corollary","Wniosek","Title","Tytu\[LSlash]","Subtitle","Podtytu\[LSlash]","Author","Autor","Section","Sekcja","Subsection","Podsekcja","Subsubsection","Podpodsekcja","Text","Tekst","Item1","Pozycja","Equation","R\[OAcute]wnanie","EquationNumbered","R\[OAcute]wnanie numerowane","Figure","Rysunek","Table","Tabela","Board","Tabela",_,name],Switch[name,"Board","Tabela",_,name]];
@@ -387,8 +407,10 @@ System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDum
 
 
 EmbedEq[what_]:=Replace[Replace[what,{ButtonBox[___,Tooltip->DynamicBox[c__,UpdateInterval->\[Infinity]],___]:>Temp[c]},Infinity],Temp[RowBox[{_,d___}]]:>d,Infinity];
-RefEq[what_]:=Replace[Replace[what,{Cell[BoxData[ButtonBox[___,TaggingRules->{___,"deeptag"->_,"TeXtag"->c_,___},___],___],___]:>("~\\ref{"<>ToString[c]<>"}"), Cell[BoxData[ButtonBox[___,TaggingRules->{___,"citekey"->c_,___},___],___],___]:>("~\\cite{"<>ToString[c]<>"}"), Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
-Cell[C_,D___,FormatType->"TraditionalForm",E___]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E],Cell[C_,D___]:>Cell[C,"InlineCell",D]},Infinity],{Cell[C_,CellTags->t_]:>Cell[C,"InlineCell",CellTags->t]},Infinity];
+RefEq[what_]:=Replace[
+Replace[what,{Cell[BoxData[ButtonBox[___,TaggingRules->{___,"deeptag"->_,"TeXtag"->c_,___},___],___],___]:>("~\\ref{"<>ToString[c]<>"}"), Cell[BoxData[ButtonBox[___,TaggingRules->{___,"citekey"->c_,___},___],___],___]:>("~\\cite{"<>ToString[c]<>"}"), Cell[C_,D___,FormatType->"TraditionalForm",E___,CellTags->t_]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E,CellTags->t],
+Cell[C_,D___,FormatType->"TraditionalForm",E___]:>Cell[C,"InlineCell",D,FormatType->"TraditionalForm",E],Cell[C_,D___]:>Cell[C,"InlineCell",D]},Infinity]
+,{Cell[C_,CellTags->t_]:>Cell[C,"InlineCell",CellTags->t]},Infinity];
 
 FixFigures[what_]:=Replace[what,{BoxData[GraphicsBox[C___]]:>BoxData[FormBox[GraphicsBox[C],TraditionalForm]],StyleBox[C_String,Background->RGBColor[0.88, 1, 0.88],D___]:>(C)},Infinity];
 
