@@ -56,6 +56,7 @@ TeXLanguage::usage="Option for ExportToTeX";
 ShowTeXLabels::usage="Option for ExportToTeX";
 TeXLineSpread::usage="Option for ExportToTeX";
 TeXPlotScale::usage="Option for ExportToTeX";
+FitEquations::usage="Option for ExportToTeX";
 ExportToTeX::usage="Generates a draft in Tex with an option to compile to PDF";
 CreateTOC::usage="Create table of contents";
 CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
@@ -351,7 +352,7 @@ ShowStatus["PDF exported successfully"];
   
 Options[ExportToTeX]={ExportToPDF->False,EmbedRefrencesBeforeExport->False,WriteTOC->False,BibFile->"",
 WriteAuthors->False,WriteDate->False,WriteTitle->True,CustomTeXCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
-ShowTeXLabels->False,SetTeXMargin->"0.8in",TeXPlotScale->"0.7"};
+ShowTeXLabels->False,SetTeXMargin->"0.8in",TeXPlotScale->"0.7",FitEquations->True};
 ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil},
 ShowStatus["Initializing TeX export..."];
 PrintToConsole["ExportToPDF is " <> ToString[OptionValue[ExportToPDF]]];
@@ -365,6 +366,7 @@ PrintToConsole["CustomTeXCommands is " <> ToString[OptionValue[CustomTeXCommands
 PrintToConsole["TeXLanguage is " <> ToString[OptionValue[TeXLanguage]]];
 PrintToConsole["ShowTeXLabels is " <> ToString[OptionValue[ShowTeXLabels]]];
 PrintToConsole["TeXPlotScale is " <> ToString[OptionValue[TeXPlotScale]]];
+PrintToConsole["FitEquations is " <> ToString[OptionValue[FitEquations]]];
 Quiet@ExportString["\[Lambda]","TeXFragment"];
 System`Convert`TeXFormDump`maketex["\[OAcute]"]="\[OAcute]";
 System`Convert`TeXFormDump`maketex["\[CloseCurlyQuote]"]="'";
@@ -482,6 +484,14 @@ prolog="% \\documentclass[titlepage, a4paper]{mwart}
 \\usepackage{authblk}
 \\usepackage{mathtools}
 \\usepackage[export]{adjustbox}
+\\usepackage{placeins}
+\\let\\Oldsection\\section
+\\renewcommand{\\section}{\\FloatBarrier\\Oldsection}
+\\let\\Oldsubsection\\subsection
+\\renewcommand{\\subsection}{\\FloatBarrier\\Oldsubsection}
+\\let\\Oldsubsubsection\\subsubsection
+\\renewcommand{\\subsubsection}{\\FloatBarrier\\Oldsubsubsection}
+
 \\usepackage[utf8]{inputenc}
 \\usepackage[T1]{fontenc}
 \\usepackage[english,polish]{babel}
@@ -586,11 +596,11 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[E
 "Lemma"->{"\\begin{lemma}",Automatic,AddLabel[i]<>"\\end{lemma}"},
 "Corollary"->{"\\begin{corollary}",Automatic,AddLabel[i]<>"\\end{corollary}"},
 "Abstract"->{"\\begin{abstract}",Automatic,"\\end{abstract}"},
-"Figure"->{"\\begin{figure}[ht!]\\centering\\includegraphics[scale="<>OptionValue[TeXPlotScale]<>",max width=\\textwidth]",NameAndExport[i,#]&,AddLabel[i]<>"\\end{figure}"},
+"Figure"->{"\\begin{figure}[!htb]\\centering\\includegraphics[scale="<>OptionValue[TeXPlotScale]<>",max width=\\textwidth]",NameAndExport[i,#]&,AddLabel[i]<>"\\end{figure}"},
 "FigureCaption"->{"\\caption{",Automatic,"}"},
 "Board"->{"\\begin{table}[ht!]\\centering",CaptionTable[i,#]&,AddLabel[i]<>"\\end{table}"},
-"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},
-"Equation"->{"\\begin{equation*}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation*}"},
+"EquationNumbered"->{"\\begin{equation}"<>If[OptionValue[FitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""],EqBoxToTeX[#]&,If[OptionValue[FitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation}"},"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},
+"Equation"->{"\\begin{equation*}"<>If[OptionValue[FitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""],EqBoxToTeX[#]&,If[OptionValue[FitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation*}"},
 "InlineCell"->{"",AddInlineLabels[i,#]&,""}
 }
 ],"Text"],{i,cells}];
@@ -615,7 +625,7 @@ System`Convert`TeXDump`cleanUpFile[fileName_String] :=
 ShowStatus["Postprocessing cells..."];
 (*fix figure captions*)
 
-base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&(!StringContainsQ[c,"\\ref"]||((StringCount[c,"{"]==StringCount[c,"\\ref"])&&(StringCount[c,"}"]==StringCount[c,"\\ref"])))&&StringFreeQ[t,"}"]) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
+base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&StringCount[c,"{"]==StringCount[c,"}"]&&StringFreeQ[t,"}"](*&&(!StringContainsQ[c,"\\ref"]||((StringCount[c,"{"]==StringCount[c,"\\ref"])&&(StringCount[c,"}"]==StringCount[c,"\\ref"])))*)(*&&StringFreeQ[t,"}"]*)) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
 base=StringReplace[base,{"\\end{equation*}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation*}\n\\begin{equation*}","\\end{equation}"~~Whitespace~~"\\begin{equation}"->"\\end{equation}\n\\begin{equation}","\\end{equation}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation}\n\\begin{equation*}"}];
 (*remove spacing for glueing TeX ref*)
 base=StringReplace[base,{Whitespace~~"~\\"->"~\\"}];
