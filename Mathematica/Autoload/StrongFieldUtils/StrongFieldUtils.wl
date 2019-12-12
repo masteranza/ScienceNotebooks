@@ -41,6 +41,7 @@ fsAtomic=QuantityMagnitude@UnitConvert[Quantity[1,"fs"],"AtomicUnitOfTime"];
 cAtomic=UnitConvert[Quantity["ReducedPlanckConstant"]/( Quantity["FineStructureConstant"] Quantity["BohrRadius"] Quantity["ElectronMass"]),"AtomicUnitOfVelocity"];
 IpAtomic[atom_,n_:1]:=QuantityMagnitude[UnitConvert[ElementData[atom,"IonizationEnergies"]/Quantity["AvogadroConstant"],"Hartrees"][[n]]];
 EfromIAtomic[I_Quantity]:=UnitConvert[Sqrt[I/(1/2*Quantity[1,"ElectricConstant"]*cAtomic)]*Quantity[1,"ElementaryCharge"]*Quantity[1,"BohrRadius"],"Hartrees"];
+IfromEAtomic[E_]:=UnitConvert[(Quantity[E,"Hartrees"]/(Quantity[1,"ElementaryCharge"]*Quantity[1,"BohrRadius"]))^2 (1/2*Quantity[1,"ElectricConstant"]*cAtomic),"W/cm^2"];
 \[Lambda]to\[Omega][nm_]:=UnitConvert[Quantity[1,"SpeedOfLight"]Quantity[1,"PlanckConstant"]/Quantity[nm,"nm"],"Hartrees"];
 \[Omega]toT[\[Omega]_Quantity]:=UnitConvert[ Quantity[1,"PlanckConstant"]/\[Omega],"AtomicUnitOfTime"];
 \[Omega]toTfs[\[Omega]_Quantity]:=UnitConvert[ Quantity[1,"PlanckConstant"]/\[Omega],"fs"];

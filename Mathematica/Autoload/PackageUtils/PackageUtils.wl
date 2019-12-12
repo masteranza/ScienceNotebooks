@@ -43,20 +43,21 @@ MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same di
 CloseCollapsed::usage="Closes collapsed Section group cells \[Dash] good for retaining numbering during export of single sections";
 CodeVisible::usage = "Shows/Hides code and cell tags";
 PublishToPDF::usage="Saves a publishing ready version, optional argument for copy (pendrive)";
-ExportToPDF::usage="Option for ExportToTeX";
-EmbedRefrencesBeforeExport::usage="Option for ExportToTeX";
-WriteTOC::usage="Option for ExportToTeX";
-BibFile::usage="Option for ExportToTeX";
-WriteAuthors::usage="Option for ExportToTeX";
-WriteDate::usage="Option for ExportToTeX";
-WriteTitle::usage="Option for ExportToTeX";
-SetTeXMargin::usage="Option for ExportToTeX";
-CustomTeXCommands::usage="Option for ExportToTeX";
+TeXExportToPDF::usage="Option for ExportToTeX";
+TeXEmbedRefrencesBeforeExport::usage="Option for ExportToTeX";
+TeXWriteTOC::usage="Option for ExportToTeX";
+TeXBibFile::usage="Option for ExportToTeX";
+TeXWriteAuthors::usage="Option for ExportToTeX";
+TeXWriteDate::usage="Option for ExportToTeX";
+TeXWriteTitle::usage="Option for ExportToTeX";
+TeXSetMargin::usage="Option for ExportToTeX";
+TeXCustomCommands::usage="Option for ExportToTeX";
 TeXLanguage::usage="Option for ExportToTeX";
-ShowTeXLabels::usage="Option for ExportToTeX";
+TeXShowLabels::usage="Option for ExportToTeX";
 TeXLineSpread::usage="Option for ExportToTeX";
 TeXPlotScale::usage="Option for ExportToTeX";
-FitEquations::usage="Option for ExportToTeX";
+TeXFitEquations::usage="Option for ExportToTeX";
+TeXAlignEquations::usage="Option for ExportToTeX";
 ExportToTeX::usage="Generates a draft in Tex with an option to compile to PDF";
 CreateTOC::usage="Create table of contents";
 CellStrip::usage="Simple cell stripper, removes BoxData and Cell";
@@ -78,13 +79,16 @@ IncludePath::usage="Includes a path to $Path variable, for easy loading";
 FullDerivativesForm::usage="Prints eqs in TraditionalForm transforming derivatives to standard, LaTeX readable form";
 FieldTheoryForm::usage="Prints eqs in TraditionalForm and moves derivatives to subscripts, best used on not-already-subscripted symbols";
 ReferenceBox::usage="Used for printing dynamic references in text. Takes tag, subtag";
+PrintManyEqs::usage="First arg is the l.h.s, second is the list of equalities, rest should be style and CellTags->tag";
 
 
 (* ::Section:: *)
 (*Implementations*)
 
 
+emptyExp=\[Null];
 Begin["`Private`"];
+PrintManyEqs[first_,list_List,args___:"EquationNumbered"]:=CellPrint[ExpressionCell[TraditionalForm@Column@(MapThread[#1==#2&,{Prepend[ConstantArray[emptyExp,Length@list-1],first],list}]),args]];
 FullDerivativesForm[f_]:=TraditionalForm[f/.Derivative[inds__][g_][vars__]:>Apply[Defer[D[g[vars],##]]&,Transpose[{{vars},{inds}}]/.{{var_,0}:>Sequence[],{var_,1}:>{var}}]];
 FieldTheoryForm[f_,parameterVars_List:{}]:=TraditionalForm[f//.{Derivative[inds__][g_Subscript][vars__Symbol]:>(Subscript[g[[1]](*,ToString/@*),##2&@@g,(*ToExpression@RowBox@*)Symbol@StringJoin[ToString/@Riffle[MapThread[ConstantArray[#1,#2]//.{List->Sequence}&,{{vars},{inds}}],"\[Null]"] ]]),Derivative[inds__][g_][vars__Symbol]:>Subscript[g,(*ToExpression@RowBox@*)Symbol@StringJoin[ToString/@Riffle[MapThread[ConstantArray[#1,#2]//.{List->Sequence}&,{{vars},{inds}}],"\[Null]"]]]}/.{(F_Symbol|F_Subscript)[a__]/;(ToString[Quiet[Check[Context[F],"SubscriptedSymbol",General::ssle],General::ssle]]=!="System`"):>F},ParameterVariables->parameterVars];
 ReferenceBox[t_,ysubt_,subt_]:=Block[{style,secID},
@@ -350,23 +354,25 @@ ShowStatus["PDF exported successfully"];
 {nb, nb2};
   ];
   
-Options[ExportToTeX]={ExportToPDF->False,EmbedRefrencesBeforeExport->False,WriteTOC->False,BibFile->"",
-WriteAuthors->False,WriteDate->False,WriteTitle->True,CustomTeXCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
-ShowTeXLabels->False,SetTeXMargin->"0.8in",TeXPlotScale->"0.7",FitEquations->True};
-ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil},
+Options[ExportToTeX]={TeXExportToPDF->False,TeXEmbedRefrencesBeforeExport->False,TeXWriteTOC->False,TeXBibFile->"",
+TeXWriteAuthors->False,TeXWriteDate->False,TeXWriteTitle->True,TeXCustomCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
+TeXShowLabels->False,TeXSetMargin->"0.8in",TeXPlotScale->"0.7",TeXFitEquations->True,TeXAlignEquations->True};
+ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil,tmps},
 ShowStatus["Initializing TeX export..."];
-PrintToConsole["ExportToPDF is " <> ToString[OptionValue[ExportToPDF]]];
-PrintToConsole["EmbedRefrencesBeforeExport is "<>ToString[OptionValue[EmbedRefrencesBeforeExport]]];
-PrintToConsole["WriteTOC is " <> ToString[OptionValue[WriteTOC]]];
-PrintToConsole["WriteAuthors is " <> ToString[OptionValue[WriteAuthors]]];
-PrintToConsole["WriteDate is " <> ToString[OptionValue[WriteDate]]];
-PrintToConsole["WriteTitle is " <> ToString[OptionValue[WriteTitle]]];
-PrintToConsole["BibFile is " <> ToString[OptionValue[BibFile]]];
-PrintToConsole["CustomTeXCommands is " <> ToString[OptionValue[CustomTeXCommands]]];
+PrintToConsole["TeXExportToPDF is " <> ToString[OptionValue[TeXExportToPDF]]];
+PrintToConsole["TeXEmbedRefrencesBeforeExport is "<>ToString[OptionValue[TeXEmbedRefrencesBeforeExport]]];
+PrintToConsole["TeXWriteTOC is " <> ToString[OptionValue[TeXWriteTOC]]];
+PrintToConsole["TeXWriteAuthors is " <> ToString[OptionValue[TeXWriteAuthors]]];
+PrintToConsole["TeXWriteDate is " <> ToString[OptionValue[TeXWriteDate]]];
+PrintToConsole["TeXWriteTitle is " <> ToString[OptionValue[TeXWriteTitle]]];
+PrintToConsole["TeXBibFile is " <> ToString[OptionValue[TeXBibFile]]];
+PrintToConsole["TeXCustomCommands is " <> ToString[OptionValue[TeXCustomCommands]]];
 PrintToConsole["TeXLanguage is " <> ToString[OptionValue[TeXLanguage]]];
-PrintToConsole["ShowTeXLabels is " <> ToString[OptionValue[ShowTeXLabels]]];
+PrintToConsole["TeXShowLabels is " <> ToString[OptionValue[TeXShowLabels]]];
 PrintToConsole["TeXPlotScale is " <> ToString[OptionValue[TeXPlotScale]]];
-PrintToConsole["FitEquations is " <> ToString[OptionValue[FitEquations]]];
+PrintToConsole["TeXLineSpread is " <> ToString[OptionValue[TeXLineSpread]]];
+PrintToConsole["TeXFitEquations is " <> ToString[OptionValue[TeXFitEquations]]];
+PrintToConsole["TeXAlignEquations is " <> ToString[OptionValue[TeXAlignEquations]]];
 Quiet@ExportString["\[Lambda]","TeXFragment"];
 System`Convert`TeXFormDump`maketex["\[OAcute]"]="\[OAcute]";
 System`Convert`TeXFormDump`maketex["\[CloseCurlyQuote]"]="'";
@@ -385,6 +391,9 @@ System`Convert`TeXFormDump`maketex["\[TensorWedge]"]="\\wedge ";
 System`Convert`TeXFormDump`maketex["\[Wedge]"]="\\wedge ";
 System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
 System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
+System`Convert`TeXFormDump`maketex["\[GreaterTilde]"]="\\gtrsim ";
+System`Convert`TeXFormDump`maketex["c.c."]="\text{c.c.}";
+System`Convert`TeXFormDump`maketex["c.\[VeryThinSpace]c."]="\text{c.c.}";
 System`Convert`TeXFormDump`maketex["\[LineSeparator]"]="\n";
 System`Convert`TeXFormDump`maketex[":="]="\\coloneqq\,";
 
@@ -470,7 +479,8 @@ myBoxRule[FormBox[TemplateBox[{boxes_,_,lima_,limb_},___],___]]:=StringJoin["\\l
 
 myBoxRule[FormBox[C__]]:=(System`Convert`TeXFormDump`maketex[FormBox[C]]);
 TooltipToFootnote[a_]:=First@Replace[{a},{FormBox[TagBox[TooltipBox[C:(_String|_Symbol),D:(_String|_Symbol),___],___],___]:>(ToString[C]<>"\\footnote{"<>If[StringQ[D],StringDrop[StringDrop[D,1],-1], ToString[D]]<>"}")},Infinity];
-EqBoxToTeX[c_]:=(Convert`TeX`BoxesToTeX[c,"BoxRules"->{box:(_TemplateBox|_FormBox):>(myBoxRule[box])}]);
+EqBoxToTeX[c_]:=Convert`TeX`BoxesToTeX[c,"BoxRules"->{box:(_TemplateBox|_FormBox):>(myBoxRule[box])}];
+EqBoxToTeXDisplay[c_]:=(EqBoxToTeX[c]<>"\\\\");
 title=ContentsByCellStyle["Title"];
 author=ContentsByCellStyle["Author"];
 abstract=ContentsByCellStyle["Abstract"];
@@ -478,7 +488,7 @@ affil=ContentsByCellStyle["Affiliation"];
 prolog="% \\documentclass[titlepage, a4paper]{mwart}
 %\\documentclass[aps,prl,showpacs,10pt,superscriptaddress,nidanfloat,twocolumn,% draft]{revtex4-1}
 \\documentclass{article}
-\\usepackage[margin="<>OptionValue[SetTeXMargin]<>"]{geometry}
+\\usepackage[margin="<>OptionValue[TeXSetMargin]<>"]{geometry}
 \\usepackage{amsmath,amsfonts,amssymb,amsthm}
 \\usepackage{graphicx, setspace}
 \\usepackage{authblk}
@@ -510,10 +520,10 @@ prolog="% \\documentclass[titlepage, a4paper]{mwart}
 % \\usepackage{polski}
 \\linespread{"<>ToString[OptionValue[TeXLineSpread]]<>"}
 \\usepackage[pdftex,colorlinks=true,citecolor=blue,linkcolor=magenta]{hyperref}\n"
-<>If[OptionValue[ShowTeXLabels],"\\usepackage{showlabels} %Comment this in production",""]<>
+<>If[OptionValue[TeXShowLabels],"\\usepackage{showlabels} %Comment this in production",""]<>
 "\\usepackage[backend=bibtex,sorting=none]{biblatex}
-\\bibliography{"<>OptionValue[BibFile]<>"}\n"<>
-OptionValue[CustomTeXCommands]<>"
+\\bibliography{"<>OptionValue[TeXBibFile]<>"}\n"<>
+OptionValue[TeXCustomCommands]<>"
 % \\usepackage[backend=bibtex]{biblatex}
 % \\addbibresource[location=remote]{http://127.0.0.1:23119/better-bibtex/collection?/1/.biblatex}
 % \\makeatletter
@@ -531,16 +541,16 @@ OptionValue[CustomTeXCommands]<>"
 % }
 % \\makeatother
 \\title{"<>First[title]<>"}\n"<>
-If[OptionValue[WriteAuthors],
+If[OptionValue[TeXWriteAuthors],
 StringRiffle[MapIndexed["\\author["<>ToString[First[#2]]<>"]{"<>#1<>"}"&,author],"\n"]<>
 StringRiffle[MapIndexed["\\affil["<>ToString[First[#2]]<>"]{"<>#1<>"}\n"&,affil],"\n"]<>
 "\n\\renewcommand\\Affilfont{\\itshape\\small}",""]<>
-If[OptionValue[WriteDate],"\\date{}",""]<>
+If[OptionValue[TeXWriteDate],"\\date{}",""]<>
 "
 \\begin{document}
 \\selectlanguage{"<>ToLowerCase[If[OptionValue[TeXLanguage]==None,AbsoluteCurrentValue["Language"],OptionValue[TeXLanguage]]]<>"}\n"
-<>If[OptionValue[WriteTitle],"\\maketitle\n","\n"]<>
-If[OptionValue[WriteTOC],"\\tableofcontents{}",""]
+<>If[OptionValue[TeXWriteTitle],"\\maketitle\n","\n"]<>
+If[OptionValue[TeXWriteTOC],"\\tableofcontents{}",""]
 <>"\n";
 epilog="\\appto{\\bibsetup}{\\raggedright} %For keeping the bib within margins
 \\printbibliography
@@ -570,7 +580,7 @@ System`Convert`TeXDump`cleanUpFile[fileName_String] :=
   	DeleteFile[scratchFileName];];
   	Quiet@ExportString["\[Lambda]","TeXFragment"];
   	
-base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[EmbedRefrencesBeforeExport],EmbedEq,RefEq]@FixFigures[NotebookRead[i]],"TeXFragment",
+base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[TeXEmbedRefrencesBeforeExport],EmbedEq,RefEq]@FixFigures[NotebookRead[i]],"TeXFragment",
 "BoxRules"->{box:(_FormBox):>(myBoxRule[box]),
 "\[Transpose]":>"^{\\mathsf{T}}",
 "\[ConjugateTranspose]":>"^{\\dagger} ",
@@ -599,8 +609,8 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[E
 "Figure"->{"\\begin{figure}[!htb]\\centering\\includegraphics[scale="<>OptionValue[TeXPlotScale]<>",max width=\\textwidth]",NameAndExport[i,#]&,AddLabel[i]<>"\\end{figure}"},
 "FigureCaption"->{"\\caption{",Automatic,"}"},
 "Board"->{"\\begin{table}[ht!]\\centering",CaptionTable[i,#]&,AddLabel[i]<>"\\end{table}"},
-"EquationNumbered"->{"\\begin{equation}"<>If[OptionValue[FitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""],EqBoxToTeX[#]&,If[OptionValue[FitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation}"},"EquationNumbered"->{"\\begin{equation}",EqBoxToTeX[#]&,AddLabel[i]<>"\\end{equation}"},
-"Equation"->{"\\begin{equation*}"<>If[OptionValue[FitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""],EqBoxToTeX[#]&,If[OptionValue[FitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation*}"},
+"EquationNumbered"->{"\\begin{equation}"<>If[OptionValue[TeXFitEquations],"\\adjustbox{max width=.95\\textwidth}{$\n",""]<>If[OptionValue[TeXAlignEquations],"\\begin{aligned}",""],EqBoxToTeXDisplay[#]&,"\n"<>If[OptionValue[TeXAlignEquations],"\\end{aligned}",""]<>If[OptionValue[TeXFitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation}"},
+"Equation"->{"\\begin{equation*}"<>If[OptionValue[TeXFitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""]<>If[OptionValue[TeXAlignEquations],"\\begin{aligned}",""],EqBoxToTeXDisplay[#]&,If[OptionValue[TeXAlignEquations],"\\end{aligned}",""]<>If[OptionValue[TeXFitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation*}"},
 "InlineCell"->{"",AddInlineLabels[i,#]&,""}
 }
 ],"Text"],{i,cells}];
@@ -624,8 +634,13 @@ System`Convert`TeXDump`cleanUpFile[fileName_String] :=
   	DeleteFile[scratchFileName];];
 ShowStatus["Postprocessing cells..."];
 (*fix figure captions*)
-
 base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&StringCount[c,"{"]==StringCount[c,"}"]&&StringFreeQ[t,"}"](*&&(!StringContainsQ[c,"\\ref"]||((StringCount[c,"{"]==StringCount[c,"\\ref"])&&(StringCount[c,"}"]==StringCount[c,"\\ref"])))*)(*&&StringFreeQ[t,"}"]*)) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
+(*alignment*)
+PutAlignMark[st_String]:=If[Length[StringSplit[st,"\\\\"]]>1,(StringRiffle[(tmps=If[StringContainsQ[#,"="],StringReplace[#,StartOfString ~~Shortest[t___]~~"="~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>"&="<>u],StringReplace[#,StartOfString ~~Shortest[t___]~~Pattern[z,Blank[]]~~u___~~EndOfString  /; ((z==="+"||z==="-")&&StringCount[t,"{"]==StringCount[t,"}"]) :> t<>"&"<>z<>u]]; If[StringContainsQ[tmps,"&"],tmps,"&"<>tmps]) &/@StringSplit[st,"\\\\"],"\\\\\n"]),st];
+base=StringReplace[base,"\\\\"~~Whitespace~~"\\end{aligned}" ->"\\end{aligned}"];
+base=StringReplace[base,"\\begin{aligned}"~~Shortest[t___]~~"\\end{aligned}" /;!StringContainsQ[t,"\\begin{array}"]:>"\\begin{aligned}"<>PutAlignMark[t]<>"\\end{aligned} "];
+base=StringReplace[base,"\\begin{aligned}\\begin{array}{l}"~~Shortest[t___]~~"\\end{array}\\end{aligned}" /;!StringContainsQ[t,"\\begin{array}"]:>"\\begin{aligned}"<>PutAlignMark[t]<>"\\end{aligned} "];
+(*cleanup*)
 base=StringReplace[base,{"\\end{equation*}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation*}\n\\begin{equation*}","\\end{equation}"~~Whitespace~~"\\begin{equation}"->"\\end{equation}\n\\begin{equation}","\\end{equation}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation}\n\\begin{equation*}"}];
 (*remove spacing for glueing TeX ref*)
 base=StringReplace[base,{Whitespace~~"~\\"->"~\\"}];
@@ -642,7 +657,7 @@ ShowStatus["Exporting TeX file..."];
 Export[StringDrop[NotebookFileName[],-2]<>"tex",prolog<>base<>epilog,"Text"];
 ShowStatus["Trying to build the PDF from TeX (might fail)..."];
 
-If[OptionValue[ExportToPDF],
+If[OptionValue[TeXExportToPDF],
 PrintToConsole["Running command: "<>"!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; ls; pdflatex "<>StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"];
 (*SetEnvironment["PATH"\[Rule]Import["!source ~/.bash_profile; echo $PATH","Text"]];*)
 Quiet@ReadList@OpenRead["!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; /Library/TeX/texbin/pdflatex "<>StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"];

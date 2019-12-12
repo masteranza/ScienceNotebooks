@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    128262,       2937]
-NotebookOptionsPosition[    127677,       2917]
-NotebookOutlinePosition[    128276,       2938]
-CellTagsIndexPosition[    128233,       2935]
+NotebookDataLength[    128613,       2945]
+NotebookOptionsPosition[    128028,       2925]
+NotebookOutlinePosition[    128627,       2946]
+CellTagsIndexPosition[    128584,       2943]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -717,6 +717,10 @@ onload='openCloseGroup()'>\>\""}], "]"}]}]}], "]"}], ",",
        RowBox[{
        "System`Convert`TeXFormDump`maketex", "[", "\"\<\:017a\>\"", "]"}], 
        "=", "\"\<\:017a\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXFormDump`maketex", "[", "\"\<\:0144\>\"", "]"}], 
+       "=", "\"\<\:0144\>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{
@@ -742,6 +746,10 @@ onload='openCloseGroup()'>\>\""}], "]"}]}]}], "]"}], ",",
        RowBox[{
        "System`Convert`TeXFormDump`maketex", "[", "\"\<\[TensorProduct]\>\"", 
         "]"}], "=", "\"\<\\\\otimes \>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+       "System`Convert`TeXFormDump`maketex", "[", "\"\<\[GreaterTilde]\>\"", 
+        "]"}], "=", "\"\<\\\\gtrsim \>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{
        "System`Convert`TeXFormDump`maketex", "[", "\"\<\[LineSeparator]\>\"", 
@@ -2937,7 +2945,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 127116, 2895, 8056, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
+Cell[557, 20, 127467, 2903, 8098, "Input",ExpressionUUID->"d51dd649-91e4-4df7-ac14-bec28aeb64c3",
  InitializationCell->True]
 }
 ]

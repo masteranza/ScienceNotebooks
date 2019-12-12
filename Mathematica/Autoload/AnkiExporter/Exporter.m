@@ -97,11 +97,13 @@ System`Convert`TeXFormDump`maketex["\:0105"]="\:0105";
 System`Convert`TeXFormDump`maketex["\[LSlash]"]="\[LSlash]";
 System`Convert`TeXFormDump`maketex["\:017c"]="\:017c";
 System`Convert`TeXFormDump`maketex["\:017a"]="\:017a";
+System`Convert`TeXFormDump`maketex["\:0144"]="\:0144";
 (*System`Convert`TeXFormDump`maketex["&"]="\\$ ";*)
 System`Convert`TeXFormDump`maketex["~"]="\\sim ";
 System`Convert`TeXFormDump`maketex["\[Perpendicular]"]="\\perp ";
 System`Convert`TeXFormDump`maketex["\[TensorWedge]"]="\\wedge ";System`Convert`TeXFormDump`maketex["\[Wedge]"]="\\wedge ";
 System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
+System`Convert`TeXFormDump`maketex["\[GreaterTilde]"]="\\gtrsim ";
 System`Convert`TeXFormDump`maketex["\[LineSeparator]"]="\n";
 System`Convert`TeXFormDump`maketex[":="]=":=";
 
