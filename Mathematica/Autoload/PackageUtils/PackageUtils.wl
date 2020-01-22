@@ -130,10 +130,17 @@ CreateObj[style_String,capstyle_String,tag_:Automatic,captionFirst_:False]:=Bloc
 tagt=TagInput[style,tag];
 c=NotebookFind[EvaluationNotebook[],tagt,All,CellTags];
 tmp=c===$Failed;
-If[tmp,FrontEnd`NotebookWrite[EvaluationNotebook[],
+If[tmp,If[captionFirst,FrontEnd`NotebookWrite[EvaluationNotebook[],CellPrint[TextCell["\[Placeholder]",capstyle,CellAutoOverwrite->False]
+],All,AutoScroll->False];
+FrontEnd`NotebookWrite[EvaluationNotebook[],
 CellPrint[Cell[BoxData[FormBox["\[Placeholder]",TraditionalForm]],style,CellAutoOverwrite->False,CellTags->tagt]
-],All,AutoScroll->False];FrontEnd`NotebookWrite[EvaluationNotebook[],CellPrint[TextCell["\[Placeholder]",capstyle,CellAutoOverwrite->False]
+],All,AutoScroll->False];
+,FrontEnd`NotebookWrite[EvaluationNotebook[],
+CellPrint[Cell[BoxData[FormBox["\[Placeholder]",TraditionalForm]],style,CellAutoOverwrite->False,CellTags->tagt]
+],All,AutoScroll->False];
+FrontEnd`NotebookWrite[EvaluationNotebook[],CellPrint[TextCell["\[Placeholder]",capstyle,CellAutoOverwrite->False]
 ],All,AutoScroll->False]];
+];
 c=NotebookFind[EvaluationNotebook[],tagt,All,CellTags];
 tmp
 ];
@@ -146,17 +153,21 @@ Paste[EvaluationNotebook[],content];
 SelectionMove[EvaluationNotebook[],Next,Cell,1,AutoScroll->False];
 SelectionMove[EvaluationNotebook[],After,CellContents,1,AutoScroll->False];
 ];
-(*Board[content_,tag_:Automatic,row_:True,opts___]:=Block[{createdNew},
-createdNew=CreateObj["Board",If[tag===Automatic&&Head@Unevaluated@content===Symbol,SymbolName[Unevaluated[content]],tag],True];
-SelectionMove[EvaluationNotebook[],After,CellContents,AutoScroll->False];
+Board[content_,tag_:Automatic,row_:True,opts___]:=Block[{createdNew},
+createdNew=CreateObj["Table","TableTitle",If[tag===Automatic&&Head@Unevaluated@content===Symbol,SymbolName[Unevaluated[content]],tag],True];
+Paste[EvaluationNotebook[],TableForm[content,opts]];
+SelectionMove[EvaluationNotebook[],Previous,Cell,1,AutoScroll->False];
+SelectionMove[EvaluationNotebook[],Before,CellContents,1,AutoScroll->False];
+(*SelectionMove[EvaluationNotebook[],After,CellContents,AutoScroll->False];*)
+(*
 SelectionMove[EvaluationNotebook[],Previous,Line,1,AutoScroll->False];
 If[!createdNew,SelectionMove[EvaluationNotebook[],All,Expression,AutoScroll->False],Unevaluated[Sequence[]]];
 NotebookWrite[EvaluationNotebook[],GridBox[content,opts,GridBoxAlignment->{"Columns"->{{Left}},"ColumnsIndexed"->{},"Rows"->{{Center}},"RowsIndexed"->{}},GridBoxDividers->{"Columns"->{False,If[!row,AbsoluteThickness[1],Nothing],{False},False},"ColumnsIndexed"->{},"Rows"->{AbsoluteThickness[2],If[row,AbsoluteThickness[1],Nothing],{False},AbsoluteThickness[2]},"RowsIndexed"->{}},GridBoxItemSize->{"Columns"->{{All}},"ColumnsIndexed"->{},"Rows"->{{1.2}},"RowsIndexed"->{}},GridDefaultElement:>"\[Placeholder]"]];
-SelectionMove[EvaluationNotebook[],Previous,Expression,2,AutoScroll->False];
+SelectionMove[EvaluationNotebook[],Previous,Expression,2,AutoScroll->False];*)
 ];
 ExtFT[cs_,cont_]:=If[cs==="Board",Replace[cont,{FormBox[GridBox[{_,{C___},{D___}},E___],F___]:>FormBox[GridBox[{{C},{D}},E],F]},Infinity],If[cs==="Figure",Replace[cont,{FormBox[GridBox[{{C___},_,{D___}},E___],F___]:>FormBox[GridBox[{{C},{D}},E],F]},Infinity],cont]];
 BoardColumn[content_,tag_:Automatic,opts___]:=Board[content,tag,False,opts];
-*)
+
 
 DuplicateNotebook[]:=NotebookPut@NotebookGet[EvaluationNotebook[]];
 TranslateSpecialCellStyleNames[name_]:=If[AbsoluteCurrentValue["Language"] == "Polish",Switch[name,"Example","Przyk\[LSlash]ad","Exercise","Zadanie","Solution","Rozwi\:0105zanie","Question","Pytanie","Remark","Uwaga","Comment","Komentarz",
@@ -356,7 +367,7 @@ ShowStatus["PDF exported successfully"];
   
 Options[ExportToTeX]={TeXExportToPDF->False,TeXEmbedRefrencesBeforeExport->False,TeXWriteTOC->False,TeXBibFile->"",
 TeXWriteAuthors->False,TeXWriteDate->False,TeXWriteTitle->True,TeXCustomCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
-TeXShowLabels->False,TeXSetMargin->"0.8in",TeXPlotScale->"0.7",TeXFitEquations->True,TeXAlignEquations->True};
+TeXShowLabels->False,TeXSetMargin->"0.8in",TeXPlotScale->"0.7",TeXFitEquations->False,TeXAlignEquations->True};
 ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil,tmps},
 ShowStatus["Initializing TeX export..."];
 PrintToConsole["TeXExportToPDF is " <> ToString[OptionValue[TeXExportToPDF]]];
@@ -636,10 +647,18 @@ ShowStatus["Postprocessing cells..."];
 (*fix figure captions*)
 base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&StringCount[c,"{"]==StringCount[c,"}"]&&StringFreeQ[t,"}"](*&&(!StringContainsQ[c,"\\ref"]||((StringCount[c,"{"]==StringCount[c,"\\ref"])&&(StringCount[c,"}"]==StringCount[c,"\\ref"])))*)(*&&StringFreeQ[t,"}"]*)) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
 (*alignment*)
-PutAlignMark[st_String]:=If[Length[StringSplit[st,"\\\\"]]>1,(StringRiffle[(tmps=If[StringContainsQ[#,"="],StringReplace[#,StartOfString ~~Shortest[t___]~~"="~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>"&="<>u],StringReplace[#,StartOfString ~~Shortest[t___]~~Pattern[z,Blank[]]~~u___~~EndOfString  /; ((z==="+"||z==="-")&&StringCount[t,"{"]==StringCount[t,"}"]) :> t<>"&"<>z<>u]]; If[StringContainsQ[tmps,"&"],tmps,"&"<>tmps]) &/@StringSplit[st,"\\\\"],"\\\\\n"]),st];
+PutAlignMark[st_String]:=If[Length[StringSplit[st,"\\\\"]]>1,(StringRiffle[(tmps=If[StringContainsQ[#,"="],StringReplace[#,StartOfString ~~Shortest[t___]~~"="~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &="<>u],StringReplace[#,StartOfString ~~Shortest[t___]~~Pattern[z,Blank[]]~~u___~~EndOfString  /; ((z==="+"||z==="-")&&StringCount[t,"{"]==StringCount[t,"}"]) :> t<>" &"<>z<>u]]; If[StringContainsQ[tmps,"&"],tmps," &"<>tmps]) &/@StringSplit[st,"\\\\"],"\\\\\n"]),st];
 base=StringReplace[base,"\\\\"~~Whitespace~~"\\end{aligned}" ->"\\end{aligned}"];
 base=StringReplace[base,"\\begin{aligned}"~~Shortest[t___]~~"\\end{aligned}" /;!StringContainsQ[t,"\\begin{array}"]:>"\\begin{aligned}"<>PutAlignMark[t]<>"\\end{aligned} "];
 base=StringReplace[base,"\\begin{aligned}\\begin{array}{l}"~~Shortest[t___]~~"\\end{array}\\end{aligned}" /;!StringContainsQ[t,"\\begin{array}"]:>"\\begin{aligned}"<>PutAlignMark[t]<>"\\end{aligned} "];
+(*fix double superscript error connected with primed variables*)
+base=StringReplace[base,"'^"~~t_ /;!(StringContainsQ[t,"{"]):>("^{\\prime "<>t<>"}")];
+base=StringReplace[base,"'^{"~~Shortest[t___]~~"}" /;StringCount[t,"{"]==StringCount[t,"}"]:>("^{\\prime "<>t<>"}")];
+base=StringReplace[base,"''^"~~t_ /;!(StringContainsQ[t,"{"]):>("^{\\prime \\prime "<>t<>"}")];
+base=StringReplace[base,"''^{"~~Shortest[t___]~~"}" /;StringCount[t,"{"]==StringCount[t,"}"]:>("^{\\prime \\prime "<>t<>"}")];
+
+base=StringReplace[base,"'"~~Whitespace~~"^"~~t_ /;!(StringContainsQ[t,"{"]):>("^{\\prime "<>t<>"}")];
+base=StringReplace[base,"'"~~Whitespace~~"^{"~~Shortest[t___]~~"}" /;StringCount[t,"{"]==StringCount[t,"}"]:>("^{\\prime "<>t<>"}")];
 (*cleanup*)
 base=StringReplace[base,{"\\end{equation*}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation*}\n\\begin{equation*}","\\end{equation}"~~Whitespace~~"\\begin{equation}"->"\\end{equation}\n\\begin{equation}","\\end{equation}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation}\n\\begin{equation*}"}];
 (*remove spacing for glueing TeX ref*)

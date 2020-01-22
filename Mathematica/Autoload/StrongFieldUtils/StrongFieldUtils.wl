@@ -27,26 +27,33 @@ BeginPackage["StrongFieldUtils`"];
 (*Essenatials*)
 
 
+(*physical constants in Atomic Units*)
 fsAtomic::usage="One femtosecond in atomic units";
 cAtomic::usage="Speed of light in atomic units";
 IpAtomic::usage="IpAtomic[atom,n] returns n'th (def. n) ionization energy of \"atom\" in atomic units.";
-EfromIAtomic::usage="EfromIAtomic[I] takes Quantity I of intensity (usually W/\!\(\*SuperscriptBox[\(cm\), \(2\)]\)) and transforms it to electric field intensity in atomic units.";
-\[Lambda]to\[Omega]::usage="Given number of nm turns into \[Omega] in AtomicUnits";
-\[Omega]toT::usage="Given \[Omega] [a.u.] turns it into period [a.u.]";
-\[Omega]toTfs::usage="Given \[Omega] [a.u.] turns it into period [fs]";
-Quiver::usage="Quiver[E,\[Omega]] returns E/\!\(\*SuperscriptBox[\(\[Omega]\), \(2\)]\).";
-Pondero::usage="Pondero[E,\[Omega]] returns \!\(\*SuperscriptBox[\(E\), \(2\)]\)/(2\[Omega]\!\(\*SuperscriptBox[\()\), \(2\)]\)";
+
 Begin["`Private`"];
 fsAtomic=QuantityMagnitude@UnitConvert[Quantity[1,"fs"],"AtomicUnitOfTime"];
-cAtomic=UnitConvert[Quantity["ReducedPlanckConstant"]/( Quantity["FineStructureConstant"] Quantity["BohrRadius"] Quantity["ElectronMass"]),"AtomicUnitOfVelocity"];
-IpAtomic[atom_,n_:1]:=QuantityMagnitude[UnitConvert[ElementData[atom,"IonizationEnergies"]/Quantity["AvogadroConstant"],"Hartrees"][[n]]];
-EfromIAtomic[I_Quantity]:=UnitConvert[Sqrt[I/(1/2*Quantity[1,"ElectricConstant"]*cAtomic)]*Quantity[1,"ElementaryCharge"]*Quantity[1,"BohrRadius"],"Hartrees"];
-IfromEAtomic[E_]:=UnitConvert[(Quantity[E,"Hartrees"]/(Quantity[1,"ElementaryCharge"]*Quantity[1,"BohrRadius"]))^2 (1/2*Quantity[1,"ElectricConstant"]*cAtomic),"W/cm^2"];
-\[Lambda]to\[Omega][nm_]:=UnitConvert[Quantity[1,"SpeedOfLight"]Quantity[1,"PlanckConstant"]/Quantity[nm,"nm"],"Hartrees"];
-\[Omega]toT[\[Omega]_Quantity]:=UnitConvert[ Quantity[1,"PlanckConstant"]/\[Omega],"AtomicUnitOfTime"];
-\[Omega]toTfs[\[Omega]_Quantity]:=UnitConvert[ Quantity[1,"PlanckConstant"]/\[Omega],"fs"];
-Quiver[E_,\[Omega]_]:=E/\[Omega]^2;
-Pondero[E_,\[Omega]_]:=E^2/(2\[Omega])^2;
+cAtomic=QuantityMagnitude@UnitConvert[Quantity["ReducedPlanckConstant"]/( Quantity["FineStructureConstant"] Quantity["BohrRadius"] Quantity["ElectronMass"]),"AtomicUnitOfVelocity"];
+IpAtomic[atom_String,n_:1]:=QuantityMagnitude[UnitConvert[ElementData[atom,"IonizationEnergies"]/Quantity["AvogadroConstant"],"Hartrees"][[n]]];
+End[];
+
+
+(*useful conversions for Strong Field physics*)
+EfromIAtomic::usage="EfromIAtomic[I] takes intensity (in W/cm^2) and transforms it to electric field intensity in atomic units.";
+IfromEAtomic::usage="IfromEAtomic[E] takes electric field in atomic units and transforms it to intensity in W/cm^2.";
+\[Omega]from\[Lambda]Atomic::usage="Given number of nm tu`rns into \[Omega] in AtomicUnits";
+Tfrom\[Omega]Atomic::usage="Given \[Omega] [a.u.] turns it into period [a.u.]";
+QuiverAtomic::usage="Quiver[E,\[Omega]] returns E/\!\(\*SuperscriptBox[\(\[Omega]\), \(2\)]\).";
+PonderoAtomic::usage="Pondero[E,\[Omega]] returns \!\(\*SuperscriptBox[\(E\), \(2\)]\)/(2\[Omega]\!\(\*SuperscriptBox[\()\), \(2\)]\)";
+
+Begin["`Private`"];
+EfromIAtomic[I_]:=QuantityMagnitude@UnitConvert[Sqrt[Quantity[I,"W/cm^2"]/(1/2*Quantity[1,"ElectricConstant"]*Quantity[cAtomic,"AtomicUnitOfVelocity"])]*Quantity[1,"ElementaryCharge"]*Quantity[1,"BohrRadius"],"Hartrees"];
+IfromEAtomic[E_]:=QuantityMagnitude@UnitConvert[(Quantity[E,"Hartrees"]/(Quantity[1,"ElementaryCharge"]*Quantity[1,"BohrRadius"]))^2 (1/2*Quantity[1,"ElectricConstant"]*Quantity[cAtomic,"AtomicUnitOfVelocity"]),"W/cm^2"];
+\[Omega]from\[Lambda]Atomic[nm_]:=QuantityMagnitude@UnitConvert[Quantity[1,"SpeedOfLight"]Quantity[1,"PlanckConstant"]/Quantity[nm,"nm"],"Hartrees"];
+Tfrom\[Omega]Atomic[\[Omega]_]:=QuantityMagnitude@UnitConvert[ Quantity[1,"PlanckConstant"]/Quantity[\[Omega],"Hartrees"],"AtomicUnitOfTime"];
+QuiverAtomic[E_,\[Omega]_]:=E/\[Omega]^2;
+PonderoAtomic[E_,\[Omega]_]:=E^2/(2\[Omega])^2;
 End[];
 
 
