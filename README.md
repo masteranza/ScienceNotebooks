@@ -91,7 +91,7 @@ Some of the steps can be omitted, but will result in minor issues/ decrease in f
 
 > Anki highlights will be ignored when exporting to TeX.
 
-> The commands for Anki highlighting, Zotero referencing and referencing equations (also any other content!)
+> The commands for Anki highlighting, Zotero referencing and referencing equations (also any other content!) are available in the Mathematica `Insert` menu.
 
 ## Figures in notebooks
 
