@@ -1,0 +1,147 @@
+Item[KeyEvent["6", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SuperscriptBox["\[InvisiblePrefixScriptBase]", "\[Placeholder]"], "\[NegativeThinSpace]", "\[SelectionPlaceholder]"}]]}]],
+Item[KeyEvent["-", Modifiers -> {Control, Command}], FrontEndExecute[{FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Word], FrontEnd`NotebookApply[FrontEnd`InputNotebook[], RowBox[{SubscriptBox["\[InvisiblePrefixScriptBase]", "\[Placeholder]"], "\[NegativeThinSpace]", "\[SelectionPlaceholder]"}]]}]],
+Item[KeyEvent["d", Modifiers -> {Control}],
+     FrontEndExecute[
+        FrontEnd`NotebookWrite[
+          FrontEnd`InputNotebook[],
+            Cell[ BoxData[ RowBox[{"Dynamic", "[", "", "]"}] ], 
+                 CellEventActions -> {{"MenuCommand", "HandleShiftReturn"} :> {
+                      SelectionMove[EvaluationCell[], All, CellContents];   
+                      SelectionEvaluate[EvaluationNotebook[]]}}
+                ]
+        ];
+        FrontEnd`SelectionMove[FrontEnd`InputNotebook[], Previous, Character, 2];
+        FrontEnd`SelectionMove[FrontEnd`InputNotebook[], All, Character]
+    ]
+],
+Item[KeyEvent["d", Modifiers -> {Command}],
+	FrontEndExecute@ Module[{nb,t},
+		nb = InputNotebook[];
+		t = CurrentValue[NotebookSelection[nb], "SelectionData"];
+		If[(MatchQ[t, GraphicsBox[BlankSequence[]]]),
+			NotebookWrite[nb,
+					ReplaceAll[ t, 
+						{GraphicsBox[Pattern[E, Blank[TagBox]], Pattern[D, BlankNullSequence[]]] :> GraphicsBox[{E, {FaceForm[{RGBColor[0.88, 1, 0.88], Opacity[0.6]}], RectangleBox[{1.0, 1.0}, {75.0, 75.0}]}}, D], 
+					    GraphicsBox[{Pattern[E, BlankSequence[]], {FaceForm[{RGBColor[0.88, 1, 0.88], Opacity[0.6]}], Pattern[RR, BlankSequence[]]}, Pattern[C, BlankNullSequence[]]}, Pattern[D, BlankNullSequence[]]] :> GraphicsBox[{E, C, {FaceForm[{RGBColor[0.88, 1, 0.88], Opacity[0.6]}], RectangleBox[{6.0, 6.0}, {80.0, 80.0}], RR}}, D],
+					    GraphicsBox[{Pattern[C, BlankNullSequence[]]}, Pattern[D, BlankNullSequence[]]] :> GraphicsBox[{C, {FaceForm[{RGBColor[0.88, 1, 0.88], Opacity[0.6]}], RectangleBox[{1.0, 1.0}, {2.0, 2.0}]}}, D]
+						}
+					]
+			], CurrentValue[NotebookSelection[nb], Background] = If[CurrentValue[NotebookSelection[nb], Background] == None, LightGreen, None]
+		];	
+	], MenuEvaluator -> Automatic
+],
+Item[KeyEvent["y", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, t},
+            nb = InputNotebook[];
+            SelectionMove[nb, All, Expression];
+            t = NotebookRead[SelectedNotebook[]];
+            If[StringQ[t],
+			NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["TableTitle", t], ")"}], BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
+        ],
+        MenuEvaluator -> Automatic 
+    ],
+
+Item[KeyEvent["s", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, t},
+            nb = InputNotebook[];
+            
+			NotebookWrite[nb,FromCharacterCode[{824}]]
+        ],
+        MenuEvaluator -> Automatic 
+    ],
+Item[KeyEvent["e", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, t, cell, ysubt, subt},
+            nb = InputNotebook[];
+            SelectionMove[nb, All, Expression];
+            t = NotebookRead[SelectedNotebook[]];           
+            t=If[Head[t]===StyleBox,First[t],t];
+            If[StringQ[t],
+    		ysubt=(StringContainsQ[t,"`"] && Length[StringSplit[t,"`"]]>1);
+    		If[ysubt, subt=Last[StringSplit[t,"`"]]; t=First[StringSplit[t,"`"]];,subt="";];
+            With[{x=t, y=subt, z=ysubt}, NotebookWrite[nb, ButtonBox[DynamicBox[ReferenceBox[x,z,y], UpdateInterval -> Infinity], 
+            TaggingRules -> {"deeptag" -> If[ysubt, subt, t], "TeXtag" -> If[ysubt, StringJoin[t,subt], t]}, 
+            BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, TooltipStyle -> {Background -> RGBColor[1, 1, 1], CellFrame -> 1}, 
+            Tooltip -> DynamicBox[RefCellTooltip[x, If[z, y, None]], UpdateInterval -> Infinity]]]]
+            ];
+        ],
+        MenuEvaluator -> Automatic 
+    ],
+
+Item[KeyEvent["z", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, clip},
+            clip = Evaluate@ToExpression[NotebookGet[ClipboardNotebook[]][[1, 1, 1]]];
+            NotebookWrite[SelectedNotebook[], With[{t = clip[[1]], s = clip[[2]], r = clip[[3]], r2 = clip[[4]], c = clip[[-1]]}, 
+  			Cell[BoxData[ButtonBox[RowBox[{"[",s,"]"}],TaggingRules -> {"citekey" -> s, "zotero" -> t, "collection" -> c},
+  			BaseStyle -> {"Hyperlink"}, ButtonFunction :> SystemOpen[t], Tooltip -> (r<>"\n"<>r2), TooltipStyle->{Background->RGBColor[1, 1, 1], CellFrame -> 1}]], "Cite"]]]
+        ],
+        MenuEvaluator -> Automatic 
+    ],
+Item[KeyEvent["r", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{},
+             MessageDialog[
+  DynamicModule[{}, 1, 
+   Initialization :> (NotebookClose@EvaluationNotebook[];
+     Module[{m,p,eqs,eqs2,ret,styles},
+     m = SystemDialogInput["FileOpen", ".nb"];
+     If[(m =!= $Canceled), 
+     ret = 0;
+     eqs = Cases[First@Get[m, Path-> {NotebookDirectory[]}], 
+   Cell[BlankSequence[], Alternatives["Equation","EquationNumbered","Definition", "Example", "Exercise", "Text", "Theorem", "Figure", "Table", "Item1", "Item1Numbered","Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[], 
+    CellTags -> BlankNullSequence[], BlankNullSequence[]], Infinity];
+eqs2 = Map[((ReplaceAll[CellTags, Options[#, CellTags]]) -> (# // 
+        DisplayForm)) &, eqs];
+styles = ReplaceAll[
+   eqs, {
+   	Cell[BlankSequence[], Alternatives["Equation", "EquationNumbered"], BlankNullSequence[]] -> LightGray, 
+    Cell[BlankSequence[], Alternatives["Section","Subsection","Subsubsection","Subsubsubsection"], BlankNullSequence[]] -> LightBlue, 
+    Cell[BlankSequence[], "Definition", BlankNullSequence[]] -> LightRed,
+    Cell[BlankSequence[], "Example", BlankNullSequence[]] -> LightGreen,
+    Cell[BlankSequence[], "Exercise", BlankNullSequence[]] -> LightYellow,
+    Cell[BlankSequence[], "Theorem", BlankNullSequence[]] -> LightGray,
+    Cell[BlankSequence[], "Proof", BlankNullSequence[]] -> LightBlue,
+    Cell[BlankSequence[], "Solution", BlankNullSequence[]] -> LightPink,
+    Cell[BlankSequence[], BlankNullSequence[]] -> White}];
+	 If[eqs2 != {},
+       DialogInput[{ListPicker[Dynamic[p], eqs2, 
+          AppearanceElements -> All, Multiselection -> False, Appearance -> "Frameless", Background -> {styles}], 
+         DefaultButton[DialogReturn[ret = First@p]]}, 
+        WindowTitle -> "Pick equation"];
+       If[(ret != 0),
+       NotebookWrite[EvaluationNotebook[], 
+        ButtonBox[
+         First@MapThread[
+           DynamicBox[RowBox[Flatten[{
+             CellStrip[
+              First@Cases[First@Get[#1, Path-> {NotebookDirectory[]}], 
+                Cell[BlankNullSequence[], CellTags -> #2, BlankNullSequence[]], Infinity]]}]], 
+             UpdateInterval -> Infinity] &, {{m}, {ret}}],  
+         Tooltip -> FileNameTake[m], 
+         ButtonFunction -> (NotebookLocate[#] &), 
+         ButtonData -> {m, ret}]]];];
+         ];
+     ];
+     ), SynchronousInitialization -> False], 
+  Visible -> False];
+        ],
+        MenuEvaluator -> Automatic,
+    ],
+
+Item[KeyEvent["p", Modifiers -> {Control}], 
+        FrontEndExecute @ Module[{nb, t},
+            nb = InputNotebook[];
+            SelectionMove[nb, All, Word];
+            t = NotebookRead[SelectedNotebook[]];
+            If[StringQ[t],
+            NotebookWrite[nb, ButtonBox[RowBox[{"(", CounterBox["Section", t], ".", CounterBox["FigureCaptionNumbered", t], ")"}], BaseStyle -> {"Hyperlink"}, ButtonData -> t, TooltipDelay -> 0.05, Tooltip -> Map[DynamicBox[CellStrip[NotebookRead[First@Cells[EvaluationNotebook[], CellTags -> {#}]]], UpdateInterval -> Infinity] & , {t}]]]];
+
+        ],
+        MenuEvaluator -> "Local"
+    ],
+
+Item[KeyEvent["p", Modifiers -> {Control,Command}], 
+        FrontEndExecute @ Module[{nb, t},
+            Export[NotebookDirectory[EvaluationNotebook[]] <> FileBaseName[NotebookFileName[]] <> ".pdf", EvaluationNotebook[]];
+        ],
+        MenuEvaluator -> Automatic 
+    ],
+		

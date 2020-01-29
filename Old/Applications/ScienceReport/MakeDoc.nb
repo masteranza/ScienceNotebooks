@@ -1,0 +1,308 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     12270,        299]
+NotebookOptionsPosition[     11892,        282]
+NotebookOutlinePosition[     12249,        298]
+CellTagsIndexPosition[     12206,        295]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pname", "=", "\"\<ScienceReport\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"pname", "<>", "\"\<`\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"basepath", " ", "=", " ", 
+   RowBox[{
+   "$UserBaseDirectory", "<>", "\"\</Applications/\>\"", "<>", "pname", "<>", 
+    "\"\</Documentation/English/ReferencePages/Symbols/\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"guidepath", "=", " ", 
+   RowBox[{
+   "$UserBaseDirectory", "<>", "\"\</Applications/\>\"", "<>", "pname", "<>", 
+    "\"\</Documentation/English/Guides/\>\""}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.518740918583435*^9, 3.518740921054409*^9}, {
+   3.5187415293614197`*^9, 3.518741556736376*^9}, {3.518741589992272*^9, 
+   3.518741590302094*^9}, {3.518741907015686*^9, 3.518741911974696*^9}, {
+   3.518786581510172*^9, 3.5187865842744503`*^9}, {3.518786721287959*^9, 
+   3.5187867364338427`*^9}, {3.51878690244477*^9, 3.518786903276379*^9}, {
+   3.5187890880954943`*^9, 3.5187891080848007`*^9}, 3.518789353405097*^9, 
+   3.606377675468199*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"snname", ":=", "\"\<AddTwo\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nb", " ", "=", " ", 
+   RowBox[{"NotebookOpen", "[", 
+    RowBox[{"basepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NotebookSave", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", "\[IndentingNewLine]", 
+    RowBox[{"TaggingRules", "\[Rule]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"\"\<ModificationHighlight\>\"", "\[Rule]", "False"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"\"\<Metadata\>\"", "\[Rule]", 
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"\"\<context\>\"", "\[Rule]", 
+           RowBox[{"pname", "<>", "\"\<`\>\""}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<keywords\>\"", "\[Rule]", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<index\>\"", "\[Rule]", "True"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<label\>\"", "\[Rule]", 
+           "\"\<OSPackage Package Paclet Symbol\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<language\>\"", "\[Rule]", "\"\<en\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<paclet\>\"", "\[Rule]", "\"\<OSPackage Package\>\""}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<status\>\"", "\[Rule]", "\"\<\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<summary\>\"", "\[Rule]", 
+           RowBox[{"AddTwo", "::", "usage"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<synonyms\>\"", "\[Rule]", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<title\>\"", "\[Rule]", "\"\<AddTwo\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<type\>\"", "\[Rule]", "\"\<Symbol\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<uri\>\"", "\[Rule]", 
+           RowBox[{"pname", "<>", "\"\</ref/AddTwo\>\""}]}]}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"\"\<SearchTextTranslated\>\"", "\[Rule]", "\"\<\>\""}]}], 
+      "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"Saveable", "\[Rule]", "False"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"StyleDefinitions", "\[Rule]", 
+     RowBox[{"FrontEnd`FileName", "[", 
+      RowBox[{
+       RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}], 
+      "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"snname", ":=", "\"\<DotTwo\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nb", " ", "=", " ", 
+   RowBox[{"NotebookOpen", "[", 
+    RowBox[{"basepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NotebookSave", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", "\[IndentingNewLine]", 
+    RowBox[{"TaggingRules", "\[Rule]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"\"\<ModificationHighlight\>\"", "\[Rule]", "False"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"\"\<Metadata\>\"", "\[Rule]", 
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"\"\<context\>\"", "\[Rule]", 
+           RowBox[{"pname", "<>", "\"\<`\>\""}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<keywords\>\"", "\[Rule]", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<index\>\"", "\[Rule]", "True"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<label\>\"", "\[Rule]", 
+           "\"\<OSPackage Package Paclet Symbol\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<language\>\"", "\[Rule]", "\"\<en\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<paclet\>\"", "\[Rule]", "\"\<OSPackage Package\>\""}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<status\>\"", "\[Rule]", "\"\<\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<summary\>\"", "\[Rule]", 
+           RowBox[{"DotTwo", "::", "usage"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<synonyms\>\"", "\[Rule]", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"\"\<title\>\"", "\[Rule]", "\"\<DotTwo\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<type\>\"", "\[Rule]", "\"\<Symbol\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"\"\<uri\>\"", "\[Rule]", 
+           RowBox[{"pname", "<>", "\"\</ref/DotTwo\>\""}]}]}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"\"\<SearchTextTranslated\>\"", "\[Rule]", "\"\<\>\""}]}], 
+      "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"Saveable", "\[Rule]", "False"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"StyleDefinitions", "\[Rule]", 
+     RowBox[{"FrontEnd`FileName", "[", 
+      RowBox[{
+       RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}], 
+      "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.518546994733265*^9, 3.5185469948985453`*^9}, {
+   3.518547434257206*^9, 3.5185474765655107`*^9}, 3.518548269672572*^9, {
+   3.518739596473926*^9, 3.518739654827796*^9}, 3.518739719232798*^9, {
+   3.5187398614152517`*^9, 3.518739865077033*^9}, {3.51873991632686*^9, 
+   3.518739957846951*^9}, 3.5187400330838213`*^9, {3.518741008930285*^9, 
+   3.5187411395948887`*^9}, {3.518741188735806*^9, 3.5187412093747168`*^9}, {
+   3.518741240491881*^9, 3.518741241441635*^9}, {3.51874129135187*^9, 
+   3.5187413109902887`*^9}, 3.518741527535597*^9, 3.518741608809082*^9, {
+   3.5187419152499247`*^9, 3.5187419382313766`*^9}, {3.518742014155777*^9, 
+   3.51874203268758*^9}, {3.518742098365844*^9, 3.5187421018473177`*^9}, {
+   3.518743077807829*^9, 3.518743080846486*^9}, {3.5187431383953333`*^9, 
+   3.518743167468234*^9}, 3.518754888236679*^9, {3.518759746997266*^9, 
+   3.518759750444018*^9}, {3.518786591166997*^9, 3.518786634105838*^9}, {
+   3.5187866978522882`*^9, 3.5187867002008457`*^9}, {3.518786742503488*^9, 
+   3.518786796144915*^9}, {3.518786826250499*^9, 3.518786833189064*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"snname", ":=", "\"\<SOPackage\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nb", " ", "=", " ", 
+     RowBox[{"NotebookOpen", "[", 
+      RowBox[{"guidepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookSave", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"guidepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"Saveable", "\[Rule]", "False"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"StyleDefinitions", "\[Rule]", 
+       RowBox[{"FrontEnd`FileName", "[", 
+        RowBox[{
+         RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}],
+         "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.5187891169681396`*^9, 3.5187891635301657`*^9}, {
+  3.518789296345827*^9, 3.5187892980154*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"indir", "=", 
+   RowBox[{
+   "$UserBaseDirectory", "<>", "\"\</Applications/\>\"", "<>", "pname", "<>", 
+    "\"\</Documentation/English/Index\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FileNames", "[", "indir", "]"}], " ", "\[NotEqual]", " ", 
+     RowBox[{"{", "}"}]}], ",", " ", 
+    RowBox[{"DeleteDirectory", "[", 
+     RowBox[{"indir", ",", " ", 
+      RowBox[{"DeleteContents", "\[Rule]", " ", "True"}]}], "]"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ind", "=", 
+   RowBox[{
+   "DocumentationSearch`NewDocumentationNotebookIndexer", "[", "indir", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DocumentationSearch`AddDocumentationNotebook", "[", 
+   RowBox[{"ind", ",", " ", 
+    RowBox[{"basepath", "<>", "\"\<AddTwo.nb\>\""}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DocumentationSearch`AddDocumentationNotebook", "[", 
+   RowBox[{"ind", ",", " ", 
+    RowBox[{"basepath", "<>", "\"\<DotTwo.nb\>\""}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "DocumentationSearch`CloseDocumentationNotebookIndexer", "[", "ind", "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.5185475009123163`*^9, 3.518547534999498*^9}, {
+   3.518548288537284*^9, 3.5185483081751823`*^9}, {3.518548386514086*^9, 
+   3.518548389161662*^9}, {3.518548438823927*^9, 3.51854843908389*^9}, 
+   3.518741004446007*^9, {3.518741502973797*^9, 3.518741522443027*^9}, {
+   3.5187418604109087`*^9, 3.518741898601584*^9}, {3.518742222763424*^9, 
+   3.518742235589294*^9}, {3.518742299025051*^9, 3.518742303702457*^9}, {
+   3.518742622567622*^9, 3.518742626525326*^9}, {3.5187427088098593`*^9, 
+   3.5187427209371157`*^9}, {3.51874294079073*^9, 3.518743021506817*^9}, 
+   3.518743497695464*^9, {3.518787424339986*^9, 3.518787445095551*^9}}]
+},
+WindowSize->{1210, 625},
+WindowMargins->{{12, Automatic}, {Automatic, 34}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 1131, 25, 80, "Input"],
+Cell[1691, 47, 7086, 153, 879, "Input"],
+Cell[8780, 202, 1199, 32, 118, "Input"],
+Cell[9982, 236, 1906, 44, 103, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
