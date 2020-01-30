@@ -30,8 +30,9 @@ SetOptions[$FrontEnd,"NotebooksMenuHistoryLength"->20]
 (*Fix to T EX Exporter*)
 
 
-(* ::Input:: *)
-(*System`Convert`TeXFormDump`$TeXDelimiterReplacements = System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " | "\\right| " -> "|","\\left\\| " | "\\right\\| " -> "\\| "};*)
+System`Convert`TeXFormDump`$TeXDelimiterReplacements = 
+  System`Convert`TeXFormDump`$TeXDelimiterReplacements /. {"\\left| " \
+| "\\right| " -> "|", "\\left\\| " | "\\right\\| " -> "\\| "};
 
 
 (* ::Text:: *)
@@ -390,7 +391,7 @@ ScienceNotebooks`StyleButton::usage="Creates a button to create a style Cell of 
 StyleButton[name_]:=Button[name,SelectionMove[SelectedNotebook[],All,Cell];FrontEndExecute@FrontEndToken[SelectedNotebook[],"Style",name]];
 
 ScienceNotebooks`ListStyles::usage="List styles from current StyleSheet";
-ListStyles=Evaluate[#:>FrontEndTokenExecute[InputNotebook[],"Style",#]&/@FE`Evaluate[FEPrivate`GetPopupList["MenuListStyles"]][[All,1]]];
+ListStyles=(#:>FrontEndTokenExecute[InputNotebook[],"Style",#]&/@FE`Evaluate[FEPrivate`GetPopupList["MenuListStyles"]][[All,1]]);
 
 ScienceNotebooks`MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 MergeStyle[]:=Module[{path,child,childstyles,parent,nb,tmp,parentparent,parentstyles, old},(*find the parent stylesheet from the private stylesheet,a.k.a child*)
@@ -487,7 +488,7 @@ thrd=Thread[Variables[sols]->1];
 Pick[sols,Element[#,Reals]&/@(sols/.thrd)]
 ];
 
-ScienceNotebooks`PlusMinus::usage="Useful error notion";
+(*ScienceNotebooks`PlusMinus::usage="Useful error notion";
 PlusMinus[{x_, err_}] := 
  Module[{errE = Last@MantissaExponent[err], 
    xE = Last@MantissaExponent[x]}, 
@@ -499,7 +500,7 @@ PlusMinus[{x_, err_}] :=
      N@Round[err, 10^(errE - 1)]*10^(-xE + 1), {1, -errE - 1}, 
      ExponentFunction -> (Null &)], ")", " \[Times] ", 
     DisplayForm@SuperscriptBox["10", ToString[xE - 1]]}]];
-PlusMinus[x_, err_] := PlusMinus[{x, err}];
+PlusMinus[x_, err_] := PlusMinus[{x, err}];*)
 
 ScienceNotebooks`EvaluatedAt::usage="Shorthand for printing expressions evaluated at points";
 EvaluatedAt[expr_, Automatic, min_, max_] := EvaluatedAt[expr, Replace[Reduce`FreeVariables[expr], {{v_,___}->v, _->None}], min, max];

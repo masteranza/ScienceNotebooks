@@ -190,8 +190,8 @@ Cell[BoxData[
                    "\n", "           ", ",", " ", 
                    RowBox[{"BaseStyle", "->", " ", "buttonStyle"}]}], " ", 
                   "\n", "           ", "]"}], "~", " ", "Tooltip", " ", "~", 
-                 " ", "\"\<Export to TeX file\>\""}], "\n", "         ", ",", 
-                " ", 
+                 " ", "\"\<Export to TeX file\>\""}], "\[IndentingNewLine]", 
+                ",", " ", 
                 RowBox[{"{", " ", 
                  RowBox[{
                   RowBox[{"\"\<Quick PDF\>\"", " ", ":>", " ", 
@@ -204,8 +204,7 @@ Cell[BoxData[
                     ";"}], "*)"}], " ", 
                     RowBox[{"TeXExporter`ExportToTeX", "[", 
                     RowBox[{"TeXExportToPDF", "\[Rule]", "True"}], "]"}]}], 
-                    " ", "]"}]}], "\n", "           ", ",", " ", "Delimiter", 
-                  "\n", "           ", ",", " ", 
+                    " ", "]"}]}], "\n", "           ", ",", " ", 
                   RowBox[{"\"\<Normal\>\"", " ", ":>", " ", 
                    RowBox[{"Block", "[", 
                     RowBox[{
@@ -215,8 +214,40 @@ Cell[BoxData[
                     RowBox[{"Needs", "[", "\"\<ScienceNotebooks`\>\"", "]"}], 
                     ";"}], "*)"}], " ", 
                     RowBox[{"TeXExporter`ExportToTeX", "[", "]"}]}], " ", 
-                    "]"}]}]}], "\n", "           ", "}"}], "\n", "         ", 
-                ",", " ", 
+                    "]"}]}], "\[IndentingNewLine]", ",", "Delimiter", ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"\"\<Custom\>\"", " ", ":>", " ", 
+                   RowBox[{"Block", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"$ContextPath", ",", 
+                    RowBox[{"Internal`$ContextMarks", "=", "False"}]}], "}"}],
+                     ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"SelectionMove", "[", 
+                    RowBox[{
+                    RowBox[{"SelectedNotebook", "[", "]"}], ",", "Before", 
+                    ",", "Notebook"}], "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"NotebookWrite", "[", 
+                    RowBox[{
+                    RowBox[{"SelectedNotebook", "[", "]"}], ",", 
+                    RowBox[{"Cell", "[", 
+                    RowBox[{
+                    RowBox[{"BoxData", "[", 
+                    RowBox[{"RowBox", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<ExportToTeX\>\"", ",", "\"\<[\>\"", ",", 
+                    RowBox[{"RowBox", "@", 
+                    RowBox[{"Riffle", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"ToBoxes", "/@", 
+                    RowBox[{"(", 
+                    RowBox[{"Options", "[", "TeXExporter`ExportToTeX", "]"}], 
+                    ")"}]}], ")"}], ",", "\"\<,\>\""}], "]"}]}], ",", 
+                    "\"\<]\>\""}], "}"}], "]"}], "]"}], ",", 
+                    "\"\<Input\>\""}], "]"}]}], "]"}]}]}], "]"}]}]}], "\n", 
+                 "           ", "}"}], "\n", "         ", ",", " ", 
                 RowBox[{"Method", "->", "\"\<Queued\>\""}], "\n", "         ",
                  ",", " ", 
                 RowBox[{"Appearance", "->", "None"}], ",", 
@@ -279,7 +310,7 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[526]:=",
+ CellLabel->"In[108]:=",
  CellID->100046957,ExpressionUUID->"566fd72d-2ebb-42e1-823f-16e2ceccd36f"],
 
 Cell[BoxData[
@@ -325,7 +356,7 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[527]:=",
+ CellLabel->"In[109]:=",
  CellID->1082195967,ExpressionUUID->"8bbe0f88-1ce3-44e2-b8c9-7f844001adda"],
 
 Cell[BoxData[
@@ -374,9 +405,19 @@ Cell[CellGroupData[{
 Cell["Pack", "Subsection",
  CellID->1101315832,ExpressionUUID->"f6e0a895-e159-4265-ae75-e1524c0c1f2e"],
 
+Cell[BoxData[{
+ RowBox[{"PacletFind", "[", "\"\<DevTools\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SystemOpen", "[", 
+  RowBox[{"\"\<Location\>\"", "/.", 
+   RowBox[{
+   "PacletManager`PacletInformation", "[", "\"\<DevTools\>\"", "]"}]}], 
+  "]"}]}], "Input",
+ CellID->130218127,ExpressionUUID->"c05aee35-97a5-4d43-b815-5828f99774f9"],
+
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<DevTools`\>\"", "]"}]], "Input",
- CellLabel->"In[558]:=",
+ CellLabel->"In[210]:=",
  CellID->1949897273,ExpressionUUID->"844b39ca-9c42-4d24-85c6-6ffa0c19755f"],
 
 Cell[BoxData[
@@ -384,7 +425,7 @@ Cell[BoxData[
   RowBox[{"PacletDirectoryAdd", "@", 
    RowBox[{"ParentDirectory", "[", 
     RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[560]:=",
+ CellLabel->"In[211]:=",
  CellID->1952885911,ExpressionUUID->"18ea1d18-e732-4e4d-9ee6-79635e89d54e"],
 
 Cell[CellGroupData[{
@@ -395,12 +436,12 @@ Cell[BoxData[
    RowBox[{"First", "@", 
     RowBox[{"PacletFind", "[", "\"\<ScienceNotebooks\>\"", "]"}]}], ",", 
    "\"\<Date&Hour\>\""}], "]"}]], "Input",
- CellLabel->"In[561]:=",
+ CellLabel->"In[212]:=",
  CellID->600469188,ExpressionUUID->"d98d33ed-8dbc-4d94-9869-b24da3fc90c4"],
 
-Cell[BoxData["\<\"2020.1.27.23\"\>"], "Output",
- CellLabel->"Out[561]=",
- CellID->101241231,ExpressionUUID->"b636a732-2edf-4593-947f-9029bac24e1c"]
+Cell[BoxData["\<\"2020.1.30.14\"\>"], "Output",
+ CellLabel->"Out[212]=",
+ CellID->340463642,ExpressionUUID->"382fe42c-3ec5-42af-b522-8fdb585c151b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -417,27 +458,42 @@ Cell[BoxData[{
     RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"PacletFind", "[", "\"\<ScienceNotebooks\>\"", "]"}]}], "Input",
- CellLabel->"In[562]:=",
+ CellLabel->"In[213]:=",
  CellID->555075604,ExpressionUUID->"97c71c2d-7ae9-495a-a9a8-bf8542e05c18"],
 
 Cell[BoxData[
  RowBox[{"{", 
-  InterpretationBox[
-   RowBox[{
-   "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.27.23\"\>", 
-    ",", "<>", "]"}],
-   PacletManager`Paclet[
-   "Name" -> "ScienceNotebooks", "Version" -> "2020.1.27.23", 
-    "MathematicaVersion" -> "10.0+", "Description" -> 
-    "Collection of tools and stylesheet for scientific writting and \
+  RowBox[{
+   InterpretationBox[
+    RowBox[{
+    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", 
+     ",", "<>", "]"}],
+    PacletManager`Paclet[
+    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.14", 
+     "MathematicaVersion" -> "10.0+", "Description" -> 
+     "Collection of tools and stylesheet for scientific writting and \
 learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
-    "", "Loading" -> "Startup", 
-    "Extensions" -> {{"Documentation"}, {
-      "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
-    "/Users/masteranza/Dropbox/MathematicaAnki/Mathematica/ScienceNotebooks"]]\
-, "}"}]], "Output",
- CellLabel->"Out[564]=",
- CellID->2044570360,ExpressionUUID->"925a57fd-6e99-420e-8814-949052f6d91a"]
+     "", "Loading" -> "Startup", 
+     "Extensions" -> {{"Documentation"}, {
+       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+     "/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
+ScienceNotebooks"]], ",", 
+   InterpretationBox[
+    RowBox[{
+    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.27.23\"\>", 
+     ",", "<>", "]"}],
+    PacletManager`Paclet[
+    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.27.23", 
+     "MathematicaVersion" -> "10.0+", "Description" -> 
+     "Collection of tools and stylesheet for scientific writting and \
+learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
+     "", "Loading" -> "Startup", 
+     "Extensions" -> {{"Documentation"}, {
+       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+     "/Users/masteranza/Library/Mathematica/Autoload/ScienceNotebooks"]]}], 
+  "}"}]], "Output",
+ CellLabel->"Out[215]=",
+ CellID->2120910229,ExpressionUUID->"f03f93e9-a90c-4483-ab79-5e29feff1e17"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -468,36 +524,39 @@ Cell[BoxData[{
      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "<>", 
     "\"\</ScienceNotebooks\>\""}], ",", 
    RowBox[{"NotebookDirectory", "[", "]"}]}], "]"}]}], "Input",
- CellLabel->"In[565]:=",
+ CellLabel->"In[216]:=",
  CellID->734657281,ExpressionUUID->"964af767-18a6-40ea-80e0-3c78303b5f7b"],
 
 Cell[BoxData[
- RowBox[{"{", "\<\"/Users/masteranza/Dropbox/MathematicaAnki/Mathematica\"\>",
-   "}"}]], "Output",
- CellLabel->"Out[565]=",
- CellID->841822806,ExpressionUUID->"13e13a3b-18d4-491c-830b-750b34fb023a"],
+ RowBox[{"{", \
+"\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica\"\>", 
+  "}"}]], "Output",
+ CellLabel->"Out[216]=",
+ CellID->1607784247,ExpressionUUID->"7e501b0f-4893-400a-b2d7-9f08758a3df6"],
 
 Cell[BoxData[
- RowBox[{"{", \
-"\<\"/Users/masteranza/Dropbox/MathematicaAnki/Mathematica/_Build/.DS_Store\"\
-\>", "}"}]], "Output",
- CellLabel->"Out[566]=",
- CellID->893634006,ExpressionUUID->"de5ca025-58b0-4c7b-9b6b-8c0aff43bfee"],
+ RowBox[{"{", 
+  RowBox[{"\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_Build/.\
+DS_Store\"\>", 
+   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/.DS_Store\
+\"\>", ",", \
+"\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/ScienceNotebooks/\
+AnkiExporter/.DS_Store\"\>", 
+   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
+ScienceNotebooks/.DS_Store\"\>", 
+   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
+ScienceNotebooks/FrontEnd/.DS_Store\"\>", 
+   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
+ScienceNotebooks/FrontEnd/StyleSheets/.DS_Store\"\>", 
+   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
+ScienceNotebooks/TeXExporter/.DS_Store\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[217]=",
+ CellID->243109128,ExpressionUUID->"352a64f6-79c6-4f41-b483-548a389a29cd"],
 
-Cell[BoxData["\<\"/Users/masteranza/Dropbox/MathematicaAnki/Mathematica/_\
-Build/ScienceNotebooks-2020.1.27.23.paclet\"\>"], "Output",
- CellLabel->"Out[568]=",
- CellID->1953595371,ExpressionUUID->"fdea425f-49cf-401c-9b21-83ed4c6f25ba"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[""], "Input",
- CellID->1223514487,ExpressionUUID->"77b2aba1-c239-4d5d-93c6-0c6a116a0dd6"],
-
-Cell[BoxData["\<\"2020.1.27\"\>"], "Output",
- CellLabel->"Out[59]=",
- CellID->1050766464,ExpressionUUID->"23966e32-746b-400f-b0ed-e6155f56e1d6"]
+Cell[BoxData["\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_\
+Build/ScienceNotebooks-2020.1.30.14.paclet\"\>"], "Output",
+ CellLabel->"Out[219]=",
+ CellID->1421217702,ExpressionUUID->"a94ecfa8-6fce-4d8f-b1ff-06b086ee1c0a"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -522,18 +581,47 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[3]:=",
+ CellLabel->"In[229]:=",
  CellID->834272026,ExpressionUUID->"8d1b4ab1-930a-4b0f-8f86-5d8fb746d295"],
 
 Cell[BoxData[
- RowBox[{"{", "}"}]], "Output",
+ RowBox[{"{", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{
+    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", 
+     ",", "<>", "]"}],
+    PacletManager`Paclet[
+    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.14", 
+     "MathematicaVersion" -> "10.0+", "Description" -> 
+     "Collection of tools and stylesheet for scientific writting and \
+learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
+     "", "Loading" -> "Startup", 
+     "Extensions" -> {{"Documentation"}, {
+       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+     "/Users/masteranza/Library/Mathematica/Paclets/Repository/\
+ScienceNotebooks-2020.1.30.14"]], ",", 
+   InterpretationBox[
+    RowBox[{
+    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.27.23\"\>", 
+     ",", "<>", "]"}],
+    PacletManager`Paclet[
+    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.27.23", 
+     "MathematicaVersion" -> "10.0+", "Description" -> 
+     "Collection of tools and stylesheet for scientific writting and \
+learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
+     "", "Loading" -> "Startup", 
+     "Extensions" -> {{"Documentation"}, {
+       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+     "/Users/masteranza/Library/Mathematica/Autoload/ScienceNotebooks"]]}], 
+  "}"}]], "Output",
  ShowCellBracket->True,
  CellOpen->True,
  GeneratedCell->True,
  CellAutoOverwrite->True,
  ShowCellLabel->True,
- CellLabel->"Out[3]=",
- CellID->1929549493,ExpressionUUID->"41d48905-2574-4298-b6c4-9be14f4c0773"]
+ CellLabel->"Out[229]=",
+ CellID->1793027789,ExpressionUUID->"71673903-3648-48bd-96c4-1a30ae353c1a"]
 }, Open  ]]
 }, Open  ]],
 
@@ -547,13 +635,13 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"PacletUninstall", "/@", 
   RowBox[{"PacletFind", "[", "\"\<ScienceNotebooks\>\"", "]"}]}]], "Input",
- CellLabel->"In[2]:=",
+ CellLabel->"In[3]:=",
  CellID->1019585954,ExpressionUUID->"deebf12b-c875-415a-a847-a10fa2881231"],
 
 Cell[BoxData[
  RowBox[{"{", "Null", "}"}]], "Output",
- CellLabel->"Out[2]=",
- CellID->1092358154,ExpressionUUID->"61b8deeb-e6f1-4d0f-a89b-ed2abac8ab8b"]
+ CellLabel->"Out[3]=",
+ CellID->1813626243,ExpressionUUID->"1378f539-3b43-4283-9fbf-d5b6c592713d"]
 }, Open  ]]
 }, Open  ]],
 
@@ -568,13 +656,13 @@ Cell[BoxData[
  RowBox[{"PacletDirectoryRemove", "@", 
   RowBox[{"ParentDirectory", "[", 
    RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}]], "Input",
- CellLabel->"In[571]:=",
+ CellLabel->"In[222]:=",
  CellID->1368955761,ExpressionUUID->"b564300d-cf51-4d66-a480-7a993561087c"],
 
 Cell[BoxData[
  RowBox[{"{", "}"}]], "Output",
- CellLabel->"Out[571]=",
- CellID->1587055003,ExpressionUUID->"921b7305-cd28-465d-bfc0-d0f2fa02428a"]
+ CellLabel->"Out[222]=",
+ CellID->1518570388,ExpressionUUID->"f67bfb92-7465-47ca-b9fe-3a605847885c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -582,34 +670,34 @@ Cell[CellGroupData[{
 Cell[BoxData[{
  RowBox[{"SetDirectory", "@", 
   RowBox[{"NotebookDirectory", "[", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"PacletInstall", "/@", 
-  RowBox[{"FileNames", "[", "\"\<*.paclet\>\"", "]"}]}]}], "Input",
- CellLabel->"In[572]:=",
+ RowBox[{"PacletInstall", "@", 
+  RowBox[{"Last", "@", 
+   RowBox[{"FileNames", "[", "\"\<*.paclet\>\"", "]"}]}]}]}], "Input",
+ CellLabel->"In[226]:=",
  CellID->1951777073,ExpressionUUID->"079b5554-6340-48dc-820a-082bb353317f"],
 
-Cell[BoxData["\<\"/Users/masteranza/Dropbox/MathematicaAnki/Mathematica/_\
+Cell[BoxData["\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_\
 Build\"\>"], "Output",
- CellLabel->"Out[572]=",
- CellID->865250696,ExpressionUUID->"c83fb4d3-ebf8-4c88-a4fa-ed99892324a1"],
+ CellLabel->"Out[226]=",
+ CellID->1182060274,ExpressionUUID->"ae7592e4-0b88-452e-b93b-a8e4ea13b1df"],
 
 Cell[BoxData[
- RowBox[{"{", 
-  InterpretationBox[
-   RowBox[{
-   "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.27.23\"\>", 
-    ",", "<>", "]"}],
-   PacletManager`Paclet[
-   "Name" -> "ScienceNotebooks", "Version" -> "2020.1.27.23", 
-    "MathematicaVersion" -> "10.0+", "Description" -> 
-    "Collection of tools and stylesheet for scientific writting and \
-learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
-    "", "Loading" -> "Startup", 
-    "Extensions" -> {{"Documentation"}, {
-      "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
-    "/Users/masteranza/Library/Mathematica/Paclets/Repository/\
-ScienceNotebooks-2020.1.27.23"]], "}"}]], "Output",
- CellLabel->"Out[573]=",
- CellID->1656673835,ExpressionUUID->"e1bb0bad-4dcc-44b7-8989-eb3a88e67343"]
+ InterpretationBox[
+  RowBox[{
+  "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", ",",
+    "<>", "]"}],
+  PacletManager`Paclet[
+  "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.14", 
+   "MathematicaVersion" -> "10.0+", "Description" -> 
+   "Collection of tools and stylesheet for scientific writting and learning.",
+    "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> "", 
+   "Loading" -> "Startup", 
+   "Extensions" -> {{"Documentation"}, {
+     "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+   "/Users/masteranza/Library/Mathematica/Paclets/Repository/ScienceNotebooks-\
+2020.1.30.14"]]], "Output",
+ CellLabel->"Out[227]=",
+ CellID->515806721,ExpressionUUID->"b4fce6cc-7ff3-4512-b902-01ad5acee0f8"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -636,27 +724,31 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[574]:=",
+ CellLabel->"In[228]:=",
  CellID->1614539762,ExpressionUUID->"2213dc04-e2eb-472b-befc-2cc351452d68"],
 
 Cell[BoxData["\<\"Default.nb\"\>"], "Output",
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"Out[574]=",
- CellID->2028724730,ExpressionUUID->"9f11e183-3c8f-45df-b585-a61fc091570f"]
+ CellLabel->"Out[228]=",
+ CellID->186256237,ExpressionUUID->"037c5e4e-00e0-4c30-b755-09d456375387"]
 }, Open  ]],
 
 Cell[BoxData[
  RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Set", " ", "the", " ", "stylesheet", " ", "to", " ", 
+    RowBox[{"Science", ".", "nb"}]}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
-   RowBox[{"CurrentValue", "[", 
-    RowBox[{"$FrontEnd", ",", "\"\<DefaultStyleDefinitions\>\""}], "]"}], 
-   "=", "\"\<Science.nb\>\""}], ";"}]], "Input",
+   RowBox[{
+    RowBox[{"CurrentValue", "[", 
+     RowBox[{"$FrontEnd", ",", "\"\<DefaultStyleDefinitions\>\""}], "]"}], 
+    "=", "\"\<Science.nb\>\""}], ";"}]}]], "Input",
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[575]:=",
+ CellLabel->"In[1]:=",
  CellID->2113900089,ExpressionUUID->"8fc7d430-50d9-4264-b39e-df0c7f9e7a67"],
 
 Cell[CellGroupData[{
@@ -716,460 +808,12 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"CodeFormatterSpelunk", "[", "PacletUpdate", "]"}]], "Input",
  CellLabel->"In[533]:=",
- CellID->592829401,ExpressionUUID->"3042edf3-e2e6-42d8-aa4f-676bfce9d014"],
-
-Cell[CellGroupData[{
-
-Cell["PacletUpdate", "Subsubsection",
- GeneratedCell->True,
- CellAutoOverwrite->True,
- CellID->1062715605,ExpressionUUID->"7be17970-171e-43b5-85a7-d0300ace3257"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"PacletUpdate", "[", 
-   RowBox[{"pacletName_String", ",", 
-    RowBox[{"opts", ":", 
-     RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", "\n", "    ", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "localPaclets", "}"}], ",", "\n", "    ", "    ", 
-    RowBox[{"(", "    ", "    ", "    ", "\n", "    ", "    ", "    ", 
-     RowBox[{
-      RowBox[{"localPaclets", "=", "\n", "    ", "    ", "    ", "    ", 
-       RowBox[{"Quiet", "[", "\n", "    ", "    ", "    ", "    ", "    ", 
-        RowBox[{
-        "PacletFind", "[", "    ", "    ", "    ", "    ", "    ", "    ", 
-         "\n", "    ", "    ", "    ", "    ", "    ", "    ", 
-         RowBox[{
-         "pacletName", ",", "\n", "    ", "    ", "    ", "    ", "    ", 
-          "    ", 
-          RowBox[{"\"\<Enabled\>\"", "->", "All"}], ",", "\n", "    ", "    ",
-           "    ", "    ", "    ", "    ", 
-          RowBox[{"\"\<Internal\>\"", "->", "All"}], ",", "    ", "    ", 
-          "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ", 
-          "    ", "    ", "    ", 
-          RowBox[{
-          "\"\<IncludeDocPaclets\>\"", "\n", "    ", "    ", "    ", "    ", 
-           "    ", "    ", "->", "\n", "    ", "    ", "    ", "    ", "    ",
-            "    ", 
-           RowBox[{"StringMatchQ", "[", 
-            RowBox[{"pacletName", ",", "\"\<SystemDocs_*\>\""}], "]"}]}]}], 
-         "\n", "    ", "    ", "    ", "    ", "    ", "]"}], "\n", "    ", 
-        "    ", "    ", "    ", "]"}]}], ";", "\n", "    ", "    ", "    ", 
-      RowBox[{"If", "[", "\n", "    ", "    ", "    ", "    ", 
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{
-          RowBox[{"Length", "[", "localPaclets", "]"}], "==", "0"}], ")"}], 
-        ",", "\n", "    ", "    ", "    ", "    ", 
-        RowBox[{
-        "PacletInstall", "[", "    ", "    ", "    ", "    ", "    ", "\n", 
-         "    ", "    ", "    ", "    ", "    ", 
-         RowBox[{
-         "pacletName", ",", "\n", "    ", "    ", "    ", "    ", "    ", 
-          RowBox[{"FilterRules", "[", 
-           RowBox[{
-            RowBox[{"{", "opts", "}"}], ",", 
-            RowBox[{"Options", "[", "PacletInstall", "]"}]}], "]"}]}], "\n", 
-         "    ", "    ", "    ", "    ", "]"}], ",", "\n", "    ", "    ", 
-        "    ", "    ", 
-        RowBox[{"(*", " ", "else", " ", "*)"}], "\n", "    ", "    ", "    ", 
-        "    ", 
-        RowBox[{"PacletUpdate", "[", 
-         RowBox[{
-          RowBox[{"First", "[", "localPaclets", "]"}], ",", "opts"}], "]"}]}],
-        "\n", "    ", "    ", "    ", "]"}]}], "\n", "    ", "    ", ")"}]}], 
-   "\n", "    ", "]"}]}]], "Input",
- GeneratedCell->True,
- CellAutoOverwrite->True,
- CellID->439681136,ExpressionUUID->"cc499a01-6cdf-4477-af7b-1aee6fd62926"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"PacletUpdate", "[", 
-   RowBox[{"paclet_Paclet", ",", 
-    RowBox[{"opts", ":", 
-     RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", "\n", "    ", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"result", "=", "Null"}], ",", "remote", ",", "bestRemote", ",", 
-      "site", ",", "isNewSite", ",", "updateSites"}], "}"}], ",", "\n", 
-    "    ", "    ", 
-    RowBox[{"(", "    ", "    ", "    ", "\n", "    ", "    ", "    ", 
-     RowBox[{
-      RowBox[{"site", "=", 
-       RowBox[{"OptionValue", "[", "\"\<Site\>\"", "]"}]}], ";", "\n", "    ",
-       "    ", "    ", 
-      RowBox[{
-      "If", "[", "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ",
-        "    ", 
-       RowBox[{
-        RowBox[{"StringQ", "[", "site", "]"}], ",", "\n", "    ", "    ", 
-        "    ", "    ", 
-        RowBox[{
-        "(", "    ", "    ", "    ", "    ", "    ", "\n", "    ", "    ", 
-         "    ", "    ", "    ", 
-         RowBox[{
-          RowBox[{
-          "try", "[", "    ", "    ", "    ", "    ", "    ", "    ", "\n", 
-           "    ", "    ", "    ", "    ", "    ", "    ", 
-           RowBox[{
-            RowBox[{
-            "(", "    ", "    ", "    ", "    ", "    ", "    ", "    ", "\n",
-              "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-             RowBox[{
-              RowBox[{
-              "isNewSite", "=", "\n", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", 
-               RowBox[{
-               "Not", "[", "\n", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "    ", "    ", "    ", 
-                RowBox[{
-                "MemberQ", "[", "    ", "    ", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "    ", "\n", "    ", "    ",
-                  "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                 "    ", 
-                 RowBox[{
-                  RowBox[{"PacletSites", "[", "]"}], ",", "\n", "    ", 
-                  "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", "    ", 
-                  RowBox[{
-                  "PacletSite", "[", "\n", "    ", "    ", "    ", "    ", 
-                   "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                   RowBox[{"site", ",", 
-                    RowBox[{"BlankSequence", "[", "]"}]}], "\n", "    ", 
-                   "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                   "    ", "    ", "]"}]}], "\n", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "    ", "    ", "]"}], "\n", 
-                "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "]"}]}], ";", "\n", "    ", "    ", "    ", "    ", 
-              "    ", "    ", "    ", 
-              RowBox[{"PacletSiteAdd", "[", "site", "]"}], ";", "\n", "    ", 
-              "    ", "    ", "    ", "    ", "    ", "    ", 
-              RowBox[{"PacletSiteUpdate", "[", "site", "]"}], ";", "\n", 
-              "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-              RowBox[{
-              "result", "=", "\n", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", 
-               RowBox[{
-               "PacletUpdate", "[", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ", 
-                "    ", "    ", "    ", "    ", "    ", "    ", 
-                RowBox[{
-                "paclet", ",", "    ", "    ", "    ", "    ", "    ", "    ",
-                  "    ", "    ", "    ", "\n", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "    ", "    ", 
-                 RowBox[{
-                 "\"\<KeepExisting\>\"", "\n", "    ", "    ", "    ", "    ",
-                   "    ", "    ", "    ", "    ", "    ", "->", "\n", "    ",
-                   "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", 
-                  RowBox[{"OptionValue", "[", "\"\<KeepExisting\>\"", "]"}]}],
-                  ",", "    ", "    ", "    ", "    ", "    ", "    ", "    ",
-                  "    ", "    ", "\n", "    ", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "    ", 
-                 RowBox[{
-                 "\"\<Asynchronous\>\"", "\n", "    ", "    ", "    ", "    ",
-                   "    ", "    ", "    ", "    ", "    ", "->", "\n", "    ",
-                   "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", 
-                  RowBox[{
-                  "OptionValue", "[", "\"\<Asynchronous\>\"", "]"}]}]}], "\n",
-                 "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "]"}]}]}], "\n", "    ", "    ", "    ", "    ", 
-             "    ", "    ", ")"}], ",", "\n", "    ", "    ", "    ", "    ",
-             "    ", "    ", 
-            RowBox[{"If", "[", 
-             RowBox[{"isNewSite", ",", 
-              RowBox[{"PacletSiteRemove", "[", "site", "]"}]}], "]"}]}], "\n",
-            "    ", "    ", "    ", "    ", "    ", "]"}], ";", "\n", "    ", 
-          "    ", "    ", "    ", "    ", 
-          RowBox[{"Return", "[", "result", "]"}]}], "\n", "    ", "    ", 
-         "    ", "    ", ")"}]}], "\n", "    ", "    ", "    ", "]"}], ";", 
-      "\n", "    ", "    ", "    ", 
-      RowBox[{"updateSites", "=", 
-       RowBox[{"OptionValue", "[", "\"\<UpdateSites\>\"", "]"}]}], ";", "\n", 
-      "    ", "    ", "    ", 
-      RowBox[{
-      "If", "[", "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ",
-        "    ", 
-       RowBox[{
-        RowBox[{"TrueQ", "[", "updateSites", "]"}], ",", "\n", "    ", "    ",
-         "    ", "    ", 
-        RowBox[{"Quiet", "[", 
-         RowBox[{"PacletSiteUpdate", "/@", 
-          RowBox[{"PacletSites", "[", "]"}]}], "]"}]}], "\n", "    ", "    ", 
-       "    ", "]"}], ";", "\n", "    ", "    ", "    ", 
-      RowBox[{"remote", "=", "\n", "    ", "    ", "    ", "    ", 
-       RowBox[{"PacletFindRemote", "[", 
-        RowBox[{
-         RowBox[{"paclet", "[", "\"\<Name\>\"", "]"}], ",", 
-         RowBox[{"\"\<UpdateSites\>\"", "->", "False"}]}], "]"}]}], ";", "\n",
-       "    ", "    ", "    ", 
-      RowBox[{
-      "If", "[", "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ",
-        "    ", 
-       RowBox[{
-        RowBox[{
-        "(", "    ", "    ", "    ", "    ", "    ", "\n", "    ", "    ", 
-         "    ", "    ", "    ", 
-         RowBox[{
-          RowBox[{"(", 
-           RowBox[{"updateSites", "===", "Automatic"}], ")"}], "\n", "    ", 
-          "    ", "    ", "    ", "    ", "&&", "\n", "    ", "    ", "    ", 
-          "    ", "    ", 
-          RowBox[{
-          "(", "    ", "    ", "    ", "    ", "    ", "    ", "\n", "    ", 
-           "    ", "    ", "    ", "    ", "    ", 
-           RowBox[{
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"Length", "[", "remote", "]"}], "==", "0"}], ")"}], 
-            "\n", "    ", "    ", "    ", "    ", "    ", "    ", "||", "\n", 
-            "    ", "    ", "    ", "    ", "    ", "    ", 
-            RowBox[{
-            "Not", "[", "\n", "    ", "    ", "    ", "    ", "    ", "    ", 
-             "    ", 
-             RowBox[{
-             "PacletNewerQ", "[", "    ", "    ", "    ", "    ", "    ", 
-              "    ", "    ", "    ", "\n", "    ", "    ", "    ", "    ", 
-              "    ", "    ", "    ", "    ", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"First", "[", "remote", "]"}], "[", "\"\<Version\>\"",
-                 "]"}], ",", "\n", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", 
-               RowBox[{"paclet", "[", "\"\<Version\>\"", "]"}]}], "\n", 
-              "    ", "    ", "    ", "    ", "    ", "    ", "    ", "]"}], 
-             "\n", "    ", "    ", "    ", "    ", "    ", "    ", "]"}]}], 
-           "\n", "    ", "    ", "    ", "    ", "    ", ")"}]}], "\n", 
-         "    ", "    ", "    ", "    ", ")"}], ",", "\n", "    ", "    ", 
-        "    ", "    ", 
-        RowBox[{
-        "(", "    ", "    ", "    ", "    ", "    ", "\n", "    ", "    ", 
-         "    ", "    ", "    ", 
-         RowBox[{
-          RowBox[{"lastSite", "=", 
-           RowBox[{"lastUpdatedPacletSite", "[", "]"}]}], ";", "\n", "    ", 
-          "    ", "    ", "    ", "    ", 
-          RowBox[{
-          "If", "[", "    ", "    ", "    ", "    ", "    ", "    ", "\n", 
-           "    ", "    ", "    ", "    ", "    ", "    ", 
-           RowBox[{
-            RowBox[{
-            "(", "    ", "    ", "    ", "    ", "    ", "    ", "    ", "\n",
-              "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-             RowBox[{
-              RowBox[{"(", 
-               RowBox[{
-                RowBox[{"Length", "[", "lastSite", "]"}], ">", "1"}], ")"}], 
-              "\n", "    ", "    ", "    ", "    ", "    ", "    ", "    ", "&&",
-               "\n", "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-              RowBox[{
-              "(", "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "\n", "    ", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", 
-               RowBox[{
-                RowBox[{
-                "differenceInDays", "[", "\n", "    ", "    ", "    ", "    ",
-                  "    ", "    ", "    ", "    ", "    ", 
-                 RowBox[{
-                  RowBox[{"Part", "[", 
-                   RowBox[{"lastSite", ",", "2"}], "]"}], ",", 
-                  RowBox[{"Date", "[", "]"}]}], "\n", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "    ", "]"}], "\n", "    ", 
-                "    ", "    ", "    ", "    ", "    ", "    ", "    ", ">", 
-                "\n", "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "0.5`"}], "\n", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", ")"}]}], "\n", "    ", "    ", "    ", 
-             "    ", "    ", "    ", ")"}], ",", "\n", "    ", "    ", "    ",
-             "    ", "    ", "    ", 
-            RowBox[{
-            "(", "    ", "    ", "    ", "    ", "    ", "    ", "    ", "\n",
-              "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-             RowBox[{
-              RowBox[{"Quiet", "[", 
-               RowBox[{"PacletSiteUpdate", "/@", 
-                RowBox[{"PacletSites", "[", "]"}]}], "]"}], ";", "\n", "    ",
-               "    ", "    ", "    ", "    ", "    ", "    ", 
-              RowBox[{
-              "remote", "=", "\n", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", 
-               RowBox[{
-               "PacletFindRemote", "[", "    ", "    ", "    ", "    ", 
-                "    ", "    ", "    ", "    ", "    ", "\n", "    ", "    ", 
-                "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                RowBox[{
-                 RowBox[{"paclet", "[", "\"\<Name\>\"", "]"}], ",", "\n", 
-                 "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                 "    ", "    ", 
-                 RowBox[{"\"\<UpdateSites\>\"", "->", "False"}]}], "\n", 
-                "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "]"}]}]}], "\n", "    ", "    ", "    ", "    ", 
-             "    ", "    ", ")"}]}], "\n", "    ", "    ", "    ", "    ", 
-           "    ", "]"}]}], "\n", "    ", "    ", "    ", "    ", ")"}]}], 
-       "\n", "    ", "    ", "    ", "]"}], ";", "\n", "    ", "    ", "    ", 
-      RowBox[{"If", "[", "\n", "    ", "    ", "    ", "    ", 
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{
-          RowBox[{"Length", "[", "remote", "]"}], ">", "0"}], ")"}], ",", 
-        "\n", "    ", "    ", "    ", "    ", 
-        RowBox[{
-        "(", "    ", "    ", "    ", "    ", "    ", "\n", "    ", "    ", 
-         "    ", "    ", "    ", 
-         RowBox[{
-          RowBox[{"bestRemote", "=", 
-           RowBox[{"First", "[", "remote", "]"}]}], ";", "\n", "    ", "    ",
-           "    ", "    ", "    ", 
-          RowBox[{
-          "If", "[", "    ", "    ", "    ", "    ", "    ", "    ", "\n", 
-           "    ", "    ", "    ", "    ", "    ", "    ", 
-           RowBox[{
-            RowBox[{
-            "PacletNewerQ", "[", "\n", "    ", "    ", "    ", "    ", "    ",
-              "    ", "    ", 
-             RowBox[{
-              RowBox[{"bestRemote", "[", "\"\<Version\>\"", "]"}], ",", 
-              RowBox[{"paclet", "[", "\"\<Version\>\"", "]"}]}], "\n", "    ",
-              "    ", "    ", "    ", "    ", "    ", "]"}], ",", "\n", 
-            "    ", "    ", "    ", "    ", "    ", "    ", 
-            RowBox[{
-            "(", "    ", "    ", "    ", "    ", "    ", "    ", "    ", "\n",
-              "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-             RowBox[{
-              RowBox[{
-              "result", "=", "\n", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", 
-               RowBox[{
-               "PacletInstall", "[", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ", 
-                "    ", "    ", "    ", "    ", "    ", "    ", 
-                RowBox[{
-                "bestRemote", ",", "\n", "    ", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "    ", 
-                 RowBox[{
-                 "Join", "[", "    ", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", "    ", "    ", "    ", "\n", "    ", "    ", 
-                  "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", 
-                  RowBox[{
-                   RowBox[{
-                   "FilterRules", "[", "    ", "    ", "    ", "    ", "    ",
-                     "    ", "    ", "    ", "    ", "    ", "    ", "\n", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", 
-                    RowBox[{
-                    RowBox[{"Flatten", "[", 
-                    RowBox[{"{", "opts", "}"}], "]"}], ",", "\n", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", 
-                    RowBox[{"Options", "[", "PacletInstall", "]"}]}], "\n", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "]"}], ",", "\n", "    ", "    ", 
-                   "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                   "    ", 
-                   RowBox[{
-                   "{", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "\n", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", 
-                    RowBox[{
-                    "\"\<CompletionFunction\>\"", "\n", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "->", "\n", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", 
-                    RowBox[{
-                    "With", "[", "\n", "    ", "    ", "    ", "    ", "    ",
-                     "    ", "    ", "    ", "    ", "    ", "    ", 
-                    RowBox[{
-                    RowBox[{
-                    "{", "\n", "    ", "    ", "    ", "    ", "    ", "    ",
-                     "    ", "    ", "    ", "    ", "    ", "    ", 
-                    RowBox[{
-                    "keep", "=", "\n", "    ", "    ", "    ", "    ", "    ",
-                     "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", 
-                    RowBox[{
-                    "OptionValue", "[", "\n", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "\"\<KeepExisting\>\"", "\n", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "]"}]}], 
-                    "\n", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "}"}], ",", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "\n", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", 
-                    RowBox[{
-                    RowBox[{
-                    "finishUpdate", "[", "\n", "    ", "    ", "    ", "    ",
-                     "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", 
-                    RowBox[{"#1", ",", "paclet", ",", "keep"}], "\n", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "]"}], "&"}]}], "\n", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "    ", "    ", "]"}]}], "\n", "    ", 
-                    "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                    "    ", "    ", "}"}]}], "\n", "    ", "    ", "    ", 
-                  "    ", "    ", "    ", "    ", "    ", "    ", "]"}]}], 
-                "\n", "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "]"}]}], ";", "\n", "    ", "    ", "    ", "    ", 
-              "    ", "    ", "    ", 
-              RowBox[{
-              "If", "[", "    ", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "\n", "    ", "    ", "    ", "    ", "    ", 
-               "    ", "    ", "    ", 
-               RowBox[{
-                RowBox[{"(", 
-                 RowBox[{
-                  RowBox[{"Head", "[", "result", "]"}], "===", "Paclet"}], 
-                 ")"}], ",", "\n", "    ", "    ", "    ", "    ", "    ", 
-                "    ", "    ", "    ", 
-                RowBox[{
-                "finishUpdate", "[", "    ", "    ", "    ", "    ", "    ", 
-                 "    ", "    ", "    ", "    ", "\n", "    ", "    ", "    ",
-                  "    ", "    ", "    ", "    ", "    ", "    ", 
-                 RowBox[{
-                 "result", ",", "\n", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", "    ", "    ", "    ", "paclet", ",", "\n", "    ",
-                   "    ", "    ", "    ", "    ", "    ", "    ", "    ", 
-                  "    ", 
-                  RowBox[{"OptionValue", "[", "\"\<KeepExisting\>\"", "]"}]}],
-                  "\n", "    ", "    ", "    ", "    ", "    ", "    ", 
-                 "    ", "    ", "]"}]}], "\n", "    ", "    ", "    ", 
-               "    ", "    ", "    ", "    ", "]"}]}], "\n", "    ", "    ", 
-             "    ", "    ", "    ", "    ", ")"}]}], "\n", "    ", "    ", 
-           "    ", "    ", "    ", "]"}]}], "\n", "    ", "    ", "    ", 
-         "    ", ")"}], ",", "\n", "    ", "    ", "    ", "    ", 
-        RowBox[{"(*", " ", "else", " ", "*)"}], "\n", "    ", "    ", "    ", 
-        "    ", 
-        RowBox[{
-        "Message", "[", "    ", "    ", "    ", "    ", "    ", "\n", "    ", 
-         "    ", "    ", "    ", "    ", 
-         RowBox[{
-          RowBox[{"MessageName", "[", 
-           RowBox[{"PacletUpdate", ",", "\"\<uptodate\>\""}], "]"}], ",", 
-          "\n", "    ", "    ", "    ", "    ", "    ", 
-          RowBox[{"paclet", "[", "\"\<Name\>\"", "]"}]}], "\n", "    ", 
-         "    ", "    ", "    ", "]"}]}], "\n", "    ", "    ", "    ", "]"}],
-       ";", "\n", "    ", "    ", "    ", "result"}], "\n", "    ", "    ", 
-     ")"}]}], "\n", "    ", "]"}]}]], "Input",
- GeneratedCell->True,
- CellAutoOverwrite->True,
- CellID->229623425,ExpressionUUID->"0c52364b-677d-4e4d-9287-97b6c31e358c"]
-}, Open  ]]
+ CellID->592829401,ExpressionUUID->"3042edf3-e2e6-42d8-aa4f-676bfce9d014"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1239, 855},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{1200, 926},
+WindowMargins->{{Automatic, 596}, {163, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowCellLabel->True,
 ShowCellTags->True,

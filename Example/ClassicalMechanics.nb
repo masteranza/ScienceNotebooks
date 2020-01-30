@@ -1,0 +1,320 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11191,        312]
+NotebookOptionsPosition[      8802,        250]
+NotebookOutlinePosition[      9532,        277]
+CellTagsIndexPosition[      9433,        271]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Classical Mechanics", "Title",
+ CellID->1725868302,ExpressionUUID->"df2f42fd-9883-40ed-9d90-a861b95289c5"],
+
+Cell["Ranza", "Author",
+ CellID->1282756762,ExpressionUUID->"b9487f82-a19f-4790-b2da-5eda56d3424c"],
+
+Cell["ScienceNotebooks GitHub rep", "Affiliation",
+ CellID->1246368620,ExpressionUUID->"366dd1dc-41c9-4018-af39-cc2384cb1e25"],
+
+Cell[BoxData[
+ RowBox[{"ExportToTeX", "[", 
+  RowBox[{
+   RowBox[{"TeXExportToPDF", "\[Rule]", "False"}], ",", 
+   RowBox[{"TeXBibFile", "\[Rule]", "\"\<Mechanics\>\""}], ",", 
+   RowBox[{"TeXWriteAuthors", "\[Rule]", "True"}], ",", 
+   RowBox[{"TeXLineSpread", "\[Rule]", "\"\<1.15\>\""}]}], "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->1246812308,ExpressionUUID->"e8a7a315-5b89-46f1-bb47-a45b7d32e0ca"],
+
+Cell[CellGroupData[{
+
+Cell["Principle of least action", "Section",
+ CellID->2021949700,ExpressionUUID->"e5d61ce2-b8be-40a1-8a7c-d1695c9894a9"],
+
+Cell[TextData[{
+ "Given the Lagrangian ",
+ Cell[BoxData[
+  FormBox["L", TraditionalForm]],ExpressionUUID->
+  "43a784a3-d258-47e3-b35e-a0fc4ffe94ed"],
+ " of variables ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["q", "i"], ",", 
+    SubscriptBox[
+     OverscriptBox["q", "."], "i"]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "50f13b6f-4373-4b89-a072-373c7fd4d14f"],
+ " the principle of least action states"
+}], "Text",
+ CellID->1384011497,ExpressionUUID->"eced51b3-821d-4d9a-87c6-cb466b2b851c"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{"\[PartialD]", "L"}], 
+     RowBox[{"\[PartialD]", 
+      SubscriptBox["q", "i"]}]], "-", 
+    RowBox[{
+     SubscriptBox["\[PartialD]", "t"], 
+     FractionBox[
+      RowBox[{"\[PartialD]", "L"}], 
+      RowBox[{"\[PartialD]", 
+       OverscriptBox["q", "."]}]]}]}], "=", "0"}], 
+  TraditionalForm]], "EquationNumbered",
+ CellTags->"LeastAction",
+ CellID->43813539,ExpressionUUID->"caca0809-ee69-4d3c-9f6f-bc53172be8d8"],
+
+Cell[TextData[{
+ "Equation ",
+ Cell[BoxData[
+  ButtonBox[
+   DynamicBox[ScienceNotebooks`ReferenceBox["LeastAction", False, ""],
+    ImageSizeCache->{30., {2.548828125, 11.}},
+    UpdateInterval->Infinity],
+   TaggingRules -> {"deeptag" -> "LeastAction", "TeXtag" -> "LeastAction"},
+   BaseStyle->{"Hyperlink"},
+   ButtonData->"LeastAction",
+   Tooltip->DynamicBox[
+     ScienceNotebooks`RefCellTooltip["LeastAction", 
+      If[False, "", None]], UpdateInterval -> Infinity],
+   TooltipDelay->0.05,
+   TooltipStyle->{Background -> RGBColor[1, 1, 1], CellFrame -> 1}]],
+  ExpressionUUID->"2d8743a4-c786-4a78-bc73-b4562e68010e"],
+ " can be found in ",
+ Cell[BoxData[
+  ButtonBox[
+   RowBox[{"[", "arnold1989mathematical", "]"}],
+   TaggingRules -> {
+    "citekey" -> "arnold1989mathematical", "zotero" -> 
+     "zotero://select/items/1_ZUYYWE88", "collection" -> "R7DDZ9JE"},
+   BaseStyle->{"Hyperlink"},
+   ButtonFunction:>SystemOpen["zotero://select/items/1_ZUYYWE88"],
+   Tooltip->"Arnol\:02b9d (1989)\nMathematical methods of classical mechanics",
+   TooltipStyle->{Background -> RGBColor[1, 1, 1], CellFrame -> 1}]], "Cite",
+  ExpressionUUID->"1a24fce1-82ed-4429-8836-0f6f88d0f31c"]
+}], "Text",
+ CellID->1556569666,ExpressionUUID->"36593846-2a0d-47f1-bfc8-371d8cf0e290"],
+
+Cell[TextData[{
+ "Variable which doesn\[CloseCurlyQuote]t occur in the Lagrangian is called \
+cyclic and is connected with ",
+ StyleBox["a conserved quantity (symmetry).",
+  Background->RGBColor[0.88, 1, 0.88]]
+}], "Remark",
+ CellID->1843510082,ExpressionUUID->"6be0ac4a-192e-4eeb-bf1a-9a382fd24748"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Another section", "Section",
+ CellID->1879697796,ExpressionUUID->"7f1fb558-98ec-4603-8ca0-1dd97d578a96"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"plotName", "=", 
+   RowBox[{"Plot", "[", 
+    RowBox[{"x", ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "1", ",", "3"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Figure", "@", "plotName"}], ";"}]}], "Input",
+ TaggingRules->{
+  "DevTools" -> {"MenuMethod" -> "Cell"}, "@Figure" -> "OcclusiveSquareness"},
+ 
+ CellLabel->"In[19]:=",
+ CellID->1761064704,ExpressionUUID->"d6d13526-8dc8-4a63-ae0b-f3b52ef8c32e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  GraphicsBox[{{{}, {}, 
+     TagBox[
+      {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], 
+       Opacity[1.], LineBox[CompressedData["
+1:eJxFxWlMknEcAOBXUF8lc8RAo3JmhTM7tNDKIw9yFG2mMsmNJSllm9IkcE42
+51Fq2lqiZc5pbWw6Sm06ppUtJUeWjBRy2tRO10xEySMRFVSqD/5/H549fkIx
+N4OAYVj8P//PnLCQMGwheutzxLmIEgIc4G+87uoCT4nG9R4k+OpKz306FU7z
+LN/FDIAvRtIDryXCcXWnOQMKuJZmI/kmLKIXfbW5k4swQ+dTIKv+gzaEGfEH
+UUvokhOaiL0TcNsqeYkpt6BVfCPbK2IZreYYzoi+wLGbgX3sO1a0Prrud82h
+FXSI370OlQ4ma5fXk/NW0Va7eD5r5xqau5yagffD5ZXDeVKpDf2+k89MpNjR
++QqetPMNHE4X8u+mr6PFKT/fTZM30AWhM4PUHvihgljUkbqJ3j9U1TG2zYF+
+XRlUfaMNpllbymb9sZitK3CZs7AALv4xOLpDD4fUfzOXMpzQIweOJV7Oh9dy
+t7vlfIDHmxudzu8joKOaNAn8HFiezTAPaeCG3SydB52IPiw3rhdnwrJfbElX
+L8whBIUfpDij8Xl+kpMQLlbHtDzqgguT21Mk7i7ok4OjbPd0+CstrtTtJezK
+CPOKxV3Rs17TpkgBzDP4UqTt8LOUhgpPB6zWfIzJ5uFonqUyHlfCGj0rWPwE
+Dm62Ukafwh4CwZiyFe7rP3KFrYKPNwzIyrphMovURByGC/eob4tGYLNVkjn8
+Cda2jh9tHIOLaM2vWN/huemzhpsm+NJbu8o0A+set9ckmWEl15vvNw+ndk9N
+9lpgXW19f4AVPiW50FK1AlP9X4jTbPAtLIurtcMLn31CgzdgwfMh77pNeEBe
+ZnM44L8CCi/v
+        "]]},
+      Annotation[#, "Charting`Private`Tag$38156#1"]& ]}, {}},
+   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+   Axes->{True, True},
+   AxesLabel->{None, None},
+   AxesOrigin->{1., 1.0000000408163265`},
+   DisplayFunction->Identity,
+   Frame->{{False, False}, {False, False}},
+   FrameLabel->{{None, None}, {None, None}},
+   FrameTicks->{{Automatic, 
+      Charting`ScaledFrameTicks[{Identity, Identity}]}, {Automatic, 
+      Charting`ScaledFrameTicks[{Identity, Identity}]}},
+   GridLines->{None, None},
+   GridLinesStyle->Directive[
+     GrayLevel[0.5, 0.4]],
+   ImagePadding->All,
+   Method->{
+    "DefaultBoundaryStyle" -> Automatic, 
+     "DefaultGraphicsInteraction" -> {
+      "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+       "Effects" -> {
+        "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+         "Droplines" -> {
+          "freeformCursorMode" -> True, 
+           "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+     "DefaultMeshStyle" -> AbsolutePointSize[6], "ScalingFunctions" -> None, 
+     "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+         (Identity[#]& )[
+          Part[#, 1]], 
+         (Identity[#]& )[
+          Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+         (Identity[#]& )[
+          Part[#, 1]], 
+         (Identity[#]& )[
+          Part[#, 2]]}& )}},
+   PlotRange->{{1, 3}, {1.0000000408163265`, 2.9999999591836737`}},
+   PlotRangeClipping->True,
+   PlotRangePadding->{{
+      Scaled[0.02], 
+      Scaled[0.02]}, {
+      Scaled[0.05], 
+      Scaled[0.05]}},
+   Ticks->{Automatic, Automatic}], TraditionalForm]], "Figure",
+ CellTags->"plotName",
+ CellID->154688090,ExpressionUUID->"c6ab90e0-4f84-4dec-975a-187d1827f696"],
+
+Cell[TextData[{
+ "This is a ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]],ExpressionUUID->
+  "b0955503-b408-401e-8a6c-ec68d0896e18"],
+ " exportable plot, tagged automatically"
+}], "FigureCaption",
+ CellID->1387515760,ExpressionUUID->"54e198e4-698b-4643-8d6d-af43db30a062"]
+}, Open  ]],
+
+Cell[TextData[{
+ "which means that you can reference it from text (example fig. ",
+ Cell[BoxData[
+  ButtonBox[
+   DynamicBox[ScienceNotebooks`ReferenceBox["plotName", False, ""],
+    ImageSizeCache->{30., {2.548828125, 11.}},
+    UpdateInterval->Infinity],
+   TaggingRules -> {"deeptag" -> "plotName", "TeXtag" -> "plotName"},
+   BaseStyle->{"Hyperlink"},
+   ButtonData->"plotName",
+   Tooltip->DynamicBox[
+     ScienceNotebooks`RefCellTooltip["plotName", 
+      If[False, "", None]], UpdateInterval -> Infinity],
+   TooltipDelay->0.05,
+   TooltipStyle->{Background -> RGBColor[1, 1, 1], CellFrame -> 1}]],
+  ExpressionUUID->"f5ff5462-eab8-43d6-93d9-54876ad297d8"],
+ ") the same way as equations."
+}], "Text",
+ CellID->1435101342,ExpressionUUID->"cbcd10af-3817-4624-9b67-44ad9e83dba6"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1005, 738},
+WindowMargins->{{81, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Science.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "LeastAction"->{
+  Cell[2021, 64, 498, 16, 54, "EquationNumbered",ExpressionUUID->"caca0809-ee69-4d3c-9f6f-bc53172be8d8",
+   CellTags->"LeastAction",
+   CellID->43813539]},
+ "plotName"->{
+  Cell[4750, 145, 2784, 65, 240, "Figure",ExpressionUUID->"c6ab90e0-4f84-4dec-975a-187d1827f696",
+   CellTags->"plotName",
+   CellID->154688090]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"LeastAction", 9092, 260},
+ {"plotName", 9263, 264}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 112, 1, 62, "Title",ExpressionUUID->"df2f42fd-9883-40ed-9d90-a861b95289c5",
+ CellID->1725868302],
+Cell[695, 25, 99, 1, 19, "Author",ExpressionUUID->"b9487f82-a19f-4790-b2da-5eda56d3424c",
+ CellID->1282756762],
+Cell[797, 28, 126, 1, 17, "Affiliation",ExpressionUUID->"366dd1dc-41c9-4018-af39-cc2384cb1e25",
+ CellID->1246368620],
+Cell[926, 31, 408, 8, 32, "Input",ExpressionUUID->"e8a7a315-5b89-46f1-bb47-a45b7d32e0ca",
+ CellID->1246812308],
+Cell[CellGroupData[{
+Cell[1359, 43, 120, 1, 71, "Section",ExpressionUUID->"e5d61ce2-b8be-40a1-8a7c-d1695c9894a9",
+ CellID->2021949700],
+Cell[1482, 46, 536, 16, 45, "Text",ExpressionUUID->"eced51b3-821d-4d9a-87c6-cb466b2b851c",
+ CellID->1384011497],
+Cell[2021, 64, 498, 16, 54, "EquationNumbered",ExpressionUUID->"caca0809-ee69-4d3c-9f6f-bc53172be8d8",
+ CellTags->"LeastAction",
+ CellID->43813539],
+Cell[2522, 82, 1273, 29, 46, "Text",ExpressionUUID->"36593846-2a0d-47f1-bfc8-371d8cf0e290",
+ CellID->1556569666],
+Cell[3798, 113, 300, 6, 59, "Remark",ExpressionUUID->"6be0ac4a-192e-4eeb-bf1a-9a382fd24748",
+ CellID->1843510082]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4135, 124, 110, 1, 71, "Section",ExpressionUUID->"7f1fb558-98ec-4603-8ca0-1dd97d578a96",
+ CellID->1879697796],
+Cell[4248, 127, 477, 14, 48, "Input",ExpressionUUID->"d6d13526-8dc8-4a63-ae0b-f3b52ef8c32e",
+ CellID->1761064704],
+Cell[CellGroupData[{
+Cell[4750, 145, 2784, 65, 240, "Figure",ExpressionUUID->"c6ab90e0-4f84-4dec-975a-187d1827f696",
+ CellTags->"plotName",
+ CellID->154688090],
+Cell[7537, 212, 437, 13, 59, "FigureCaption",ExpressionUUID->"54e198e4-698b-4643-8d6d-af43db30a062",
+ CellID->1387515760]
+}, Open  ]],
+Cell[7989, 228, 785, 18, 46, "Text",ExpressionUUID->"cbcd10af-3817-4624-9b67-44ad9e83dba6",
+ CellID->1435101342]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

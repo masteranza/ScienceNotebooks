@@ -1,4 +1,5 @@
 *.code-workspace
 .vscode
 *.paclet
-*.bib
+# *.bib
+.texpadtmp
