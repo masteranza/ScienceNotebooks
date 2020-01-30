@@ -62,20 +62,20 @@ AnkiHighlight[]:=Module[{nb, t}, nb = InputNotebook[];
 
 (* ::Input::Initialization:: *)
 (*Anki Connect: Pass Action and param*)
-AnkiRequest[action_,params_:<||>]:=Block[{req,json},PrintToConsole[params];json=ImportString[ExportString[<|"action"->action,"version"->6,"params"->params|>,"JSON","Compact"->False],"Text"];PrintToConsole[json];req=HTTPRequest[<|"Scheme"->"http","Domain"->"localhost","Port"->8765,Method -> "POST","Body"->json|>];URLRead[req,"Body"]
+AnkiRequest[action_,params_:<||>,debug_:False]:=Block[{req,json},json=ImportString[ExportString[<|"action"->action,"version"->6,"params"->params|>,"JSON","Compact"->False],"Text"];If[debug,PrintToConsole[json]];req=HTTPRequest[<|"Scheme"->"http","Domain"->"localhost","Port"->8765,Method -> "POST","Body"->json|>];URLRead[req,"Body"]
 ];
 
 (*Anki Connect: Pass deck name then for params and tags (opt)*)
 PrepareAnkiNote[deckName_,cellID_,clozed_,title_,link_,tags_:{}]:={"deckName"->deckName,"modelName"->"MathematicaCloze","fields"->{"CellID"->ToString[cellID],"Text"->clozed,"Extra"->title,"Link"->link},"options"->{"allowDuplicate"->False},"tags"->tags};
 
 (*Anki Connect: Pass deck name then all notes*)
-AddOrUpdateNotes[deck_,rawNotes_]:=Block[{res,resi,toUpdate,ids,ankiIds},
+AddOrUpdateNotes[deck_,rawNotes_,debug_]:=Block[{res,resi,toUpdate,ids,ankiIds},
 res=(ImportString[AnkiRequest["addNotes",{"notes"->(PrepareAnkiNote[deck,#[[1]],#[[2]],#[[3]],#[[4]],#[[5]]]&/@rawNotes)}],"JSON"]);
-PrintToConsole[res];
+If[debug,PrintToConsole[res]];
 res=("result"/.res);
 toUpdate=#[[2]]&/@Select[Thread[{res,rawNotes}],#[[1]]==Null&];
-PrintToConsole["Need to update "<>ToString[Length[toUpdate]]<> " notes"];
-If[Length[toUpdate]>0,res={"actions"->({"action"->"findNotes","params"->{"query"->"CellID:"<>ToString[#[[1]]]}}&/@toUpdate)};ankiIds=#[[1]]&/@("result"/.ImportString[AnkiRequest["multi",res],"JSON"]);toUpdate=Thread[{ankiIds,toUpdate}];PrintToConsole[ankiIds];PrintToConsole[toUpdate];res={"actions"->({"action"->"updateNoteFields","params"->{"note"->{"id"->ToString[#[[1]]],"deckName"->deck,"modelName"->"MathematicaCloze","fields"->{"CellID"->ToString[#[[2,1]]],"Text"->#[[2,2]],"Extra"->#[[2,3]],"Link"->#[[2,4]]},"options"->{"allowDuplicate"->False}}}}&/@toUpdate)};ImportString[AnkiRequest["multi",res],"JSON"]];
+If[debug,PrintToConsole["Need to update "<>ToString[Length[toUpdate]]<> " notes"]];
+If[Length[toUpdate]>0,res={"actions"->({"action"->"findNotes","params"->{"query"->"CellID:"<>ToString[#[[1]]]}}&/@toUpdate)};ankiIds=#[[1]]&/@("result"/.ImportString[AnkiRequest["multi",res],"JSON"]);toUpdate=Thread[{ankiIds,toUpdate}];If[debug,PrintToConsole[ankiIds]];If[debug,PrintToConsole[toUpdate]];res={"actions"->({"action"->"updateNoteFields","params"->{"note"->{"id"->ToString[#[[1]]],"deckName"->deck,"modelName"->"MathematicaCloze","fields"->{"CellID"->ToString[#[[2,1]]],"Text"->#[[2,2]],"Extra"->#[[2,3]],"Link"->#[[2,4]]},"options"->{"allowDuplicate"->False}}}}&/@toUpdate)};ImportString[AnkiRequest["multi",res],"JSON"]];
 (*PrintToConsole[ImportString[AnkiRequest["updateNoteFields",{"note"\[Rule]{"id"\[Rule]#[[1]],"fields"\[Rule]{"CellID"\[Rule]ToString[#[[2,1]]],"Text"\[Rule]#[[2,2]],"Extra"\[Rule]#[[2,3]],"Link"\[Rule]#[[2,4]]}}}],"JSON"]]&/@toUpdate;*)
 (*PrintToConsole[ImportString[AnkiRequest["notesInfo",{"notes"\[Rule]toUpdate[[All,1]]}],"JSON"]];*)
 ];
@@ -103,12 +103,12 @@ s=CloudDeploy[EvaluationNotebook[],cn];
 su=Quiet@CloudDeploy[URLDispatcher[{"/"~~EndOfString:>Delayed@CloudImport@s,"/"~~ base:Repeated[DigitCharacter,20]:>Delayed@ExportForm[Notebook[Append[First@CloudGet@s,cell@EmbeddedHTML["<script> function openCloseGroup() { wolfram.cloud.parentNotebook.evaluateExpression({     expression: 'FrontEndExecute[NotebookLocate[\""<>base<>"\"]]' }); } </script> <body onload='openCloseGroup()'>"]],(Rest@s)/.{Notebook->Sequence}],"CloudCDF"]}],StringDrop[cn,-3]];
 StringDrop[StringSplit[CloudConnect[],"@"][[1]]<>fn,-3]
 ];
-ExportToAnki[sync_:True]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath,backupc,cloudex},
+ExportToAnki[sync_:True,debug_:False]:=Module[{separator,styleTags,cells,sections,subsections,subsubsections,subsubsubsections,allinfo,cellids,celltags,data,ids,cloze,matchEq,encoding,eqCloze,GetTOC,exported,filtered,splited,marked,paths,fixed,final,threaded,deck,title, base,dat,ndir,tempPicPath, allspecial,npath,backupc,cloudex},
 If[NotebookDirectory[]===$Failed,ShowStatus["ExportAnki failed. Notebook must be saved first!"];Abort[]];
-cloudex=If[!$CloudConnected&&$WolframID===None,If[CloudConnect[]===$Failed||CloudConnect[]===$Canceled,False,True],True];
+cloudex=sync&&If[!$CloudConnected&&$WolframID===None,If[CloudConnect[]===$Failed||CloudConnect[]===$Canceled,False,True],True];
 separator="#";
 ShowStatus["Export starts"];
-PrintToConsole["Export starts"];
+If[debug,PrintToConsole["Export starts"]];
 ExportString["Exp","TeXFragment"];
 (*System`Convert`TeXFormDump`maketex["\[LeftSkeleton]"]="\\ll ";
 System`Convert`TeXFormDump`maketex["\[RightSkeleton]"]="\\gg ";*)
@@ -128,6 +128,8 @@ System`Convert`TeXFormDump`maketex["\[Perpendicular]"]="\\perp ";
 System`Convert`TeXFormDump`maketex["\[TensorWedge]"]="\\wedge ";System`Convert`TeXFormDump`maketex["\[Wedge]"]="\\wedge ";
 System`Convert`TeXFormDump`maketex["\[TensorProduct]"]="\\otimes ";
 System`Convert`TeXFormDump`maketex["\[GreaterTilde]"]="\\gtrsim ";
+System`Convert`TeXFormDump`maketex["<"]="\\lt ";
+System`Convert`TeXFormDump`maketex[">"]="\\gt ";
 System`Convert`TeXFormDump`maketex["\[LineSeparator]"]="\n";
 System`Convert`TeXFormDump`maketex[":="]=":=";
 
@@ -341,12 +343,14 @@ FrontEndTokenExecute[EvaluationNotebook[],"SelectionOpenAllGroups"];
 MapThread[SetOptions[#1,CellTags->#2]&,{Cells[EvaluationNotebook[],CellID->ids],backupc}];
 ,filtered=Select[Thread[{ids,base,paths,npath,celltags}],StringMatchQ[#[[2]],"*{{c@::*"]&];
 ];
+If[debug,PrintToConsole[filtered](*; Abort[]*)];
+
 ShowStatus["Exporting to Anki..."];
 deck=StringReplace[StringReplace[ndir,e___~~"/Knowledge/" ~~ f___ ~~"/":> f],"/":>"::"];
-PrintToConsole[deck];
-PrintToConsole[AnkiRequest["createDeck",<|"deck"->deck|>]];
-AddOrUpdateNotes[deck,filtered];
-If[sync,PrintToConsole[AnkiRequest["sync"]]];
+If[debug,PrintToConsole[deck]]; 
+AnkiRequest["createDeck",<|"deck"->deck|>,debug];
+AddOrUpdateNotes[deck,filtered,debug];
+AnkiRequest["sync",<||>,debug];
 ShowStatus["Notebook Exported"];
 ];
 End[];

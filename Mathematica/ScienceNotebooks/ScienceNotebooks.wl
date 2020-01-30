@@ -391,7 +391,7 @@ ScienceNotebooks`StyleButton::usage="Creates a button to create a style Cell of 
 StyleButton[name_]:=Button[name,SelectionMove[SelectedNotebook[],All,Cell];FrontEndExecute@FrontEndToken[SelectedNotebook[],"Style",name]];
 
 ScienceNotebooks`ListStyles::usage="List styles from current StyleSheet";
-ListStyles=(#:>FrontEndTokenExecute[InputNotebook[],"Style",#]&/@FE`Evaluate[FEPrivate`GetPopupList["MenuListStyles"]][[All,1]]);
+ListStyles=(#:>FrontEndTokenExecute[InputNotebook[],"Style",#]&/@FE`Evaluate[FEPrivate`GetPopupList["MenuListStyles"]][[2;;,1]]);
 
 ScienceNotebooks`MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 MergeStyle[]:=Module[{path,child,childstyles,parent,nb,tmp,parentparent,parentstyles, old},(*find the parent stylesheet from the private stylesheet,a.k.a child*)

@@ -259,18 +259,37 @@ Cell[BoxData[
                    RowBox[{"{", 
                     RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}]}], "\n", 
                "         ", "]"}], ",", 
-              RowBox[{
-               RowBox[{"Button", "[", " ", 
-                RowBox[{"\"\<\[UpArrow]Anki\>\"", ",", " ", 
-                 RowBox[{"AnkiExporter`ExportToAnki", "[", "]"}], ",", " ", 
-                 RowBox[{"Appearance", "->", "buttonAppearance"}], " ", ",", 
-                 " ", 
-                 RowBox[{"BaseStyle", "->", " ", "buttonStyle"}], " ", ",", 
-                 " ", 
-                 RowBox[{"Method", "->", " ", "\"\<Queued\>\""}]}], "]"}], 
-               "~", " ", "Tooltip", " ", "~", " ", 
-               "\"\<Export to Anki (open Anki before)\>\""}]}], "\n", 
-             "       ", "}"}], "}"}], "\n", "       ", ",", " ", 
+              RowBox[{"ActionMenu", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Button", "[", " ", 
+                  RowBox[{"\"\<\[UpArrow]Anki\>\"", ",", " ", 
+                   RowBox[{"Appearance", "->", "buttonAppearance"}], " ", ",",
+                    " ", 
+                   RowBox[{"BaseStyle", "->", " ", "buttonStyle"}]}], " ", 
+                  "]"}], "~", " ", "Tooltip", " ", "~", " ", 
+                 "\"\<Export to Anki (open Anki before)\>\""}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"\"\<With Cloud Sync\>\"", ":>", 
+                   RowBox[{"AnkiExporter`ExportToAnki", "[", "]"}]}], ",", 
+                  RowBox[{"\"\<Local only\>\"", ":>", 
+                   RowBox[{"AnkiExporter`ExportToAnki", "[", "False", "]"}]}],
+                   ",", "Delimiter", ",", 
+                  RowBox[{"\"\<Debug\>\"", ":>", 
+                   RowBox[{"AnkiExporter`ExportToAnki", "[", 
+                    RowBox[{"False", ",", "False"}], "]"}]}]}], "}"}], ",", 
+                " ", 
+                RowBox[{"Method", "->", " ", "\"\<Queued\>\""}], ",", " ", 
+                RowBox[{"Appearance", "->", "None"}], ",", 
+                RowBox[{"FrameMargins", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}]}], "]"}]}], 
+             "\n", "       ", "}"}], "}"}], "\n", "       ", ",", " ", 
            RowBox[{"BaseStyle", " ", "->", " ", 
             RowBox[{"ButtonBoxOptions", " ", "->", " ", 
              RowBox[{"{", 
@@ -310,53 +329,63 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[108]:=",
+ CellLabel->"In[15]:=",
  CellID->100046957,ExpressionUUID->"566fd72d-2ebb-42e1-823f-16e2ceccd36f"],
 
 Cell[BoxData[
- RowBox[{"Block", "[", 
+ RowBox[{
   RowBox[{
-   RowBox[{"{", 
-    RowBox[{"nb", ",", "toolbarStub", ",", "\[IndentingNewLine]", 
-     RowBox[{"Internal`$ContextMarks", "=", "True"}]}], "\[IndentingNewLine]",
-     "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"CurrentValue", "[", 
+    RowBox[{"$FrontEnd", ",", "\"\<DefaultStyleDefinitions\>\""}], "]"}], "=",
+    "Inherited"}], ";"}]], "Input",
+ CellLabel->"In[92]:=",
+ CellID->160779287,ExpressionUUID->"c2ad8fce-38a8-47cb-8121-7924de0d404c"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Block", "[", 
    RowBox[{
-    RowBox[{"nb", "=", 
-     RowBox[{"NotebookOpen", "[", 
-      RowBox[{
-       RowBox[{"FileNameJoin", "[", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"ParentDirectory", "[", 
-           RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ",", 
-          "\"\<ScienceNotebooks\>\"", ",", "\"\<FrontEnd\>\"", ",", 
-          "\"\<StyleSheets\>\"", ",", "\"\<Science.nb\>\""}], "}"}], "]"}], 
-       ",", 
-       RowBox[{"Visible", "\[Rule]", "False"}]}], "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"toolbarStub", "=", 
-     RowBox[{"Cells", "[", 
-      RowBox[{"nb", ",", 
-       RowBox[{"CellTags", "\[Rule]", "\"\<Toolbar\>\""}]}], "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"NotebookWrite", "[", 
-     RowBox[{
-      RowBox[{"First", "[", "toolbarStub", "]"}], ",", 
-      RowBox[{"ReplaceAll", "[", 
+    RowBox[{"{", 
+     RowBox[{"nb", ",", "toolbarStub", ",", "\[IndentingNewLine]", 
+      RowBox[{"Internal`$ContextMarks", "=", "True"}]}], 
+     "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"nb", "=", 
+      RowBox[{"NotebookOpen", "[", 
        RowBox[{
-        RowBox[{"NotebookRead", "[", "toolbarStub", "]"}], ",", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ParentDirectory", "[", 
+            RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ",", 
+           "\"\<ScienceNotebooks\>\"", ",", "\"\<FrontEnd\>\"", ",", 
+           "\"\<StyleSheets\>\"", ",", "\"\<Science.nb\>\""}], "}"}], "]"}], 
+        ",", 
+        RowBox[{"Visible", "\[Rule]", "False"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"toolbarStub", "=", 
+      RowBox[{"Cells", "[", 
+       RowBox[{"nb", ",", 
+        RowBox[{"CellTags", "\[Rule]", "\"\<Toolbar\>\""}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"NotebookWrite", "[", 
+      RowBox[{
+       RowBox[{"First", "[", "toolbarStub", "]"}], ",", 
+       RowBox[{"ReplaceAll", "[", 
         RowBox[{
-         RowBox[{"(", 
-          RowBox[{"DockedCells", "->", "___"}], ")"}], ":>", 
-         RowBox[{"(", 
-          RowBox[{"DockedCells", "\[Rule]", "Toolbar"}], ")"}]}]}], "]"}]}], 
-     "]"}], ";", "\[IndentingNewLine]", 
-    RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}]}], "\[IndentingNewLine]", 
-  "]"}]], "Input",
+         RowBox[{"NotebookRead", "[", "toolbarStub", "]"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"DockedCells", "->", "___"}], ")"}], ":>", 
+          RowBox[{"(", 
+           RowBox[{"DockedCells", "\[Rule]", "Toolbar"}], ")"}]}]}], "]"}]}], 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}]}], "\[IndentingNewLine]",
+    "]"}]}]], "Input",
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[109]:=",
+ CellLabel->"In[88]:=",
  CellID->1082195967,ExpressionUUID->"8bbe0f88-1ce3-44e2-b8c9-7f844001adda"],
 
 Cell[BoxData[
@@ -366,6 +395,15 @@ Cell[BoxData[
  CellOpen->True,
  ShowCellLabel->True,
  CellID->1969206536,ExpressionUUID->"8487fcae-96b1-4543-93f1-e5f354f37a05"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CurrentValue", "[", 
+    RowBox[{"$FrontEnd", ",", "\"\<DefaultStyleDefinitions\>\""}], "]"}], 
+   "=", "\"\<Science.nb\>\""}], ";"}]], "Input",
+ CellLabel->"In[90]:=",
+ CellID->203951634,ExpressionUUID->"d494619a-441e-422e-8fb2-e0ef60abd1bd"],
 
 Cell[CellGroupData[{
 
@@ -383,27 +421,29 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[9]:=",
+ CellLabel->"In[89]:=",
  CellID->987500110,ExpressionUUID->"98db97e4-ca5d-4500-b6be-d1851a50feb5"],
 
 Cell[BoxData[
  TemplateBox[{FrontEndObject[
-    LinkObject["sp53p_shm", 3, 1]],20,
-   "FrontEndObject[LinkObject[\"sp53p_shm\", 3, 1]]","20","\"Science.nb\"",
-   "\"/Users/masteranza/Dropbox/MathematicaAnki/Mathematica/ScienceNotebooks/\
+    LinkObject["yzagb_shm", 3, 1]],22,
+   "FrontEndObject[LinkObject[\"yzagb_shm\", 3, 1]]","22","\"Science.nb\"",
+   "\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/ScienceNotebooks/\
 FrontEnd/StyleSheets/Science.nb\""},
   "NotebookObject"]], "Output",
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"Out[9]=",
- CellID->374178824,ExpressionUUID->"ee231d46-8e2e-48cc-bdf0-6672ca6a37be"]
+ CellLabel->"Out[89]=",
+ CellID->664356040,ExpressionUUID->"12cc2de5-f30b-4d74-9d9b-43404bfbc72d"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Pack", "Subsection",
  CellID->1101315832,ExpressionUUID->"f6e0a895-e159-4265-ae75-e1524c0c1f2e"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{"PacletFind", "[", "\"\<DevTools\>\"", 
@@ -413,11 +453,30 @@ Cell[BoxData[{
    RowBox[{
    "PacletManager`PacletInformation", "[", "\"\<DevTools\>\"", "]"}]}], 
   "]"}]}], "Input",
+ CellLabel->"In[16]:=",
  CellID->130218127,ExpressionUUID->"c05aee35-97a5-4d43-b815-5828f99774f9"],
 
 Cell[BoxData[
+ RowBox[{"{", 
+  InterpretationBox[
+   RowBox[{
+   "Paclet", "[", "\<\"DevTools\"\>", ",", "\<\"0.10.5\"\>", ",", "<>", "]"}],
+   
+   PacletManager`Paclet[
+   "Name" -> "DevTools", "Version" -> "0.10.5", "WolframVersion" -> "10.4+", 
+    "Description" -> "DevTools", "Creator" -> 
+    "Jakub (Kuba) Podkalicki\tkuba.pod@gmail.com", 
+    "Extensions" -> {{"FrontEnd"}, {"Kernel", "Context" -> "DevTools`"}}, 
+    "Location" -> 
+    "/Users/masteranza/Library/Mathematica/Paclets/Repository/DevTools-0.10.\
+5"]], "}"}]], "Output",
+ CellLabel->"Out[16]=",
+ CellID->1282470014,ExpressionUUID->"085f11f9-9cec-4aa4-8c7c-f34539860d5d"]
+}, Open  ]],
+
+Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<DevTools`\>\"", "]"}]], "Input",
- CellLabel->"In[210]:=",
+ CellLabel->"In[18]:=",
  CellID->1949897273,ExpressionUUID->"844b39ca-9c42-4d24-85c6-6ffa0c19755f"],
 
 Cell[BoxData[
@@ -425,7 +484,7 @@ Cell[BoxData[
   RowBox[{"PacletDirectoryAdd", "@", 
    RowBox[{"ParentDirectory", "[", 
     RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[211]:=",
+ CellLabel->"In[19]:=",
  CellID->1952885911,ExpressionUUID->"18ea1d18-e732-4e4d-9ee6-79635e89d54e"],
 
 Cell[CellGroupData[{
@@ -436,12 +495,12 @@ Cell[BoxData[
    RowBox[{"First", "@", 
     RowBox[{"PacletFind", "[", "\"\<ScienceNotebooks\>\"", "]"}]}], ",", 
    "\"\<Date&Hour\>\""}], "]"}]], "Input",
- CellLabel->"In[212]:=",
+ CellLabel->"In[20]:=",
  CellID->600469188,ExpressionUUID->"d98d33ed-8dbc-4d94-9869-b24da3fc90c4"],
 
-Cell[BoxData["\<\"2020.1.30.14\"\>"], "Output",
- CellLabel->"Out[212]=",
- CellID->340463642,ExpressionUUID->"382fe42c-3ec5-42af-b522-8fdb585c151b"]
+Cell[BoxData["\<\"2020.1.30.20\"\>"], "Output",
+ CellLabel->"Out[20]=",
+ CellID->133659955,ExpressionUUID->"3e8365df-5cde-4d00-a467-2896529a44b8"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -458,12 +517,26 @@ Cell[BoxData[{
     RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"PacletFind", "[", "\"\<ScienceNotebooks\>\"", "]"}]}], "Input",
- CellLabel->"In[213]:=",
+ CellLabel->"In[21]:=",
  CellID->555075604,ExpressionUUID->"97c71c2d-7ae9-495a-a9a8-bf8542e05c18"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
+   InterpretationBox[
+    RowBox[{
+    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.20\"\>", 
+     ",", "<>", "]"}],
+    PacletManager`Paclet[
+    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.20", 
+     "MathematicaVersion" -> "10.0+", "Description" -> 
+     "Collection of tools and stylesheet for scientific writting and \
+learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
+     "", "Loading" -> "Startup", 
+     "Extensions" -> {{"Documentation"}, {
+       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+     "/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
+ScienceNotebooks"]], ",", 
    InterpretationBox[
     RowBox[{
     "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", 
@@ -476,24 +549,10 @@ learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" ->
      "", "Loading" -> "Startup", 
      "Extensions" -> {{"Documentation"}, {
        "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
-     "/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
-ScienceNotebooks"]], ",", 
-   InterpretationBox[
-    RowBox[{
-    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.27.23\"\>", 
-     ",", "<>", "]"}],
-    PacletManager`Paclet[
-    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.27.23", 
-     "MathematicaVersion" -> "10.0+", "Description" -> 
-     "Collection of tools and stylesheet for scientific writting and \
-learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
-     "", "Loading" -> "Startup", 
-     "Extensions" -> {{"Documentation"}, {
-       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
      "/Users/masteranza/Library/Mathematica/Autoload/ScienceNotebooks"]]}], 
   "}"}]], "Output",
- CellLabel->"Out[215]=",
- CellID->2120910229,ExpressionUUID->"f03f93e9-a90c-4483-ab79-5e29feff1e17"]
+ CellLabel->"Out[23]=",
+ CellID->1649134730,ExpressionUUID->"fadda186-71c9-4614-8625-6c9e87b0d3ec"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -524,15 +583,15 @@ Cell[BoxData[{
      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "<>", 
     "\"\</ScienceNotebooks\>\""}], ",", 
    RowBox[{"NotebookDirectory", "[", "]"}]}], "]"}]}], "Input",
- CellLabel->"In[216]:=",
+ CellLabel->"In[24]:=",
  CellID->734657281,ExpressionUUID->"964af767-18a6-40ea-80e0-3c78303b5f7b"],
 
 Cell[BoxData[
  RowBox[{"{", \
 "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica\"\>", 
   "}"}]], "Output",
- CellLabel->"Out[216]=",
- CellID->1607784247,ExpressionUUID->"7e501b0f-4893-400a-b2d7-9f08758a3df6"],
+ CellLabel->"Out[24]=",
+ CellID->159302209,ExpressionUUID->"5b644c38-cff8-4c3f-8928-4aff74c54b90"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -540,23 +599,15 @@ Cell[BoxData[
 DS_Store\"\>", 
    ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/.DS_Store\
 \"\>", ",", \
-"\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/ScienceNotebooks/\
-AnkiExporter/.DS_Store\"\>", 
-   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
-ScienceNotebooks/.DS_Store\"\>", 
-   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
-ScienceNotebooks/FrontEnd/.DS_Store\"\>", 
-   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
-ScienceNotebooks/FrontEnd/StyleSheets/.DS_Store\"\>", 
-   ",", "\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/\
-ScienceNotebooks/TeXExporter/.DS_Store\"\>"}], "}"}]], "Output",
- CellLabel->"Out[217]=",
- CellID->243109128,ExpressionUUID->"352a64f6-79c6-4f41-b483-548a389a29cd"],
+"\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/ScienceNotebooks/.\
+DS_Store\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[25]=",
+ CellID->1627602501,ExpressionUUID->"69e6eca4-2376-4d5d-812f-11e30b1f9db1"],
 
 Cell[BoxData["\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_\
-Build/ScienceNotebooks-2020.1.30.14.paclet\"\>"], "Output",
- CellLabel->"Out[219]=",
- CellID->1421217702,ExpressionUUID->"a94ecfa8-6fce-4d8f-b1ff-06b086ee1c0a"]
+Build/ScienceNotebooks-2020.1.30.20.paclet\"\>"], "Output",
+ CellLabel->"Out[27]=",
+ CellID->468538821,ExpressionUUID->"01e37b0e-7428-4e58-a888-11ccb9ead3a1"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -581,47 +632,32 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[229]:=",
+ CellLabel->"In[35]:=",
  CellID->834272026,ExpressionUUID->"8d1b4ab1-930a-4b0f-8f86-5d8fb746d295"],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{
-   InterpretationBox[
-    RowBox[{
-    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", 
-     ",", "<>", "]"}],
-    PacletManager`Paclet[
-    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.14", 
-     "MathematicaVersion" -> "10.0+", "Description" -> 
-     "Collection of tools and stylesheet for scientific writting and \
+  InterpretationBox[
+   RowBox[{
+   "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", 
+    ",", "<>", "]"}],
+   PacletManager`Paclet[
+   "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.14", 
+    "MathematicaVersion" -> "10.0+", "Description" -> 
+    "Collection of tools and stylesheet for scientific writting and \
 learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
-     "", "Loading" -> "Startup", 
-     "Extensions" -> {{"Documentation"}, {
-       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
-     "/Users/masteranza/Library/Mathematica/Paclets/Repository/\
-ScienceNotebooks-2020.1.30.14"]], ",", 
-   InterpretationBox[
-    RowBox[{
-    "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.27.23\"\>", 
-     ",", "<>", "]"}],
-    PacletManager`Paclet[
-    "Name" -> "ScienceNotebooks", "Version" -> "2020.1.27.23", 
-     "MathematicaVersion" -> "10.0+", "Description" -> 
-     "Collection of tools and stylesheet for scientific writting and \
-learning.", "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> 
-     "", "Loading" -> "Startup", 
-     "Extensions" -> {{"Documentation"}, {
-       "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
-     "/Users/masteranza/Library/Mathematica/Autoload/ScienceNotebooks"]]}], 
+    "", "Loading" -> "Startup", 
+    "Extensions" -> {{"Documentation"}, {
+      "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
+    "/Users/masteranza/Library/Mathematica/Autoload/ScienceNotebooks"]], 
   "}"}]], "Output",
  ShowCellBracket->True,
  CellOpen->True,
  GeneratedCell->True,
  CellAutoOverwrite->True,
  ShowCellLabel->True,
- CellLabel->"Out[229]=",
- CellID->1793027789,ExpressionUUID->"71673903-3648-48bd-96c4-1a30ae353c1a"]
+ CellLabel->"Out[35]=",
+ CellID->1264375140,ExpressionUUID->"525169a4-ea92-4c0b-919c-37e1da14d2e8"]
 }, Open  ]]
 }, Open  ]],
 
@@ -635,13 +671,44 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"PacletUninstall", "/@", 
   RowBox[{"PacletFind", "[", "\"\<ScienceNotebooks\>\"", "]"}]}]], "Input",
- CellLabel->"In[3]:=",
+ CellLabel->"In[29]:=",
  CellID->1019585954,ExpressionUUID->"deebf12b-c875-415a-a847-a10fa2881231"],
 
 Cell[BoxData[
- RowBox[{"{", "Null", "}"}]], "Output",
- CellLabel->"Out[3]=",
- CellID->1813626243,ExpressionUUID->"1378f539-3b43-4283-9fbf-d5b6c592713d"]
+ TemplateBox[{
+  "PacletUninstall","nodelete",
+   "\"The paclet named \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"ScienceNotebooks\\\\\\\"\\\"}]\\) at location \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"/Users/masteranza/Dropbox/ScienceNotebooks/\
+Mathematica/ScienceNotebooks\\\\\\\"\\\"}]\\) cannot be uninstalled because \
+it does not reside in the standard paclet repository. You will have to delete \
+the paclet's files manually, such as by using DeleteDirectory with \
+DeleteContents->True.\"",2,29,12,15812324071336189920,"Local",
+   "PacletManager`PacletUninstall"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[29]:=",
+ CellID->1238704567,ExpressionUUID->"4dae58be-59f3-426f-b85e-fb2c27705219"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "PacletUninstall","nodelete",
+   "\"The paclet named \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"ScienceNotebooks\\\\\\\"\\\"}]\\) at location \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"/Users/masteranza/Library/Mathematica/Autoload/\
+ScienceNotebooks\\\\\\\"\\\"}]\\) cannot be uninstalled because it does not \
+reside in the standard paclet repository. You will have to delete the \
+paclet's files manually, such as by using DeleteDirectory with \
+DeleteContents->True.\"",2,29,13,15812324071336189920,"Local",
+   "PacletManager`PacletUninstall"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[29]:=",
+ CellID->1201183551,ExpressionUUID->"4d651435-083d-442c-952c-8caf0f2fd83e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", "Null"}], "}"}]], "Output",
+ CellLabel->"Out[29]=",
+ CellID->1945659857,ExpressionUUID->"cd0dcef2-e75b-4c37-8433-32818db89246"]
 }, Open  ]]
 }, Open  ]],
 
@@ -656,13 +723,13 @@ Cell[BoxData[
  RowBox[{"PacletDirectoryRemove", "@", 
   RowBox[{"ParentDirectory", "[", 
    RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}]], "Input",
- CellLabel->"In[222]:=",
+ CellLabel->"In[30]:=",
  CellID->1368955761,ExpressionUUID->"b564300d-cf51-4d66-a480-7a993561087c"],
 
 Cell[BoxData[
  RowBox[{"{", "}"}]], "Output",
- CellLabel->"Out[222]=",
- CellID->1518570388,ExpressionUUID->"f67bfb92-7465-47ca-b9fe-3a605847885c"]
+ CellLabel->"Out[30]=",
+ CellID->1805339702,ExpressionUUID->"7ca8ed09-b494-4705-b227-5bf070317883"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -670,24 +737,37 @@ Cell[CellGroupData[{
 Cell[BoxData[{
  RowBox[{"SetDirectory", "@", 
   RowBox[{"NotebookDirectory", "[", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"PacletInstall", "@", 
-  RowBox[{"Last", "@", 
-   RowBox[{"FileNames", "[", "\"\<*.paclet\>\"", "]"}]}]}]}], "Input",
- CellLabel->"In[226]:=",
+ RowBox[{"Last", "@", 
+  RowBox[{"FileNames", "[", "\"\<*.paclet\>\"", "]"}]}]}], "Input",
+ CellLabel->"In[31]:=",
  CellID->1951777073,ExpressionUUID->"079b5554-6340-48dc-820a-082bb353317f"],
 
 Cell[BoxData["\<\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_\
 Build\"\>"], "Output",
- CellLabel->"Out[226]=",
- CellID->1182060274,ExpressionUUID->"ae7592e4-0b88-452e-b93b-a8e4ea13b1df"],
+ CellLabel->"Out[31]=",
+ CellID->569339939,ExpressionUUID->"a9171a91-2e0a-4267-9651-4125904a1ef6"],
+
+Cell[BoxData["\<\"ScienceNotebooks-2020.1.30.20.paclet\"\>"], "Output",
+ CellLabel->"Out[32]=",
+ CellID->1856707388,ExpressionUUID->"cae2e7ce-7db0-4ab0-8b76-960253db33af"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PacletInstall", "@", 
+  RowBox[{"Last", "@", 
+   RowBox[{"FileNames", "[", "\"\<*.paclet\>\"", "]"}]}]}]], "Input",
+ CellLabel->"In[33]:=",
+ CellID->59143075,ExpressionUUID->"8428066f-3476-4cff-a6c7-eb583b6c1304"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{
-  "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.14\"\>", ",",
+  "Paclet", "[", "\<\"ScienceNotebooks\"\>", ",", "\<\"2020.1.30.20\"\>", ",",
     "<>", "]"}],
   PacletManager`Paclet[
-  "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.14", 
+  "Name" -> "ScienceNotebooks", "Version" -> "2020.1.30.20", 
    "MathematicaVersion" -> "10.0+", "Description" -> 
    "Collection of tools and stylesheet for scientific writting and learning.",
     "Creator" -> "Michal Mandrysz <michal.mandrysz@gmail.com>", "URL" -> "", 
@@ -695,9 +775,9 @@ Cell[BoxData[
    "Extensions" -> {{"Documentation"}, {
      "Kernel", "Context" -> "ScienceNotebooks`"}, {"FrontEnd"}}, "Location" -> 
    "/Users/masteranza/Library/Mathematica/Paclets/Repository/ScienceNotebooks-\
-2020.1.30.14"]]], "Output",
- CellLabel->"Out[227]=",
- CellID->515806721,ExpressionUUID->"b4fce6cc-7ff3-4512-b902-01ad5acee0f8"]
+2020.1.30.20"]]], "Output",
+ CellLabel->"Out[33]=",
+ CellID->965171368,ExpressionUUID->"de6a4295-399c-4a03-840c-56744ffac0a8"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -759,13 +839,29 @@ Cell[BoxData[
  ShowCellBracket->True,
  CellOpen->True,
  ShowCellLabel->True,
- CellLabel->"In[95]:=",
+ CellLabel->"In[34]:=",
  CellID->20955315,ExpressionUUID->"5e42e6f1-d125-4f09-91b2-b2a1bde0fe8c"],
 
 Cell[BoxData[
- RowBox[{"{", "Null", "}"}]], "Output",
- CellLabel->"Out[95]=",
- CellID->193748883,ExpressionUUID->"9ad9372a-d0ce-4bf4-ab3b-6d18a5340a75"]
+ TemplateBox[{
+  "PacletUninstall","nodelete",
+   "\"The paclet named \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"ScienceNotebooks\\\\\\\"\\\"}]\\) at location \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"/Users/masteranza/Library/Mathematica/Autoload/\
+ScienceNotebooks\\\\\\\"\\\"}]\\) cannot be uninstalled because it does not \
+reside in the standard paclet repository. You will have to delete the \
+paclet's files manually, such as by using DeleteDirectory with \
+DeleteContents->True.\"",2,34,14,15812324071336189920,"Local",
+   "PacletManager`PacletUninstall"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->"During evaluation of In[34]:=",
+ CellID->1054545430,ExpressionUUID->"40287d44-fbb6-43b1-8d4a-99530a20109e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", "Null"}], "}"}]], "Output",
+ CellLabel->"Out[34]=",
+ CellID->562503319,ExpressionUUID->"0cbd1054-51ac-4588-a1a4-fd9611d7ce90"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -797,7 +893,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Updating", "Subsection",
+Cell["Fixing references in old notebooks", "Subsection",
  CellID->1041431320,ExpressionUUID->"4751015c-ecea-4025-9271-809a0c55ed28"],
 
 Cell[BoxData[
@@ -808,12 +904,114 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"CodeFormatterSpelunk", "[", "PacletUpdate", "]"}]], "Input",
  CellLabel->"In[533]:=",
- CellID->592829401,ExpressionUUID->"3042edf3-e2e6-42d8-aa4f-676bfce9d014"]
+ CellID->592829401,ExpressionUUID->"3042edf3-e2e6-42d8-aa4f-676bfce9d014"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Notebooks", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nb", "=", 
+   RowBox[{
+    RowBox[{"Notebooks", "[", "]"}], "[", 
+    RowBox[{"[", "3", "]"}], "]"}]}], ";"}]}], "Input",
+ CellLabel->"In[10]:=",
+ CellID->1018760245,ExpressionUUID->"5d438805-c877-421d-8862-be09b509a5a4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{FrontEndObject[
+      LinkObject["q5r2z_shm", 3, 1]],29,
+     "FrontEndObject[LinkObject[\"q5r2z_shm\", 3, 1]]","29","\"Build.nb\"",
+     "\"/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_Build/Build.\
+nb\""},
+    "NotebookObject"], ",", 
+   TemplateBox[{FrontEndObject[
+      LinkObject["q5r2z_shm", 3, 1]],24,
+     "FrontEndObject[LinkObject[\"q5r2z_shm\", 3, 1]]","24","\"RefFixer.nb\"",
+     "\"/Users/masteranza/Dropbox/Knowledge/_Debug/RefFixer.nb\""},
+    "NotebookObject"], ",", 
+   TemplateBox[{FrontEndObject[
+      LinkObject["q5r2z_shm", 3, 1]],20,
+     "FrontEndObject[LinkObject[\"q5r2z_shm\", 3, 1]]","20",
+     "\"ScatteringTheory.nb\"",
+     "\"/Users/masteranza/Dropbox/Knowledge/Science/Physics/Quantum/Mechanics/\
+ScatteringTheory.nb\""},
+    "NotebookObject"], ",", 
+   TemplateBox[{FrontEndObject[
+      LinkObject["q5r2z_shm", 3, 1]],17,
+     "FrontEndObject[LinkObject[\"q5r2z_shm\", 3, 1]]","17","\"Algebra.nb\"",
+     "\"/Users/masteranza/Dropbox/Knowledge/Science/Mathematics/Algebra/\
+Algebra.nb\""},
+    "NotebookObject"], ",", 
+   TemplateBox[{FrontEndObject[
+      LinkObject["q5r2z_shm", 3, 1]],1,
+     "FrontEndObject[LinkObject[\"q5r2z_shm\", 3, 1]]","1","\"Messages\""},
+    "NotebookObjectUnsaved"]}], "}"}]], "Output",
+ CellLabel->"Out[10]=",
+ CellID->1352149025,ExpressionUUID->"a309e86b-d961-401d-abd7-06b95794d2bd"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Get", "[", 
+  "\"\<http://www.mathprogramming-intro.org/download/packages/\
+PackageManipulations.m\>\"", "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->241821379,ExpressionUUID->"1c8b18c2-05b6-4a5f-bae9-207d2a5a3d8b"],
+
+Cell[BoxData[{
+ RowBox[{"PackageRemove", "[", "\"\<ScienceNotebooks`\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{"Internal`$ContextMarks", "=", "True"}], "\[IndentingNewLine]", 
+    "}"}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"!", 
+         RowBox[{"FreeQ", "[", 
+          RowBox[{
+           RowBox[{"NotebookRead", "@", "#"}], ",", 
+           RowBox[{"PackageUtils`RefCellTooltip", "[", "___", "]"}]}], 
+          "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"NotebookWrite", "[", 
+         RowBox[{"#", ",", 
+          RowBox[{"ReplaceAll", "[", 
+           RowBox[{
+            RowBox[{"NotebookRead", "@", "#"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"PackageUtils`RefCellTooltip", "[", "c___", "]"}], 
+                ")"}], "\[RuleDelayed]", 
+               RowBox[{"(", 
+                RowBox[{"ScienceNotebooks`RefCellTooltip", "[", "c", "]"}], 
+                ")"}]}], ",", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"PackageUtils`ReferenceBox", "[", "d__", "]"}], ":>", 
+                
+                RowBox[{"ScienceNotebooks`ReferenceBox", "[", "d", "]"}]}], 
+               ")"}]}], "}"}]}], "]"}]}], "]"}]}], "]"}], "&"}], "/@", 
+     RowBox[{"Cells", "[", "nb", "]"}]}], ";"}]}], "]"}]}], "Input",
+ CellLabel->"In[12]:=",
+ CellID->167711101,ExpressionUUID->"f9018bc2-dcca-4a0f-8fd3-61819d14f655"],
+
+Cell[BoxData[
+ RowBox[{"<<", "ScienceNotebooks`"}]], "Input",
+ CellLabel->"In[14]:=",
+ CellID->350872880,ExpressionUUID->"47797aa4-c41f-4187-afc4-fe2e53a383f0"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1200, 926},
-WindowMargins->{{Automatic, 596}, {163, Automatic}},
+WindowSize->{1200, 1087},
+WindowMargins->{{Automatic, 144}, {Automatic, 112}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowCellLabel->True,
 ShowCellTags->True,

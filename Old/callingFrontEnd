@@ -1,0 +1,4 @@
+Needs["JLink`"];
+ConnectToFrontEnd[];
+nb=UseFrontEnd[NotebookOpen["/Users/masteranza/Dropbox/ScienceNotebooks/Mathematica/_Build/Build.nb"]]
+UsingFrontEnd@NotebookFind[nb, "Paclet"]
