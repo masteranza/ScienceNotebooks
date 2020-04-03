@@ -20,10 +20,12 @@ BeginPackage["TeXExporter`",{"ScienceNotebooks`"}];
 
 
 TeXExportToPDF::usage="Option for ExportToTeX";
+TeXNumberedSections::usage="Option for ExportToTeX";
 TeXEmbedRefrencesBeforeExport::usage="Option for ExportToTeX";
 TeXWriteTOC::usage="Option for ExportToTeX";
 TeXBibFile::usage="Option for ExportToTeX";
 TeXWriteAuthors::usage="Option for ExportToTeX";
+TeXWriteAffil::usage="Option for ExportToTeX";
 TeXWriteDate::usage="Option for ExportToTeX";
 TeXWriteTitle::usage="Option for ExportToTeX";
 TeXSetMargin::usage="Option for ExportToTeX";
@@ -32,24 +34,29 @@ TeXLanguage::usage="Option for ExportToTeX";
 TeXShowLabels::usage="Option for ExportToTeX";
 TeXLineSpread::usage="Option for ExportToTeX";
 TeXPlotScale::usage="Option for ExportToTeX";
+TeXExportSections::usage="Export only one section";
+TeXOmmitStyles::usage="Export only one section";
 TeXFitEquations::usage="Option for ExportToTeX";
 TeXAlignEquations::usage="Option for ExportToTeX";
+TeXOutputName::usage="Option for ExportToTeX";
 ExportToTeX::usage="Generates a draft in Tex with an option to compile to PDF";
 
 
 Begin["`Private`"];
 
 
-Options[ExportToTeX]={TeXExportToPDF->False,TeXEmbedRefrencesBeforeExport->False,TeXWriteTOC->False,TeXBibFile->"",
-TeXWriteAuthors->False,TeXWriteDate->False,TeXWriteTitle->True,TeXCustomCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
-TeXShowLabels->False,TeXSetMargin->"0.8in",TeXPlotScale->"0.7",TeXFitEquations->False,TeXAlignEquations->True};
-ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,base,prolog,epilog,styles,title, author, abstract, affil,tmps},
+Options[ExportToTeX]={TeXExportToPDF->False,TeXNumberedSections->True,TeXEmbedRefrencesBeforeExport->False,TeXWriteTOC->False,TeXBibFile->"",
+TeXWriteAuthors->False,TeXWriteAffil->False,TeXWriteDate->False,TeXWriteTitle->True,TeXCustomCommands->"",TeXLanguage->None,TeXLineSpread->"1.0",
+TeXShowLabels->False,TeXSetMargin->"0.8in",TeXPlotScale->"0.7",TeXExportSections->All,TeXOmmitStyles->{},TeXFitEquations->False,TeXAlignEquations->True,TeXOutputName->""};
+ExportToTeX[opt:OptionsPattern[]]:=Module[{cells,cells2,base,prolog,epilog,styles,title, author, abstract, affil,tmps,ommit,outname},
 ShowStatus["Initializing TeX export..."];
 If[NotebookDirectory[]===$Failed,ShowStatus["ExportToTeX failed. Notebook must be saved first!"];Abort[]];
 PrintToConsole["TeXExportToPDF is " <> ToString[OptionValue[TeXExportToPDF]]];
+PrintToConsole["TeXNumberedSections is" <> ToString[OptionValue[TeXNumberedSections]]];
 PrintToConsole["TeXEmbedRefrencesBeforeExport is "<>ToString[OptionValue[TeXEmbedRefrencesBeforeExport]]];
 PrintToConsole["TeXWriteTOC is " <> ToString[OptionValue[TeXWriteTOC]]];
 PrintToConsole["TeXWriteAuthors is " <> ToString[OptionValue[TeXWriteAuthors]]];
+PrintToConsole["TeXWriteAffil is " <> ToString[OptionValue[TeXWriteAffil]]];
 PrintToConsole["TeXWriteDate is " <> ToString[OptionValue[TeXWriteDate]]];
 PrintToConsole["TeXWriteTitle is " <> ToString[OptionValue[TeXWriteTitle]]];
 PrintToConsole["TeXBibFile is " <> ToString[OptionValue[TeXBibFile]]];
@@ -57,9 +64,12 @@ PrintToConsole["TeXCustomCommands is " <> ToString[OptionValue[TeXCustomCommands
 PrintToConsole["TeXLanguage is " <> ToString[OptionValue[TeXLanguage]]];
 PrintToConsole["TeXShowLabels is " <> ToString[OptionValue[TeXShowLabels]]];
 PrintToConsole["TeXPlotScale is " <> ToString[OptionValue[TeXPlotScale]]];
+PrintToConsole["TeXExportSections is " <> ToString[OptionValue[TeXExportSections]]];
+PrintToConsole["TeXOmmitStyles is " <> ToString[OptionValue[TeXOmmitStyles]]];
 PrintToConsole["TeXLineSpread is " <> ToString[OptionValue[TeXLineSpread]]];
 PrintToConsole["TeXFitEquations is " <> ToString[OptionValue[TeXFitEquations]]];
 PrintToConsole["TeXAlignEquations is " <> ToString[OptionValue[TeXAlignEquations]]];
+PrintToConsole["TeXOutputName is " <> ToString[OptionValue[TeXOutputName]]];
 Quiet@ExportString["\[Lambda]","TeXFragment"];
 System`Convert`TeXFormDump`maketex["\[OAcute]"]="\[OAcute]";
 System`Convert`TeXFormDump`maketex["\[CloseCurlyQuote]"]="'";
@@ -231,9 +241,9 @@ OptionValue[TeXCustomCommands]<>"
 \\title{"<>First[title]<>"}\n"<>
 If[OptionValue[TeXWriteAuthors],
 StringRiffle[MapIndexed["\\author["<>ToString[First[#2]]<>"]{"<>#1<>"}"&,author],"\n"]<>
-StringRiffle[MapIndexed["\\affil["<>ToString[First[#2]]<>"]{"<>#1<>"}\n"&,affil],"\n"]<>
+If[OptionValue[TeXWriteAffil],StringRiffle[MapIndexed["\\affil["<>ToString[First[#2]]<>"]{"<>#1<>"}\n"&,affil],"\n"],""]<>
 "\n\\renewcommand\\Affilfont{\\itshape\\small}",""]<>
-If[OptionValue[TeXWriteDate],"\\date{}",""]<>
+If[OptionValue[TeXWriteDate],"","\\date{\\vspace{-5ex}}"]<>
 "
 \\begin{document}
 \\selectlanguage{"<>ToLowerCase[If[OptionValue[TeXLanguage]==None,AbsoluteCurrentValue["Language"],OptionValue[TeXLanguage]]]<>"}\n"
@@ -246,8 +256,15 @@ epilog="\\appto{\\bibsetup}{\\raggedright} %For keeping the bib within margins
 ShowStatus["Gathering cells..."];
 (*styles=DeleteCases[FEPrivate`GetPopupList[EvaluationNotebook[],"MenuListStyles"]//FE`Evaluate//Cases[_[s_String,_]:>s],"Input"|"Output"];*)
 cells=Cells[EvaluationNotebook[]];
-cells=Select[cells,!MemberQ[{{"Input"},{"Print"},{"Output"},{"Title"},{"Affiliation"},{"Author"},{"Message"},{"Message","MSG"}},CurrentValue[#,"CellStyle"]]&];
+ommit=Join[{{"Input"},{"Print"},{"Output"},{"Title"},{"Affiliation"},{"Author"},{"Message"},{"Message","MSG"}},Partition[OptionValue[TeXOmmitStyles],1]];
+cells=Select[cells,!MemberQ[ommit,CurrentValue[#,"CellStyle"]]&];
 ShowStatus["Processing cells..."];
+(*PrintToConsole[cells];*)
+cells=If[OptionValue[TeXExportSections]=!=All,
+cells2=Split[cells,(*(CurrentValue[#2,"CellStyle"]=!={"Section"})||*)(CurrentValue[#2,"CellStyle"]=!={"Section"})&];
+If[Length[cells2]<Max[OptionValue[TeXExportSections]],ShowStatus["Error: Incorrect TeXExportSections option value - there's not that many sections in your notebook"];  Abort[];]; 
+cells2=If[CurrentValue[cells2[[1,1]],"CellStyle"]=!={"Section"},cells2[[2;;]],cells2];
+Flatten[cells2[[OptionValue[TeXExportSections]]],1],cells];
 (*line splitter extended to 5000 characters*)
 System`Convert`TeXDump`cleanUpFile[fileName_String] := 
  Module[{streamIn, streamOut, insideComment = False, charNum = 0, 
@@ -276,11 +293,11 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[T
 "ConversionRules"->{
 "Text"->{LeftB[i],Automatic,StringJoin[AddLabel[i],RightB[i]]},
 "Chapter"->{"\\part{",Automatic,AddLabel[i]<>"}"},
-"Section"->{"\\section{",Automatic,AddLabel[i]<>"}"},
-"Subsection"->{"\\subsection{",Automatic,AddLabel[i]<>"}"},
-"Subsubsection"->{"\\subsubsection{",Automatic,AddLabel[i]<>"}"},
-"Subsubsubsection"->{"\\paragraph{",Automatic,AddLabel[i]<>"}"},
-"Subsubsubsubsection"->{"\\subparagraph{",Automatic,AddLabel[i]<>"}"},
+"Section"->{"\\section"<>If[OptionValue[TeXNumberedSections],"","*"]<>"{",Automatic,AddLabel[i]<>"}"},
+"Subsection"->{"\\subsection"<>If[OptionValue[TeXNumberedSections],"","*"]<>"{",Automatic,AddLabel[i]<>"}"},
+"Subsubsection"->{"\\subsubsection"<>If[OptionValue[TeXNumberedSections],"","*"]<>"{",Automatic,AddLabel[i]<>"}"},
+"Subsubsubsection"->{"\\paragraph"<>If[OptionValue[TeXNumberedSections],"","*"]<>"{",Automatic,AddLabel[i]<>"}"},
+"Subsubsubsubsection"->{"\\subparagraph"<>If[OptionValue[TeXNumberedSections],"","*"]<>"{",Automatic,AddLabel[i]<>"}"},
 "Example"->{"\\begin{example}",Automatic,AddLabel[i]<>"\\end{example}"},
 "Exercise"->{"\\begin{exercise}",Automatic,AddLabel[i]<>"\\end{exercise}"},
 "Solution"->{"\\begin{solution}",Automatic,AddLabel[i]<>"\\end{solution}"},
@@ -347,16 +364,17 @@ StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\tex
 }],{"\\pmb{"->"\\bf{"}];
 base=If[StringContainsQ[base,"\\("],base,StringReplace[base,{"\\pmb{"->"\\textbf{"}]];
 (*make inline matrixes small*)
-base=StringReplace[base,"\\("~~Shortest[C__]~~"\\)":>("\\("<>StringReplace[C,{"{array}{c"~~Repeated["c"]..~~"}":>"{smallmatrix}","{array}":>"{smallmatrix}"}]<>"\\)")];
+base=StringReplace[base,"\\("~~Shortest[C__]~~"\\)":>("\\("<>StringReplace[C,{"{array}{"~~Repeated["c"]..~~"}":>"{smallmatrix}","{array}":>"{smallmatrix}"}]<>"\\)")];
 (*base=StringReplace[base,{"\\&"\[Rule]"&","{array}" -> "{aligned}"}];*)
 ShowStatus["Exporting TeX file..."];
-Export[StringDrop[NotebookFileName[],-2]<>"tex",prolog<>base<>epilog,"Text"];
+outname=If[OptionValue[TeXOutputName]==="",StringDrop[NotebookFileName[],-2]<>"tex",NotebookDirectory[EvaluationNotebook[]]<>OptionValue[TeXOutputName]<>".tex"];
+Export[outname,prolog<>base<>epilog,"Text"];
 ShowStatus["Trying to build the PDF from TeX (might fail)..."];
 
 If[OptionValue[TeXExportToPDF],
-PrintToConsole["Running command: "<>"!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; ls; pdflatex "<>StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"];
+PrintToConsole["Running command: "<>"!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; ls; pdflatex "<>outname];
 (*SetEnvironment["PATH"\[Rule]Import["!source ~/.bash_profile; echo $PATH","Text"]];*)
-Quiet@ReadList@OpenRead["!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; /Library/TeX/texbin/pdflatex "<>StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"];
+Quiet@ReadList@OpenRead["!cd "<>NotebookDirectory[EvaluationNotebook[]]<>"; /Library/TeX/texbin/pdflatex "<>outname];
 (*RunProcess@{"pdflatex.exe",StringDrop[FileNameTake[NotebookFileName[EvaluationNotebook[]]],-2]<>"tex"}*)];
 ShowStatus["Done."];
 ];

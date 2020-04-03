@@ -390,8 +390,38 @@ SetOptions[EvaluationNotebook[],ScreenStyleEnvironment->"Printout"]];
 ScienceNotebooks`StyleButton::usage="Creates a button to create a style Cell of a specific name";
 StyleButton[name_]:=Button[name,SelectionMove[SelectedNotebook[],All,Cell];FrontEndExecute@FrontEndToken[SelectedNotebook[],"Style",name]];
 
-ScienceNotebooks`ListStyles::usage="List styles from current StyleSheet";
-ListStyles=(#:>FrontEndTokenExecute[InputNotebook[],"Style",#]&/@FE`Evaluate[FEPrivate`GetPopupList["MenuListStyles"]][[2;;,1]]);
+ScienceNotebooks`ListScienceStyles::usage="List styles from current StyleSheet";
+ListScienceStyles={"Title":>FrontEndTokenExecute[InputNotebook[],"Style","Title"],
+"Chapter":>FrontEndTokenExecute[InputNotebook[],"Style","Chapter"],
+"Subchapter":>FrontEndTokenExecute[InputNotebook[],"Style","Subchapter"],
+"Section":>FrontEndTokenExecute[InputNotebook[],"Style","Section"],
+"Text":>FrontEndTokenExecute[InputNotebook[],"Style","Text"],
+"Input":>FrontEndTokenExecute[InputNotebook[],"Style","Input"],
+"CodeText":>FrontEndTokenExecute[InputNotebook[],"Style","CodeText"],
+"Abstract":>FrontEndTokenExecute[InputNotebook[],"Style","Abstract"],
+"Author":>FrontEndTokenExecute[InputNotebook[],"Style","Author"],
+"Affiliation":>FrontEndTokenExecute[InputNotebook[],"Style","Affiliation"],
+"Item":>FrontEndTokenExecute[InputNotebook[],"Style","Item"],
+"ItemNumbered":>FrontEndTokenExecute[InputNotebook[],"Style","ItemNumbered"],
+"ItemParagraph":>FrontEndTokenExecute[InputNotebook[],"Style","ItemParagraph"],
+"Subitem":>FrontEndTokenExecute[InputNotebook[],"Style","Subitem"],
+"SubitemNumbered":>FrontEndTokenExecute[InputNotebook[],"Style","SubitemNumbered"],
+"SubitemParagraph":>FrontEndTokenExecute[InputNotebook[],"Style","SubitemParagraph"],
+"Subsubitem":>FrontEndTokenExecute[InputNotebook[],"Style","Subsubitem"],
+"SubsubitemNumbered":>FrontEndTokenExecute[InputNotebook[],"Style","SubsubitemNumbered"],
+"SubsubitemParagraph":>FrontEndTokenExecute[InputNotebook[],"Style","SubsubitemParagraph"],
+"InlineFormula":>FrontEndTokenExecute[InputNotebook[],"Style","InlineFormula"],
+"DisplayFormula":>FrontEndTokenExecute[InputNotebook[],"Style","DisplayFormula"],
+"DisplayFormulaNumbered":>FrontEndTokenExecute[InputNotebook[],"Style","DisplayFormulaNumbered"],
+"ExternalLanguage":>FrontEndTokenExecute[InputNotebook[],"Style","ExternalLanguage"],
+"Program":>FrontEndTokenExecute[InputNotebook[],"Style","Program"],
+"Code":>FrontEndTokenExecute[InputNotebook[],"Style","Code"],
+"Equation":>FrontEndTokenExecute[InputNotebook[],"Style","Equation"],
+"EquationNumbered":>FrontEndTokenExecute[InputNotebook[],"Style","EquationNumbered"],
+"Example":>FrontEndTokenExecute[InputNotebook[],"Style","Example"],
+"Figure":>FrontEndTokenExecute[InputNotebook[],"Style","Figure"],
+"Item1":>FrontEndTokenExecute[InputNotebook[],"Style","Item1"]};
+(*Evaluate[(#:>FrontEndTokenExecute[InputNotebook[],"Style",#]&/@FE`Evaluate[FEPrivate`GetPopupList["MenuListStyles"]][[2;;,1]])];*)
 
 ScienceNotebooks`MergeStyle::usage ="Merges stylesheet with the notebook and saves in the same directory with the postfix _sm";
 MergeStyle[]:=Module[{path,child,childstyles,parent,nb,tmp,parentparent,parentstyles, old},(*find the parent stylesheet from the private stylesheet,a.k.a child*)
