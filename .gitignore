@@ -3,3 +3,4 @@
 *.paclet
 # *.bib
 .texpadtmp
+.DS_Store
