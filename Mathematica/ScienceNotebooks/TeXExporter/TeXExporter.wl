@@ -314,7 +314,7 @@ base=StringJoin@Riffle[#,"\n"]&@Table[ImportString[ExportString[If[OptionValue[T
 "Figure"->{"\\begin{figure}[!htb]\\centering\\includegraphics[scale="<>OptionValue[TeXPlotScale]<>",max width=\\textwidth]",NameAndExport[i,#]&,AddLabel[i]<>"\\end{figure}"},
 "FigureCaption"->{"\\caption{",Automatic,"}"},
 "Board"->{"\\begin{table}[ht!]\\centering",CaptionTable[i,#]&,AddLabel[i]<>"\\end{table}"},
-"EquationNumbered"->{"\\begin{equation}"<>If[OptionValue[TeXFitEquations],"\\adjustbox{max width=.95\\textwidth}{$\n",""]<>If[OptionValue[TeXAlignEquations],"\\begin{aligned}",""],EqBoxToTeXDisplay[#]&,"\n"<>If[OptionValue[TeXAlignEquations],"\\end{aligned}",""]<>If[OptionValue[TeXFitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation}"},
+"EquationNumbered"->{"\\begin{equation}"<>If[OptionValue[TeXFitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""]<>If[OptionValue[TeXAlignEquations],"\\begin{aligned}",""],EqBoxToTeXDisplay[#]&,"\n"<>If[OptionValue[TeXAlignEquations],"\\end{aligned}",""]<>If[OptionValue[TeXFitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation}"},
 "Equation"->{"\\begin{equation*}"<>If[OptionValue[TeXFitEquations],"\\adjustbox{max width=.95\\textwidth}{$",""]<>If[OptionValue[TeXAlignEquations],"\\begin{aligned}",""],EqBoxToTeXDisplay[#]&,If[OptionValue[TeXAlignEquations],"\\end{aligned}",""]<>If[OptionValue[TeXFitEquations],"$}",""]<>AddLabel[i]<>"\\end{equation*}"},
 "InlineCell"->{"",AddInlineLabels[i,#]&,""}
 }
@@ -341,7 +341,20 @@ ShowStatus["Postprocessing cells..."];
 (*fix figure captions*)
 base=StringReplace[base,"\\label{"~~Shortest[t___]~~"}\\end{figure}"~~Whitespace~~"\\caption{"~~Shortest[c___]~~"}"/; (StringCount[c,"\\("]==StringCount[c,"\\)"]&&StringCount[c,"{"]==StringCount[c,"}"]&&StringFreeQ[t,"}"](*&&(!StringContainsQ[c,"\\ref"]||((StringCount[c,"{"]==StringCount[c,"\\ref"])&&(StringCount[c,"}"]==StringCount[c,"\\ref"])))*)(*&&StringFreeQ[t,"}"]*)) :>"\\caption{ "<>c<>" }\\label{"<>t<>"}\\end{figure} "];
 (*alignment*)
-PutAlignMark[st_String]:=If[Length[StringSplit[st,"\\\\"]]>1,(StringRiffle[(tmps=If[StringContainsQ[#,"="],StringReplace[#,StartOfString ~~Shortest[t___]~~"="~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &="<>u],StringReplace[#,StartOfString ~~Shortest[t___]~~Pattern[z,Blank[]]~~u___~~EndOfString  /; ((z==="+"||z==="-")&&StringCount[t,"{"]==StringCount[t,"}"]) :> t<>" &"<>z<>u]]; If[StringContainsQ[tmps,"&"],tmps," &"<>tmps]) &/@StringSplit[st,"\\\\"],"\\\\\n"]),st];
+(*PutAlignMarkOnEqual[st_]:=(StringReplace[st,StartOfString ~~Shortest[t___]~~"="~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &="<>u]);
+PutAlignMarkOnPropto[st_]:=StringReplace[st,StartOfString ~~Shortest[t___]~~"\\propto"~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &\\propto"<>u];
+PutAlignMarkOnApprox[st_]:=StringReplace[st,StartOfString ~~Shortest[t___]~~"\\approx"~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &\\approx"<>u];
+PutAlignMarkOnPlusMinus[st_]:=StringReplace[st,StartOfString ~~Shortest[t___]~~Pattern[z,Blank[]]~~u___~~EndOfString  /; ((z==="+"||z==="-")&&StringCount[t,"{"]==StringCount[t,"}"]) :> t<>" &"<>z<>u];
+PutAlignMark[st_String]:=If[Length[StringSplit[st,"\\\\"]]>1,
+(StringRiffle[(tmps=If[StringContainsQ[#,"="],PutAlignMarkOnEqual[#],
+If[StringContainsQ[#,"\\propto"],PutAlignMarkOnPropto[#],If[StringContainsQ[#,"\\approx"],PutAlignMarkOnApprox[#], PutAlignMarkOnPlusMinus[#]]]
+]; If[StringContainsQ[tmps,"&"],tmps," &"<>tmps]) &/@StringSplit[st,"\\\\"],"\\\\\n"]),st];*)
+PutAlignMarkSpecial[st_]:=(StringReplace[st,StartOfString ~~Shortest[t___]~~a:("="|"\\approx"| "\\propto"(*|"+"|"-"*))~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]&&StringCount[t,"("]==StringCount[t,")"]):> t<>" &"<>a<>u]);
+(*PutAlignMarkOnPropto[st_]:=StringReplace[st,StartOfString ~~Shortest[t___]~~"\\propto"~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &\\propto"<>u];
+PutAlignMarkOnApprox[st_]:=StringReplace[st,StartOfString ~~Shortest[t___]~~"\\approx"~~u___~~EndOfString/; (StringCount[t,"{"]==StringCount[t,"}"]):> t<>" &\\approx"<>u];
+PutAlignMarkOnPlusMinus[st_]:=StringReplace[st,StartOfString ~~Shortest[t___]~~Pattern[z,Blank[]]~~u___~~EndOfString  /; ((z==="+"||z==="-")&&StringCount[t,"{"]==StringCount[t,"}"]) :> t<>" &"<>z<>u];*)
+PutAlignMark[st_String]:=If[Length[StringSplit[st,"\\\\"]]>1,
+(StringRiffle[(tmps=PutAlignMarkSpecial[#]; If[StringContainsQ[tmps,"&"],tmps," &"<>tmps]) &/@StringSplit[st,"\\\\"],"\\\\\n"]),st];
 base=StringReplace[base,"\\\\"~~Whitespace~~"\\end{aligned}" ->"\\end{aligned}"];
 base=StringReplace[base,"\\begin{aligned}"~~Shortest[t___]~~"\\end{aligned}" /;!StringContainsQ[t,"\\begin{array}"]:>"\\begin{aligned}"<>PutAlignMark[t]<>"\\end{aligned} "];
 base=StringReplace[base,"\\begin{aligned}\\begin{array}{l}"~~Shortest[t___]~~"\\end{array}\\end{aligned}" /;!StringContainsQ[t,"\\begin{array}"]:>"\\begin{aligned}"<>PutAlignMark[t]<>"\\end{aligned} "];
@@ -355,9 +368,11 @@ base=StringReplace[base,"'"~~Whitespace~~"^"~~t_ /;!(StringContainsQ[t,"{"]):>("
 base=StringReplace[base,"'"~~Whitespace~~"^{"~~Shortest[t___]~~"}" /;StringCount[t,"{"]==StringCount[t,"}"]:>("^{\\prime "<>t<>"}")];
 (*cleanup*)
 base=StringReplace[base,{"\\end{equation*}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation*}\n\\begin{equation*}","\\end{equation}"~~Whitespace~~"\\begin{equation}"->"\\end{equation}\n\\begin{equation}","\\end{equation}"~~Whitespace~~"\\begin{equation*}"->"\\end{equation}\n\\begin{equation*}"}];
+base=StringReplace[base,{"\\end{equation*}"~~Whitespace->"\\end{equation*}","\\end{equation}"~~Whitespace->"\\end{equation}"}];
 (*remove spacing for glueing TeX ref*)
 base=StringReplace[base,{Whitespace~~"~\\"->"~\\"}];
 base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
+(*fix italics and bolds*)
 base=StringReplace[StringReplace[base,{"\\)"~~Shortest[C__]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
 StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"->"\\textbf{"],"\\("],
 "\\)"~~Shortest[C__]~~EndOfString:>StringJoin["\\)",StringReplace[C,"\\pmb{"->"\\textbf{"]]
