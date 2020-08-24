@@ -316,6 +316,7 @@ base=StringReplace[base,{
 "\\right\\right| "~~WhitespaceCharacter...~~"{}_":> "\\right|_",
 "\\right\\right| "~~WhitespaceCharacter...~~"_":> "\\right|_"
 }];
+
 base=StringReplace[base,{"\\(\\("->"\\(","\\)\\)"->"\\)"}];
 base=StringReplace[base,{"\\)"~~Shortest[C__]~~"\\(":>StringJoin["\\)",StringReplace[C,"\\pmb{"~~Shortest[D__]~~"}":>StringJoin["<b>",D,"</b>"]],"\\("],
 StartOfString~~Shortest[C__]~~"\\(":>StringJoin[StringReplace[C,"\\pmb{"~~Shortest[D__]~~"}":>StringJoin["</b>",D,"</b>"]],"\\("],

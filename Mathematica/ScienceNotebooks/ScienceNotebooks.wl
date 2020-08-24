@@ -46,7 +46,7 @@ emptyExp=\[Null];
 (*Keyboard shortcuts and menus*)
 
 
-(* Shortcut for inputing Zotero references to Mathematica *)
+(* Shortcut for inputing Zotero references to Mathematica (Ctrl-Z) *)
  FrontEndExecute[
  FrontEnd`AddMenuCommands[
   "DuplicatePreviousOutput", {

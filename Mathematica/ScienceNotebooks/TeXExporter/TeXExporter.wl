@@ -247,6 +247,7 @@ If[OptionValue[TeXWriteDate],"","\\date{\\vspace{-5ex}}"]<>
 "
 \\begin{document}
 \\selectlanguage{"<>ToLowerCase[If[OptionValue[TeXLanguage]==None,AbsoluteCurrentValue["Language"],OptionValue[TeXLanguage]]]<>"}\n"
+<>If[OptionValue[TeXExportSections]=!=All,"\\setcounter{section}{"<>ToString[Min@OptionValue[TeXExportSections]-1]<>"}\n",""]
 <>If[OptionValue[TeXWriteTitle],"\\maketitle\n","\n"]<>
 If[OptionValue[TeXWriteTOC],"\\tableofcontents{}",""]
 <>"\n";
