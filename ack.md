@@ -1,0 +1,2 @@
+search: https://mathematica.stackexchange.com/questions/70162/how-to-dynamically-filter-cells-in-a-notebook
+tags: https://mathematica.stackexchange.com/questions/196928/how-do-i-add-into-a-text-cell-a-reference-to-a-numbered-function/197339#197339

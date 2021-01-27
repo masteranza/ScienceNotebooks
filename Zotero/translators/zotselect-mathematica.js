@@ -26,6 +26,6 @@ function doExport() {
 		var library_id = item.libraryID ? item.libraryID : 0;
 		// Zotero.write("Button[Row[{Style[\"\\[DoubleStruckZ] \", 30, Red], \""+item.creators[0].lastName+". ("+item.date+") " +item["title"] +"\"}], SystemOpen[\"zotero://select/items/"+ library_id+"_"+item.key+"\"], BaseStyle->\"GenericButton\"]");
 		// Zotero.write("Button[Row[{Style[\"\\[DoubleStruckZ] \", 30, Red], \""+item.creators[0].lastName+". ("+item.date+") " +item["title"] +"\"}], SystemOpen[\"zotero://select/items/"+ library_id+"_"+item.key+"\"], BaseStyle->\"GenericButton\"]");
-		Zotero.write("{\"zotero://select/items/"+ library_id+"_"+item.key+"\", \"" + item.citekey+"\", \""+ (item.creators.length>0?(item.creators[0].lastName+(item.creators.length>1?"et al.":"")):"unknown author")+ " ("+((item.date!=undefined)?item.date:"year")+")" +"\", \""+  (item["title"]!=undefined?item["title"]:"notitle")+"\", \""+ item.collections[0]+ "\"}");
+		Zotero.write("{\"zotero://select/library/items/"+item.key+"\", \"" + item.citekey+"\", \""+ (item.creators.length>0?(item.creators[0].lastName+(item.creators.length>1?"et al.":"")):"unknown author")+ " ("+((item.date!=undefined)?item.date:"year")+")" +"\", \""+  (item["title"]!=undefined?item["title"]:"notitle")+"\", \""+ item.collections[0]+ "\"}");
 	}
 }
