@@ -46,6 +46,14 @@ emptyExp=\[Null];
 (*Keyboard shortcuts and menus*)
 
 
+(*Quit Kernel (FAST)*)
+FrontEndExecute[
+ FrontEnd`AddMenuCommands["MenuListQuitEvaluators",
+  {MenuItem["&Quit",
+    FrontEnd`KernelExecute[ToExpression["Quit[]"]],
+    System`MenuKey["q", System`Modifiers -> {"Control"}],
+    System`MenuEvaluator -> Automatic]}]]
+    
 (* Shortcut for inputing Zotero references to Mathematica (Ctrl-Z) *)
  FrontEndExecute[
  FrontEnd`AddMenuCommands[
@@ -59,7 +67,7 @@ emptyExp=\[Null];
   "DuplicatePreviousOutput", { 
    MenuItem["Link to tagged ref.", FrontEndExecute[ScienceNotebooks`LinkTaggedRef[]], System`MenuKey["e", System`Modifiers -> {Control}], 
     System`MenuEvaluator -> Automatic]}]]; 
-    
+
 emptyExp=\[Null];
 Begin["`Private`"];
 
@@ -252,7 +260,7 @@ QuickOutline=EventHandler[Dynamic[ActionMenu["Toc",(*creating list of action men
 (*Search*)
 
 
-sa:=DynamicModule[{nb},nb=EvaluationNotebook[];search="";
+(*sa:=DynamicModule[{nb},nb=EvaluationNotebook[];search="";
 SetOptions[#,CellOpen->True,ShowCellLabel->True, ShowCellBracket->True]&/@Cells[nb]]
 sdm:=DynamicModule[{nb},nb=EvaluationNotebook[];
 NotebookFind[nb,search,All];
@@ -260,8 +268,16 @@ SetOptions[#,CellOpen->False,ShowCellBracket->False]&/@Cells[nb];
 SetOptions[#,CellOpen->True,ShowCellBracket->True]&/@SelectedCells[nb];]
 
 ScienceNotebooks`SearchBar::usage="Search bar";
-SearchBar=ExpressionCell[EventHandler[InputField[Dynamic[search],String,ContinuousAction->True,FieldHint->"Search",Appearance-> FEPrivate`FrontEndResource["MUnitExpressions","ButtonAppearances"]],{"ReturnKeyDown":>sdm},{"EscapeKeyDown":>sa}]];
-
+SearchBar=ExpressionCell[EventHandler[InputField[Dynamic[search],String, Method-> "Queued",ContinuousAction->False,FieldHint->"Search",Appearance-> FEPrivate`FrontEndResource["MUnitExpressions","ButtonAppearances"]],{"ReturnKeyDown":>sdm},{"EscapeKeyDown":>sa}]];
+*)
+ScienceNotebooks`SearchBar::usage="Search bar";
+SearchBar=DynamicModule[{nb,search},
+ExpressionCell[EventHandler[
+InputField[Dynamic[search],String, Method-> "Queued", ContinuousAction->False, FieldHint->"Search", Appearance-> FEPrivate`FrontEndResource["MUnitExpressions","ButtonAppearances"]]
+,{"ReturnKeyDown":>(nb=EvaluationNotebook[]; NotebookFind[nb,search,All];
+SetOptions[#,CellOpen->False,ShowCellBracket->False]&/@Cells[nb];
+SetOptions[#,CellOpen->True,ShowCellBracket->True]&/@SelectedCells[nb];),"EscapeKeyDown":>(search="";
+SetOptions[#,CellOpen->True,ShowCellLabel->True, ShowCellBracket->True]&/@Cells[EvaluationNotebook[]])},Method->"Queued"]],SynchronousUpdating->False];
 
 
 (* ::Subsection:: *)
@@ -444,7 +460,7 @@ NotebookOpen[NotebookDirectory[EvaluationNotebook[]]<>old<>".nb"];
 ];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Printing forms*)
 
 
